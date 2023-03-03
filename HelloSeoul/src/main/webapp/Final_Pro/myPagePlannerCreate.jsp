@@ -24,8 +24,7 @@
 	// 플래너 생성 로드시
 	$('document').ready(function(){
 		
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = ${no};
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -164,8 +163,7 @@
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
 
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = ${no};
 		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
@@ -257,8 +255,6 @@
 	
 	// 생성한 플래너 저장
 	function storePlanner(){
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
 		
 		const inputTimeMin = document.getElementsByClassName("form-control");
 		// 모든 input 태그(시간, 분)에 대해 반복하며 제약조건을 확인
@@ -290,7 +286,7 @@
 		}); // $(forms).each
 		
 		// show 페이지로 이동
-		document.location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
+		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + ${no};
 		
 	} // storePlanner()
 	

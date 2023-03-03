@@ -10,7 +10,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypagePlannerBean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -160,14 +163,36 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Object> mypageScheduleWishList(String id) {
-		return helloDao.getUserJjimList(id);
+	public void mypageJjimDelete(Object id, String[] list) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", id);
+		
+		// 삭제할 찜리스트의 장소코드
+		String str = "(";
+		for(int i=0; i<list.length; i++) {
+			str += list[i] + ",";
+			System.out.println(list[i]);
+		}
+		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str += ")";		
+		map.put("str", str);
+
+		helloDao.userJjimListDelete(map);
 	}
 
 	@Override
+	public MainDbBean getlocInfo(int loc_pc) {
+		return helloDao.getJjimInfo(loc_pc);
+	}
+
+	@Override
+	public List<Object> mypageScheduleWishList(String id) {
+		return helloDao.getUserJjimList(id);
+	}
+	
+	@Override
 	public HashMap<String, Object> mypagePlannerTabBar(int no) {
 		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(no);
-		
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		int diffDate = end.compareTo(start);
@@ -179,8 +204,51 @@ public class MypageServiceImpl implements MypageService {
 	public List<Object> mypagePlannerTabContent(int no) {
 		return helloDao.mainPlannerDataSelect(no);
 	}
+
+	@Override
+	public int mypagePlannerNext(Object id, String modi, MypagePlannerBean bean) {
+		// 새로운 플래너 생성을 위한 일정 생성
+		if(modi.equals("createPlanner")) {
+			int no = helloDao.getPlannerNo();
+			bean.setPlanner_no(no);
+			bean.setUser_id((String) id);
+			helloDao.plannerDataInsert(bean);
+			return no;
+		}
+		return 0;
+	}
+
+	@Override
+	public List<Object> mypagePlannerScheduleAdd(String[] loc_pc) {
+		String str = "(";
+		for(int i=0; i<loc_pc.length; i++) {
+			str += loc_pc[i] + ",";
+		}
+		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str += ")";
+		return helloDao.selectMainDbData(str);
+	}
+
+	@Override
+	public void mypageScheduleDelete(int no) {
+		helloDao.plannerScheduleDelete(no);
+	}
+	
+	@Override
+	public void mypagePlannerDelete(int no) {
+		helloDao.plannerAllDelete(no);
+	}
+	
+	@Override
+	public void mypageScheduleInsert(Object id, MypageMainPlannerBean bean) {
+		bean.setUser_id((String) id);
+		helloDao.plannerScheduleInsert(bean);
+	}
+
+
 	
 	
+
 	
 	
 	

@@ -25,7 +25,7 @@
 	$('document').ready(function(){
 		
 		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = urlParams.get('planner_no');
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -215,7 +215,7 @@
 		}); // checkBox.each
 
 		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = urlParams.get('planner_no');
 		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
@@ -308,30 +308,29 @@
 	// 생성한 플래너 저장
 	function storePlanner(){
 		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = urlParams.get('planner_no');
 		
 		const inputTimeMin = document.getElementsByClassName("form-control");
-		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다.
-		  for (let i = 0; i < inputTimeMin.length; i++) {
-		    if (!inputTimeMin[i].checkValidity()) {
-		      alert("Please enter the schedule time");
-		      return false;
+		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다
+		for (let i = 0; i < inputTimeMin.length; i++) {
+			if (!inputTimeMin[i].checkValidity()) {
+				alert("Please enter the schedule time");
+				return false;
+			}
+		}
+		$.ajax({
+			type:"POST",
+			url:"/web/deletePlannerSchedule",
+			data: {no:no},
+			dataType: 'text',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			async:false,
+			success: function(result){
+			},
+			error: function(xhr, status, error) {
+				console.log("error : " + error);
 		    }
-		  }
-		
-		  $.ajax({
-				type:"POST",
-				url:"/web/deletePlannerSchedule",
-				data: {no:no},
-				dataType: 'text',
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				async:false,
-				success: function(result){
-				},
-				error: function(xhr, status, error) {
-					console.log("error : " + error);
-			    }
-			}); // ajax
+		}); // ajax
 		
 		var forms = document.getElementsByName("mypageMainPlannerFrm");
 		
@@ -354,7 +353,7 @@
 		}); // $(forms).each
 		
 		// show 페이지로 이동
-		document.location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
+		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		
 	} // storePlanner()
 	
