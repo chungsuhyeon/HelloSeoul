@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
-import com.bit.web.vo.goodbadBoard;
+import com.bit.web.vo.gbboard;
 import com.mongodb.util.Hash;
 
 @Repository
@@ -78,7 +78,7 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public String selectReplyid(int no) {
 		return this.getSqlSession().selectOne("selectReplyid",no);
 	}
-	public String goodAction(goodbadBoard board) {
+	public String goodAction(gbboard board) {
 		return this.getSqlSession().selectOne("goodAction",board);
 	}
 	public String goodBoard(int com_no) {

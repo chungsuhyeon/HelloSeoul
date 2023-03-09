@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bit.web.dao.ProjectDao;
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
-import com.bit.web.vo.goodbadBoard;
+import com.bit.web.vo.gbboard;
 
 
 @Controller
@@ -97,7 +97,7 @@ public class projectcontroller {
 	}
 	@RequestMapping(value="goodAction")
 	@ResponseBody
-	public Integer goodAction(int com_no,String user_id,goodbadBoard board,HashMap<String, Object>map) {
+	public Integer goodAction(int com_no,String user_id,gbboard board,HashMap<String, Object>map) {
 		map.put("user_id", user_id);
 		map.put("com_no", com_no);
 		if((dao.goodbadSelectGood(map))==null) {	
