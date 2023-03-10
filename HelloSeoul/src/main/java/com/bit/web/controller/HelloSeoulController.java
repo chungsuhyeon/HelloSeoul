@@ -207,7 +207,7 @@ public class HelloSeoulController {
 		
 		map.put("str", str);
 
-		helloDao.userJjimListDelete(map);		
+		helloDao.userJjimListDelete(map);
 		
 		return "redirect:/ajaxMypageJjim";
 	}
