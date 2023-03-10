@@ -17,9 +17,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
-$(function(){
-	
-});
+	$(function(){
+		
+	});
 </script>
 <!--JS Section End -->
 
@@ -42,7 +42,7 @@ $(function(){
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='./myPagePlannerCreate.jsp'>Planner Modify</a></li>
-					<li class='breadcrumb-item'><a href='./maPageMain.jsp'>Back</a></li>
+					<li class='breadcrumb-item'><a href='./myPageMain.jsp'>Back</a></li>
 				</ol>
 			</div>
 			<div class='data col-12' style="display: inline-flex;">
@@ -84,17 +84,18 @@ $(function(){
 					</div>
 				</div>
 				<div class='mapbar col-6'>
-					<!-- map -->
-			<div id="map" style="border: solid; margin-top: 10px; float: right; margin-right: 20px"></div>
-<script>
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-		</script>
+				<!-- map -->
+				<div id="map" style="width: 100%; height: 100%; float: right;"></div>
+				
+				<script>
+					var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+					var options = { //지도를 생성할 때 필요한 기본 옵션
+						center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+						level: 3 //지도의 레벨(확대, 축소 정도)
+					};
+					
+					var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+				</script>
 				</div>
 			</div>
 		</div>		
