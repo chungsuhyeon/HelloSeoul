@@ -15,5 +15,7 @@ public class MainDbBean {
 	private String loc_tel;
 	private String loc_info;
 	private String loc_img;
+	private float loc_x;
+	private float loc_y;
 
 }

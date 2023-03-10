@@ -90,21 +90,55 @@
 						});
 		//-----------------------------------------------------------------ajax--------------------------------------------------------------------------------------------------
 		$("button#good").click(function(){
-					$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
+			$("button#bad").html("<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
+			$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
+			$("i#top-bad").html("");
+			$("i#top-good").html("");
 			$.ajax({
 				type : 'POST',
 			    url : '/web/goodAction',
 				data:{com_no:$("input#com_no").val(),user_id:$("input#user_id").val()},
-				dataType : 'text',
+				dataType : 'json',
 				success : function(p) {
-					$("button#good").append(p);
-					},
+					$(p).each(function(index,x){
+						$("button#good").append(x.GOOD);
+						$("button#bad").append(x.BAD);
+						$("i#top-bad").append(x.BAD);
+						$("i#top-good").append(x.GOOD);
+// 					$("button#good").append(p);
+					});
+ 					},
 				error:function(){
 					console.log("error");
 				}
 				
 			});
 		});
+		$("button#bad").click(function(){
+			$("button#bad").html("<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
+			$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
+			$("i#top-bad").html("");
+			$("i#top-good").html("");
+		$.ajax({
+			type : 'POST',
+		    url : '/web/badAction',
+			data:{com_no:$("input#com_no").val(),user_id:$("input#user_id").val()},
+			dataType : 'json',
+			success : function(p) {
+				$(p).each(function(index,x){
+					$("button#good").append(x.GOOD);
+					$("button#bad").append(x.BAD);
+// 					console.log($("i#top-good").html("1"));
+					$("i#top-bad").append(x.BAD);
+					$("i#top-good").append(x.GOOD);
+				});
+			},
+			error:function(){
+				console.log("error");
+			}
+		
+	});
+});
 		
 		
 	});
@@ -146,8 +180,8 @@
 									class="glyphicon glyphicon-comment"></i> ${i.reply } <i
 									class="glyphicon glyphicon-ok"></i>${i.com_hit } <i
 									class="glyphicon glyphicon-time"></i> ${i.com_regdate } <i
-									class="glyphicon glyphicon-thumbs-up"></i> 0 <i
-									class="glyphicon glyphicon-thumbs-down"></i> 0
+									class="glyphicon glyphicon-thumbs-up" id="top-good">${i.good }</i>  <i
+									class="glyphicon glyphicon-thumbs-down" id="top-bad">${i.bad}</i> 
 							</p>
 						</div>
 				</div>
@@ -162,10 +196,10 @@
 				style="margin: 10px; margin-top: 20px; text-align: right; border: 2px ridge;">
 				<p style="text-align: center; margin-top: 30px">
 					<button class="btn btn-success" id="good" >
-						<i class="glyphicon glyphicon-thumbs-up"></i>공감 
+						<i class="glyphicon glyphicon-thumbs-up"></i>공감 ${i.good }
 					</button>
 					<button class="btn btn-warning" id="bad">
-						<i class="glyphicon glyphicon-thumbs-down"></i>비공감
+						<i class="glyphicon glyphicon-thumbs-down"></i>비공감 ${i.bad }
 					</button>
 
 				</p>
