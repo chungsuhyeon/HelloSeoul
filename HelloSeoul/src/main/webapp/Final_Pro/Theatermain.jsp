@@ -15,14 +15,14 @@
 <meta property="fb:app_id">
 <title>YES24 티켓</title>
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/jquery-3.4.1_min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/jquery-3.4.1_min.js"></script>
 <!-- Google Tag Manager -->
 
 <!-- End Google Tag Manager -->
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/swiper_min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/swiper_min.js"></script>
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/jquery.lazy.min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/jquery.lazy.min.js"></script>
 <script type="text/javascript"
 	src="/web/resources/ticketMain2/New/Js/Main.js?v=391"></script>
 
@@ -31,25 +31,25 @@
 <link rel="stylesheet" type="text/css"
 	href="/web/resources/ticketMain2/New/Css/reset.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/swiper-1.css">
+	href="/web/resources/ticketMain2/New/Css/swiper.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar-1.css">
+	href="/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/common-1.css?v=17">
+	href="/web/resources/ticketMain2/New/Css/common.css?v=17">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/main2-1.css?v=2020012203">
+	href="/web/resources/ticketMain2/New/Css/main2.css?v=2020012203">
 =======
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/bootstrap.css">
 <link rel='stylesheet' type='text/css'
 	href='/web/resources/ticketMain2/New/Css/reset.css'>
 <link rel='stylesheet' type='text/css'
-	href='/web/resources/ticketMain2/New/Css/swiper-1.css'>
+	href='/web/resources/ticketMain2/New/Css/swiper.css'>
 <link rel='stylesheet' type='text/css'
-	href='/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar-1.css'>
+	href='/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar.css'>
 <link rel='stylesheet' type='text/css'
-	href='/web/resources/ticketMain2/New/Css/common-1.css?v=17'>
+	href='/web/resources/ticketMain2/New/Css/common.css?v=17'>
 <link rel='stylesheet' type='text/css'
-	href='/web/resources/ticketMain2/New/Css/main2-1.css?v=2020012203'>
+	href='/web/resources/ticketMain2/New/Css/main2.css?v=2020012203'>
 >>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/project.git
 	
 <div class="m2-kv-hidden">   <!-- 상단 돌아가는 컨텐츠 -->
