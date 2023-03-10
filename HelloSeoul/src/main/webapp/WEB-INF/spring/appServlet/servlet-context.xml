@@ -16,7 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!--db login -->
-	<beans:bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+	<beans:bean id="dsr" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
 		<beans:property name="username" value="seoul"></beans:property>
