@@ -16,7 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!--db login -->
-	<beans:bean id="dsr" class="org.apache.commons.dbcp.BasicDataSource">
+	<beans:bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
 		<beans:property name="username" value="seoul"></beans:property>
@@ -25,7 +25,7 @@
 
 	<!-- log4jdbc -->
 	<beans:bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-		<beans:constructor-arg ref="dsr" />
+		<beans:constructor-arg ref="ds" />
 		<beans:property name="logFormatter">
 			<beans:bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
 				<beans:property name="loggingType" value="MULTI_LINE" />
