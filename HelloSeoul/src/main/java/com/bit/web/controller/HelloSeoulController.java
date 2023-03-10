@@ -26,7 +26,7 @@ public class HelloSeoulController {
 	@Resource(name = "helloSeoulDao")
 	private HelloSeoulDao helloDao;
 
-	// 濡쒓렇�씤
+	// login & session store
 	@RequestMapping("siteCheck")
 	public String loginProcess(HttpServletRequest request, String user_id, String password) {
 		HashMap<String, String> userInfo = helloDao.getDbUser(user_id);
@@ -35,7 +35,7 @@ public class HelloSeoulController {
 		String nickName = userInfo.get("USER_NICK");
 				
 		if(dbPass!=null && dbPass.equals(password)) {
-			// �꽭�뀡�뿉 �븘�씠�뵒, �땳�꽕�엫 ���옣�븯湲� & �븳�떆媛� �쑀吏�			
+			// login success		
 			request.getSession().setAttribute("user_id", user_id);
 			request.getSession().setAttribute("user_nickName", nickName);
 			request.getSession().setMaxInactiveInterval(60*60);
@@ -45,7 +45,7 @@ public class HelloSeoulController {
 		}
 	}
 	
-	// 濡쒓렇�븘�썐
+	// logout
 	@RequestMapping("HelloSeoulLogout")
 	public ModelAndView BoardLogout(HttpServletRequest request) {
 		request.getSession().setAttribute("user_id", null);
@@ -53,7 +53,7 @@ public class HelloSeoulController {
 		return new ModelAndView("Final_Pro/index");
 	}
 	
-	// 留덉씠�럹�씠吏� 硫붿씤�솕硫댁쑝濡�
+	// mypage main
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request, Model model) {
 
@@ -196,25 +196,18 @@ public class HelloSeoulController {
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		map.put("user_id", user_id);
 		
+		// 삭제할 찜리스트의 장소코드
 		String str = "(";
-
 		for(int i=0; i<locDataList.length; i++) {
 			System.out.println(locDataList[i]);
 			str += locDataList[i] + ",";			
 		}
-		
 		str = str.replaceAll(",$", "");
 		str += ")";
 		
 		map.put("str", str);
 
 		helloDao.userJjimListDelete(map);
-		
-
-		
-		helloDao.userJjimListDelete(map);
-
-		
 		
 		return "redirect:/ajaxMypageJjim";
 	}
