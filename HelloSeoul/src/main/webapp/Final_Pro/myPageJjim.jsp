@@ -23,8 +23,33 @@
 				$("table input[type='checkbox']").prop('checked',false);
 			}
 		}); // $(".nav >li").click
+		
+		
+// 		// 메뉴가 선택되어 active가 되기 전 이벤트
+// 		$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+// 			e.target // 현재 설정된 tab
+// 			e.relatedTarget // 이전에 설정된 탭
+// 		});
+		
+// 		// 메뉴가 선택되어 active가 된 후 이벤트
+// 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+// 			e.target // 현재 설정된 tab
+// 			e.relatedTarget // 이전에 설정된 탭
+// 		});
+		
+// 		// 다른 메뉴가 선택되어 active가 remove 되기 전 이벤트
+// 		$('a[data-toggle="tab"]').on('hide.bs.tab', function (e) {
+// 			e.target // 현재 설정된 tab
+// 			e.relatedTarget // 이전에 설정된 탭
+// 		});
+// 		// 다른 메뉴가 선택되어 active가 remove 된 후 이벤트
+// 		$('a[data-toggle="tab"]').on('hidden.bs.tab', function (e) {
+// 			e.target // 현재 설정된 tab
+// 			e.relatedTarget // 이전에 설정된 탭
+// 		});
+		
+		
 
-	
 	}); // function
 	
 	
@@ -111,7 +136,7 @@
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<ol class='breadcrumb'>
 				<li class='breadcrumb-item'><a href='/web/myPageLoad'>BACK</a></li>
-				<li class='breadcrumb-item'><a href='./myPagePlannerCreate.jsp'>PLANNER CREATE</a></li>
+				<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>PLANNER CREATE</a></li>
 			</ol>
 		</div>
 		<div class='main col-12' style="display: inline-flex;">
@@ -128,10 +153,10 @@
 						<a class='nav-link' data-bs-toggle='tab' href='#hotspot' aria-selected='false' role='tab'>HotSpot</a>
 					</li>					
 					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#ticket' aria-selected='false' role='tab'>Ticket</a>
+						<a class='nav-link' data-bs-toggle='tab' href='#things_to_see' aria-selected='false' role='tab'>Ticket</a>
 					</li>					
 					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#test' aria-selected='false' role='tab'>Test</a>
+						<a class='nav-link' data-bs-toggle='tab' href='#ticket' aria-selected='false' role='tab'>Test</a>
 					</li>					
 				</ul>
 				<!-- tab contents -->
