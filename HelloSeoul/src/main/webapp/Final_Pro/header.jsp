@@ -29,7 +29,7 @@ $(function(){
 			document.location.href ="/web/HelloSeoulLogout";
 		}
 		else if(($(this).attr('id'))=='comm'){
-			document.location.href ="/web/Final_Pro/ComList.jsp";
+			document.location.href ="/web/boardSelect";
 		}
 		else if(($(this).attr('id'))=='mypage'){
 			document.location.href ="/web/myPageLoad";

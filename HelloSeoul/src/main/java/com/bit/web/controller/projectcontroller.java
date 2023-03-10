@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bit.web.dao.ProjectDao;
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
-import com.bit.web.vo.goodbadBoard;
+import com.bit.web.vo.gbboard;
+import com.mongodb.util.JSON;
 
 
 @Controller
@@ -46,8 +47,10 @@ public class projectcontroller {
 	}
 	@RequestMapping(value="deleteCom")
 	public String deleteCom(int no,Model model,@RequestParam(value="user_id")String id) {
+	
 		if(dao.selectBoardId(no).equals(dao.selectId(id))) {
 			dao.deleteReply(no);
+			dao.deleteGBboard(no);
 			dao.deleteBoard(no);
 		}else{
 			return "redirect:/infoSelect?no="+no;
@@ -97,7 +100,7 @@ public class projectcontroller {
 	}
 	@RequestMapping(value="goodAction")
 	@ResponseBody
-	public Integer goodAction(int com_no,String user_id,goodbadBoard board,HashMap<String, Object>map) {
+	public List<Object> goodAction(int com_no,String user_id,gbboard board,HashMap<String, Object>map) {
 		map.put("user_id", user_id);
 		map.put("com_no", com_no);
 		if((dao.goodbadSelectGood(map))==null) {	
@@ -107,11 +110,40 @@ public class projectcontroller {
 			board.setGood(1);
 			dao.goodAction(board);
 			dao.goodBoard(com_no);
-		}else {
+		}else if(dao.goodbadSelectbad(map)==1) {
+			dao.updategoodGBboard(map);
+			dao.badBoardMi(com_no);
+			dao.goodBoard(com_no);
+		}
+		else {
 			dao.goodbadDelete(map);
 			dao.goodBoardMi(com_no);
 		}
-		return dao.selectGood(com_no);
+		return dao.selectGBboard(com_no);
+	}
+	@RequestMapping(value="badAction")
+	@ResponseBody
+	public List<Object> badAction(int com_no,String user_id,gbboard board,HashMap<String, Object>map) {
+		map.put("user_id", user_id);
+		map.put("com_no", com_no);
+		System.out.println(dao.goodbadSelectbad(map));
+		if((dao.goodbadSelectbad(map))==null) {	
+			System.out.println("com_no===="+com_no+"user_id===="+user_id);
+			board.setUser_id(user_id);
+			board.setCom_no(com_no);
+			board.setBad(1);
+			dao.badAction(board);
+			dao.badBoard(com_no);
+		}else if(dao.goodbadSelectGood(map)==1){
+			dao.updatebadGBboard(map);
+			dao.goodBoardMi(com_no);
+			dao.badBoard(com_no);
+		}
+		else {
+			dao.goodbadDelete(map);
+			dao.badBoardMi(com_no);
+		}
+		return dao.selectGBboard(com_no);
 	}
 }
 	
