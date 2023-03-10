@@ -24,8 +24,8 @@ public class sunrestcontroller {
 	}
 	
 	@PostMapping(value = "searchFood")
-	public List<MainDbBean> searchFood(String loc_sg, String loc_ctg2, String query) {
-		HashMap<Object, String> map = new HashMap<Object, String>();
+	public List<MainDbBean> searchFood(String loc_sg, int loc_ctg2, String query) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		map.put("loc_sg", loc_sg);
 		map.put("loc_ctg2", loc_ctg2);
 		map.put("query", query);		

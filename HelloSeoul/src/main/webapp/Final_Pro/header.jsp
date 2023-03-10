@@ -72,11 +72,10 @@ $(function(){
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">FOOD</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="./ctgPage.jsp">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="./ctgPage.jsp">koera</a>
+            <a class="dropdown-item" href="./ctgPage.jsp">china</a>
+            <a class="dropdown-item" href="./ctgPage.jsp">america</a>
+            <a class="dropdown-item" href="./ctgPage.jsp">japan</a>
           </div>
         </li>
          <li class="nav-item dropdown">
