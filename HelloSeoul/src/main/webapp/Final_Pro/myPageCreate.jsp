@@ -17,8 +17,12 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("button").click(function(){
+	$("button#btn_submit").click(function(){
 			document.location.href ="myPagePlannerCreate.jsp";
+	});
+	
+	$("button#btn_cancle").click(function(){
+			document.location.href ="myPageMain.jsp";
 	});
 });
 </script>
@@ -56,7 +60,8 @@ $(function(){
 					<textarea style="width: 80%; height: 200px; resize: none;"></textarea>
 				</div>
 				<div>
-					<button type="button" class="btn btn-primary">Submit</button>
+					<button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
+					<button type="button" class="btn btn-primary" id="btn_cancle">Cancle</button>
 				</div>
 				</form>
 			</div>
