@@ -146,8 +146,8 @@
 									class="glyphicon glyphicon-comment"></i> ${i.reply } <i
 									class="glyphicon glyphicon-ok"></i>${i.com_hit } <i
 									class="glyphicon glyphicon-time"></i> ${i.com_regdate } <i
-									class="glyphicon glyphicon-thumbs-up"></i> 0 <i
-									class="glyphicon glyphicon-thumbs-down"></i> 0
+									class="glyphicon glyphicon-thumbs-up"></i> ${i.good } <i
+									class="glyphicon glyphicon-thumbs-down"></i> ${i.bad}
 							</p>
 						</div>
 				</div>
@@ -162,10 +162,10 @@
 				style="margin: 10px; margin-top: 20px; text-align: right; border: 2px ridge;">
 				<p style="text-align: center; margin-top: 30px">
 					<button class="btn btn-success" id="good" >
-						<i class="glyphicon glyphicon-thumbs-up"></i>공감 
+						<i class="glyphicon glyphicon-thumbs-up"></i>공감 ${i.good }
 					</button>
 					<button class="btn btn-warning" id="bad">
-						<i class="glyphicon glyphicon-thumbs-down"></i>비공감
+						<i class="glyphicon glyphicon-thumbs-down"></i>비공감 ${i.bad }
 					</button>
 
 				</p>
