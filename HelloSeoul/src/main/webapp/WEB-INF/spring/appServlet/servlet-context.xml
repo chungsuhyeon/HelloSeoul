@@ -25,7 +25,7 @@
 
 	<!-- log4jdbc -->
 	<beans:bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-		<beans:constructor-arg ref="dsr" />
+		<beans:constructor-arg ref="ds" />
 		<beans:property name="logFormatter">
 			<beans:bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
 				<beans:property name="loggingType" value="MULTI_LINE" />
