@@ -23,7 +23,7 @@ public class CtgDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("showDb");
 	}
 	
-	public List<MainDbBean> searchFood(HashMap<Object, String> map){
+	public List<MainDbBean> searchFood(HashMap<Object, Object> map){
 		return this.getSqlSession().selectList("searchFood",map);
 	}
 }
