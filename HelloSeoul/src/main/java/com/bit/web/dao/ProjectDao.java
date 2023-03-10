@@ -96,7 +96,33 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public String goodbadDelete(HashMap<String, Object>map) {
 		return this.getSqlSession().selectOne("goodbadDelete",map);
 	}
-	
+	public Integer goodbadSelectbad(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("goodbadSelectbad",map);
+	}
+	public String badAction(gbboard board) {
+		return this.getSqlSession().selectOne("badAction",board);
+	}
+	public String badBoard(int com_no) {
+		return this.getSqlSession().selectOne("badBoard",com_no);
+	}
+	public String badBoardMi(int com_no) {
+		return this.getSqlSession().selectOne("badBoardMi",com_no);
+	}
+	public Integer selectbad(int com_no) {
+		return this.getSqlSession().selectOne("selectbad",com_no);
+	}
+	public String updatebadGBboard(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("updatebadGBboard",map);
+	}
+	public String updategoodGBboard(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("updategoodGBboard",map);
+	}
+	public String deleteGBboard(int no) {
+		return this.getSqlSession().selectOne("deleteGBboard",no);
+	}
+	public List<Object>  selectGBboard(int com_no) {
+		return this.getSqlSession().selectList("selectGBboard", com_no);
+	}
 }
 
 
