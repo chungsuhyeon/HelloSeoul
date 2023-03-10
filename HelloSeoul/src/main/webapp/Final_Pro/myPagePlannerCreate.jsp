@@ -45,8 +45,10 @@ $(function(){
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="#">Date Reset</a></li>
-  					<li class="breadcrumb-item"><a href="#">Back</a></li>
+  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Date Reset</a></li>
+  					
+<!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
+  					<li class="breadcrumb-item"><a href="javascript:history.back();">Back</a></li>
 				</ol>
 			</div>
 			<div class='col-12'>

@@ -179,17 +179,16 @@ public class HelloSeoulController {
 		}		
 
 		finalStr += "<div class='tab-pane fade active show' id='food' role='tabpanel'><table class='table table-hover'><tbody>" + tab1 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='test' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='things_to_see' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
 		
 		return finalStr;
 	}
 	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
-//	@ResponseBody
 	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -199,7 +198,6 @@ public class HelloSeoulController {
 		// 삭제할 찜리스트의 장소코드
 		String str = "(";
 		for(int i=0; i<locDataList.length; i++) {
-			System.out.println(locDataList[i]);
 			str += locDataList[i] + ",";			
 		}
 		str = str.replaceAll(",$", "");
