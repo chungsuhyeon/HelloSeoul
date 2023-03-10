@@ -22,6 +22,8 @@
 			location.href="/web/Final_Pro/myPageShow.jsp";
 		});
 		
+// 		SDKFJ;LKSJLDFA
+		
 	});
 </script>
 <!--JS Section End -->
