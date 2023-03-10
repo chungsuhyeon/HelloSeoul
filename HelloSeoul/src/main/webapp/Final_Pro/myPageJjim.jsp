@@ -53,8 +53,8 @@
 	}); // function
 	
 	
-	
 	$('document').ready(function(){
+// 		console.log($("a").attr(""));
 		$.ajax({
 			url: '/web/ajaxMypageJjim',
 			type: 'post',
@@ -101,9 +101,10 @@
 				$("div.tab-content").empty();
 				console.log(result);
 				$("div.tab-content").append(result);
-								
+				
+				$(".nav-link")
+				
 // 				$("td > a").click(function(){
-// 					alert("dfsdfsdf");
 // 			 		var tr = $(this).parent().parent();
 // 			 		var td = tr.children();
 // // 			 		console.log(td.eq(0).children().val());	
