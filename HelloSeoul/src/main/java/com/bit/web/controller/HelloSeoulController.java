@@ -189,7 +189,6 @@ public class HelloSeoulController {
 	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
-//	@ResponseBody
 	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		

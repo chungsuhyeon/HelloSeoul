@@ -23,6 +23,12 @@
 				$("table input[type='checkbox']").prop('checked',false);
 			}
 		}); // $(".nav >li").click
+		
+		// 메뉴가 선택되어 active가 된 후 이벤트
+		$('a#local_name').on('shown.bs.tab', function (e) {
+		  e.target // 현재 설정된 tab
+		  e.relatedTarget // 이전에 설정된 탭
+		});
 
 	
 	}); // function
