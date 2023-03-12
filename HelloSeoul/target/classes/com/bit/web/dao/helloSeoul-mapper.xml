@@ -26,6 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from jjim
 		where user_id = #{user_id} and loc_pc in ${str}
 	</delete>
+	
+	<select id="getJjimInfo" parameterType="Integer" resultType="mainDb">
+		select * from maindb where loc_pc = #{value}
+	</select>
 
 </mapper>
 

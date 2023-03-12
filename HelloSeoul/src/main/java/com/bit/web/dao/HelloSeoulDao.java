@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.MainDbBean;
+
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
 	@Inject
@@ -34,6 +36,11 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	// 회원의 찜 리스트 삭제
 	public void userJjimListDelete(HashMap<String, String> list) {
 		this.getSqlSession().delete("userJjimListDelete", list);
+	}
+	
+	// 찜 리스트에서 장소코드로 상세정보 조회
+	public MainDbBean getJjimInfo(int code){
+		return this.getSqlSession().selectOne("getJjimInfo", code);
 	}
 	
 	

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 
 @Controller
@@ -66,7 +67,6 @@ public class HelloSeoulController {
 		// 오늘 날짜
 		LocalDate today = LocalDate.now();
 		
-		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
 		
@@ -78,7 +78,7 @@ public class HelloSeoulController {
 		// 나이계산
 		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
 			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
-		} else { // �깮�씪 �븞吏��궓
+		} else { // 생일 안지남
 			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // 생일 안지난 사람
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
 			} else { // 생일 지남
@@ -149,25 +149,25 @@ public class HelloSeoulController {
 			if(bean.getLoc_ctg1().equals("음식점")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab1 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("관광지")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab2 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("쇼핑")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab3 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("볼거리")){				
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab4 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
 			}
 			else { // 티켓인 경우	
@@ -201,13 +201,19 @@ public class HelloSeoulController {
 			str += locDataList[i] + ",";			
 		}
 		str = str.replaceAll(",$", "");
-		str += ")";
-		
+		str += ")";		
 		map.put("str", str);
 
 		helloDao.userJjimListDelete(map);
 		
 		return "redirect:/ajaxMypageJjim";
+	}
+	
+	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
+	@PostMapping(value = "ajaxMypageJjimInfo")
+	@ResponseBody
+	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, @RequestParam(value = "loc_code")int loc_code){
+		return helloDao.getJjimInfo(loc_code);
 	}
 	
 
