@@ -20,11 +20,9 @@
 		
 		$(".loadMyPlanner").click(function(){
 			location.href="/web/Final_Pro/myPageShow.jsp";
-		});
-		
-// 		SDKFJ;LKSJLDFA
-		
-	});
+		}); // $(".loadMyPlanner").click
+				
+	}); // function
 </script>
 <!--JS Section End -->
 

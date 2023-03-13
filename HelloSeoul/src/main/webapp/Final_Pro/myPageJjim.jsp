@@ -56,33 +56,42 @@
 						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 						success: function(result){
 							$("div.detailbar").empty();
-							$("div.detailbar").append(
-									`<table class='table table-hover'>
-										<tbody>
-											<tr class='table-light'>
-												<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td>
-											</tr>
-											<tr class='table-light'>
-												<td><span> \${result.loc_name}</span>	</td>
-											</tr>
-											<tr class='table-light'>
-												<td><span> \${result.loc_sg} > \${result.loc_ctg1} > \${result.loc_ctg2} </span>	</td>
-											</tr>
-											<tr class='table-light'>
-												<td><span> 주소 : \${result.loc_addr}</span>	</td>
-											</tr>
-											<tr class='table-light'>
-												<td><span> 영업시간 : \${result.loc_op} ~ \${result.loc_cl}</span>	</td>
-											</tr>
-											<tr class='table-light'>
-												<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
+							
+							var htmlInner = `<table class='table table-hover'><tbody><tr class='table-light'>`;
+							
+							if((result.loc_img).includes("http")){
+								htmlInner += `<td><img src="\${result.loc_img}" width="100%" height="300"></td></tr>`;
+							} else {
+								htmlInner += `<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td></tr>`;								
+							}
+							
+							htmlInner += `<tr class='table-light'>
+										<td><span> \${result.loc_name}</span>	</td>
+										</tr>
+										<tr class='table-light'>
+											<td><span> \${result.loc_sg} > \${result.loc_ctg1} > \${result.loc_ctg2} </span>	</td>
+										</tr>
+										<tr class='table-light'>
+											<td><span> 주소 : \${result.loc_addr}</span>	</td>
+										</tr>`;
+							
+							if(result.loc_op == " "){ // null값
+								htmlInner += `<tr class='table-light'><td><span> </span></td></tr>`;								
+							} else {
+								htmlInner += `<tr class='table-light'>
+												<td><span> 영업시간 : \${result.loc_op} ~ \${result.loc_cl}</span>	</td></tr>`;
+							}
+							
+							htmlInner += `<tr class='table-light'>
+											<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
 											</tr>
 											<tr class='table-light'>
 												<td><span> 정보 : \${result.loc_info}</span>	</td>
 											</tr>
 										</tbody>
-									</table>`
-							);
+									</table>`;
+							
+							$("div.detailbar").append(htmlInner);
 							
 							// 지도 마커 스크립트
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

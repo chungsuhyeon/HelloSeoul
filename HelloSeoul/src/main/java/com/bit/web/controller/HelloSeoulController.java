@@ -216,6 +216,11 @@ public class HelloSeoulController {
 		return helloDao.getJjimInfo(loc_code);
 	}
 	
+	@PostMapping(value = "createPlannerDate")
+	public void plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
+		System.out.println(request.getParameter("planner_title"));
+	}
+	
 
 	
 }

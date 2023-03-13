@@ -43,5 +43,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("getJjimInfo", code);
 	}
 	
+	// 플래너 생성을 위한 플래너 번호
+	public int getPlannerNo() {
+		return this.getSqlSession().selectOne("getPlannerNo");
+	}
 	
 }

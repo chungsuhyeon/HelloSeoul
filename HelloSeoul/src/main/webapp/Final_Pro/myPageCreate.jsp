@@ -16,15 +16,41 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
-$(function(){
-	$("button#btn_submit").click(function(){
-			document.location.href ="myPagePlannerCreate.jsp";
-	});
+	function minEndDate(){
+		let startDate = $("input[name='tripStart']").val();
+		$("input[name='tripEnd']").prop('min', startDate);
+	}
 	
-	$("button#btn_cancle").click(function(){
-			document.location.href ="myPageMain.jsp";
-	});
-});
+	function maxStartDate(){
+		let endDate = $("input[name='tripEnd']").val();
+		$("input[name='tripStart']").prop('max', endDate);s
+	}
+	
+	$(function(){
+		// submit 버튼 클릭 → 유효성 검사
+		$("button#btn_submit").click(function(){
+			if($("input#title").val().length == 0) {
+				alert("Please enter the title");
+				$("input#title").val('');
+				$("input#title").focus();			
+				return false;
+			}		
+			if($("input[name='tripStart']").val().length == 0 || $("input[name='tripEnd']").val().length == 0){
+				alert("Please choose the date");
+				$("input[name='tripStart']").val('');
+				$("input[name='tripEnd']").val('');
+				$("input[name='tripStart']").focus();	
+				return false;			
+			}						
+			$("form[name='mypageCreateDateFrm']").submit();
+		}); // $("button#btn_submit").click
+		
+		$("button#btn_cancle").click(function(){
+				document.location.href ="myPageMain.jsp";
+		}); // $("button#btn_cancle").click
+		
+	}); // function
+	
 </script>
 <!--JS Section End -->
 
@@ -37,32 +63,64 @@ $(function(){
 </style>
 <!-- Style Section End -->
 
-
 </head>
 <body>
 	<header>
-	<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="header.jsp"></jsp:include>
 	</header>
+	
 	<section>
 		<div class='container mt-4' style="text-align: center;">
 			<div class='col-4 bg-light' style="display: inline-block;">
-				<form>
-				<div class="form-group">
-  					<label class="col-form-label mt-4" for="title">Title</label>
-  					<input type="text" class="form-control" placeholder="Input Title" id="title">
-				</div>
-				<div class='form-group'>
-					Start Date<input type="date" class="form-control" style="width: 50%; margin-left: 25%;">
-					End Date<input type="date" class="form-control"  style="width: 50%; margin-left: 25%;">
-				</div>
-				<div class='form-group'>
-					<p>memo_line</p>
-					<textarea style="width: 80%; height: 200px; resize: none;"></textarea>
-				</div>
-				<div>
-					<button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
-					<button type="button" class="btn btn-primary" id="btn_cancle">Cancle</button>
-				</div>
+				<form action="/web/createPlannerDate?modi=createDate", name="mypageCreateDateFrm", method="post">
+					<div class="form-group">
+	  					<label class="col-form-label mt-4" for="title">Title</label>
+	  					<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
+					</div>
+					
+					<div class='form-group'>
+						Start Date<input type="date" class="form-control" style="width: 50%; margin-left: 25%;" name="tripStart" onchange="minEndDate()">
+						End Date<input type="date" class="form-control"  style="width: 50%; margin-left: 25%;" name="tripEnd" onchange="maxStartDate()">
+					</div>
+					
+					<div class='form-group'>
+						<p>Planner memo</p>
+						<textarea style="width: 80%; height: 200px; resize: none;" name="planner_info"></textarea>
+					</div>
+					
+					<div>
+						<button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
+						<button type="button" class="btn btn-primary" id="btn_cancle">Cancel</button>
+					</div>
+					
+					
+					
+					
+					<table>
+						<tbody>
+							<tr>
+								<td><label class="col-form-label mt-4" for="title">Title</label></td>
+								<td><input type="text" class="form-control" placeholder="Input Title" id="title" name="title"></td>
+							</tr>
+							<tr>
+								<td>Start Date</td>
+								<td><input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()"></td>
+							</tr>
+							<tr>
+								<td>End Date</td>
+								<td><input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()"></td>
+							</tr>
+							<tr>
+								<td><p>Planner memo</p></td>
+								<td><textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea></td>
+							</tr>
+						
+						</tbody>
+					
+					</table>
+					
+					
+					
 				</form>
 			</div>
 		</div>
