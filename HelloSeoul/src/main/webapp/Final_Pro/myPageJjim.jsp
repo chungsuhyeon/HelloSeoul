@@ -18,44 +18,21 @@
 <script type="text/javascript">
 	$(function(){
 		// tab 변경시 checked 해제
-		$(".nav >li").click(function(){
+		$(".nav > li").click(function(){
 			if($("table input[type='checkbox']").is(":checked")){
 				$("table input[type='checkbox']").prop('checked',false);
 			}
 		}); // $(".nav >li").click
-		
-		
+				
 // 		.show.bs.tab : 클릭한 탭이 보이기 전에 실행합니다.
 // 		.shown.bs.tab : 클릭한 탭이 보인 후에 실행됩니다. 위와 시간적으로 거의 차이가 없습니다.
 // 		.hide.bs.tab : 이전의 탭이 감춰지기 전에 실행됩니다.
 // 		.hidden.bs.tab : 이전의 탭이 감춰진 후에 실행됩니다.
 		
-		// 메뉴가 선택되어 active가 되기 전 이벤트
-// 		$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-// 			e.target // 현재 설정된 tab
-// 			e.relatedTarget // 이전에 설정된 탭
-// 		});
-// 		// 메뉴가 선택되어 active가 된 후 이벤트
-// 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-// 			e.target // 현재 설정된 tab
-// 			e.relatedTarget // 이전에 설정된 탭
-// 		});
-// 		// 다른 메뉴가 선택되어 active가 remove 되기 전 이벤트
-// 		$('a[data-toggle="tab"]').on('hide.bs.tab', function (e) {
-// 			e.target // 현재 설정된 tab
-// 			e.relatedTarget // 이전에 설정된 탭
-// 		});
-// 		// 다른 메뉴가 선택되어 active가 remove 된 후 이벤트
-// 		$('a[data-toggle="tab"]').on('hidden.bs.tab', function (e) {
-// 			e.target // 현재 설정된 tab
-// 			e.relatedTarget // 이전에 설정된 탭
-// 		});
-		
 	}); // function
 	
 	
 	$('document').ready(function(){
-// 		console.log($("a").attr(""));
 		$.ajax({
 			url: '/web/ajaxMypageJjim',
 			type: 'post',
@@ -81,30 +58,30 @@
 							$("div.detailbar").empty();
 							$("div.detailbar").append(
 									`<table class='table table-hover'>
-									<tbody>
-										<tr class='table-light'>
-											<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> \${result.loc_name}</span>	</td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> \${result.loc_sg} > \${result.loc_ctg1} > \${result.loc_ctg2} </span>	</td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> 주소 : \${result.loc_addr}</span>	</td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> 영업시간 : \${result.loc_op} ~ \${result.loc_cl}</span>	</td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
-										</tr>
-										<tr class='table-light'>
-											<td><span> 정보 : \${result.loc_info}</span>	</td>
-										</tr>
-									</tbody>
-								</table>`
+										<tbody>
+											<tr class='table-light'>
+												<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> \${result.loc_name}</span>	</td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> \${result.loc_sg} > \${result.loc_ctg1} > \${result.loc_ctg2} </span>	</td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> 주소 : \${result.loc_addr}</span>	</td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> 영업시간 : \${result.loc_op} ~ \${result.loc_cl}</span>	</td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
+											</tr>
+											<tr class='table-light'>
+												<td><span> 정보 : \${result.loc_info}</span>	</td>
+											</tr>
+										</tbody>
+									</table>`
 							);
 							
 							// 지도 마커 스크립트
