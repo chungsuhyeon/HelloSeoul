@@ -34,6 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPlannerNo" resultType="Integer">
 		select planner_seq.nextval from dual
 	</select>
+	
+	<insert id="plannerDataInsert" parameterMap="java.util.HashMap">
+		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
+		values(${no}, ${user_id}, ${title}, ${}, ${}, ${})
+	</insert>
 
 </mapper>
 

@@ -218,7 +218,16 @@ public class HelloSeoulController {
 	
 	@PostMapping(value = "createPlannerDate")
 	public void plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
-		System.out.println(request.getParameter("planner_title"));
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int no = helloDao.getPlannerNo();
+		map.put("no", no);
+		map.put("user_id", (String) request.getSession().getAttribute("user_id"));
+		map.put("title", request.getParameter("title"));
+		map.put("tripStart", request.getParameter("tripStart"));
+		map.put("tripEnd", request.getParameter("tripEnd"));
+		map.put("memo", request.getParameter("planner_info"));
+		System.out.println(map);
+		
 	}
 	
 
