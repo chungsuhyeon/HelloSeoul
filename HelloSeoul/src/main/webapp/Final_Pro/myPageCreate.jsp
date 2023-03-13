@@ -59,7 +59,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style type="text/css">
-
+td{
+	text-align: center;
+}
+tr > td:nth-child(2){
+	width : 70%;
+}
 </style>
 <!-- Style Section End -->
 
@@ -70,60 +75,61 @@
 	</header>
 	
 	<section>
-		<div class='container mt-4' style="text-align: center;">
-			<div class='col-4 bg-light' style="display: inline-block;">
-				<form action="/web/createPlannerDate?modi=createDate", name="mypageCreateDateFrm", method="post">
-					<div class="form-group">
-	  					<label class="col-form-label mt-4" for="title">Title</label>
-	  					<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
-					</div>
-					
-					<div class='form-group'>
-						Start Date<input type="date" class="form-control" style="width: 50%; margin-left: 25%;" name="tripStart" onchange="minEndDate()">
-						End Date<input type="date" class="form-control"  style="width: 50%; margin-left: 25%;" name="tripEnd" onchange="maxStartDate()">
-					</div>
-					
-					<div class='form-group'>
-						<p>Planner memo</p>
-						<textarea style="width: 80%; height: 200px; resize: none;" name="planner_info"></textarea>
-					</div>
-					
-					<div>
-						<button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
-						<button type="button" class="btn btn-primary" id="btn_cancle">Cancel</button>
-					</div>
-					
-					
-					
-					
-					<table>
+			<div class='container-fluid bg-warning' style="display: inline-flex;">
+				<div class='col-4'></div>
+				<div class='col-4 mt-5'>
+					<table class="table table-hover bg-light" style="width: 80%;">
+						<thead>
+							<tr class="table-primary">
+								<th colspan="2">
+								<h4>Join</h4>
+								</th>
+							</tr>
+						</thead>
 						<tbody>
 							<tr>
-								<td><label class="col-form-label mt-4" for="title">Title</label></td>
-								<td><input type="text" class="form-control" placeholder="Input Title" id="title" name="title"></td>
+								<td>
+								<h4>Title : </h4>
+								</td>
+								<td>
+								<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
+								</td>
 							</tr>
 							<tr>
-								<td>Start Date</td>
-								<td><input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()"></td>
+								<td>
+								<h4>Start Date : </h4>
+								</td>
+								<td>
+								<input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()">
+								</td>
 							</tr>
 							<tr>
-								<td>End Date</td>
-								<td><input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()"></td>
+								<td>
+								<h4>End Date : </h4>
+								</td>
+								<td>
+								<input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()">
+								</td>
 							</tr>
 							<tr>
-								<td><p>Planner memo</p></td>
-								<td><textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea></td>
+								<td colspan="2">
+								<h4 style="text-align: center;">Planner memo</h4>
+								<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea>
+								</td>
 							</tr>
-						
+							<tr>
+								<td style="width:50%;">
+								<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="">Submit</button>
+								</td>
+								<td>
+								<button class="btn btn-lg btn-danger" type="button" style="width: 100%" id="">Cancel</button>
+								</td>
+							</tr>
 						</tbody>
-					
-					</table>
-					
-					
-					
-				</form>
+					</table>								
+				</div>
+				<div class='col-4'></div>
 			</div>
-		</div>
 	</section>
 </body>
 </html>
