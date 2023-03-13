@@ -59,12 +59,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style type="text/css">
-td{
-	text-align: center;
-}
-tr > td:nth-child(2){
-	width : 70%;
-}
+	td{
+		text-align: center;
+	}
+	tr > td:nth-child(2){
+		width : 70%;
+	}
 </style>
 <!-- Style Section End -->
 
@@ -75,61 +75,63 @@ tr > td:nth-child(2){
 	</header>
 	
 	<section>
-			<div class='container-fluid bg-warning' style="display: inline-flex;">
-				<div class='col-4'></div>
-				<div class='col-4 mt-5'>
+		<div class='container-fluid bg-warning' style="display: inline-flex;">
+			<div class='col-4'></div>
+			<div class='col-4 mt-5'>
+				<form action="/web/createPlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
 					<table class="table table-hover bg-light" style="width: 80%;">
 						<thead>
 							<tr class="table-primary">
 								<th colspan="2">
-								<h4>Join</h4>
+									<h4>Join</h4>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-								<h4>Title : </h4>
+									<h4>Title : </h4>
 								</td>
 								<td>
-								<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
-								</td>
-							</tr>
-							<tr>
-								<td>
-								<h4>Start Date : </h4>
-								</td>
-								<td>
-								<input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()">
+									<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
 								</td>
 							</tr>
 							<tr>
 								<td>
-								<h4>End Date : </h4>
+									<h4>Start Date : </h4>
 								</td>
 								<td>
-								<input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()">
+									<input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>End Date : </h4>
+								</td>
+								<td>
+									<input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-								<h4 style="text-align: center;">Planner memo</h4>
-								<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea>
+									<h4 style="text-align: center;">Planner memo</h4>
+									<textarea style="width: 100%; height: 200px; resize: none;" name="memo"></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td style="width:50%;">
-								<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="">Submit</button>
+									<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="btn_submit">Submit</button>
 								</td>
 								<td>
-								<button class="btn btn-lg btn-danger" type="button" style="width: 100%" id="">Cancel</button>
+									<button class="btn btn-lg btn-danger" type="button" style="width: 100%" id="btn_cancle">Cancel</button>
 								</td>
 							</tr>
 						</tbody>
-					</table>								
-				</div>
-				<div class='col-4'></div>
+					</table>
+				</form>								
 			</div>
+			<div class='col-4'></div>
+		</div>
 	</section>
 </body>
 </html>

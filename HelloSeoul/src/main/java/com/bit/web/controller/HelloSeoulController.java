@@ -131,7 +131,7 @@ public class HelloSeoulController {
 	// 찜 보기 화면
 	@RequestMapping(value = "ajaxMypageJjim",method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String mypageJjimListLoad(HttpServletRequest request, HttpServletResponse response){
+	public String mypageJjimListLoad(HttpServletRequest request){
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		List<Object> userJjimList = helloDao.getUserJjimList(user_id);
 //		System.out.println("HelloSeoulController mypageJjimListLoad userJjimList " + userJjimList);
@@ -216,19 +216,45 @@ public class HelloSeoulController {
 		return helloDao.getJjimInfo(loc_code);
 	}
 	
+	// 플래너 일정 생성
 	@PostMapping(value = "createPlannerDate")
-	public void plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		int no = helloDao.getPlannerNo();
-		map.put("no", no);
-		map.put("user_id", (String) request.getSession().getAttribute("user_id"));
-		map.put("title", request.getParameter("title"));
-		map.put("tripStart", request.getParameter("tripStart"));
-		map.put("tripEnd", request.getParameter("tripEnd"));
-		map.put("memo", request.getParameter("planner_info"));
-		System.out.println(map);
-		
+	public ModelAndView plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
+	
+		// 새로운 플래너 생성을 위한 일정 생성
+		if(modi.equals("createPlanner")) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("user_id", (String) request.getSession().getAttribute("user_id"));
+			map.put("title", request.getParameter("title"));
+			map.put("tripStart", request.getParameter("tripStart"));
+			map.put("tripEnd", request.getParameter("tripEnd"));
+			
+			model.addAttribute("plannerInfo", map);
+			
+			map.put("memo", request.getParameter("memo"));
+			
+			int no = helloDao.getPlannerNo();
+			map.put("no", no);
+			
+			helloDao.plannerDataInsert(map);
+			
+//			return "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+		}
+//		return "redirect:/createMainPlanner";
+		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
+	
+//	// 플래너 메인 생성 페이지 이동
+//	@RequestMapping(value = "createMainPlanner")
+//	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
+//		// 새로운 플래너를 생성
+//		if(modi.equals("newCreate")) {
+//			
+//		}
+//		
+//		return new ModelAndView("Final_Pro/myPagePlannerCreate");
+//	}
 	
 
 	

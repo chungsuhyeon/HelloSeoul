@@ -49,8 +49,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// planner table에 데이터 insert
-	public void plannerDataInsert(HashMap<String, String> map) {
+	public void plannerDataInsert(HashMap<String, Object> map) {
 		this.getSqlSession().insert("plannerDataInsert", map);
 	}
+	
 	
 }
