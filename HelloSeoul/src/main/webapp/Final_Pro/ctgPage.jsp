@@ -19,7 +19,97 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
+	//ajax show list
+	$.ajax({
+		type:'post',
+		url:'/web/showMainDb',
+		dataType:'json',
+		success : function(r){
+				for(var x=0; x<r.length;x++){
+					$("#tablebd").append(
+										`<tr class='table-light' style="border: solid; height: 50px;">
+										<td id='locname' style="border: solid; width: 300px;">\${r[x].loc_name}</td>
+										<td style="border: solid; width: 80px">
+										<input type="checkbox" name="zzim" value=\${r[x].loc_pc}>
+										</td>
+										</tr>`
+										);
+										}
+				$(function(){
+					$('tr #locname').click(function(){
+						
+						var sel = $(this).text();
+ 						for(var x=0; x<r.length;x++){
+ 							if(r[x].loc_name==sel){
+ 								var loc = r[x];
+ 							}
+ 						}
+ 						//
+	 						
+						//마커가 표시될 위치입니다 
+						var markerPosition  = new kakao.maps.LatLng(loc.loc_x,loc.loc_y); 
+
+						//마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+						position: markerPosition
+						});
+
+						//마커가 지도 위에 표시되도록 설정합니다
+						map.setCenter(markerPosition);
+						marker.setMap(map);
+
+						//아래 코드는 지도 위의 마커를 제거하는 코드입니다
+						//marker.setMap(null);
+						$('#tabab').html(
+								`<table class='table table-hover'>
+								<tbody>
+									<tr style="border: solid;">
+										<td rowspan="6" style="border: solid; width: 300px;">장소사진</td>
+										<td style="border: solid; width: 20%;">장소명</td>
+										<td style="border: solid;">\${loc.loc_name}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;">세부 카테고리</td>
+										<td style="border: solid;">\${loc.loc_ctg2}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;">장소주소</td>
+										<td style="border: solid;">\${loc.loc_addr}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;">영업시간</td>
+										<td style="border: solid;">\${loc.loc_op} ~ \${loc.loc_cl}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;">전화번호</td>
+										<td style="border: solid;">\${loc.loc_tel}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;">기타</td>
+										<td style="border: solid;">\${loc.loc_sg}</td>
+									</tr>
+									<tr style="border: solid;">
+										<td style="border: solid;" colspan="3" id="shit">장소정보</td>
+									</tr>
+									<tr style="border: solid;">
+										<td colspan="3" style="border: solid; height: 350px">\${loc.loc_info}</td>
+									</tr>
+								</tbody>
+							</table>`		
+						);
+						
+					});
+				});
+				
+		},
+		error : function(x){
+			console.log(x);
+		}
+	});
 	
+	
+	
+	//ajax search
 	$("#search").click(function(){
  		if($('#locctg').val()=='choose'||$('#detailctg').val()=='choose'||$('#query').val().length==0){
  		alert('?');
@@ -146,116 +236,9 @@ $(function(){
 		});
 	});
 	
-	ajaxProcess();
 	
-	
-	
-	
-});//loadFunction
-function ajaxProcess(){
-	$.ajax({
-		type:'post',
-		url:'/web/showMainDb',
-		dataType:'json',
-		success : function(r){
-			for(var x=0; x<r.length;x++){
-				console.log(r[x].loc_addr);
-				
-				$("#tablebd").append(
-				`<tr class='table-light' style="border: solid; height: 50px;">
-				<td id='locname' style="border: solid; width: 300px;">\${r[x].loc_name}</td>
-				<td style="border: solid; width: 80px">
-				<input type="checkbox" name="zzim" value=\${r[x].loc_pc}>
-				</td>
-				</tr>`
-				);
-				}
-				$(function(){
-					$('tr #locname').click(function(){
-						
-						var sel = $(this).text();
- 						for(var x=0; x<r.length;x++){
- 							if(r[x].loc_name==sel){
- 								var loc = r[x];
- 							}
- 						}
- 						//
-	 						
-						//마커가 표시될 위치입니다 
-						var markerPosition  = new kakao.maps.LatLng(loc.loc_x,loc.loc_y); 
+});
 
-						//마커를 생성합니다
-						var marker = new kakao.maps.Marker({
-						position: markerPosition
-						});
-
-						//마커가 지도 위에 표시되도록 설정합니다
-						map.setCenter(markerPosition);
-						marker.setMap(map);
-
-						//아래 코드는 지도 위의 마커를 제거하는 코드입니다
-						//marker.setMap(null);
-	 						
-	 						//
- 	 					if(loc.loc_ctg2==1){
- 							loc.loc_ctg2 = "한식";
- 						}
- 						else if(loc.loc_ctg2==2){
- 							loc.loc_ctg2 = "중식";
- 						}
- 						else if(loc.loc_ctg2==3){
-							loc.loc_ctg2 = "양식";
-						}else{
-							loc.loc_ctg2 = "일식";
-						}
-						
-						$('#tabab').html(
-								`<table class='table table-hover'>
-								<tbody>
-									<tr style="border: solid;">
-										<td rowspan="6" style="border: solid; width: 300px;">장소사진</td>
-										<td style="border: solid; width: 20%;">장소명</td>
-										<td style="border: solid;">\${loc.loc_name}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;">세부 카테고리</td>
-										<td style="border: solid;">\${loc.loc_ctg2}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;">장소주소</td>
-										<td style="border: solid;">\${loc.loc_addr}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;">영업시간</td>
-										<td style="border: solid;">\${loc.loc_op} ~ \${loc.loc_cl}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;">전화번호</td>
-										<td style="border: solid;">\${loc.loc_tel}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;">기타</td>
-										<td style="border: solid;">\${loc.loc_sg}</td>
-									</tr>
-									<tr style="border: solid;">
-										<td style="border: solid;" colspan="3" id="shit">장소정보</td>
-									</tr>
-									<tr style="border: solid;">
-										<td colspan="3" style="border: solid; height: 350px">\${loc.loc_info}</td>
-									</tr>
-								</tbody>
-							</table>`		
-						);
-						
-					});
-				});
-				
-		},
-		error : function(x){
-			console.log(x);
-		}
-	});
-}
 </script>
 <!--JS Section End -->
 
@@ -326,19 +309,22 @@ function ajaxProcess(){
 		</div>
 		
 <div class="text2"style="border: solid; height: 800px; width: 20%; float:right;">
-<select class='form-select' id='locctg'>
-<option value="choose">지역</option>
-<option value='중구'>junggu</option>
-<option value='영등포구'>yeongdeungpogu</option>
-<option value='강남구'>gangnamgu</option>
-</select>
-<select class='form-select' id='detailctg'>
-<option value="choose">세부카테고리</option>
-<option value='1'>korea</option>
-<option value='2'>china</option>
-<option value='3'>America</option>
-<option value='4'>japan</option>
-</select>
+	<div >
+	<select class='form-select' id='locctg'>
+	<option value="choose">지역</option>
+	<option value='중구'>junggu</option>
+	<option value='영등포구'>yeongdeungpogu</option>
+	<option value='강남구'>gangnamgu</option>
+	</select>
+	<select class='form-select' id='detailctg'>
+	<option value="choose">세부카테고리</option>
+	<option value='korea'>korea</option>
+	<option value='china'>china</option>
+	<option value='America'>America</option>
+	<option value='japan'>japan</option>
+	</select>
+	</div>
+
 <button id='search' style="border: solid; float: right;">검색</button>
 <input id='query' type="text">
 <div style="border: solid; height:610px; overflow: auto; margin-left: 5px; margin-top: 50px;">
