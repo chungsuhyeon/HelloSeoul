@@ -53,5 +53,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().insert("plannerDataInsert", map);
 	}
 	
+	// 플래너 생성 후 메인 플래너 페이지에 넘길 정보
+	public HashMap<String, Object> firstMainPlannerCreate(HashMap<String, Object> map){
+		return this.getSqlSession().selectOne("firstMainPlannerCreate", map);
+	}
+	
 	
 }

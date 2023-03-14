@@ -17,9 +17,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
-$(function(){
+	$(function(){
+		
+	});
 	
-});
+	$('document').ready(function(){
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
+		$.ajax({
+			url: '/web/ajaxMypagePlannerCreate',
+			type: 'post',
+			data: {no:no},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				console.log(result);
+				console.log(result.PLANNER_START);
+				console.log(result.PLANNER_END);
+				console.log(typeof(result.PLANNER_START));
+				var start = 
+// 				LocalDate start = LocalDate.parse(result.PLANNER_START, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+// 				LocalDate end = LocalDate.parse(result.PLANNER_END, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+// 				const start = new Date(result.PLANNER_START);
+// 				console.log("start " + start);
+								
+				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
+	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
+				
+				for(var i=0; i<result.numDate; i++){
+					console.log(i);
+					console.log(result.PLANNER_START);
+				}
+				
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
+		
+	}); // $('document').ready
+	
 </script>
 <!--JS Section End -->
 
@@ -47,18 +85,16 @@ $(function(){
 			<div class='col-12'>
 				<ol class="breadcrumb">
   					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Date Reset</a></li>
-  					
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
   					<li class="breadcrumb-item"><a href="javascript:history.back();">Back</a></li>
 				</ol>
 			</div>
 			<div class='col-12'>
-				<div class='col-6' style="display: inline-flex;">
-					<h3>Title : &nbsp;</h3>
-    				<input class="form-control" id="readOnlyInput" type="text" value="${plannerInfo.title}" readonly="" style="height:50px;">					
+				<div class='col-6' style="display: inline-flex;" id="planTitle">
 <%--     				<span id="readOnlyInput" style="align-items: center">${plannerInfo.title}</span>			 --%>
 				</div>
 			</div>
+			
 			<!-- 메인 플래너 내용 -->	
 			<div class="main col-12" style="display: inline-flex;">
 				<!--tab-->

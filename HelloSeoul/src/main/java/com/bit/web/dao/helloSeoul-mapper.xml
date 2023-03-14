@@ -39,6 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
 		values(#{no}, #{user_id}, #{title}, #{tripStart}, #{tripEnd}, #{memo})
 	</insert>
+	
+	<select id="firstMainPlannerCreate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * 
+		from planner
+		where planner_no = #{no} and user_id = #{user_id}
+	</select>
 
 </mapper>
 

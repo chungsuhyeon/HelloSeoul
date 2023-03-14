@@ -1,6 +1,7 @@
 package com.bit.web.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -129,7 +130,7 @@ public class HelloSeoulController {
 	}
 	
 	// 찜 보기 화면
-	@RequestMapping(value = "ajaxMypageJjim",method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
+	@RequestMapping(value = "ajaxMypageJjim", method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mypageJjimListLoad(HttpServletRequest request){
 		String user_id = (String) request.getSession().getAttribute("user_id");
@@ -218,44 +219,62 @@ public class HelloSeoulController {
 	
 	// 플래너 일정 생성
 	@PostMapping(value = "createPlannerDate")
+	@ResponseBody
 	public ModelAndView plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
 	
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 
+			int no = helloDao.getPlannerNo();
+			map.put("no", no);
 			map.put("user_id", (String) request.getSession().getAttribute("user_id"));
 			map.put("title", request.getParameter("title"));
 			map.put("tripStart", request.getParameter("tripStart"));
 			map.put("tripEnd", request.getParameter("tripEnd"));
-			
-			model.addAttribute("plannerInfo", map);
-			
 			map.put("memo", request.getParameter("memo"));
-			
-			int no = helloDao.getPlannerNo();
-			map.put("no", no);
-			
+		
+//			model.addAttribute("plannerInfo", map);
 			helloDao.plannerDataInsert(map);
 			
+			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
+			return new ModelAndView(direct);
 //			return "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
-			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+//			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
 //		return "redirect:/createMainPlanner";
 		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 	
-//	// 플래너 메인 생성 페이지 이동
-//	@RequestMapping(value = "createMainPlanner")
-//	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
-//		// 새로운 플래너를 생성
-//		if(modi.equals("newCreate")) {
-//			
-//		}
-//		
-//		return new ModelAndView("Final_Pro/myPagePlannerCreate");
-//	}
+	// 플래너 메인 생성 페이지 이동
+	@RequestMapping(value = "createMainPlanner")
+	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
+		if(modi.equals("newCreate")) { // 새로운 플래너를 생성
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+		}
+		else { // 플래너 수정
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		}
+	}
 	
+	// 메인 플래너 생성 페이지 로드
+	@PostMapping(value = "ajaxMypagePlannerCreate")
+	@ResponseBody
+	public HashMap<String, Object> ajaxPlannerFirstCreate(HttpServletRequest request, @RequestParam(value = "no") int no) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", (String) request.getSession().getAttribute("user_id"));
+		map.put("no", no);
+		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(map);
+		
+		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//		plannerInfo.put("PLANNER_START", start);
+		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//		plannerInfo.put("PLANNER_END", end);
+		int diffDate = end.compareTo(start);
+		plannerInfo.put("numDate", diffDate+1);
+		
+		return plannerInfo;
+	}
 
 	
 }

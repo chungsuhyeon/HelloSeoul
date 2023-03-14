@@ -23,7 +23,7 @@
 	
 	function maxStartDate(){
 		let endDate = $("input[name='tripEnd']").val();
-		$("input[name='tripStart']").prop('max', endDate);s
+		$("input[name='tripStart']").prop('max', endDate);
 	}
 	
 	$(function(){
