@@ -11,7 +11,7 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
 
-<title>Hello, Seoul!!!!</title>
+<title>Hello, Seoul!</title>
 
 <!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

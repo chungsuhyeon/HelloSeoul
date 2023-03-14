@@ -26,6 +26,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from jjim
 		where user_id = #{user_id} and loc_pc in ${str}
 	</delete>
+	
+	<select id="getJjimInfo" parameterType="Integer" resultType="mainDb">
+		select * from maindb where loc_pc = #{value}
+	</select>
+	
+	<select id="getPlannerNo" resultType="Integer">
+		select planner_seq.nextval from dual
+	</select>
+	
+	<insert id="plannerDataInsert" parameterType="java.util.HashMap">
+		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
+		values(#{no}, #{user_id}, #{title}, #{tripStart}, #{tripEnd}, #{memo})
+	</insert>
 
 </mapper>
 

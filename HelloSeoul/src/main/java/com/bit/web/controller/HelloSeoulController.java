@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 
 @Controller
@@ -66,7 +67,6 @@ public class HelloSeoulController {
 		// 오늘 날짜
 		LocalDate today = LocalDate.now();
 		
-		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
 		
@@ -78,7 +78,7 @@ public class HelloSeoulController {
 		// 나이계산
 		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
 			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
-		} else { // �깮�씪 �븞吏��궓
+		} else { // 생일 안지남
 			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // 생일 안지난 사람
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
 			} else { // 생일 지남
@@ -131,7 +131,7 @@ public class HelloSeoulController {
 	// 찜 보기 화면
 	@RequestMapping(value = "ajaxMypageJjim",method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String mypageJjimListLoad(HttpServletRequest request, HttpServletResponse response){
+	public String mypageJjimListLoad(HttpServletRequest request){
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		List<Object> userJjimList = helloDao.getUserJjimList(user_id);
 //		System.out.println("HelloSeoulController mypageJjimListLoad userJjimList " + userJjimList);
@@ -149,25 +149,25 @@ public class HelloSeoulController {
 			if(bean.getLoc_ctg1().equals("음식점")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab1 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("관광지")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab2 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("쇼핑")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab3 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("볼거리")){				
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab4 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
 			}
 			else { // 티켓인 경우	
@@ -179,17 +179,16 @@ public class HelloSeoulController {
 		}		
 
 		finalStr += "<div class='tab-pane fade active show' id='food' role='tabpanel'><table class='table table-hover'><tbody>" + tab1 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='test' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='things_to_see' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
 		
 		return finalStr;
 	}
 	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
-//	@ResponseBody
 	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -199,18 +198,63 @@ public class HelloSeoulController {
 		// 삭제할 찜리스트의 장소코드
 		String str = "(";
 		for(int i=0; i<locDataList.length; i++) {
-			System.out.println(locDataList[i]);
 			str += locDataList[i] + ",";			
 		}
 		str = str.replaceAll(",$", "");
-		str += ")";
-		
+		str += ")";		
 		map.put("str", str);
 
 		helloDao.userJjimListDelete(map);
 		
 		return "redirect:/ajaxMypageJjim";
 	}
+	
+	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
+	@PostMapping(value = "ajaxMypageJjimInfo")
+	@ResponseBody
+	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, @RequestParam(value = "loc_code")int loc_code){
+		return helloDao.getJjimInfo(loc_code);
+	}
+	
+	// 플래너 일정 생성
+	@PostMapping(value = "createPlannerDate")
+	public ModelAndView plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
+	
+		// 새로운 플래너 생성을 위한 일정 생성
+		if(modi.equals("createPlanner")) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("user_id", (String) request.getSession().getAttribute("user_id"));
+			map.put("title", request.getParameter("title"));
+			map.put("tripStart", request.getParameter("tripStart"));
+			map.put("tripEnd", request.getParameter("tripEnd"));
+			
+			model.addAttribute("plannerInfo", map);
+			
+			map.put("memo", request.getParameter("memo"));
+			
+			int no = helloDao.getPlannerNo();
+			map.put("no", no);
+			
+			helloDao.plannerDataInsert(map);
+			
+//			return "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+		}
+//		return "redirect:/createMainPlanner";
+		return new ModelAndView("Final_Pro/myPagePlannerCreate");
+	}
+	
+//	// 플래너 메인 생성 페이지 이동
+//	@RequestMapping(value = "createMainPlanner")
+//	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
+//		// 새로운 플래너를 생성
+//		if(modi.equals("newCreate")) {
+//			
+//		}
+//		
+//		return new ModelAndView("Final_Pro/myPagePlannerCreate");
+//	}
 	
 
 	

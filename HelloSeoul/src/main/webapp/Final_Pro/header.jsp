@@ -72,7 +72,7 @@ $(function(){
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">FOOD</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="./ctgPage.jsp">koera</a>
+            <a class="dropdown-item" href="./ctgPage002.jsp?loc_ctg1=음식점">koera</a>
             <a class="dropdown-item" href="./ctgPage.jsp">china</a>
             <a class="dropdown-item" href="./ctgPage.jsp">america</a>
             <a class="dropdown-item" href="./ctgPage.jsp">japan</a>
@@ -99,7 +99,7 @@ $(function(){
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">TICKET</a>
+          <a class="nav-link" href="/web/MusicalList">TICKET</a>
         </li>
       </ul>
       <div class="setbar d-flex">

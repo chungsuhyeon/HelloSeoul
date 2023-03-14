@@ -18,7 +18,11 @@
 <script type="text/javascript">
 	$(function(){
 		
-	});
+		$(".loadMyPlanner").click(function(){
+			location.href="/web/Final_Pro/myPageShow.jsp";
+		}); // $(".loadMyPlanner").click
+				
+	}); // function
 </script>
 <!--JS Section End -->
 
@@ -82,14 +86,14 @@
 			<!-- Nav Bar -->
 			<div>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="./Final_Pro/myPageJjim.jsp">Wish</a></li>
-  					<li class="breadcrumb-item"><a href="./Final_Pro/myPageCreate.jsp">Planner Create</a></li>
+  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageJjim.jsp">Wish</a></li>
+  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Planner Create</a></li>
 				</ol>
 			</div>
 			<!-- Contents Div Box -->
 			<div class='contdivbox'>
 				<div>
-					<table class="table table-hover">
+					<table class="loadMyPlanner table table-hover">
   						<thead>
     						<tr>
       							<th>PlanTitle</th>
@@ -117,7 +121,7 @@
     				</table>
 				</div>
 				<div>
-					<table class="table table-hover">
+					<table class="loadMyPlanner table table-hover">
   						<thead>
     						<tr>
       							<th>PlanTitle</th>
@@ -145,7 +149,7 @@
     				</table>
 				</div>
 				<div>
-					<table class="table table-hover">
+					<table class="loadMyPlanner table table-hover">
   						<thead>
     						<tr>
       							<th>PlanTitle</th>
@@ -173,7 +177,7 @@
     				</table>
 				</div>
 				<div>
-					<table class="table table-hover">
+					<table class="loadMyPlanner table table-hover">
   						<thead>
     						<tr>
       							<th>PlanTitle</th>
