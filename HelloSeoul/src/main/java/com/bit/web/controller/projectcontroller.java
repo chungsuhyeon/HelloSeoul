@@ -28,8 +28,7 @@ public class projectcontroller {
 	ProjectDao dao;
 	@PostMapping(value="boardInsert")
 	public String boardInsert(ComBoard board) {
-		board.setCom_no(dao.selectBoradNo());
-		System.out.println("board===="+board);
+		board.setCom_no(dao.selectBoradNo());	
 		dao.boardInsert(board);
 		return "redirect:/boardSelect";
 	}
@@ -65,6 +64,7 @@ public class projectcontroller {
 		model.addAttribute("info",dao.selectInfoBoard(no));
 		return "Final_Pro/Commodify";
 		}else{
+			
 			return "redirect:/infoSelect?no="+no;
 		}
 		
@@ -104,7 +104,6 @@ public class projectcontroller {
 		map.put("user_id", user_id);
 		map.put("com_no", com_no);
 		if((dao.goodbadSelectGood(map))==null) {	
-			System.out.println("com_no===="+com_no+"user_id===="+user_id);
 			board.setUser_id(user_id);
 			board.setCom_no(com_no);
 			board.setGood(1);
@@ -126,9 +125,8 @@ public class projectcontroller {
 	public List<Object> badAction(int com_no,String user_id,gbboard board,HashMap<String, Object>map) {
 		map.put("user_id", user_id);
 		map.put("com_no", com_no);
-		System.out.println(dao.goodbadSelectbad(map));
+		
 		if((dao.goodbadSelectbad(map))==null) {	
-			System.out.println("com_no===="+com_no+"user_id===="+user_id);
 			board.setUser_id(user_id);
 			board.setCom_no(com_no);
 			board.setBad(1);
