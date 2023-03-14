@@ -86,7 +86,7 @@
 						
 						
 						]</span>
-						${i.com_title }  <span class="badge">Newtes</span>
+						${i.com_title }  <span class="badge">Newtest</span>
 					</div>
 					<div class="board-meta"
 						style="font-weight: 400; font-size: 1.2rem; color: #404040">
