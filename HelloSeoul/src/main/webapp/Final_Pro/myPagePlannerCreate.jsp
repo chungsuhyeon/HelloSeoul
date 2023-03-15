@@ -33,23 +33,25 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				console.log(result);
-				console.log(result.PLANNER_START);
-				console.log(result.PLANNER_END);
-				console.log(typeof(result.PLANNER_START));
-				var start = 
+				
+				// 사이트 : https://blog.leocat.kr/notes/2017/07/24/javascript-add-days
+				
+				var start = new Date(result.PLANNER_START);
+				console.log(start);
+				console.log(start.setDate(start.getDate() + 32));
+				console.log(start.setDate(start.getDate() + 30));
+				
 // 				LocalDate start = LocalDate.parse(result.PLANNER_START, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 // 				LocalDate end = LocalDate.parse(result.PLANNER_END, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 // 				const start = new Date(result.PLANNER_START);
-// 				console.log("start " + start);
 								
 				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
 	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
 				
 				for(var i=0; i<result.numDate; i++){
 					console.log(i);
-					console.log(result.PLANNER_START);
+					console.log(start.setDate(start.getDate() + i));
 				}
-				
 			},
 			error: function(){
 				alert("error : " + error);
