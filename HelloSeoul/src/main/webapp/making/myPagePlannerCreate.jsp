@@ -78,7 +78,7 @@
 </head>
 <body class='body'>
 	<header>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	</header>
 	<section>
 	${plannerInfo}
@@ -115,11 +115,28 @@
 							<table class='table table-hover'>
 								<tbody>
 									<tr class='table-light'>
-										<td>
+										<td style="width: 5%">
+											<input type="checkbox" name="select_location" value="?">
+										</td>
+										<td style="display: inline-flex;">
+											<div class='timeseting' style="display: inline-flex; width: 20%">
+											<input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault">
+											<span> : </span>
+											<input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault">
+											</div>
+											<div class='loctextline' style='width: 70%; margin-left: 10px;'>
 											<a href='#'>Location Name1</a>
 											<br>
 											<span>Gungu > Loc Ctg > Detail Ctg > </span>
+											</div>
 										</td>
+<!-- 										<td style="display: inline-flex;"> -->
+<!-- 											<div> -->
+<!-- 											<input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault"> -->
+<!-- 											<span> : </span> -->
+<!-- 											<input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault"> -->
+<!-- 											</div> -->
+<!-- 										</td> -->
 									</tr>
 									<tr class='table-light'>
 										<td>
@@ -187,6 +204,7 @@
 					</script>				
 				</div>
 			</div>
+		</div>
 	</section>
 </body>
 </html>
