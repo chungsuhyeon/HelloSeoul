@@ -186,8 +186,8 @@ function ajaxpro2(jjimpoint){
 			<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="jjimsubmit">Submit</button>
 			</div>
 		</div>
-		<div class="infobar col-6">
-			<table class='table'>
+		<div class="infobar col-6" >
+			<table class='table' style="height: 100%;">
 				<tbody>
 					<tr>
 						<td rowspan="6" style="width: 300px;">장소사진</td>
