@@ -135,8 +135,7 @@
 		if($("table input[type='checkbox']").is(":checked")){
 			$("table input[type='checkbox']").prop('checked',false);
 		}
-		
-	}
+	} // updatePlan()
 	
 </script>
 <!--JS Section End -->
