@@ -28,8 +28,9 @@ $(function(){
 		else if(($(this).attr('id'))=='logout'){
 			document.location.href ="/web/HelloSeoulLogout";
 		}
-		else if(($(this).attr('id'))=='comm'){
-			document.location.href ="/web/boardSelect";
+		else if(($(this).attr('id'))=='comm'){		
+			//document.location.href ="/web/boardSelect";
+			document.location.href ="/web/making/workbench.jsp";
 		}
 		else if(($(this).attr('id'))=='mypage'){
 			document.location.href ="/web/myPageLoad";
@@ -50,6 +51,9 @@ $(function(){
 	margin-left: 10px;
 	margin-bottom: 50px;
 }
+li div > a{
+	font-size: 15px;
+}
 </style>
 <!-- Style Section End -->
 
@@ -58,24 +62,26 @@ $(function(){
 <header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   	<div class='container-fluid'>
-    <a class="logo navbar-brand" href="./index.jsp"><img alt="" src="/web/resources/final_style/img/seoul_logo.png"></a>
+    <a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/seoul_logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">HOME
-            <span class="visually-hidden">(current)</span>
+          <a class="nav-link" href="/web/Final_Pro/index.jsp">HOME
+<!--             <span class="visually-hidden">(current)</span> -->
           </a>
         </li>
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">FOOD</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점">koera</a>
+            <a class="dropdown-item" href="./ctgMain.jsp">koera</a>
             <a class="dropdown-item" href="./ctgPage.jsp">china</a>
             <a class="dropdown-item" href="./ctgPage.jsp">america</a>
             <a class="dropdown-item" href="./ctgPage.jsp">japan</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점">Search</a>
           </div>
         </li>
          <li class="nav-item dropdown">
@@ -85,7 +91,7 @@ $(function(){
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점">Search</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -95,7 +101,7 @@ $(function(){
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=볼거리">Search</a>
           </div>
         </li>
         <li class="nav-item">
