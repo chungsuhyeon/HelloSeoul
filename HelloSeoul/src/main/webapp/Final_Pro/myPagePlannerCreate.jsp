@@ -33,32 +33,110 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				console.log(result);
-				
-				// 사이트 : https://blog.leocat.kr/notes/2017/07/24/javascript-add-days
-				
-				var start = new Date(result.PLANNER_START);
-				console.log(start);
-				console.log(start.setDate(start.getDate() + 32));
-				console.log(start.setDate(start.getDate() + 30));
-				
-// 				LocalDate start = LocalDate.parse(result.PLANNER_START, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-// 				LocalDate end = LocalDate.parse(result.PLANNER_END, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-// 				const start = new Date(result.PLANNER_START);
-								
+												
+				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
 	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
 				
+				// 날짜 tab				
+				var start = new Date(result.PLANNER_START);
+
 				for(var i=0; i<result.numDate; i++){
-					console.log(i);
-					console.log(start.setDate(start.getDate() + i));
+					// 날짜를 사용자가 보기 편하게 변환
+					var year = start.getFullYear().toString();
+					var mon = (start.getMonth() + 1).toString();
+					var day = start.getDate().toString();
+					
+					mon = mon.length == 1 ? "0" + mon : mon;
+					day = day.length == 1 ? "0" + day : day;
+					
+					// 최종 날짜 변수
+					var show_date = year + "-" + mon + "-" + day;
+					
+					if(!i){
+						// tabBar
+						$("ul[name='dayTabbar']").append(
+								`<li class='nav-item' role='presentaion'>
+									<a class='nav-link active' data-bs-toggle='tab' href='#Day\${i}' aria-selected='true' role='tab'>\${show_date}</a>
+								</li>`
+						);
+						// tabContent
+						$("div.tab-content").append(
+								`<div class='tab-pane fade active show' id='Day\${i}' role='tabpanel'>
+									<table class='table table-hover'>
+										<tbody></tbody>
+									</table>
+								</div>`						
+						);
+					} else {
+						$("ul[name='dayTabbar']").append(
+								`<li class='nav-item' role='presentaion'>
+									<a class='nav-link' data-bs-toggle='tab' href='#Day\${i}' aria-selected='false' role='tab'>\${show_date}</a>
+								</li>`
+						);
+						$("div.tab-content").append(
+								`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
+									<table class='table table-hover'>
+										<tbody></tbody>
+									</table>
+								</div>`						
+						);
+					}
+					
+					// 여행 시작 날짜에서 하루씩 더하기
+					start.setDate(start.getDate() + 1); // 더하면서 start가 바뀌기 때문에 i가 아니라 1을 더해야함
 				}
 			},
 			error: function(){
 				alert("error : " + error);
 			}
-		}); // ajax
+		}); // ajax(일정 탭바, 내용 없는 테이블)
+		
+		$.ajax({
+			url: '/web/ajaxWishList',
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				console.log(result);
+				
+				$(result).each(function(index, list){					
+					$("tbody#tbodyWishList").append(
+							`<tr class="table-active">
+								<th scope="row"><input type="checkbox" name="select_location" value="\${list['loc_pc']}"></th>
+									<td>
+										<span>\${list['loc_name']}</span>
+										<br>
+										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
+									</td>
+								</tr>`
+					);
+				});
+			}, // success
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax(사용자 찜 리스트)
 		
 	}); // $('document').ready
+	
+	// 일정에 추가 버튼 클릭
+	function updatePlan(){
+		var locDataList = [];
+		var checkBox = $("input[name='select_location']:checked");
+				
+		checkBox.each(function(i){
+			var checkTr = checkBox.parent().parent().eq(i);
+			var checkTd = checkTr.children(); // 장소코드있는 td	
+			locDataList.push(checkTd.eq(0).children().val());
+		}); // checkBox.each
+		
+		console.log(locDataList);
+		if($("table input[type='checkbox']").is(":checked")){
+			$("table input[type='checkbox']").prop('checked',false);
+		}
+		
+	}
 	
 </script>
 <!--JS Section End -->
@@ -68,9 +146,9 @@
 <link type="text/css" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-.div{
-	display:flex !important;
-}
+	.div{
+		display:flex !important;
+	}
 </style>
 <!-- Style Section End -->
 
@@ -80,8 +158,8 @@
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
+	
 	<section>
-	${plannerInfo}
 		<div class='container_fluid'>
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
@@ -91,6 +169,8 @@
   					<li class="breadcrumb-item"><a href="javascript:history.back();">Back</a></li>
 				</ol>
 			</div>
+			
+			<!-- 플래너 타이틀 -->
 			<div class='col-12'>
 				<div class='col-6' style="display: inline-flex;" id="planTitle">
 <%--     				<span id="readOnlyInput" style="align-items: center">${plannerInfo.title}</span>			 --%>
@@ -99,19 +179,35 @@
 			
 			<!-- 메인 플래너 내용 -->	
 			<div class="main col-12" style="display: inline-flex;">
+			
 				<!--tab-->
 				<div class='tabbar col-3'>
-					<ul class='nav nav-tabs bg-primary' role='tablist'>
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link active' data-bs-toggle='tab' href='#Day1' aria-selected='true' role='tab'>Day1</a>
-						</li>
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#Day2' aria-selected='false' role='tab'>Day2</a>
-						</li>					
+					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
+					
 					<!-- tab contents -->
 					<div id='myTabContent border border-info-1' class='tab-content'>
-						<div class='tab-pane fade active show' id='Day1' role='tabpanel'>
+					<!-- <div class='tab-pane fade active show' id='Day0' role='tabpanel'>
+							<table class='table table-hover'>
+								<tbody>
+									<tr class='table-light'>
+										<td>
+											<a href='#'>Location</a>
+											<br>
+											<span>Gungu > Loc Ctg > Detail Ctg > </span>
+										</td>
+									</tr>
+									<tr class='table-light'>
+										<td>
+											<a href='#'>Location</a>
+											<br>
+											<span>Gungu > Loc Ctg > Detail Ctg > </span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="Day2" role="tabpanel">
 							<table class='table table-hover'>
 								<tbody>
 									<tr class='table-light'>
@@ -130,47 +226,30 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
-						<div class="tab-pane fade" id="Day2" role="tabpanel">
-							<p>contents</p>
-						</div>
+						</div> -->
 					</div>	
 					<div class='settingbt'>
 						<button onclick="location.href='MyPagedreate.jsp;'">일정 제거</button>
 						<button class="create_planner_button" onclick="location.href='MyPageShow.jsp;'">플래너 저장</button>
 					</div>			
 				</div>
+				
 				<!-- jjim bar -->
 				<div class='jjimbar col-3'>
 					<div class='jjimtb'>
-					<table class="table table-hover">
-						<thead>
-   							<tr>
-    							<th scope="col">Type</th>
-   								<th scope="col">Column heading</th>
-   							</tr>
-						</thead>
-						<tbody>
-   							<tr class="table-active">
-   								<th scope="row"><input type="checkbox" name="select_location" value="장소코드1"></th>
-      							<td>
-      								<a href="#">1번 찜 장소</a>
-									<br>
-									<span style="font-size: 5px">지역 구 > 장소 카테고리 > 세부 카테고리 > </span>
-								</td>
-    						</tr>
-    						<tr class="table-active">
-    							<th scope="row"><input type="checkbox" name="select_location" value="장소코드2"></th>
-									<td>										<a href="#">2번 찜 장소</a>
-									<br>	
-									<span style="font-size: 5px">지역 구 > 장소 카테고리 > 세부 카테고리 > </span>
-								</td>
-    						</tr>
-    					</tbody>
-					</table>
+						<table class="table table-hover">
+							<thead>
+	   							<tr>
+	    							<th scope="col">Check</th>
+	   								<th scope="col">Wish List</th>
+	   							</tr>
+							</thead>
+							<tbody id="tbodyWishList">
+	    					</tbody>
+						</table>
 					</div>
 					<div class='jjimbt'>
-						<button onclick="">일정에 추가</button>
+						<button onclick="updatePlan()">일정에 추가</button>
 					</div>
 				</div>
 				<div class='mapbar col-6'>

@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="firstMainPlannerCreate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select * 
+		select planner_start, planner_end, planner_title
 		from planner
 		where planner_no = #{no} and user_id = #{user_id}
 	</select>
