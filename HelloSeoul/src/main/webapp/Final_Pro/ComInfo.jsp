@@ -77,28 +77,7 @@ function check_id2(){
 		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
 	}
 }
-function check_id3(){
-	var no=$("input#com_no").val();
-	var user_id=$("input#user_id").val();
-	var rep_no=$("input#rep_no").val();
-	if(
-			$("input#user_id").val()==""
-			
-			){
-		alert("login plz");
-	}else if(
-			
-			($("input#user_id").val())!=($("input#rep_user_id").val())
-			){
-		alert("id가 맞지않습니다.");
-		console.log($("input#rep_user_id").val());
-		console.log($("input#user_id").val());
-	}
-	else{
-		confirm('정말로 삭제하시겠습니까?');
-		location.replace("/web/deleteReplyMain?no="+rep_no+"&boardno="+no+"&user_id="+user_id);
-	}
-}
+
 
 </script>
 <script type="text/javascript">
@@ -308,9 +287,9 @@ function check_id3(){
 			</fieldset>
 		</form>
 		<strong class="screen_out">전체 댓글</strong>
-			<c:forEach items="${reply }" var="i">
 		<input type="hidden" value="${i.rep_no }" id="rep_no">
 		<div id="replyboard">
+			<c:forEach items="${reply }" var="i">
 					<input type="hidden" value="${i.user_id }" id="rep_user_id">
 				<div class="list_cmt">
 					<div class="cmt_head"></div>
@@ -325,7 +304,7 @@ function check_id3(){
 					<div class="cmt_foot">
 						<a href="#none">답글</a><span class="txt_bar">|</span><a
 							href="/web/replyMo">수정</a><span class="txt_bar">|</span>
-							<a href="#"  onclick="check_id3()">삭제</a>
+							<a href="/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}"  onclick="confirm('정말로 삭제하겠습니까?')">삭제</a>
 							<span class="txt_bar">|</span><a href="#none">신고</a>
 					</div>
 				</div>
