@@ -1,0 +1,14 @@
+<<<Git 사용법>>>
+subMain 한개로 다같이 사용
+push하면 팀원에게 pull하라고 알려주기
+혹시 겹치는 파일 사용시 서로 의논하기
+
+<< PULL >>
+기존 수정하던 파일 commit (not commit And Push)
+Git Repositories에서 HelloSeoul 우클릭 → PULL
+
+Merged Failed시 어떤 파일이 충돌나는지 확인 후 GitHub 사이트에 들어가서 맞춰주기(기존 코드 메모장에 복사)
+
+다시 PULL
+
+Merged 성공시 Git Repositories에서 HelloSeoul 우클릭 → PUSH Branch SubMain 클릭
