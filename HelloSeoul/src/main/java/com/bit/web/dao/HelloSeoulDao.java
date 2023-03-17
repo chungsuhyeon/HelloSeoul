@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.MainDbBean;
+
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
 	@Inject
@@ -34,6 +36,26 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	// 회원의 찜 리스트 삭제
 	public void userJjimListDelete(HashMap<String, String> list) {
 		this.getSqlSession().delete("userJjimListDelete", list);
+	}
+	
+	// 찜 리스트에서 장소코드로 상세정보 조회
+	public MainDbBean getJjimInfo(int code){
+		return this.getSqlSession().selectOne("getJjimInfo", code);
+	}
+	
+	// 플래너 생성을 위한 플래너 번호
+	public int getPlannerNo() {
+		return this.getSqlSession().selectOne("getPlannerNo");
+	}
+	
+	// planner table에 데이터 insert
+	public void plannerDataInsert(HashMap<String, Object> map) {
+		this.getSqlSession().insert("plannerDataInsert", map);
+	}
+	
+	// 플래너 생성 후 메인 플래너 페이지에 넘길 정보
+	public HashMap<String, Object> firstMainPlannerCreate(HashMap<String, Object> map){
+		return this.getSqlSession().selectOne("firstMainPlannerCreate", map);
 	}
 	
 	

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>    
 <!DOCTYPE html>
 <html>
@@ -334,8 +334,14 @@ p {
 				
 					<td class="td1">카테고리</td>
 					<td class="td2"><select name="com_ctg" class="form-control"
-						style="display: inline-block;">
-							<option value="${i.com_ctg }">&nbsp;+ 선택해주세요</option>
+						style="display: inline-block;"   value="${i.com_ctg }">
+							<option value="${i.com_ctg }">&nbsp;
+							<c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						</c:choose>
+						</option>
 							<option value="">----------------------</option>
 							<option value="1">정보공유</option>
 							<option value="2">후기</option>	

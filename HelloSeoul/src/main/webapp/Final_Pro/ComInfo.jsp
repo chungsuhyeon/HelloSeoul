@@ -41,7 +41,45 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script>
+function check_id(){
+	var no=$("input#com_no").val();
+	var user_id=$("input#user_id").val();
+	if(
+			$("input#user_id").val()==""
+			
+			){
+		alert("login plz");
+	}else if(
+			($("input#user_id").val())!=($("input#boarduser_id").val())
+			){
+		alert("id가 맞지않습니다");
+	}
+	else{
+		location.replace("/web/modifyAction?no="+no+"&user_id="+user_id);
+	}
+}
+function check_id2(){
+	var no=$("input#com_no").val();
+	var user_id=$("input#user_id").val();
+	if(
+			$("input#user_id").val()==""
+			
+			){
+		alert("login plz");
+	}else if(
+			($("input#user_id").val())!=($("input#boarduser_id").val())
+			){
+		alert("id가 맞지않습니다.");
+	}
+	else{
+		confirm('정말로 삭제하시겠습니까?');
+		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
+	}
+}
 
+
+</script>
 <script type="text/javascript">
 	$(function() {
 		$("textarea#reply_contents").focus(function() {
@@ -52,9 +90,13 @@
 					$("span#replybyte").text(
 							$("textarea#reply_contents").val().length);
 				});
+		
 		$("input#reply_Submit")
 				.click(
 						function() {
+							if($("input#user_id").val()==""){
+								alert("login plz");
+							}else{
 							$.ajax({type : 'POST',
 								    url : '/web/replyInsert',
 									data : {
@@ -66,14 +108,14 @@
 									success : function(p) {
 										$('div#replyboard>div').remove();
 									$(p).each(function(index, x) {
-										$("div#replyboard").append('<div class="list_cmt"><div class="cmt_head"></div><div class="cmt_body"><span class="info_append"><span class="txt_name">'
+										$("div#replyboard").append('<div class="list_cmt"><input type="hidden" value="'+x["user_id"]+'" id="rep_user_id"><div class="cmt_head"></div><div class="cmt_body"><span class="info_append"><span class="txt_name">'
 																	+ x['user_nick']
 																	+ '<span class="txt_bar">|</span><span class="txt_time">'
 																	+ x['rep_regdate']
 																	+ '</span></span><p class="txt_desc">'
 																	+ x['rep_cont']
 																	+ '</p></div><div class="cmt_foot">'
-																	+ '<a href="#none">답글</a><span class="txt_bar">|</span><a href="#none">수정</a><span class="txt_bar">|</span><a href="#none">삭제</a><span class="txt_bar">|</span><a href="#none">신고</a></div></div>'
+																	+ '<a href="#none">답글</a><span class="txt_bar">|</span><a href="#none">수정</a><span class="txt_bar">|</span><a href="#none" onclick="check_id3()">삭제</a><span class="txt_bar">|</span><a href="#none">신고</a></div></div>'
 																	);
 
 																$(Object.keys(x)).each(function(j,key){
@@ -87,9 +129,14 @@
 
 									});
 
+		}
 						});
 		//-----------------------------------------------------------------ajax--------------------------------------------------------------------------------------------------
+	
 		$("button#good").click(function(){
+			if($("input#user_id").val()==""){
+				alert("login plz");
+			}else{
 			$("button#bad").html("<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
 			$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
 			$("i#top-bad").html("");
@@ -113,8 +160,12 @@
 				}
 				
 			});
+			}
 		});
 		$("button#bad").click(function(){
+			if($("input#user_id").val()==""){
+				alert("login plz");
+			}else{
 			$("button#bad").html("<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
 			$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
 			$("i#top-bad").html("");
@@ -138,8 +189,9 @@
 			}
 		
 	});
+			}
 });
-		
+			
 		
 	});
 </script>
@@ -163,6 +215,7 @@
 							value="${i.com_no }">
 						<input type="hidden" id="user_id" name="user_id"
 							value="${user_id }">
+						<input type="hidden" id="boarduser_id" value="${i.user_id }">
 						<span class="board-category">[<c:choose>
 
 								<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
@@ -203,12 +256,12 @@
 					</button>
 
 				</p>
-				<a href="#" class="btn btn-default btn-xs pull-left">목록으로</a> <a
-					href="/web/modifyAction?no=${i.com_no }&user_id=${user_id}"
-					class="btn btn-default btn-xs">수정</a> <a
-					href="/web/deleteCom?no=${i.com_no }&user_id=${user_id}"
+				<a href="/web/boardSelect" class="btn btn-default btn-xs pull-left">목록으로</a> <a
+<%-- 					href="/web/modifyAction?no=${i.com_no }&user_id=${user_id}" --%>
+					class="btn btn-default btn-xs" onclick="check_id()">수정</a> <a
+<%-- 					href="/web/deleteCom?no=${i.com_no }&user_id=${user_id}" --%>
 					target="_action_frame_bbs" class="btn btn-default btn-xs"
-					onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a> <a href="#"
+					onclick="check_id2()">삭제</a> <a href="#"
 					class="btn btn-default btn-xs">답변</a> <a href="#"
 					class="btn btn-default btn-xs">스크랩</a>
 				</c:forEach>
@@ -234,11 +287,14 @@
 			</fieldset>
 		</form>
 		<strong class="screen_out">전체 댓글</strong>
+		<input type="hidden" value="${i.rep_no }" id="rep_no">
 		<div id="replyboard">
 			<c:forEach items="${reply }" var="i">
+					<input type="hidden" value="${i.user_id }" id="rep_user_id">
 				<div class="list_cmt">
 					<div class="cmt_head"></div>
 					<div class="cmt_body">
+										
 						<span class="info_append"> <span class="txt_name">${i.user_nick }</span>
 							<span class="txt_bar">|</span> <span class="txt_time">${i.rep_regdate }
 						</span>
@@ -247,8 +303,9 @@
 					</div>
 					<div class="cmt_foot">
 						<a href="#none">답글</a><span class="txt_bar">|</span><a
-							href="/web/replyMo">수정</a><span class="txt_bar">|</span><a href="/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}"  >삭제</a><span
-							class="txt_bar">|</span><a href="#none">신고</a>
+							href="/web/replyMo">수정</a><span class="txt_bar">|</span>
+							<a href="/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}"  onclick="confirm('정말로 삭제하겠습니까?')">삭제</a>
+							<span class="txt_bar">|</span><a href="#none">신고</a>
 					</div>
 				</div>
 		</c:forEach>
@@ -258,31 +315,7 @@
 		<!-- Footer -->
 		<footer>
 
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-						<ul class="list-inline text-center">
-							<li><a href="#"> <span class="fa-stack fa-lg"> <i
-										class="fa fa-circle fa-stack-2x"></i> <i
-										class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-								</span>
-							</a></li>
-							<li><a href="#"> <span class="fa-stack fa-lg"> <i
-										class="fa fa-circle fa-stack-2x"></i> <i
-										class="fa fa-home fa-stack-1x fa-inverse"></i>
-								</span>
-							</a></li>
-							<li><a href="#"> <span class="fa-stack fa-lg"> <i
-										class="fa fa-circle fa-stack-2x"></i> <i
-										class="fa fa-github fa-stack-1x fa-inverse"></i>
-								</span>
-							</a></li>
-						</ul>
-						<p class="copyright text-muted">Copyright &copy;2016 SIST. All
-							rights reserved | code by milib</p>
-					</div>
-				</div>
-			</div>
+		
 		</footer>
 		<!-- 	<!-- jQuery -->
 		<!-- 	<script src="js/jquery.js"></script> -->
