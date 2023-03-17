@@ -256,14 +256,16 @@ function check_id2(){
 					</button>
 
 				</p>
-				<a href="/web/boardSelect" class="btn btn-default btn-xs pull-left">목록으로</a> <a
-<%-- 					href="/web/modifyAction?no=${i.com_no }&user_id=${user_id}" --%>
-					class="btn btn-default btn-xs" onclick="check_id()">수정</a> <a
-<%-- 					href="/web/deleteCom?no=${i.com_no }&user_id=${user_id}" --%>
-					target="_action_frame_bbs" class="btn btn-default btn-xs"
-					onclick="check_id2()">삭제</a> <a href="#"
-					class="btn btn-default btn-xs">답변</a> <a href="#"
-					class="btn btn-default btn-xs">스크랩</a>
+				<a href="/web/boardSelect" class="btn btn-default btn-xs pull-left">목록으로</a>
+				<c:choose>
+				<c:when test="${user_id eq i.user_id }">
+				
+				<a class="btn btn-default btn-xs" onclick="check_id()">수정</a> 
+				<a target="_action_frame_bbs" class="btn btn-default btn-xs" onclick="check_id2()">삭제</a>
+				</c:when>
+				</c:choose>
+				 <a href="#" class="btn btn-default btn-xs">답변</a> 
+				 <a href="#" class="btn btn-default btn-xs">스크랩</a>
 				</c:forEach>
 			</div>
 			<div class="clear"></div>
@@ -302,8 +304,8 @@ function check_id2(){
 						<p class="txt_desc">${i.rep_cont }</p>
 					</div>
 					<div class="cmt_foot">
-						<a href="#none">답글</a><span class="txt_bar">|</span><a
-							href="/web/replyMo">수정</a><span class="txt_bar">|</span>
+						<a href="#none">답글</a><span class="txt_bar">|</span>
+						<a href="/web/replyMo">수정</a><span class="txt_bar">|</span>
 							<a href="/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}"  onclick="confirm('정말로 삭제하겠습니까?')">삭제</a>
 							<span class="txt_bar">|</span><a href="#none">신고</a>
 					</div>
