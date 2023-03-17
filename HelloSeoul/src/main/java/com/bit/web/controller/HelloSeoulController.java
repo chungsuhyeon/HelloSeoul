@@ -188,6 +188,13 @@ public class HelloSeoulController {
 		return finalStr;
 	}
 	
+	// 찜 리스트 자체 보내기
+	@PostMapping(value = "ajaxWishList")
+	@ResponseBody
+	public List<Object> mypageWishListAll(HttpServletRequest request){
+		return helloDao.getUserJjimList((String) request.getSession().getAttribute("user_id"));
+	}
+	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
 	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
@@ -210,6 +217,7 @@ public class HelloSeoulController {
 		return "redirect:/ajaxMypageJjim";
 	}
 	
+	
 	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
 	@PostMapping(value = "ajaxMypageJjimInfo")
 	@ResponseBody
@@ -217,39 +225,37 @@ public class HelloSeoulController {
 		return helloDao.getJjimInfo(loc_code);
 	}
 	
-	// 플래너 일정 생성
+	// 플래너 일정 생성 / 수정
 	@PostMapping(value = "createPlannerDate")
-	@ResponseBody
-	public ModelAndView plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
+	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
 	
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> toDbMap = new HashMap<String, Object>();
 
 			int no = helloDao.getPlannerNo();
-			map.put("no", no);
-			map.put("user_id", (String) request.getSession().getAttribute("user_id"));
-			map.put("title", request.getParameter("title"));
-			map.put("tripStart", request.getParameter("tripStart"));
-			map.put("tripEnd", request.getParameter("tripEnd"));
-			map.put("memo", request.getParameter("memo"));
+			toDbMap.put("no", no);
+			toDbMap.put("user_id", (String) request.getSession().getAttribute("user_id"));
+			toDbMap.put("title", request.getParameter("title"));
+			toDbMap.put("tripStart", request.getParameter("tripStart"));
+			toDbMap.put("tripEnd", request.getParameter("tripEnd"));
+			toDbMap.put("memo", request.getParameter("memo"));
 		
-//			model.addAttribute("plannerInfo", map);
-			helloDao.plannerDataInsert(map);
+			helloDao.plannerDataInsert(toDbMap);
 			
-			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
-			return new ModelAndView(direct);
-//			return "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
-//			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+//			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
+//			return new ModelAndView(direct);
+			return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
 		}
-//		return "redirect:/createMainPlanner";
-		return new ModelAndView("Final_Pro/myPagePlannerCreate");
+//		return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
+		return "redirect:/createMainPlanner?modi=" + modi;
+//		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 	
 	// 플래너 메인 생성 페이지 이동
 	@RequestMapping(value = "createMainPlanner")
 	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
-		if(modi.equals("newCreate")) { // 새로운 플래너를 생성
+		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
 		else { // 플래너 수정
@@ -267,9 +273,7 @@ public class HelloSeoulController {
 		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(map);
 		
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//		plannerInfo.put("PLANNER_START", start);
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//		plannerInfo.put("PLANNER_END", end);
 		int diffDate = end.compareTo(start);
 		plannerInfo.put("numDate", diffDate+1);
 		
