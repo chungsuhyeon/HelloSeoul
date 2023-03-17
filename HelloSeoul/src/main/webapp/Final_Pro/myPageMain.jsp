@@ -19,10 +19,10 @@
 	$(function(){
 		
 		$(".loadMyPlanner").click(function(){
-			location.href="./Final_Pro/myPageShow.jsp";
-		});
-		
-	});
+			location.href="/web/Final_Pro/myPageShow.jsp";
+		}); // $(".loadMyPlanner").click
+				
+	}); // function
 </script>
 <!--JS Section End -->
 

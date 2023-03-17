@@ -26,14 +26,27 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script type="text/javascript">
+	$(function(){
+		$("a#board-write").click(function(){
+			if($("input#user_id").val()==""){
+				alert("login plz");
+			}
+			else if($("input#user_id").val()!=""){
+				location.replace("/web/Final_Pro/ComWrite.jsp");
+			}
+		});
+	});
 
+</script>
 </head>
 <body>
 
@@ -45,10 +58,10 @@
 	
 	<div class="board-field"  style="margin-top: 50px">
 		<div class="col-md-2"></div>
-		<div class="col-md-8" ">
+		<div class="col-md-8" >
 			<div class="board-toolbar" 	style="text-align: right; margin-bottom: 20px">
-
-				<a href="/web/Final_Pro/ComWrite.jsp" class="btn btn-primary btn-sm"><i
+<!-- 				<a href="/web/Final_Pro/ComWrite.jsp" class="btn btn-primary btn-sm" id="board-write"><i -->
+			<a href="#" class="btn btn-primary btn-sm" id="board-write"><i
 					class="glyphicon glyphicon-pencil" style="margin-right: 15px"></i>쓰기</a>
 			</div>
 			
@@ -73,12 +86,12 @@
 						
 						
 						]</span>
-						${i.com_title }  <span class="badge">New</span>
+						${i.com_title }  <span class="badge">Newtest</span>
 					</div>
 					<div class="board-meta"
 						style="font-weight: 400; font-size: 1.2rem; color: #404040">
 						<p>
-						<input type="hidden" value="${user_id }" name="user_id">
+						<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
 							<i class="glyphicon glyphicon-user"></i> ${i.user_nick } 님 <i
 								class="glyphicon glyphicon-comment"></i> ${i.reply } <i
 								class="glyphicon glyphicon-ok"></i> ${i.com_hit } <i
@@ -109,27 +122,8 @@
 	<!-- Footer -->
 	<body>
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-					<ul class="list-inline text-center">
-						<li><a href="#"> <span class="fa-stack fa-lg"> <i
-									class="fa fa-circle fa-stack-2x"></i> <i
-									class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-						<li><a href="#"> <span class="fa-stack fa-lg"> <i
-									class="fa fa-circle fa-stack-2x"></i> <i
-									class="fa fa-home fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-						<li><a href="#"> <span class="fa-stack fa-lg"> <i
-									class="fa fa-circle fa-stack-2x"></i> <i
-									class="fa fa-github fa-stack-1x fa-inverse"></i>
-							</span>
-						</a></li>
-					</ul>
-				</div>
-			</div>
+		
+			
 		</div>
 	</body>
 <!-- 	<footer>

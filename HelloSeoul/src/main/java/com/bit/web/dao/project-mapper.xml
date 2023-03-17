@@ -31,8 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete communityboard where com_no=#{value}
 	</delete>
 	<update id="updateBoard" parameterType="com.bit.web.vo.ComBoard" >
-	update communityboard set com_no=#{com_no},com_ctg=#{com_ctg},com_title=#{com_title},com_cont=#{com_cont},com_filename=#{com_filename}
-	,com_hit=#{com_hit},com_regdate=sysdate,user_id=#{user_id},user_nick=#{user_nick}
+	update communityboard set com_no=#{com_no},user_id=#{user_id},com_ctg=#{com_ctg},com_title=#{com_title},com_cont=#{com_cont},com_filename=#{com_filename}
+	,com_hit=#{com_hit},com_redate=sysdate,user_nick=#{user_nick}
 	 where com_no=#{com_no}
 	</update>
 	<select id="selectId" resultType="String" parameterType="String">
@@ -74,9 +74,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectGood" parameterType="Integer" resultType="Integer">
 	select good from communityboard where com_no=#{com_no}
 	</select>
-<!-- 	<select id="goodbadSelectId" resultType="String" parameterType="Integer"> -->
-<!-- 	select user_id from gbboard where com_no=${com_no} -->
-<!-- 	</select> -->
 	<select id="goodbadSelectGood" parameterType="HashMap" resultType="Integer">
 	select good from gbboard where com_no=#{com_no} and user_id=#{user_id}
 	</select>
@@ -100,11 +97,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updatebadGBboard" parameterType="HashMap">
 	update gbboard set bad=1,good=0 where com_no=#{com_no} and user_id=#{user_id}
-	
 	</update>
 	<update id="updategoodGBboard" parameterType="HashMap">
 	update gbboard set bad=0,good=1 where com_no=#{com_no} and user_id=#{user_id}
-	
 	</update>
 	<delete id="deleteGBboard" parameterType="Integer">
 	delete gbboard where com_no=#{no}
