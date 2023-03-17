@@ -27,7 +27,7 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-
+@
 </style>
 <!-- Style Section End -->
 
@@ -39,9 +39,11 @@ $(function(){
 		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
 			<div class='newcomm' style="display: inline-flex; position: relative;">
 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
+					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
 					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
 				</div>
 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
+					<!-- 커뮤니티 글 제목 태그 -->
 					<h3>Title Test line ...!!!!!</h3>
 				</div>
 			</div>
@@ -64,7 +66,25 @@ $(function(){
 		</div>
 		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
 			<div class='col-4'>
-				<h1>Tag Box</h1>
+				<div class='tagline' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
+					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
+					<div class='tagbox'>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					</div>
+				</div>
 			</div>
 			<div class='col-8'>
 				<table class="table table-hover">

@@ -15,10 +15,11 @@ public class JoinSeoulController {
 	@Autowired
 	private JoinSeoulDao dao;
 	
-	@PostMapping(value = "")
+	@PostMapping(value = "ajaxFindID")
 	@ResponseBody
 	public String findId(@RequestParam(value = "id", required = false, defaultValue = "blue@bit.com")String id) {
-		//System.out.println(id);
+		System.out.println(id);
+		System.out.println(dao.ajaxGetId(id));
 		//return "ok";
 		return dao.ajaxGetId(id) != null ? String.valueOf(true) : String.valueOf(false);
 		//return "test";
@@ -26,15 +27,15 @@ public class JoinSeoulController {
 	
 	@PostMapping(value = "joinMemberInsert")
 	public String joinMemberInsert(JoinSeoulBean bean) {
-		System.out.println("test");
-		//bean.setNo(dao.getJoinSeoulSequence());
-//		dao.insertMember(bean);
 		System.out.println(bean);
-		return "";
-		
-		
+		// 33 출력
+		System.out.println();
+
+//		bean.setUser_nation(dao.getJoinnation(user_nation));
+		//dao.insertMember(bean);
+		System.out.println(bean);
+		return "test";
+		//return "Final_Pro/login";
 	}
 	
-	
-
 }

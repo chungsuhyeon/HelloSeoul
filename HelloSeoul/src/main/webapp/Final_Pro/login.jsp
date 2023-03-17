@@ -57,20 +57,31 @@
 	<header>
 	<jsp:include page="header.jsp"></jsp:include>
 	</header>
-	<section>
-		<div>
-			<form method="post" action="${pageContext.request.contextPath}/siteCheck">
-				<div class="form-group">
-	  				<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">ID</label>
-	  				<input class="form-control form-control-lg" type="text" placeholder="ID" id="inputID" name="user_id">
-	  				<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Password</label>
-	  				<input class="form-control form-control-lg" type="password" placeholder="Password" id="inputPassword" name="password">
+	<section class='section bg-dark' style="height: 800px;">
+		<div class='container-fluid' style="display: inline-flex; height: 100%;">
+			<div class='col-4 bg-dark'></div>
+			<div class='col-4 bg-dark'>
+				<div class='loginbar bg-light' style="border-radius: 20px; padding-bottom: 10px; margin-top: 200px;">
+					<form method="post" action="${pageContext.request.contextPath}/siteCheck">
+						<div class="form-group">
+	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">ID</label>
+	  						<input class="form-control form-control-lg" type="text" placeholder="ID" id="inputID" name="user_id">
+	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Password</label>
+	  						<input class="form-control form-control-lg" type="password" placeholder="Password" id="inputPassword" name="password">
+						</div>
+						<div class='buttonbar d-flex justify-content-around' style="display: inline-flex; margin-top: 10px; margin-bottom: 10px;">
+						<button type="submit" class="btn btn-primary" id="login">Login</button>
+						<button type="button" class="btn btn-success" id="join">Join</button>
+						<button type="button" class="btn btn-danger" id="findID">Find Id</button>
+						</div>
+					</form>
 				</div>
-				<button type="submit" class="btn btn-primary" id="login">Submit</button>
-				<button type="button" class="btn btn-success" id="join">Success</button>
-				<button type="button" class="btn btn-danger" id="findID">Danger</button>
-			</form>
+			</div>
+			<div class='col-4 bg-dark'></div>
 		</div>
 	</section>
+	<footer>
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>
