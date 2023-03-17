@@ -113,10 +113,10 @@
 <div class="renew-wrap">
 	<div class="renew-content">
 		<div class="rn-02"><!--제목-->
-			<p class="rn-big-title">${musicalinfo.title}</p>   <!-- 뮤지컬 + 컨텐츠제목 포스터 위 메인 제목 -->
+			<p class="rn-big-title">${ticketinfo.title}</p>   <!-- 뮤지컬 + 컨텐츠제목 포스터 위 메인 제목 -->
 			<div class="rn-product-short-data">
-				<p><span class="ps-date">${musicalinfo.rundate}</span>
-				<span class="ps-location">${musicalinfo.theater}</span></p>  <!-- 상영기간 / 상영장소 + 상영관 -->
+				<p><span class="ps-date">${ticketinfo.rundate}</span>
+				<span class="ps-location">${ticketinfo.theater}</span></p>  <!-- 상영기간 / 상영장소 + 상영관 -->
 	</div>	
 	<img src="http://tkfile.yes24.com/upload2/PerfBlog/202302/20230220/20230220-44090.jpg" alt="" class="copy-url">
 </div>
@@ -151,33 +151,33 @@
 		<div class="rn-03"><!--상단-->
 			<div class="rn-03-left"><!--포스터, 지역, 동영상-->
 				<div class="rn-product-imgbox">
-					<img src='${musicalinfo.imgsrc}'>  <!-- 메인 포스터 위치 -->
+					<img src='${ticketinfo.imgsrc}'>  <!-- 메인 포스터 위치 -->
 <!-- 					<a href="#" class="rn-product-movie" style="display:none;"><img src="http://tkfile.yes24.com/upload2/PerfBlog/202302/20230220/20230220-44090.jpg" alt=""></a> -->
 				</div>
 				<div class="rn-product-maps" id="divPerfRelation" style="display:none;"></div>
 				<div class="rn-product-social">
-					<a href="javascript:;" class="rn-product-good" id="scrap" name="scrap">
+					<a href="#" class="rn-product-good" id="scrap" name="scrap">
 						<img src="http://tkfile.yes24.com/imgNew/sub/rn-product-good1.png" alt="">
 <!-- 						<img src="http://tkfile.yes24.com/imgNew/sub/rn-product-good2.png" alt=""><span class="rn-pdg-txt2"></span><span class="rn-pdg-txt1">Likes</span> -->
 					</a>
 						<div class='rn-product-star' id='rnProductStar' style='cursor:pointer' ;="">
 <!-- 						<div class='rnp-bg'><p class='rnp-star'></p></div> -->
-						<span>${musicalinfo.reviews}<span>Reviews</span></span></div>
+						<span>${ticketinfo.reviews}<span>Reviews</span></span></div>
 				</div>				
 			</div><!--rn-03-left-->
 			<div class="rn-03-right"><!--상품정보-->
 				<div class="rn-product-area1"><!--등급, 관람시간, 출연, 가격, 혜택-->
 					<dl>
 						<dt>등급</dt>
-						<dd>&nbsp;${musicalinfo.grade} </dd>
+						<dd>&nbsp;${ticketinfo.grade} </dd>
 						<dt>관람시간</dt>
-						<dd>&nbsp;${musicalinfo.runtime}</dd>   <!-- 관람시간 -->
+						<dd>&nbsp;${ticketinfo.runtime}</dd>   <!-- 관람시간 -->
 						<dt>출연</dt><!-- 출연자는 a태그 달지않고 출연진만 입력해도 무관 -->
-						<dd>&nbsp;${musicalinfo.performer}</dd>
+						<dd>&nbsp;${ticketinfo.performer}</dd>
 						<dt id="dtPrice">가격</dt>
 						<dd id="divPrice" class="rn-product-price">
 <!-- 							<ul class="rn-product-price1 scroll-color"> -->
-								<li>${musicalinfo.price}</li>  <!-- 가격(연령별) -->
+								<li>${ticketinfo.price}</li>  <!-- 가격(연령별) -->
 <!-- 							</ul> -->
 <!-- 							<p class='rn-product-price2'>할인 적용 시 최저가 <span class='rn-red'>22,000</span>원 ~ 최고가 <span class='rn-red'>59,400</span>원<span class='rn-label rlb-12'><a href='javascript:;' class='rn-pop-btn' data-popbtn='1'>자세히</a></span></p> -->
 						</dd>

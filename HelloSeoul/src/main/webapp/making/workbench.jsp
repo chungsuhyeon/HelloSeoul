@@ -19,7 +19,14 @@
 
 <script type="text/javascript">
 $(function(){
-		
+	$('.write').click(function(){
+		if($("input#user_id").val()==""){
+			alert("login plz");
+		}
+		else if($("input#user_id").val()!=""){
+			location.replace("/web/Final_Pro/ComWrite.jsp");
+		}
+	});
 });
 </script>
 <!--JS Section End -->
@@ -35,7 +42,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	<section class='section'>
+	<section class='section bg-light'>
 		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
 			<div class='newcomm' style="display: inline-flex; position: relative;">
 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
@@ -66,7 +73,7 @@ $(function(){
 		</div>
 		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
 			<div class='col-4'>
-				<div class='tagline' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
+				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
 					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
 					<div class='tagbox'>
 					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
@@ -87,24 +94,58 @@ $(function(){
 				</div>
 			</div>
 			<div class='col-8'>
-				<table class="table table-hover">
+				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
+				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
+				<h2>Community List</h2>
+				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
+				</div>
+				<table class="table table-hover" style="border: solid;">
 					<thead>
     					<tr class="table-primary">
       						<th>ComNo</th>
       						<th>Category</th>
       						<th>Title</th>
+      						<th>Nick</th>
       						<th>RegDate</th>
     					</tr>
 	  				</thead>
   					<tbody>
-    					<tr class="table-info">
-      						<td>Column content</td>
-      						<td>Column content</td>
-      						<td>Column content</td>
-      						<td>Column content</td>
-    					</tr>
+  						<c:forEach items="${board}" var='i'>
+    						<tr class="table-info">
+      							<td>${i.com_no}</td>
+      							<td>${i.com_ctg }</td>
+      							<td>${i.com_title}</td>
+      							<td>${i.user_nick}</td>
+      							<td>${i.com_regdate}</td>
+    						</tr>
+  						</c:forEach>
   					</tbody>
   				</table>
+  				<div class='d-flex justify-content-center'>
+  					<ul class="pagination pagination-sm">
+    					<li class="page-item disabled">
+      						<a class="page-link" href="#">&laquo;</a>
+    					</li>
+    					<li class="page-item active">
+      						<a class="page-link" href="#">1</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">2</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">3</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">4</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">5</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">&raquo;</a>
+    					</li>
+  					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
