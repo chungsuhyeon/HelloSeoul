@@ -42,6 +42,29 @@
 			$("form").submit();
 		});
 	});
+	
+// 	$('document').ready(function(){
+// 		$.ajax({
+// 			url: '/web/ticketList',
+// 			type: 'post',
+// 			dataType: 'text',
+// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+// 			success: function(result){
+							
+// 				$("div.tab-content").append(result);
+				
+// 				$("td > a").click(function(){
+// 			 		var tr = $(this).parent().parent();
+// 			 		var td = tr.children();
+// 			 		console.log(td.eq(0).children().val());
+// 				}); // $("td > a").click
+
+// 			},
+// 			error: function(){
+// 				alert("error : " + error);
+// 			}
+// 		}); // ajax
+// 	}); // $('document').ready
 </script>
 
 

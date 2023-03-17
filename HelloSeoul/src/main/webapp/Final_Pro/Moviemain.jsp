@@ -43,94 +43,106 @@ $(function(){
 	href="/web/resources/ticketMain2/New/Css/main2.css?v=2020012203">
 	
 	
-<form role="form" action="/web/MusicalList">
+<form role="form" action="/web/musicalList">
 <div class="m2-kv-hidden">   <!-- 상단 돌아가는 컨텐츠 -->
 		<div class="m2-kv-wrap">
 			<div class="m2-kv">
 				<div class="swiper-container m2-kvs">
 					<div class="swiper-wrapper">
+					<c:forEach var="i" items="${musicallist}" varStatus="cnt">
 						<div class="swiper-slide">
-							<a href="#"
-								target="_self" title="스즈메의 문단속" id="img"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_320.jpg"
+							<a href="/web/contentImg?imgsrc=${i.imgsrc}"
+								target="_self" title="${i.title}" id="img"><img id="imgsrc"
+								src="${i.imgsrc}"
 								alt="">
 							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit">스즈메의 문단속</p> -->
-<!-- 									<p class="m2-kvs-detail">2023.03.25 ~ 2023.06.18 부산 드림씨어터</p> -->
+									<p class="m2-kvs-tit">${i.ptitle }</p>
+									<p class="m2-kvs-detail">${i.detail}</p>
 								</div></a>
 						</div>
-						<div class="swiper-slide">
-							<a
-								href="#"
-								target="_self" title="영웅"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000083/83203/83203_320.jpg"
-								alt="영웅">
-							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit"> -->
-<!-- 										영웅 -->
-<!-- 									</p> -->
-<!-- 									<p class="m2-kvs-detail">2022.11 ~ 2023.02 서울, 부산, 대구</p> -->
-								</div></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#" target="_self"
-								title="오늘 밤, 세계에서 이 사랑이 사라진다 해도"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86503/86503_320.jpg"
-								alt="뮤지컬 <호프>">
-							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit"> -->
-<!-- 										오늘 밤, 세계에서 이 사랑이 사라진다 해도 -->
-<!-- 									</p> -->
-<!-- 									<p class="m2-kvs-detail">2023.03.16 ~ 2023.06.11 유니플렉스 1관</p> -->
-								</div></a>
-						</div>
-						<div class="swiper-slide">
-							<a
-								href="#"
-								target="_self" title="어메이징 모리스"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86701/86701_320.jpg"
-								alt="어메이징 모리스">
-							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit"> -->
-<!-- 										어메이징 모리스 -->
-<!-- 									</p> -->
-<!-- 									<p class="m2-kvs-detail">2022.12 ~ 2023.03 서울, 인천</p> -->
-								</div></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#" target="_self"
-								title="장화신은 고양이-끝내주는 모험"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86689/86689_320.jpg"
-								alt="장화신은 고양이-끝내주는 모험">
-							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit"> -->
-<!-- 										장화신은 고양이-끝내주는 모험 -->
-<!-- 									</p> -->
-<!-- 									<p class="m2-kvs-detail">2023.03.05 ~ 2023.04.02 광림아트센터 -->
-<!-- 										BBCH홀</p> -->
-								</div></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#" target="_self"
-								title="다음 소희"><img
-								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86752/86752_320.jpg"
-								alt="다음 소희">
-							<div class="m2-kvs-txt">
-<!-- 									<p class="m2-kvs-tit"> -->
-<!-- 										다음 소희 -->
-<!-- 									</p> -->
-<!-- 									<p class="m2-kvs-detail">2023.01.12 ~ 2023.03.26 예술의전당 -->
-<!-- 										오페라극장</p> -->
-								</div></a>
-						</div>
+						</c:forEach>
 <!-- 						<div class="swiper-slide"> -->
-<!-- 							<a href="/Perf/44728?Gcode=009_400" target="_self" -->
-<!-- 								title="디 오리지널 프렌치뮤지컬 갈라콘서트"><img -->
-<!-- 								src="/web/resources/ticketMain/Upload2/Display/202302/20230206/gmain_top_44728.jpg/dims/quality/70/index.htm" -->
+<!-- 							<a href="#" -->
+<!-- 								target="_self" title="스즈메의 문단속" id="img"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_320.jpg" -->
+<!-- 								alt=""> -->
+<!-- 							<div class="m2-kvs-txt"> -->
+<!-- <!-- 									<p class="m2-kvs-tit">스즈메의 문단속</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2023.03.25 ~ 2023.06.18 부산 드림씨어터</p> --> 
+<!-- 								</div></a> 
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a -->
+<!-- 								href="#" -->
+<!-- 								target="_self" title="영웅"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000083/83203/83203_320.jpg" -->
+<!-- 								alt="영웅"> -->
+<!-- 							<div class="m2-kvs-txt"> -->
+<!-- <!-- 									<p class="m2-kvs-tit"> --> 
+<!-- <!-- 										영웅 --> 
+<!-- <!-- 									</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2022.11 ~ 2023.02 서울, 부산, 대구</p> --> 
+<!-- 								</div></a> -->
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a href="#" target="_self" -->
+<!-- 								title="오늘 밤, 세계에서 이 사랑이 사라진다 해도"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86503/86503_320.jpg" -->
+<%-- 								alt="뮤지컬 <호프>"> --%>
+<!-- 							<div class="m2-kvs-txt"> -->
+<!-- <!-- 									<p class="m2-kvs-tit"> --> 
+<!-- <!-- 										오늘 밤, 세계에서 이 사랑이 사라진다 해도 --> 
+<!-- <!-- 									</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2023.03.16 ~ 2023.06.11 유니플렉스 1관</p> --> 
+<!-- 								</div></a> -->
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a -->
+<!-- 								href="#" -->
+<!-- 								target="_self" title="어메이징 모리스"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86701/86701_320.jpg" -->
+<!-- 								alt="어메이징 모리스"> -->
+<!-- 							<div class="m2-kvs-txt"> 
+<!-- <!-- 									<p class="m2-kvs-tit"> --> 
+<!-- <!-- 										어메이징 모리스 --> 
+<!-- <!-- 									</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2022.12 ~ 2023.03 서울, 인천</p> --> 
+<!-- 								</div></a> 
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a href="#" target="_self" -->
+<!-- 								title="장화신은 고양이-끝내주는 모험"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86689/86689_320.jpg" -->
+<!-- 								alt="장화신은 고양이-끝내주는 모험"> -->
+<!-- 							<div class="m2-kvs-txt"> -->
+<!-- <!-- 									<p class="m2-kvs-tit"> --> 
+<!-- <!-- 										장화신은 고양이-끝내주는 모험 --> 
+<!-- <!-- 									</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2023.03.05 ~ 2023.04.02 광림아트센터 --> 
+<!-- <!-- 										BBCH홀</p> --> 
+<!-- 								</div></a> -->
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a href="#" target="_self" -->
+<!-- 								title="다음 소희"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86752/86752_320.jpg" -->
+<!-- 								alt="다음 소희"> -->
+<!-- 							<div class="m2-kvs-txt"> -->
+<!-- <!-- 									<p class="m2-kvs-tit"> -->
+<!-- <!-- 										다음 소희 
+<!-- <!-- 									</p> -->
+<!-- <!-- 									<p class="m2-kvs-detail">2023.01.12 ~ 2023.03.26 예술의전당 --> 
+<!-- <!-- 										오페라극장</p> --> -->
+<!-- 								</div></a> -->
+<!-- 						</div> -->
+<!-- 						<div class="swiper-slide"> -->
+<!-- 							<a href="#" target="_self" -->
+<!-- 								title="샤잠! 신들의 분노"><img -->
+<!-- 								src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86824/86824_320.jpg" -->
 <!-- 								alt="디 오리지널 프렌치 뮤지컬 콘서트"> -->
 <!-- 							<div class="m2-kvs-txt"> -->
-<!-- 									<p class="m2-kvs-tit">디 오리지널 프렌치 뮤지컬 콘서트</p> -->
-<!-- 									<p class="m2-kvs-detail">2023.03.18 ~ 2023.03.19 세종문화회관 대극장</p> -->
+<!-- <!-- 									<p class="m2-kvs-tit">디 오리지널 프렌치 뮤지컬 콘서트</p> --> 
+<!-- <!-- 									<p class="m2-kvs-detail">2023.03.18 ~ 2023.03.19 세종문화회관 대극장</p> --> 
 <!-- 								</div></a> -->
 <!-- 						</div> -->
 <!-- 						<div class="swiper-slide"> -->
@@ -162,132 +174,162 @@ $(function(){
 				alt="">
 		</p>   <!-- /WHAT"S HOT 이미지 -->
 		<div class="ms-list-imgs">   <!-- 첫줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
-			<a href="#" target="_self" title="더 퍼스트 슬램덩크"><div
-					class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86720/86720_320.jpg"
-						alt="더 퍼스트 슬램덩크">
+		<c:forEach var="i" items="${musicallist2}" varStatus="cnt">
+		<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+				title="${i.title}" id="img"><div class="list-bigger-wrap">
+					<img class="lazyload" id="imgsrc"
+						data-src="${i.imgsrc}"
+						alt="">
 					<div class="list-bigger-txt">
 						<p class="list-b-tit1">
-							더 퍼스트 슬램덩크
-						</p>
-<!-- 						<p class="list-b-tit2">조기예매 할인 30%</p> -->
-<!-- 						<p class="list-b-circle">30%</p> -->
-					</div>
-				</div></a><a href="#" target="_self"
-				title="서치 2"><div class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86770/86770_320.jpg"
-						alt="서치 2">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							서치 2
-						</p>
-<!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> -->
-<!-- 						<p class="list-b-circle">20%</p> -->
-					</div>
-				</div></a><a href="#" target="_self"
-				title="앤트맨과 와스프-퀀텀매니아"><div class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86796/86796_320.jpg"
-						alt="앤트맨과 와스프-퀀텀매니아">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							앤트맨과 와스프-퀀텀매니아
+							${i.ptitle}
 						</p>
 <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> -->
 <!-- 						<p class="list-b-circle">30%</p> -->
-					</div>
-				</div></a><a href="#" target="_self"
-				title="상견니"><div class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86750/86750_320.jpg"
-						alt="상견니">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							상견니
-						</p>
-<!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> -->
-<!-- 						<p class="list-b-circle">30%</p> -->
-					</div>
-				</div></a><a href="#" target="_self" title="대외비"><div
-					class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86814/86814_320.jpg"
-						alt="대외비">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							대외비
-						</p>
-<!-- 						<p class="list-b-tit2">All For One 할인 25%</p> -->
-<!-- 						<p class="list-b-circle">25%</p> -->
 					</div>
 				</div></a>
+				</c:forEach>
+<!-- 			<a href="#" target="_self" title="더 퍼스트 슬램덩크"><div -->
+<!-- 					class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86720/86720_320.jpg" -->
+<!-- 						alt="더 퍼스트 슬램덩크"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							더 퍼스트 슬램덩크 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a><a href="#" target="_self" -->
+<!-- 				title="서치 2"><div class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86770/86770_320.jpg" -->
+<!-- 						alt="서치 2"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							서치 2 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
+<!-- 					</div> 
+<!-- 				</div></a><a href="#" target="_self" -->
+<!-- 				title="앤트맨과 와스프-퀀텀매니아"><div class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86796/86796_320.jpg" -->
+<!-- 						alt="앤트맨과 와스프-퀀텀매니아"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							앤트맨과 와스프-퀀텀매니아 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
+<!-- 					</div>
+<!-- 				</div></a><a href="#" target="_self" -->
+<!-- 				title="상견니"><div class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86750/86750_320.jpg" -->
+<!-- 						alt="상견니"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							상견니 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a><a href="#" target="_self" title="대외비"><div -->
+<!-- 					class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86814/86814_320.jpg" -->
+<!-- 						alt="대외비"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							대외비 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">All For One 할인 25%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">25%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a> -->
 		</div>   <!-- /첫줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
 		<div class="ms-list-imgs">  <!-- 둘째줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
-			<a href="#" target="_self" title="카운트"><div
-			 class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86798/86798_320.jpg"
-				alt="카운트">
+		<c:forEach var="i" items="${musicallist3}" varStatus="cnt">
+		<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+				title="${i.title}" id="img"><div class="list-bigger-wrap">
+					<img class="lazyload" id="imgsrc"
+						data-src="${i.imgsrc}"
+						alt="">
 					<div class="list-bigger-txt">
 						<p class="list-b-tit1">
-							카운트
+							${i.ptitle}
 						</p>
-<!-- 						<p class="list-b-tit2">재관람 할인 30%</p> -->
+<!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> -->
 <!-- 						<p class="list-b-circle">30%</p> -->
 					</div>
-				</div></a><a href="#" target="_self" title="귀멸의 칼날-상현집결, 그리고 도공 마을로"><div
-					class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86826/86826_320.jpg"
-						alt="귀멸의 칼날-상현집결, 그리고 도공 마을로">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							귀멸의 칼날-상현집결, 그리고 도공 마을로
-						</p>
-<!-- 						<p class="list-b-tit2">입문 할인 50%</p> -->
-<!-- 						<p class="list-b-circle">50%</p> -->
-					</div>
-				</div></a><a href="#" target="_self"
-				title="미녀와 야수-마법에 걸린 왕자"><div class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86800/86800_320.jpg"
-						alt="미녀와 야수-마법에 걸린 왕자">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							미녀와 야수-마법에 걸린 왕자
-						</p>
-<!-- 						<p class="list-b-tit2">재관람 할인 20%</p> -->
-<!-- 						<p class="list-b-circle">20%</p> -->
-					</div>
-				</div></a><a href="#" target="_self"
-				title="멍뭉이">
-				<div class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86797/86797_320.jpg"
-						alt="멍뭉이">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							멍뭉이
-						</p>
-<!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> -->
-<!-- 						<p class="list-b-circle">20%</p> -->
-					</div>
-				</div>
-			</a><a href="#" target="_self" title="아바타-물의 길"><div
-					class="list-bigger-wrap">
-					<img class="lazyload"
-						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86072/86072_320.jpg"
-						alt="아바타-물의 길">
-					<div class="list-bigger-txt">
-						<p class="list-b-tit1">
-							아바타-물의 길
-						</p>
-<!-- 						<p class="list-b-tit2">R석 할인 25%</p> -->
-<!-- 						<p class="list-b-circle">25%</p> -->
-					</div>
 				</div></a>
+				</c:forEach>
+<!-- 			<a href="#" target="_self" title="카운트"><div -->
+<!-- 			 class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86798/86798_320.jpg" -->
+<!-- 				alt="카운트"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							카운트 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">재관람 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a><a href="#" target="_self" title="귀멸의 칼날-상현집결, 그리고 도공 마을로"><div -->
+<!-- 					class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86826/86826_320.jpg" -->
+<!-- 						alt="귀멸의 칼날-상현집결, 그리고 도공 마을로"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							귀멸의 칼날-상현집결, 그리고 도공 마을로 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">입문 할인 50%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">50%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a><a href="#" target="_self" -->
+<!-- 				title="미녀와 야수-마법에 걸린 왕자"><div class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86800/86800_320.jpg" -->
+<!-- 						alt="미녀와 야수-마법에 걸린 왕자"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							미녀와 야수-마법에 걸린 왕자 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">재관람 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a><a href="#" target="_self" -->
+<!-- 				title="멍뭉이"> -->
+<!-- 				<div class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86797/86797_320.jpg" -->
+<!-- 						alt="멍뭉이"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							멍뭉이 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</a><a href="#" target="_self" title="아바타-물의 길"><div -->
+<!-- 					class="list-bigger-wrap"> -->
+<!-- 					<img class="lazyload" -->
+<!-- 						data-src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86072/86072_320.jpg" -->
+<!-- 						alt="아바타-물의 길"> -->
+<!-- 					<div class="list-bigger-txt"> -->
+<!-- 						<p class="list-b-tit1"> -->
+<!-- 							아바타-물의 길 -->
+<!-- 						</p> -->
+<!-- <!-- 						<p class="list-b-tit2">R석 할인 25%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">25%</p> --> 
+<!-- 					</div> -->
+<!-- 				</div></a> -->
 		</div>   <!-- /둘째줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
 	</section>   <!-- WHAT"S HOT 전체   -->
 
@@ -304,96 +346,116 @@ $(function(){
 <!-- 						alt=""></a> -->
 				</p>
 				<ul>
-					<li class="on"><a
-						href="#"
-						title="아임 히어로 더 파이널"><dl>
+				<c:forEach var="i" items="${musicallist4}">
+				<li><a
+						href='/web/contentImg?imgsrc=${i.imgsrc}'
+						title='${i.title}'><dl>
 								<dt>
-									1위<span class="dash">-</span>
+									${i.ranking }<span class='dash'>-</span>
 								</dt>
 								<dd>
 									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86829/86829_320.jpg"
-										alt="">
+										src='${i.imgsrc}'
+										alt=''>
 								</dd>
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">아임 히어로 더 파이널</p>
-									<p class="ms5-l-txt2">
-										2023.03.01 개봉<br>예매율32.8%
+								<dd class='ms5-l-txt'>
+									<p class='ms5-l-txt1'>${i.ptitle}</p>
+									<p class='ms5-l-txt2'>
+										${i.detail}
 									</p>
 								</dd>
 							</dl></a></li>
-					<li><a
-						href="#"
-						title="앤트맨과 와스프-퀀텀매니아"><dl>
-								<dt>
-									2위<span class="dash">-</span>
-								</dt>
-								<dd>
-									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86796/86796_320.jpg"
-										alt="">
-								</dd> 
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">앤트맨과 와스프-퀀텀매니아</p>
-									<p class="ms5-l-txt2">
-										2023.02.15 개봉<br>예매율13.2%
-									</p>
-								</dd>
-							</dl></a></li>
-					<li><a
-						href="#"
-						title="귀멸의 칼날-상현집결, 그리고 도공 마을로"><dl>
-								<dt>
-									3위<span class="dash">-</span>
-								</dt>
-								<dd>
-									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86826/86826_320.jpg"
-										alt="">
-								</dd>
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">귀멸의 칼날-상현집결, 그리고 도공 마을로</p>
-									<p class="ms5-l-txt2">
-										2023.03.02 개봉 <br>예매율9.7%
-									</p>
-								</dd>
-							</dl></a></li>
-					<li><a
-						href="#"
-						title="마루이 비디오"><dl>
-								<dt>
-									4위<span class="up">1</span>
-								</dt>
-								<dd>
-									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86772/86772_320.jpg"
-										alt="">
-								</dd>
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">마루이 비디오</p>
-									<p class="ms5-l-txt2">
-										2023.02.22 개봉<br>예매율9.1%
-									</p>
-								</dd>
-							</dl></a></li>
-					<li><a
-						href="#"
-						title="서치 2"><dl>
-								<dt>
-									5위<span class="down">1</span>
-								</dt>
-								<dd>
-									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86770/86770_320.jpg"
-										alt="">
-								</dd>
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">서치 2</p>
-									<p class="ms5-l-txt2">
-										2023.02.22 개봉<br>예매율7.7%
-									</p>
-								</dd>
-							</dl></a></li>
+							</c:forEach>
+<!-- 					<li class="on"><a -->
+<!-- 						href="#" -->
+<!-- 						title="아임 히어로 더 파이널"><dl> -->
+<!-- 								<dt> -->
+<!-- 									1위<span class="dash">-</span> -->
+<!-- 								</dt> -->
+<!-- 								<dd> -->
+<!-- 									<img -->
+<!-- 										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86829/86829_320.jpg" -->
+<!-- 										alt=""> -->
+<!-- 								</dd> -->
+<!-- 								<dd class="ms5-l-txt"> -->
+<!-- 									<p class="ms5-l-txt1">아임 히어로 더 파이널</p> -->
+<!-- 									<p class="ms5-l-txt2"> -->
+<!-- 										2023.03.01 개봉<br>예매율32.8% -->
+<!-- 									</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl></a></li> -->
+<!-- 					<li><a -->
+<!-- 						href="#" -->
+<!-- 						title="앤트맨과 와스프-퀀텀매니아"><dl> -->
+<!-- 								<dt> -->
+<!-- 									2위<span class="dash">-</span> -->
+<!-- 								</dt> -->
+<!-- 								<dd> -->
+<!-- 									<img -->
+<!-- 										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86796/86796_320.jpg" -->
+<!-- 										alt=""> -->
+<!-- 								</dd>  -->
+<!-- 								<dd class="ms5-l-txt"> -->
+<!-- 									<p class="ms5-l-txt1">앤트맨과 와스프-퀀텀매니아</p> -->
+<!-- 									<p class="ms5-l-txt2"> -->
+<!-- 										2023.02.15 개봉<br>예매율13.2% -->
+<!-- 									</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl></a></li> -->
+<!-- 					<li><a -->
+<!-- 						href="#" -->
+<!-- 						title="귀멸의 칼날-상현집결, 그리고 도공 마을로"><dl> -->
+<!-- 								<dt> -->
+<!-- 									3위<span class="dash">-</span> -->
+<!-- 								</dt> -->
+<!-- 								<dd> -->
+<!-- 									<img -->
+<!-- 										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86826/86826_320.jpg" -->
+<!-- 										alt=""> -->
+<!-- 								</dd> -->
+<!-- 								<dd class="ms5-l-txt"> -->
+<!-- 									<p class="ms5-l-txt1">귀멸의 칼날-상현집결, 그리고 도공 마을로</p> -->
+<!-- 									<p class="ms5-l-txt2"> -->
+<!-- 										2023.03.02 개봉 <br>예매율9.7% -->
+<!-- 									</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl></a></li> -->
+<!-- 					<li><a -->
+<!-- 						href="#" -->
+<!-- 						title="마루이 비디오"><dl> -->
+<!-- 								<dt> -->
+<!-- 									4위<span class="up">1</span> -->
+<!-- 								</dt> -->
+<!-- 								<dd> -->
+<!-- 									<img -->
+<!-- 										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86772/86772_320.jpg" -->
+<!-- 										alt=""> -->
+<!-- 								</dd> -->
+<!-- 								<dd class="ms5-l-txt"> -->
+<!-- 									<p class="ms5-l-txt1">마루이 비디오</p> -->
+<!-- 									<p class="ms5-l-txt2"> -->
+<!-- 										2023.02.22 개봉<br>예매율9.1% -->
+<!-- 									</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl></a></li> -->
+<!-- 					<li><a -->
+<!-- 						href="#" -->
+<!-- 						title="서치 2"><dl> -->
+<!-- 								<dt> -->
+<!-- 									5위<span class="down">1</span> -->
+<!-- 								</dt> -->
+<!-- 								<dd> -->
+<!-- 									<img -->
+<!-- 										src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86770/86770_320.jpg" -->
+<!-- 										alt=""> -->
+<!-- 								</dd> -->
+<!-- 								<dd class="ms5-l-txt"> -->
+<!-- 									<p class="ms5-l-txt1">서치 2</p> -->
+<!-- 									<p class="ms5-l-txt2"> -->
+<!-- 										2023.02.22 개봉<br>예매율7.7% -->
+<!-- 									</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl></a></li> -->
 				</ul>
 			</div>   <!-- /WEEKLY RANKING -->
 
@@ -404,49 +466,64 @@ $(function(){
 				<div class="ms5-rs-wrap">   <!-- 지역별 추천 이미지 -->
 					<div class="swiper-container ms5-rs">   
 						<div class="swiper-wrapper">   <!-- 지역별 추천 컨텐츠 -->
+						<c:forEach var="i" items="${musicallist5}">
 							<div class="swiper-slide">
-								<a href="#" target="_self"
-									title="뮤지컬 <드라큘라>"><span><img
-										src="/web/resources/ticket.yes24.com/Upload2/Display/202210/20221021/gmain_top_43815.jpg/dims/quality/70/index.htm"
-										alt="뮤지컬 <드라큘라>"></span>
+								<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+									title="${i.title}" id="img"><span><img id="imgsrc"
+										src="${i.imgsrc}"
+										alt=""></span>
 								<div>
 										<p class="ms5-r-txt1">
-											뮤지컬
-											<드라큘라></드라큘라>
+											${i.ptitle}
 										</p>
 <!-- 										<p class="ms5-r-txt2">학생 할인 30%</p> -->
 									</div>
-									<p>송파구</p></a>
+									<p>${i.detail}</p></a>
 							</div>
-							<div class="swiper-slide">
-								<a href="#" target="_self"
-									title="뮤지컬 <미드나잇 : 앤틀러스>"><span><img
-										src="http://tkfile.yes24.com/upload2/perfblog/202301/20230118/20230118-44374.jpg/dims/quality/70/"
-										alt="뮤지컬 <미드나잇 : 앤틀러스>"></span>
-								<div>
-										<p class="ms5-r-txt1">
-											뮤지컬
-											<미드나잇 : 앤틀러스></미드나잇 : 앤틀러스>
-										</p>
-<!-- 										<p class="ms5-r-txt2">프리뷰 할인 30%</p> -->
-									</div>
-									<p>종로구</p>
-									</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="#" target="_self"
-									title="뮤지컬 <은밀하게 위대하게： THE LAST> "><span><img
-										src="http://tkfile.yes24.com/upload2/perfblog/202302/20230201/20230201-44819.jpg/dims/quality/70/"
-										alt="뮤지컬 <은밀하게 위대하게： THE LAST> "></span>
-								<div>
-										<p class="ms5-r-txt1">
-											뮤지컬
-											<은밀하게 위대하게： THE LAST></은밀하게 위대하게： THE LAST>
-										</p>
-<!-- 										<p class="ms5-r-txt2">청소년 할인 30%</p> -->
-									</div>
-									<p>강남구</p></a>
-							</div>
+							</c:forEach>
+<!-- 							<div class="swiper-slide"> -->
+<!-- 								<a href="#" target="_self" -->
+<%-- 									title="뮤지컬 <드라큘라>"><span><img --%>
+<!-- 										src="/web/resources/ticket.yes24.com/Upload2/Display/202210/20221021/gmain_top_43815.jpg/dims/quality/70/index.htm" -->
+<%-- 										alt="뮤지컬 <드라큘라>"></span> --%>
+<!-- 								<div> -->
+<!-- 										<p class="ms5-r-txt1"> -->
+<!-- 											뮤지컬 -->
+<!-- 											<드라큘라></드라큘라> -->
+<!-- 										</p> -->
+<!-- <!-- 										<p class="ms5-r-txt2">학생 할인 30%</p> --> -->
+<!-- 									</div> -->
+<!-- 									<p>송파구</p></a> -->
+<!-- 							</div> -->
+<!-- 							<div class="swiper-slide"> -->
+<!-- 								<a href="#" target="_self" -->
+<%-- 									title="뮤지컬 <미드나잇 : 앤틀러스>"><span><img --%>
+<!-- 										src="http://tkfile.yes24.com/upload2/perfblog/202301/20230118/20230118-44374.jpg/dims/quality/70/" -->
+<%-- 										alt="뮤지컬 <미드나잇 : 앤틀러스>"></span> --%>
+<!-- 								<div> -->
+<!-- 										<p class="ms5-r-txt1"> -->
+<!-- 											뮤지컬 -->
+<!-- 											<미드나잇 : 앤틀러스></미드나잇 : 앤틀러스> -->
+<!-- 										</p> -->
+<!-- <!-- 										<p class="ms5-r-txt2">프리뷰 할인 30%</p> --> -->
+<!-- 									</div> -->
+<!-- 									<p>종로구</p> -->
+<!-- 									</a> -->
+<!-- 							</div> -->
+<!-- 							<div class="swiper-slide"> -->
+<!-- 								<a href="#" target="_self" -->
+<!-- 									title="뮤지컬 <은밀하게 위대하게： THE LAST> "><span><img -->
+<!-- 										src="http://tkfile.yes24.com/upload2/perfblog/202302/20230201/20230201-44819.jpg/dims/quality/70/" -->
+<!-- 										alt="뮤지컬 <은밀하게 위대하게： THE LAST> "></span> -->
+<!-- 								<div> -->
+<!-- 										<p class="ms5-r-txt1"> -->
+<!-- 											뮤지컬 -->
+<!-- 											<은밀하게 위대하게： THE LAST></은밀하게 위대하게： THE LAST> -->
+<!-- 										</p> -->
+<!-- <!-- 										<p class="ms5-r-txt2">청소년 할인 30%</p> --> -->
+<!-- 									</div> -->
+<!-- 									<p>강남구</p></a> -->
+<!-- 							</div> -->
 						</div>   <!-- 지역별 추천 컨텐츠 -->
 					</div>   
 					<div class="swiper-button-next ms5-rs"></div>

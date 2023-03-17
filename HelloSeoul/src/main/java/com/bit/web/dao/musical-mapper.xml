@@ -5,27 +5,99 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="sist.spring.dao.boardMemberDao">
 
 	<select id="selectMusicalList" resultType="MusicalBean">
-		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM MUSICALLIST
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=1 AND NO<=7
+		]]>
 	</select>
 	
 	<select id="selectMusicalList2" resultType="MusicalBean">
-		SELECT TITLE,IMGSRC,PTITLE FROM MUSICALLIST2
+	<![CDATA[
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=8 AND NO<=12
+		]]>
 	</select>
 	
 	<select id="selectMusicalList3" resultType="MusicalBean">
-		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM MUSICALLIST3
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=13 AND NO<=17
+		]]>
 	</select>
 	
 	<select id="selectMusicalList4" resultType="MusicalBean">
-		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE,RANKING FROM MUSICALLIST4
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE,RANKING FROM TICKETDB WHERE NO>=18 AND NO<=22
+		]]>
 	</select>
 	
 	<select id="selectMusicalList5" resultType="MusicalBean">
-		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM MUSICALLIST5
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=23 AND NO<=25
+		]]>
 	</select>
 	
-	<select id="selectMusicalInfo" parameterType="String" resultType="MusicalBean">
-		SELECT NO, TITLE, RUNDATE, THEATER, IMGSRC, REVIEWS, GRADE, RUNTIME, PERFORMER, PRICE FROM MUSICALINFO
+	
+	<select id="selectMovieList" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=26 AND NO<=32
+		]]>
+	</select>
+	
+	<select id="selectMovieList2" resultType="MusicalBean">
+	<![CDATA[
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=33 AND NO<=37
+		]]>
+	</select>
+	
+	<select id="selectMovieList3" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=38 AND NO<=42
+		]]>
+	</select>
+	
+	<select id="selectMovieList4" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE,RANKING FROM TICKETDB WHERE NO>=43 AND NO<=47
+		]]>
+	</select>
+	
+	<select id="selectMovieList5" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=48 AND NO<=50
+		]]>
+	</select>
+	
+	
+	<select id="selectTheaterList" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=51 AND NO<=57
+		]]>
+	</select>
+	
+	<select id="selectTheaterList2" resultType="MusicalBean">
+	<![CDATA[
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=58 AND NO<=62
+		]]>
+	</select>
+	
+	<select id="selectTheaterList3" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=63 AND NO<=67
+		]]>
+	</select>
+	
+	<select id="selectTheaterList4" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE,RANKING FROM TICKETDB WHERE NO>=68 AND NO<=72
+		]]>
+	</select>
+	
+	<select id="selectTheaterList5" resultType="MusicalBean">
+	<![CDATA[
+		SELECT NO,TITLE,IMGSRC,DETAIL,PTITLE FROM TICKETDB WHERE NO>=73 AND NO<=75
+		]]>
+	</select>
+	
+	<select id="selectTicketInfo" parameterType="String" resultType="MusicalBean">
+		SELECT NO, TITLE, RUNDATE, THEATER, IMGSRC, REVIEWS, GRADE, RUNTIME, PERFORMER, PRICE FROM TICKETDB
 		WHERE IMGSRC=#{VALUE}
 	</select>
 	

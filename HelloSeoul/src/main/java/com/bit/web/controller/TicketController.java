@@ -25,25 +25,45 @@ public class TicketController {
 	public String ImgCheck(String imgsrc,Model model) {
 //		System.out.println("contentImg");
 //		System.out.println(imgsrc);
-		model.addAttribute("musicalinfo", dao.selectMusicalInfo(imgsrc));
+		model.addAttribute("ticketinfo", dao.selectTicketInfo(imgsrc));
 		System.out.println(model);
 		return "Final_Pro/TicketDetail";
 	}
 	
-	@RequestMapping (value = "MusicalList")
+	@RequestMapping (value = "musicalList")
 	public String musicallist(Model model) {
-		System.out.println("test");
+//		System.out.println("test");
 		HashMap<String, Object>map= new HashMap<String, Object>();
 		model.addAttribute("musicallist", dao.selectMusicalList(map));
-		HashMap<String, Object>map2 = new HashMap<String, Object>();
-		model.addAttribute("musicallist2", dao.selectMusicalList2(map2));
-		HashMap<String, Object>map3 = new HashMap<String, Object>();
-		model.addAttribute("musicallist3", dao.selectMusicalList3(map3));
-		HashMap<String, Object>map4 = new HashMap<String, Object>();
-		model.addAttribute("musicallist4", dao.selectMusicalList4(map4));
-		HashMap<String, Object>map5 = new HashMap<String, Object>();
-		model.addAttribute("musicallist5", dao.selectMusicalList5(map5));
+		model.addAttribute("musicallist2", dao.selectMusicalList2(map));
+		model.addAttribute("musicallist3", dao.selectMusicalList3(map));
+		model.addAttribute("musicallist4", dao.selectMusicalList4(map));
+		model.addAttribute("musicallist5", dao.selectMusicalList5(map));
 		return "Final_Pro/Musicalmain";
+	}
+	
+	@RequestMapping (value = "movieList")
+	public String movielist(Model model) {
+//		System.out.println("test");
+		HashMap<String, Object>map= new HashMap<String, Object>();
+		model.addAttribute("movielist", dao.selectMusicalList(map));
+		model.addAttribute("movielist2", dao.selectMusicalList2(map));
+		model.addAttribute("movielist3", dao.selectMusicalList3(map));
+		model.addAttribute("movielist4", dao.selectMusicalList4(map));
+		model.addAttribute("movielist5", dao.selectMusicalList5(map));
+		return "Final_Pro/Moviemain";
+	}
+	
+	@RequestMapping (value = "theaterList")
+	public String theaterlist(Model model) {
+//		System.out.println("test");
+		HashMap<String, Object>map= new HashMap<String, Object>();
+		model.addAttribute("theaterlist", dao.selectMusicalList(map));
+		model.addAttribute("theaterlist2", dao.selectMusicalList2(map));
+		model.addAttribute("theaterlist3", dao.selectMusicalList3(map));
+		model.addAttribute("theaterlist4", dao.selectMusicalList4(map));
+		model.addAttribute("theaterlist5", dao.selectMusicalList5(map));
+		return "Final_Pro/Theatermain";
 	}
 	
 }

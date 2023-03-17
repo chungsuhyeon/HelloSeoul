@@ -99,7 +99,7 @@ $(function(){
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/web/MusicalList">TICKET</a>
+          <a class="nav-link" href="/web/musicalList">TICKET</a>
         </li>
       </ul>
       <div class="setbar d-flex">
