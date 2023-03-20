@@ -19,7 +19,19 @@
 
 <script type="text/javascript">
 $(function(){
+	$(".seat >button").click(function(){
+		//좌석벨류
+		alert($(this).val());
 		
+		//유무
+		if($(this).attr('class')=='useseat btn btn-primary'){
+			alert('this seat is used!');
+		}else{
+			alert('emptyseat');
+			//function seat use ajax
+		}
+	});
+	
 });
 </script>
 <!--JS Section End -->
@@ -35,127 +47,41 @@ $(function(){
 </head>
 <body>
 	<section class='section'>
-		<div class='container-fluid'>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<p>A</p>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
+		<div class='container-fluid' style="display: inline-flex; border: solid;">
+			<!-- 좌석표 -->
+			<div class='seatbar col-4'>
+			<c:forEach var='i' begin="0" end="9">
+				<div class='seat col-12' style="display: inline-flex;">
+					<h3>${i}</h3>
+					<c:forEach var='x' begin="0" end="9">
+						<c:choose>
+							<c:when test="${x%2==0}">
+								<button type="button" class="emptyeseat btn btn-outline-primary" style="margin: 1px;" value="${i}">${i}-${x}</button>					
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="useseat btn btn-primary" style="margin: 1px;" value="${i}">${i}-${x}</button>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</div>
+			</c:forEach>
 			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			</div>
-			<div class='seat col-6 bg-light' style="display: inline-flex;">
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
-			<button type="button" class="btn btn-primary">A0</button>
-			<button type="button" class="btn btn-outline-primary">A0</button>
+			<!-- 테이블 시작 및 결제 관련 -->
+			<div class='paybar col-4'>
+				<table class='table table-hover'>
+					<thead>
+						<tr class='table-primary'>
+							<th>th</th>
+							<th>th</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class='table-info'>
+							<td>td</td>
+							<td>td</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</section>
