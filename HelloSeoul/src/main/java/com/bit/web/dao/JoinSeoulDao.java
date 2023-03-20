@@ -25,7 +25,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		this.getSqlSession().insert("insertMember",bean);
 	}	
 	
-	 public String getJoinnation(int user_nation) {
+	 public String getJoinnation(String user_nation) {
 		 return this.getSqlSession().selectOne("getJoinnation",user_nation);
 	 }
 		
