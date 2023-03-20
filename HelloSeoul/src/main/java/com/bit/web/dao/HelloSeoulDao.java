@@ -59,8 +59,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 일정에 추가하기 위한 MapDb 정보 가져오기
-	public MainDbBean selectMainDbData(String codeList) {
-		return this.getSqlSession().selectOne("selectMainDbData", codeList);
+	public List<Object> selectMainDbData(String codeList) {
+		return this.getSqlSession().selectList("selectMainDbData", codeList);
 	}
 	
 	

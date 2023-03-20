@@ -34,16 +34,9 @@
 			success: function(result){
 				console.log(result);
 				
-				// 사이트 : https://blog.leocat.kr/notes/2017/07/24/javascript-add-days
 				
 				var start = new Date(result.PLANNER_START);
 				console.log(start);
-				console.log(start.setDate(start.getDate() + 32));
-				console.log(start.setDate(start.getDate() + 30));
-				
-// 				LocalDate start = LocalDate.parse(result.PLANNER_START, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-// 				LocalDate end = LocalDate.parse(result.PLANNER_END, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-// 				const start = new Date(result.PLANNER_START);
 								
 				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
 	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
