@@ -5,14 +5,21 @@
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_OP, LOC_CL, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
 </select>
-<select id="searchFood" parameterType="java.util.HashMap" resultType="mainDB">
+
+
+
+<select id="transKr" parameterType="String" resultType="String">
+SELECT KR_GU
+FROM LOCATION_SUGUNGU
+WHERE EN_GU = #{en_gu}
+</select>
+
+
+<select id="searchList" parameterType="java.util.HashMap" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_OP, LOC_CL, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
 WHERE LOC_SG = #{loc_sg} AND LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
 </select>
-
-
-
 
 <select id="readyForLocation" resultType="com.bit.web.vo.LocGunGuBean">
 SELECT * FROM LOCATION_SIGUNGU

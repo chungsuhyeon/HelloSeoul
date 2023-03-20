@@ -28,14 +28,20 @@ public class JoinSeoulController {
 	@PostMapping(value = "joinMemberInsert")
 	public String joinMemberInsert(JoinSeoulBean bean) {
 		System.out.println(bean);
+		System.out.println(bean.getUser_nation().getClass().getName());// User_nation 타입 확인
 		// 33 출력
-		System.out.println();
-
-//		bean.setUser_nation(dao.getJoinnation(user_nation));
-		//dao.insertMember(bean);
+		//System.out.println(user_nation);
+		
+		
+		
+		
+		
+		bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
+		dao.insertMember(bean);
 		System.out.println(bean);
-		return "test";
-		//return "Final_Pro/login";
+		//return "test";
+		return "Final_Pro/login";
 	}
 	
 }
+ 

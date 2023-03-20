@@ -97,10 +97,10 @@ $(function(){
 		 // 가입정보 저장  	   
 	   $("button#save").click(function(){ //값 유무 확인		   
 		   $("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
-		   $("input[name='user_name']").val($("input[name='user_name1']").val()+' '+$("input[name='user_name1']").val());	   
+		   $("input[name='user_name']").val($("input[name='user_name1']").val()+' '+$("input[name='user_name2']").val());	   
 		   $("input[name='user_tel']").val($("input[name='user_tel1']").val()+'-'+$("input[name='user_tel2']").val()+'-'+$("input[name='user_tel3']").val()+'-'+$("input[name='user_tel4']").val());       
 		   alert($("select[name='user_nation']").val());
-		   alert($("option[type='text']").attr("id"));
+		   
 		   $("select[name='user_nation']").val();
 		  //("select[name='user_nation']").val($("option[type='text']").attr("id"));
 		
@@ -193,28 +193,30 @@ $(function(){
 	  					
   					<label class="col-form-label mt-4" for="inputDefault">Nation</label>
   						<div>
-		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
+		  				   	<div style="width: 300px;" class="form-group" style="display: inline-block;">
 		   					       <select class="form-select" name="user_nation" id="inputDefault">
 						                 <option selected="selected">사는국가</option>
-										 <option value="1" type="text" id="미국">미국</option>
+										 <option value="1">미국</option>
 										 <option value="7">러시아</option>
-										 <option value="33" type="text" id="프랑스">프랑스</option>
+										 <option value="33">프랑스</option>
 										 <option value="34">스페인</option>
 										 <option value="44">영국</option>
 										 <option value="49">독일</option>
-										 <option value="61">호주</option>
-										 <option value="63">필리핀</option>
-										 <option value="64">뉴질랜드</option>
-										 <option value="65">싱가포르</option>
-										 <option value="66">태국</option>
-										 <option value="81">일본</option>
-										 <option value="82">대한민국</option>
-										 <option value="84">베트남</option>
-										 <option value="86">중국</option>
-										 <option value="852">홍콩</option>
-										 <option value="886">대만</option>
-										 <option value="91" name="인도">인도</option>
-										 <option value="971">아랍에미리트</option>
+										 <option value="61">호주</option>										 
+									</select>	 
+								<input type="hidden" class="form-control" name="user_nat" id="inputDefault">		 
+			  				</div>
+			  				
+			  				<div style="width: 300px;" class="form-group" style="display:inline-block;">
+		   					       <select class="form-select" name="user_nation" id="inputDefault">
+						                 <option selected="selected">사는국가</option>
+										 <option value="1">미국</option>
+										 <option value="7">러시아</option>
+										 <option value="33">프랑스</option>
+										 <option value="34">스페인</option>
+										 <option value="44">영국</option>
+										 <option value="49">독일</option>
+										 <option value="61">호주</option>										 
 									</select>	 
 								<input type="hidden" class="form-control" name="user_nat" id="inputDefault">		 
 			  				</div>
