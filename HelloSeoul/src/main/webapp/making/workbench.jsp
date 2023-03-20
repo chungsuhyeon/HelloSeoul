@@ -114,7 +114,7 @@ $(function(){
     						<tr class="table-info">
       							<td>${i.com_no}</td>
       							<td>${i.com_ctg }</td>
-      							<td>${i.com_title}</td>
+      							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
       							<td>${i.user_nick}</td>
       							<td>${i.com_regdate}</td>
     						</tr>

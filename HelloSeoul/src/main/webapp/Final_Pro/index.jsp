@@ -82,22 +82,12 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
-		<div class='container-fluid'>
+		<div class='container-fluid' style="display: inline-flex;">
 			<div class='col-6'>
-				<h1>calander</h1>
+				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
 			</div>
 			<div class='col-6'>
-				<h1>coin</h1>
-				<h1>people</h1>
-			</div>
-		</div>
-		<div class='container-fluid'>
-			<div class='col-6'>
-				<h1>calander</h1>
-			</div>
-			<div class='col-6'>
-				<h1>coin</h1>
-				<h1>people</h1>
+				<jsp:include page="./Coin.jsp"></jsp:include>				
 			</div>
 		</div>
 	</section>
