@@ -105,20 +105,60 @@
 							`<tr class="table-active">
 								<th scope="row"><input type="checkbox" name="select_location" value="\${list['loc_pc']}"></th>
 									<td>
-										<span>\${list['loc_name']}</span>
+										<a href='#' id='local_name'>\${list['loc_name']}</a>
 										<br>
 										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
 									</td>
 								</tr>`
 					);
-				});
-			}, // success
+				}); // $(result).each
+				
+				loc_pc_click();
+			},
 			error: function(){
 				alert("error : " + error);
 			}
 		}); // ajax(사용자 찜 리스트)
 		
 	}); // $('document').ready
+	
+	// 찜 리스트에서 장소명 클릭
+	function loc_pc_click(){
+		$("td > a").click(function(){
+	 		var tr = $(this).parent().parent();
+	 		var td = tr.children();			 		
+	 		var code = td.eq(0).children().val();
+	 		
+	 		$.ajax({
+				url: '/web/ajaxMypageJjimInfo',
+				type: 'post',
+				data: {loc_code:code},
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function(result){
+					// 지도 마커 스크립트
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
+					    };
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					// 마커가 표시될 위치입니다
+					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+					    position: markerPosition
+					});
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);					
+				},
+				error: function(){
+					alert("error : " + error);
+				}
+			}); // inner ajax
+	 		
+		}); // $("td > a").click
+	}
 	
 	// 일정에 추가 버튼 클릭
 	function updatePlan(){
@@ -131,7 +171,24 @@
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
 		
-		console.log(locDataList);
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
+		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
+		$.ajax({
+			url: '/web/ajaxAddPlannerSchedule',
+			type: 'post',
+			data:{codeList:locDataList, state:"new", no:no},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				console.log(result);
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
+		
 		if($("table input[type='checkbox']").is(":checked")){
 			$("table input[type='checkbox']").prop('checked',false);
 		}

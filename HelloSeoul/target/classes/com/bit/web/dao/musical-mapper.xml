@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectTicketInfo" parameterType="String" resultType="MusicalBean">
-		SELECT NO, TITLE, RUNDATE, THEATER, IMGSRC, REVIEWS, GRADE, RUNTIME, PERFORMER, PRICE FROM TICKETDB
+		SELECT NO, TITLE, RUNDATE, LOC_NAME, IMGSRC, REVIEWS, GRADE, RUNTIME, PERFORMER, PRICE FROM TICKETDB
 		WHERE IMGSRC=#{VALUE}
 	</select>
 	
