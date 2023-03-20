@@ -3,6 +3,7 @@ package com.bit.web.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -208,7 +209,7 @@ public class HelloSeoulController {
 		for(int i=0; i<locDataList.length; i++) {
 			str += locDataList[i] + ",";			
 		}
-		str = str.replaceAll(",$", "");
+		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
 		str += ")";		
 		map.put("str", str);
 
@@ -216,8 +217,7 @@ public class HelloSeoulController {
 		
 		return "redirect:/ajaxMypageJjim";
 	}
-	
-	
+		
 	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
 	@PostMapping(value = "ajaxMypageJjimInfo")
 	@ResponseBody
@@ -227,7 +227,7 @@ public class HelloSeoulController {
 	
 	// 플래너 일정 생성 / 수정
 	@PostMapping(value = "createPlannerDate")
-	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, Model model) {
+	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
 	
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
@@ -254,7 +254,7 @@ public class HelloSeoulController {
 	
 	// 플래너 메인 생성 페이지 이동
 	@RequestMapping(value = "createMainPlanner")
-	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi, Model model) {
+	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
 		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
@@ -278,6 +278,29 @@ public class HelloSeoulController {
 		plannerInfo.put("numDate", diffDate+1);
 		
 		return plannerInfo;
+	}
+	
+	// 메인 플래너 생성
+	@PostMapping(value = "ajaxAddPlannerSchedule")
+	@ResponseBody
+	public String ajaxPlannerScheduleAdd(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "codeList[]") String[] loc_code, @RequestParam(value = "state") String state) {
+//		List<Object> addScheduleList = new ArrayList<Object>();
+		
+		if(state.equals("new")) {
+			String str = "(";
+			for(int i=0; i<loc_code.length; i++) {
+				str += loc_code[i] + ",";
+			}
+			str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+			str += ")";
+			
+			System.out.println(str);
+			
+			System.out.println(helloDao.selectMainDbData(str));
+			
+		}
+		
+		return "data";
 	}
 
 	
