@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  
 
- <select id="getJoinnation" parameterType="integer"  resultType="String">
+ <select id="getJoinnation" parameterType="String"  resultType="String">
 	select country_name from nation where country_no=#{value}
 </select> 
 
