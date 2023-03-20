@@ -39,7 +39,11 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-
+.screen {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 </style>
 <!-- Style Section End -->
 
@@ -48,6 +52,7 @@ $(function(){
 <body>
 	<section class='section'>
 		<div class='container-fluid' style="display: inline-flex; border: solid;">
+		<div class="screen" align="center">Screen</div>
 			<!-- 좌석표 -->
 			<div class='seatbar col-4'>
 			<c:forEach var='i' begin="0" end="9">
@@ -67,22 +72,22 @@ $(function(){
 			</c:forEach>
 			</div>
 			<!-- 테이블 시작 및 결제 관련 -->
-			<div class='paybar col-4'>
-				<table class='table table-hover'>
-					<thead>
-						<tr class='table-primary'>
-							<th>th</th>
-							<th>th</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class='table-info'>
-							<td>td</td>
-							<td>td</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+<!-- 			<div class='paybar col-4'> -->
+<!-- 				<table class='table table-hover'> -->
+<!-- 					<thead> -->
+<!-- 						<tr class='table-primary'> -->
+<!-- 							<th>th</th> -->
+<!-- 							<th>th</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 					<tbody> -->
+<!-- 						<tr class='table-info'> -->
+<!-- 							<td>td</td> -->
+<!-- 							<td>td</td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 				</table> -->
+<!-- 			</div> -->
 		</div>
 	</section>
 	<footer>
