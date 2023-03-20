@@ -192,8 +192,11 @@
 <!-- 								<a href="#" class="ico-pop rn-pop-btn" data-popbtn="2">제휴카드할인</a> -->
 <!-- 							</p>							 -->
 <!-- 						</dd> -->
-					</dl>					
+					</dl>
 				</div>
+				<div class="rn-05">
+					<a href='#' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+				</div><!--rn-05-->					
                 <!--포인트-->
 				
 <!-- 				<div class="rn-product-area3">공연시간안내, 배송정보 -->
