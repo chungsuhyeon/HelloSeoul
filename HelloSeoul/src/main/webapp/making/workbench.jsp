@@ -113,12 +113,7 @@ $(function(){
   						<c:forEach items="${board}" var='i'>
     						<tr class="table-info">
       							<td>${i.com_no}</td>
-      							<td><c:choose>
-						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
-						<c:when test="${i.com_ctg eq 2}">후기</c:when>
-						<c:otherwise>동행모집</c:otherwise>
-						
-						</c:choose></td>
+      							<td>${i.com_ctg }</td>
       							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
       							<td>${i.user_nick}</td>
       							<td>${i.com_regdate}</td>
