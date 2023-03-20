@@ -30,7 +30,7 @@ $(function(){
 		}
 		else if(($(this).attr('id'))=='comm'){		
 			//document.location.href ="/web/boardSelect";
-			document.location.href ="/web/making/workbench.jsp";
+			document.location.href ="/web/boardSelect";
 		}
 		else if(($(this).attr('id'))=='mypage'){
 			document.location.href ="/web/myPageLoad";
@@ -105,12 +105,11 @@ li div > a{
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/web/MusicalList">TICKET</a>
+          <a class="nav-link" href="/web/musicalList">TICKET</a>
         </li>
       </ul>
       <div class="setbar d-flex">
        	<button type="button" class="btn btn-dark" id="comm">Community</button>
-       	
        	<c:choose>
 	       	<c:when test="${user_id eq null}">
 		       	<button type="button" class="btn btn-dark" id="login">Login</button>

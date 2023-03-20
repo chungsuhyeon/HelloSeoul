@@ -58,5 +58,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("firstMainPlannerCreate", map);
 	}
 	
+	// 일정에 추가하기 위한 MapDb 정보 가져오기
+	public List<Object> selectMainDbData(String codeList) {
+		return this.getSqlSession().selectList("selectMainDbData", codeList);
+	}
+	
 	
 }

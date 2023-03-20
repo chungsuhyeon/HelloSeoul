@@ -45,6 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from planner
 		where planner_no = #{no} and user_id = #{user_id}
 	</select>
+	
+	<select id="selectMainDbData" parameterType="String" resultType="mainDb">
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y
+		from maindb
+		where loc_pc in ${value}
+	</select>
 
 </mapper>
 

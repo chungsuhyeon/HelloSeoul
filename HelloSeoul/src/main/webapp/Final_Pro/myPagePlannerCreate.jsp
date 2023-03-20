@@ -21,19 +21,19 @@
 		
 	});
 	
+	// 플래너 생성 로드시
 	$('document').ready(function(){
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('no');
 		
+		// 일정에 따른 tab 구현
 		$.ajax({
 			url: '/web/ajaxMypagePlannerCreate',
 			type: 'post',
 			data: {no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function(result){
-				console.log(result);
-												
+			success: function(result){												
 				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
 	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
@@ -42,7 +42,6 @@
 				var start = new Date(result.PLANNER_START);
 
 				for(var i=0; i<result.numDate; i++){
-					// 날짜를 사용자가 보기 편하게 변환
 					var year = start.getFullYear().toString();
 					var mon = (start.getMonth() + 1).toString();
 					var day = start.getDate().toString();
@@ -82,7 +81,6 @@
 								</div>`						
 						);
 					}
-					
 					// 여행 시작 날짜에서 하루씩 더하기
 					start.setDate(start.getDate() + 1); // 더하면서 start가 바뀌기 때문에 i가 아니라 1을 더해야함
 				}
@@ -92,27 +90,29 @@
 			}
 		}); // ajax(일정 탭바, 내용 없는 테이블)
 		
+		// 찜 리스트 로드
 		$.ajax({
 			url: '/web/ajaxWishList',
 			type: 'post',
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-				console.log(result);
 				
 				$(result).each(function(index, list){					
 					$("tbody#tbodyWishList").append(
 							`<tr class="table-active">
 								<th scope="row"><input type="checkbox" name="select_location" value="\${list['loc_pc']}"></th>
 									<td>
-										<span>\${list['loc_name']}</span>
+										<a href='#' id='local_name'>\${list['loc_name']}</a>
 										<br>
 										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
 									</td>
 								</tr>`
 					);
-				});
-			}, // success
+				}); // $(result).each
+				
+				loc_pc_click();
+			},
 			error: function(){
 				alert("error : " + error);
 			}
@@ -120,7 +120,41 @@
 		
 	}); // $('document').ready
 	
-	// 일정에 추가 버튼 클릭
+	// 찜 리스트에서 장소명 클릭
+	function loc_pc_click(){
+		$("td > a").click(function(){
+	 		var tr = $(this).parent().parent();
+	 		var td = tr.children();			 		
+	 		var code = td.eq(0).children().val();
+	 		
+	 		$.ajax({
+				url: '/web/ajaxMypageJjimInfo',
+				type: 'post',
+				data: {loc_code:code},
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function(result){
+					var mapContainer = document.getElementById('map'),
+						mapOption = {
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y),
+					        level: 3
+					    };
+					var map = new kakao.maps.Map(mapContainer, mapOption);
+					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					var marker = new kakao.maps.Marker({
+					    position: markerPosition
+					});
+					marker.setMap(map);					
+				},
+				error: function(){
+					alert("error : " + error);
+				}
+			});
+	 		
+		}); // $("td > a").click
+	} // loc_pc_click()
+	
+	// 일정에 추가 버튼 클릭 → 선택된 tab의 날짜의 content에 추가
 	function updatePlan(){
 		var locDataList = [];
 		var checkBox = $("input[name='select_location']:checked");
@@ -131,7 +165,48 @@
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
 		
-		console.log(locDataList);
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
+		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
+		$.ajax({
+			url: '/web/ajaxAddPlannerSchedule',
+			type: 'post',
+			data:{codeList:locDataList, no:no},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				console.log(result);
+				let activeTab = document.querySelector('ul.nav li a.active'); // object
+				$(activeTab.getAttribute('href')).append(
+						`<table class='table table-hover'>
+							<tbody>
+							<tr class='table-light'>
+								<td style="width: 5%">
+									<input type="checkbox" name="select_location" value="?">
+								</td>
+								<td style="display: inline-flex;">
+									<div class='timeseting' style="display: inline-flex; width: 20%">
+									<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault">
+									<span> : </span>
+									<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault">
+									</div>
+									<div class='loctextline' style='width: 70%; margin-left: 10px;'>
+									<a href='#'>Location Name1</a>
+									<br>
+									<span>Gungu > Loc Ctg > Detail Ctg > </span>
+									</div>
+								</td>
+							</tbody>
+						</table>`
+				);
+				
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
+		
 		if($("table input[type='checkbox']").is(":checked")){
 			$("table input[type='checkbox']").prop('checked',false);
 		}
@@ -180,7 +255,7 @@
 			<div class="main col-12" style="display: inline-flex;">
 			
 				<!--tab-->
-				<div class='tabbar col-3'>
+				<div class='tabbar col-5'>
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
@@ -251,7 +326,7 @@
 						<button onclick="updatePlan()">일정에 추가</button>
 					</div>
 				</div>
-				<div class='mapbar col-6'>
+				<div class='mapbar col-4'>
 					<div class='div_map' id="map"></div>				
 					<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
