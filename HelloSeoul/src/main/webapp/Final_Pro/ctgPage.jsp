@@ -196,18 +196,29 @@ function ajaxpro2(jjimpoint){
 					<option value="${sg.kr_gu}">${sg.en_gu}</option>
 					</c:forEach>
 				</select>
-				
-				<c:choose>
-				<c:when test="">
-				
-				</c:when>
-				</c:choose>
 				<select class='form-select' id='detailctg'>
+				<c:if test="${menuctg=='음식점'}">
 					<option value="all">Detail</option>
 					<option value="korea">Korea</option>
 					<option value="china">China</option>
 					<option value="america">America</option>
 					<option value="japan">Japan</option>
+				</c:if>
+				<c:if test="${menuctg=='상점'}">
+					<option value="all">Detail</option>
+					<option value="korea">Korea</option>
+					<option value="china">China</option>
+					<option value="america">America</option>
+					<option value="japan">Japan</option>
+				</c:if>
+				<c:if test="${menuctg=='핫플'}">
+					<option value="all">Detail</option>
+					<option value="street">Street</option>
+					<option value="cafe">Cafe</option>
+					<option value="themapark">ThemaPark</option>
+					<option value="sports">Sports</option>
+				</c:if>
+				
 				</select>
 			</div>
 			<div class='searchbar2 col-12' style="display: inline-flex;">

@@ -19,7 +19,7 @@ public class Ctgcontroller {
 	public String goToCtgPage(String ctg,String detail, Model model) {
 		model.addAttribute("locsg",dao.readyForLocation());
 		model.addAttribute("locinfo",dao.readyForCategory(ctg));
-		System.out.println(detail);
+		model.addAttribute("menuctg",ctg);
 		model.addAttribute("detail", detail);
 		return "Final_Pro/ctgPage";
 	}
