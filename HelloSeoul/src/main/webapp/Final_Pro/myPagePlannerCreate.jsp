@@ -35,8 +35,7 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){												
 				// 타이틀 input
-				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
-	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
+				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
 				// 날짜 tab				
 				var start = new Date(result.PLANNER_START);
@@ -97,7 +96,6 @@
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-				
 				$(result).each(function(index, list){					
 					$("tbody#tbodyWishList").append(
 							`<tr class="table-active">
@@ -178,29 +176,32 @@
 			success: function(result){
 				console.log(result);
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
-				$(activeTab.getAttribute('href')).append(
-						`<table class='table table-hover'>
-							<tbody>
-							<tr class='table-light'>
-								<td style="width: 5%">
-									<input type="checkbox" name="select_location" value="?">
+							
+				$(result).each(function(index, list){
+					$(activeTab.getAttribute('href') + " table tbody").append(
+							`<tr class='table-light'>
+								<td style="width: 5%;">
+									<input type="checkbox" name="select_location" value="\${list.loc_pc}">
+									<input type="hidden" name="select_location_x" value="\${list.loc_x}">
+									<input type="hidden" name="select_location_y" value="\${list.loc_y}">
 								</td>
 								<td style="display: inline-flex;">
 									<div class='timeseting' style="display: inline-flex; width: 20%">
-									<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault">
-									<span> : </span>
-									<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault">
+										<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault" height="10px">
+										<span>&nbsp; : &nbsp;</span>
+										<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault" height="5px">
 									</div>
 									<div class='loctextline' style='width: 70%; margin-left: 10px;'>
-									<a href='#'>Location Name1</a>
-									<br>
-									<span>Gungu > Loc Ctg > Detail Ctg > </span>
+										<span>\${list.loc_name}</span>
+										<br>
+										<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
 									</div>
 								</td>
-							</tbody>
-						</table>`
-				);
+							</tr>`
+					);
+				}); // for문					
 				
+				// 지도에 순서대로 마커 뿌리기 (보류)
 			},
 			error: function(){
 				alert("error : " + error);
@@ -211,6 +212,29 @@
 			$("table input[type='checkbox']").prop('checked',false);
 		}
 	} // updatePlan()
+	
+	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+	function addMarker(position, idx, title) {
+		
+// 		var imageSrc = '${context}/styles/img/map/location_icon_1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+	        imgOptions =  {
+	            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+	            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+	            offset : new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+	        },
+	        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new kakao.maps.Marker({
+	            position: position, // 마커의 위치
+	            image: markerImage,
+	        });
+
+	    marker.setMap(map); // 지도 위에 마커를 표출합니다
+	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+	    
+	    return marker;
+	}
 	
 </script>
 <!--JS Section End -->
@@ -223,6 +247,13 @@
 	.div{
 		display:flex !important;
 	}
+ 	input.form-control{ 
+ 		height: 50px !important; 
+ 	}
+ 	
+/* 	tr.table-light { */
+/* 		height: 50px !important; */
+/* 	} */
 </style>
 <!-- Style Section End -->
 
@@ -329,6 +360,7 @@
 				<div class='mapbar col-4'>
 					<div class='div_map' id="map"></div>				
 					<script>
+						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    		mapOption = { 
 			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
