@@ -116,7 +116,7 @@
 			<p class="rn-big-title">${ticketinfo.title}</p>   <!-- 뮤지컬 + 컨텐츠제목 포스터 위 메인 제목 -->
 			<div class="rn-product-short-data">
 				<p><span class="ps-date">${ticketinfo.rundate}</span>
-				<span class="ps-location">${ticketinfo.theater}</span></p>  <!-- 상영기간 / 상영장소 + 상영관 -->
+				<span class="ps-location">${ticketinfo.loc_name}</span></p>  <!-- 상영기간 / 상영장소 + 상영관 -->
 	</div>	
 	<img src="http://tkfile.yes24.com/upload2/PerfBlog/202302/20230220/20230220-44090.jpg" alt="" class="copy-url">
 </div>
@@ -192,8 +192,11 @@
 <!-- 								<a href="#" class="ico-pop rn-pop-btn" data-popbtn="2">제휴카드할인</a> -->
 <!-- 							</p>							 -->
 <!-- 						</dd> -->
-					</dl>					
+					</dl>
 				</div>
+				<div class="rn-05">
+					<a href='#' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+				</div><!--rn-05-->					
                 <!--포인트-->
 				
 <!-- 				<div class="rn-product-area3">공연시간안내, 배송정보 -->

@@ -35,7 +35,7 @@ public class projectcontroller {
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model) {
 		model.addAttribute("board",dao.selectBoard());
-		return "Final_Pro/ComList";
+		return "making/workbench";
 	}
 	@RequestMapping(value="infoSelect")
 	public String infoSelect(int no,Model model) {
@@ -55,7 +55,7 @@ public class projectcontroller {
 			return "redirect:/infoSelect?no="+no;
 		}
 		model.addAttribute("board",dao.selectBoard());	
-		return "Final_Pro/ComList";
+		return "redirect:/boardSelect";
 	}
 	@RequestMapping(value="modifyAction")
 	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id) {

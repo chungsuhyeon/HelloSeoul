@@ -30,7 +30,7 @@ $(function(){
 		}
 		else if(($(this).attr('id'))=='comm'){		
 			//document.location.href ="/web/boardSelect";
-			document.location.href ="/web/making/workbench.jsp";
+			document.location.href ="/web/boardSelect";
 		}
 		else if(($(this).attr('id'))=='mypage'){
 			document.location.href ="/web/myPageLoad";
@@ -110,7 +110,6 @@ li div > a{
       </ul>
       <div class="setbar d-flex">
        	<button type="button" class="btn btn-dark" id="comm">Community</button>
-       	
        	<c:choose>
 	       	<c:when test="${user_id eq null}">
 		       	<button type="button" class="btn btn-dark" id="login">Login</button>
