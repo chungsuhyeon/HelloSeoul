@@ -12,6 +12,7 @@ import com.bit.web.vo.JoinSeoulBean;
 
 @Repository
 public class JoinSeoulDao extends SqlSessionDaoSupport {
+	
 	@Inject
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		super.setSqlSessionFactory(sqlSessionFactory);
