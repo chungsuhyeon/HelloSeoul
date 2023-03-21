@@ -31,8 +31,6 @@ $(function(){
 .tablebar tr > th{
 	width: 5%;
 }
-=======
-<<<<<<< HEAD
 .infobar{
 	font-size: 20px;
 }
@@ -70,7 +68,6 @@ $(function(){
 					<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
 					<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 					<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}'>
-<<<<<<< HEAD
 					<span>[
 							<c:choose>
 								<c:when test="${i.com_ctg eq 1}">1</c:when>
@@ -95,7 +92,6 @@ $(function(){
 					</div>
 					<div class='photobar col-6'>
 						photoline
-=======
 					<span id='titlespan'>
 						<c:choose>
 							<c:when test="${i.com_ctg eq 1}">[11111]</c:when>
@@ -119,12 +115,10 @@ $(function(){
 					</div>
 					<div class='photobar col-6'>
 						<img alt="test" src="/web/resources/final_style/img/indexFood.jpg">
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					</div>
 				</div>
 				<div class='setbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
-<<<<<<< HEAD
 					go list
 					</div>
 					<div class='goodbad col-4'>
@@ -145,7 +139,6 @@ $(function(){
 				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
 				<h2>Community List</h2>
 				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
-=======
 					<button type="button" class="btn btn-primary">List</button>
 					</div>
 					<div class='goodbad col-4'>
@@ -165,9 +158,7 @@ $(function(){
 					<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
 					<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
 					</div>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
-<<<<<<< HEAD
 				<table class="table table-hover" style="border: solid;">
 					<thead>
     					<tr class="table-primary">
@@ -230,12 +221,9 @@ $(function(){
 					<div class='col-2'>
 						<button type="button" class="btn btn-primary" style="width: 100%; height: 100%;">Apply</button>
 					</div>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
-<<<<<<< HEAD
 			<div class='replebar'>
 
-=======
 				
 				<div class='replyboard col-10' style="margin-left: 10px;">
 					<div class='replecontents'>
@@ -276,7 +264,6 @@ $(function(){
 				</div>
 		</c:forEach>
  -->
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>
