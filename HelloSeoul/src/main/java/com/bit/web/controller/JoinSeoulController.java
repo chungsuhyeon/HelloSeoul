@@ -27,15 +27,6 @@ public class JoinSeoulController {
 		// return "test";
 	}
 	
-<<<<<<< HEAD
-	@PostMapping(value = "ajaxcontinent")
-	  
-	@ResponseBody
-	public String selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-		System.out.println(id); 
-		return "";
-	  
-=======
 	@PostMapping(value = "ajaxcontinent")	  
 	@ResponseBody
 	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
@@ -43,7 +34,6 @@ public class JoinSeoulController {
 		//return "success";
 		//return dao.selectcontinent(id); 
 		return dao.selectcontinent(id);
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	  
 	  }
 	
