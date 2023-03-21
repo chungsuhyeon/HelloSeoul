@@ -35,8 +35,7 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){												
 				// 타이틀 input
-				$("div#planTitle").append(`<h3>Title : &nbsp;</h3>
-	    				<input class="form-control" id="readOnlyInput" type="text" value="\${result.PLANNER_TITLE}" readonly="" style="height:50px;">`);
+				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
 				// 날짜 tab				
 				var start = new Date(result.PLANNER_START);
@@ -97,7 +96,6 @@
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-				
 				$(result).each(function(index, list){					
 					$("tbody#tbodyWishList").append(
 							`<tr class="table-active">
@@ -175,7 +173,6 @@
 			success: function(result){
 				console.log(result);
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
-<<<<<<< HEAD
 							
 				$(result).each(function(index, list){
 					$(activeTab.getAttribute('href') + " table tbody").append(
@@ -184,31 +181,24 @@
 									<input type="checkbox" name="select_location" value="\${list.loc_pc}">
 									<input type="hidden" name="select_location_x" value="\${list.loc_x}">
 									<input type="hidden" name="select_location_y" value="\${list.loc_y}">
-=======
-				$(activeTab.getAttribute('href')).append(
-						`<table class='table table-hover'>
-							<tbody>
-							<tr class='table-light'>
-								<td style="width: 5%">
-									<input type="checkbox" name="select_location" value="?">
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 								</td>
 								<td style="display: inline-flex;">
 									<div class='timeseting' style="display: inline-flex; width: 20%">
-									<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault">
-									<span> : </span>
-									<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault">
+										<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault" height="10px">
+										<span>&nbsp; : &nbsp;</span>
+										<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault" height="5px">
 									</div>
 									<div class='loctextline' style='width: 70%; margin-left: 10px;'>
-									<a href='#'>Location Name1</a>
-									<br>
-									<span>Gungu > Loc Ctg > Detail Ctg > </span>
+										<span>\${list.loc_name}</span>
+										<br>
+										<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
 									</div>
 								</td>
-							</tbody>
-						</table>`
-				);
+							</tr>`
+					);
+				}); // for문					
 				
+				// 지도에 순서대로 마커 뿌리기 (보류)
 			},
 			error: function(){
 				alert("error : " + error);
@@ -220,7 +210,6 @@
 		}
 	} // updatePlan()
 	
-<<<<<<< HEAD
 	// 일정 제거
 	function deletePlan() {
 		var checkBox = $("input[name='select_location']:checked");
@@ -261,8 +250,6 @@
 	    return marker;
 	}
 	
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </script>
 <!--JS Section End -->
 
@@ -274,6 +261,13 @@
 	.div{
 		display:flex !important;
 	}
+ 	input.form-control{ 
+ 		height: 50px !important; 
+ 	}
+ 	
+/* 	tr.table-light { */
+/* 		height: 50px !important; */
+/* 	} */
 </style>
 <!-- Style Section End -->
 
@@ -380,6 +374,7 @@
 				<div class='mapbar col-4'>
 					<div class='div_map' id="map"></div>				
 					<script>
+						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    		mapOption = { 
 			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
@@ -392,5 +387,9 @@
 				</div>
 			</div>
 	</section>
+	
+	<footer>
+		<jsp:include page="./footer.jsp"></jsp:include>
+	</footer>	
 </body>
 </html>
