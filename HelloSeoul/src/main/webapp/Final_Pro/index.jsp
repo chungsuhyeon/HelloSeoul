@@ -34,7 +34,9 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+	<header>
+		<jsp:include page="header.jsp"></jsp:include>
+	</header>
 	<section class='section'>
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   			<div class="carousel-indicators">
@@ -84,10 +86,65 @@
 		</div>
 		<div class='container-fluid' style="display: inline-flex;">
 			<div class='col-6'>
-				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
+ 				<h1>Calender</h1>
 			</div>
-			<div class='col-6'>
-				<jsp:include page="./Coin.jsp"></jsp:include>				
+			<div class='col-6' style="margin-top: 180px; margin-bottom: 100px;">
+ 				<div class='moneytb'>
+					<table class='table table-hover'>
+						<thead>
+							<tr>
+								<th>Nation</th>
+								<th>currency</th>
+								<th>KRW</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class='populationtb'>
+					<table class='table'>
+						<thead>
+							<tr>
+								<th>Nation</th>
+								<th>Population In</th>
+								<th>Population Out</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+							<tr>
+							<td>America</td>
+							<td>$</td>
+							<td>1000</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>					 
 			</div>
 		</div>
 	</section>

@@ -22,10 +22,10 @@ public class TicketController {
 	private MusicalBean bean;
 
 	@RequestMapping (value = "contentImg")
-	public String ImgCheck(String imgsrc,Model model) {
+	public String ImgCheck(int no,Model model) {
 //		System.out.println("contentImg");
 //		System.out.println(imgsrc);
-		model.addAttribute("ticketinfo", dao.selectTicketInfo(imgsrc));
+		model.addAttribute("ticketinfo", dao.selectTicketInfo(no));
 		System.out.println(model);
 		return "Final_Pro/TicketDetail";
 	}

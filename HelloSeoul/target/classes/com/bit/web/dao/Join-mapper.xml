@@ -4,12 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sist.spring.dao.joinmemberdao">
 
-	<select id="ajaxGetId" parameterType="String" resultType="String">
-	   select * from userboard
-	   where user_id=#{value}
-	</select>
+<select id="ajaxGetId" parameterType="String" resultType="String">
+   select * from userboard
+   where user_id=#{value}
+
+</select>
 
 
+<<<<<<< HEAD
 	<insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
 	    INSERT INTO 
 	 		userboard(user_id,user_nick,user_pw,user_name,user_nation,user_tel,user_birth,user_gender,user_pp,user_first)
@@ -21,12 +23,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select country_name from nation
         where continent = #{value}
 	</select>
+=======
+  <insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
+ INSERT INTO 
+ 		userboard(user_id,user_nick,user_pw,user_name,user_nation,user_tel,user_birth,user_gender,user_pp,user_first)
+ 		values(#{user_id},#{user_nick},#{user_pw},#{user_name},#{user_nation},#{user_tel},#{user_birth},#{user_gender},#{user_pp},#{user_first})
+
+ </insert>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
  
  
 
-	 <select id="getJoinnation" parameterType="String"  resultType="String">
-		select country_name from nation where country_no=#{value}
-	 </select> 
+ <select id="getJoinnation" parameterType="String"  resultType="String">
+	select country_name from nation where country_no=#{value}
+</select> 
+
 
 </mapper>
 
