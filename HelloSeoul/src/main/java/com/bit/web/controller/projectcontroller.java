@@ -42,7 +42,8 @@ public class projectcontroller {
 		dao.hitAction(no);
 		model.addAttribute("info", dao.selectInfoBoard(no));
 		model.addAttribute("reply",dao.selectReply(no));
-		return "Final_Pro/ComInfo";
+		return "making/workbench";
+		//return "Final_Pro/ComInfo";
 	}
 	@RequestMapping(value="deleteCom")
 	public String deleteCom(int no,Model model,@RequestParam(value="user_id")String id) {
