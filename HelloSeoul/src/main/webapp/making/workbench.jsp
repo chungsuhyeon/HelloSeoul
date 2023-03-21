@@ -19,14 +19,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("login plz");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
-		}
-	});
+
 });
 </script>
 <!--JS Section End -->
@@ -34,6 +27,11 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
+<<<<<<< HEAD
+.tablebar tr > th{
+	width: 5%;
+}
+=======
 <<<<<<< HEAD
 .infobar{
 	font-size: 20px;
@@ -56,6 +54,7 @@ $(function(){
 	height: 100%;
 }
 >>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </style>
 <!-- Style Section End -->
 
@@ -71,6 +70,32 @@ $(function(){
 					<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
 					<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 					<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}'>
+<<<<<<< HEAD
+					<span>[
+							<c:choose>
+								<c:when test="${i.com_ctg eq 1}">1</c:when>
+								<c:when test="${i.com_ctg eq 2}">2</c:when>
+								<c:otherwise>3</c:otherwise>
+							</c:choose>
+							] ${i.com_title}
+					</span>
+					<br>
+					<span>
+						<img alt="user" src="/web/resources/final_style/img/icon/comuser.png"> ${i.user_nick}
+						<img alt="reple" src="/web/resources/final_style/img/icon/reple.png"> ${i.reply}
+						<img alt="hit" src="/web/resources/final_style/img/icon/hit.png"> ${i.com_hit}
+						<img alt="regdate" src="/web/resources/final_style/img/icon/regdate.png"> ${i.com_regdate}
+						<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png"> ${i.good}
+						<img alt="combad" src="/web/resources/final_style/img/icon/combad.png"> ${i.bad}
+					</span>
+				</div>
+				<div class='contentsbar' style="display: inline-flex; width: 100%;">
+					<div class='textbar col-6'>
+						${i.com_cont}
+					</div>
+					<div class='photobar col-6'>
+						photoline
+=======
 					<span id='titlespan'>
 						<c:choose>
 							<c:when test="${i.com_ctg eq 1}">[11111]</c:when>
@@ -94,10 +119,33 @@ $(function(){
 					</div>
 					<div class='photobar col-6'>
 						<img alt="test" src="/web/resources/final_style/img/indexFood.jpg">
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					</div>
 				</div>
 				<div class='setbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
+<<<<<<< HEAD
+					go list
+					</div>
+					<div class='goodbad col-4'>
+					img good ${i.good } img ${i.bad }
+					</div>
+					<div class='settingbar col-4' style="display: inline-flex;">
+					<button type="button" class="btn btn-danger">Report</button>
+					<button type="button" class="btn btn-primary">Modify</button>
+					<button type="button" class="btn btn-primary">Delete</button>
+					<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
+					<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
+					</div>
+				</div>
+			</c:forEach>	
+			</div>
+			<div class='col-8'>
+				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
+				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
+				<h2>Community List</h2>
+				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
+=======
 					<button type="button" class="btn btn-primary">List</button>
 					</div>
 					<div class='goodbad col-4'>
@@ -117,7 +165,61 @@ $(function(){
 					<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
 					<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
 					</div>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
+<<<<<<< HEAD
+				<table class="table table-hover" style="border: solid;">
+					<thead>
+    					<tr class="table-primary">
+      						<th>ComNo</th>
+      						<th>Category</th>
+      						<th>Title</th>
+      						<th>Nick</th>
+      						<th>RegDate</th>
+    					</tr>
+	  				</thead>
+  					<tbody>
+  						<c:forEach items="${board}" var='i'>
+    						<tr class="table-info">
+      							<td>${i.com_no}</td>
+      							<td><c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						
+						</c:choose></td>
+      							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
+      							<td>${i.user_nick}</td>
+      							<td>${i.com_regdate}</td>
+    						</tr>
+  						</c:forEach>
+  					</tbody>
+  				</table>
+  				<div class='d-flex justify-content-center'>
+  					<ul class="pagination pagination-sm">
+    					<li class="page-item disabled">
+      						<a class="page-link" href="#">&laquo;</a>
+    					</li>
+    					<li class="page-item active">
+      						<a class="page-link" href="#">1</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">2</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">3</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">4</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">5</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">&raquo;</a>
+    					</li>
+  					</ul>
+=======
 			</c:forEach>	
 			<div class='replebar mt-4 bg-light'>
 				<div class='col-12' style="text-align: center;">All Reple</div>
@@ -128,7 +230,12 @@ $(function(){
 					<div class='col-2'>
 						<button type="button" class="btn btn-primary" style="width: 100%; height: 100%;">Apply</button>
 					</div>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
+<<<<<<< HEAD
+			<div class='replebar'>
+
+=======
 				
 				<div class='replyboard col-10' style="margin-left: 10px;">
 					<div class='replecontents'>
@@ -169,6 +276,7 @@ $(function(){
 				</div>
 		</c:forEach>
  -->
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>

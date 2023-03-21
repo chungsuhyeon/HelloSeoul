@@ -23,7 +23,13 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> showDb() {
 		return this.getSqlSession().selectList("showDb");
 	}
-
+	
+	public List<MainDbBean> searchFood(HashMap<Object, Object> map){
+		return this.getSqlSession().selectList("searchFood",map);
+	}
+	
+	
+	
 	//gungu
 	public List<LocGunGuBean> readyForLocation(){
 		return this.getSqlSession().selectList("readyForLocation");
@@ -35,13 +41,5 @@ public class CtgDao extends SqlSessionDaoSupport{
 	
 	public MainDbBean searchInsertJjim(int loc_pc) {
 		return this.getSqlSession().selectOne("searchInsertJjim",loc_pc);
-	}
-	
-	public List<MainDbBean> searchList(HashMap<Object, Object> map){
-		return this.getSqlSession().selectList("searchList",map);
-	}
-	
-	public String transKr(String en_gu) {
-		return this.getSqlSession().selectOne("transKr",en_gu);
 	}
 }

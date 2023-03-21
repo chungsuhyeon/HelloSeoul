@@ -34,42 +34,14 @@ $(function(){
 
 </head>
 <body>
-
-						<div class='moneytb'>
-					<table class='table table-hover'>
-						<thead>
-							<tr>
-								<th>Nation</th>
-								<th>currency</th>
-								<th>KRW</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class='populationtb'>
-					<table class='table'>
-						<thead>
-							<tr>
-								<th>Nation</th>
-								<th>currency</th>
-								<th>KRW</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>	
+<jsp:include page="header.jsp"></jsp:include>
+	<section class='section'>
+		<div class='container-fluid bg-light'>
+			
+		</div>		
+	</section>
+	<footer>
+	<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

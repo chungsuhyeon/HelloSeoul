@@ -31,6 +31,9 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		return this.getSqlSession().selectOne("getJoinnation",user_nation);
 	 }
 	
+<<<<<<< HEAD
+	public String getcontient(String user_contient) {
+=======
 	public List<String> selectcontinent(String id){
 		return this.getSqlSession().selectList("selectcontinent", id);
 		
@@ -38,6 +41,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 	}
 	
 	public String getcontinent(String user_contient) {
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		System.out.println(user_contient);
 		return "";
 	}
