@@ -35,7 +35,7 @@ public class projectcontroller {
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model) {
 		model.addAttribute("board",dao.selectBoard());
-		return "making/workbench";
+		return "Final_Pro/ComList";
 	}
 	@RequestMapping(value="infoSelect")
 	public String infoSelect(int no,Model model) {

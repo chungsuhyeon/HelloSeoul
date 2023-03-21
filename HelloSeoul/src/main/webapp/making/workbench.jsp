@@ -19,13 +19,8 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("login plz");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
-		}
+	$(".postbar").click(function(){
+		$("form").submit();
 	});
 });
 </script>
@@ -34,7 +29,9 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-@
+.tablebar tr > th{
+	width: 5%;
+}
 </style>
 <!-- Style Section End -->
 
@@ -42,6 +39,57 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+<<<<<<< HEAD
+	<section class='section d-flex justify-content-center bg-info'>
+		<div class='tablebar col-6 mt-4 mb-4 bg-light' style="border-radius: 25px;">
+			<form action="/web/boardInsert" method="post">
+				<table class='table'>
+					<tbody>
+						<tr>
+							<th>Catergory</th>
+							<td>
+								<select class='form-select' name="com_ctg" style="width: 30%;">
+									<option value="">&nbsp;+ 선택해주세요</option>
+									<option value="">----------------------</option>
+									<option value="1">정보공유</option>
+									<option value="2">후기</option>	
+									<option value="3">동행모집</option>
+								</select>
+							</td>
+							<td> <input type="hidden" value="${user_id }" name="user_id">  </td>
+						</tr>
+						<tr>
+							<th>Writer</th>
+							<td>
+								<input style="width: 30%;" class='form-control' type="text" readonly="readonly" name="user_nick" value="${user_nickName}"/>
+							</td>
+						</tr>
+						<tr>
+							<th>Title</th>
+							<td>
+								<input class='form-control' type="text" name="com_title" value=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Contents</th>
+							<td>
+								<textarea class="form-control" id="com_cont" name='com_cont' rows="20" style="resize: none;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th>File</th>
+							<td>
+								 <input class="form-control" type="file" id="com_filename" name='com_filename'>
+							</td>
+						</tr>
+	
+					</tbody>
+				</table>
+			</form>
+			<div class='buttonbar mb-4 d-flex justify-content-evenly'>
+				<button type="button" class="postbar btn btn-success">Post</button>
+				<button type="button" class="cancelbar btn btn-danger">Cancel</button>
+=======
 	<section class='section bg-light'>
 		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
 			<div class='newcomm' style="display: inline-flex; position: relative;">
@@ -151,6 +199,7 @@ $(function(){
     					</li>
   					</ul>
 				</div>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>
