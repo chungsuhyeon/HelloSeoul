@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+
 });
 </script>
 <!--JS Section End -->
@@ -38,7 +38,14 @@ $(function(){
 		<div class='d-flex justify-content-center w-100'>
 			<a href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/icon/home.png"></a>
 			<a href="#"><img alt="" src="/web/resources/final_style/img/icon/up-arrow.png" style="margin-left: 50px; margin-right: 50px;"></a>
-			<a href="/web/myPageLoad"><img alt="" src="/web/resources/final_style/img/icon/user.png"></a>
+			<c:choose>
+				<c:when test="${user_id eq null}">
+					<a href="/web/Final_Pro/join.jsp"><img alt="" src="/web/resources/final_style/img/icon/add-user.png"></a>
+				</c:when>
+				<c:otherwise>
+					<a href="/web/myPageLoad"><img alt="" src="/web/resources/final_style/img/icon/user.png"></a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<div class='col-4'>
