@@ -19,14 +19,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("login plz");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
-		}
-	});
+
 });
 </script>
 <!--JS Section End -->
@@ -34,64 +27,46 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-@
+.tablebar tr > th{
+	width: 5%;
+}
 </style>
 <!-- Style Section End -->
 
 
 </head>
 <body>
-<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	<section class='section bg-light'>
-		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+	<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+	<section class='section d-flex justify-content-center bg-info'>
+		<div class='col-6 mt-4 mb-4'>
+			<div class='infobar bg-light'>
+				<div class='titlebar'>
+					<input type="hidden" id='com_no' name='com_no' value=''>
+					<input type="hidden" id='user_id' name='user_id' value=''>
+					<input type="hidden" id='boarduser_id' name='boarduser_id' value=''>
+					<span>[Category] ComTitle</span>
+					<br>
+					<span>img Nick img Reple img Hit img Regdate img Good img Bad</span>
 				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<!-- 커뮤니티 글 제목 태그 -->
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-		</div>
-		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
-			<div class='col-4'>
-				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
-					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
-					<div class='tagbox'>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+				<div class='contentsbar' style="display: inline-flex; width: 100%;">
+					<div class='textbar col-6'>
+						textline
+					</div>
+					<div class='photobar col-6'>
+						photoline
 					</div>
 				</div>
+				<div class='setbar' style="display: inline-flex;">
+					<div class='backbar col-4'>
+					go list
+					</div>
+					<div class='goodbad col-4'>
+					img good img bad
+					</div>
+					<div class='settingbar col-4'>
+					report modify delete reple scrap
+					</div>
+				</div>	
 			</div>
 			<div class='col-8'>
 				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
@@ -151,6 +126,8 @@ $(function(){
     					</li>
   					</ul>
 				</div>
+			<div class='replebar'>
+
 			</div>
 		</div>
 	</section>

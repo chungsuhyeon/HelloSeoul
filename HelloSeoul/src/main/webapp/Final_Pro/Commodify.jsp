@@ -24,7 +24,7 @@ $(function(){
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Start Simple Web</title>
+<title>Start Simple Web1</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/web/resources/comcss/css/bootstrap.min.css" rel="stylesheet">

@@ -34,9 +34,7 @@
 
 </head>
 <body>
-	<header>
-		<jsp:include page="header.jsp"></jsp:include>
-	</header>
+<jsp:include page="header.jsp"></jsp:include>
 	<section class='section'>
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   			<div class="carousel-indicators">
@@ -84,15 +82,15 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
-		<div class='container-fluid' style="display: inline-flex;">
-			<div class='col-6'>
- 				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
-			</div>
+		<div class='container-fluid bg-light' style="display: inline-flex;">
+			<div class='calender col-6'>
+			<h1>Calender</h1>
+  			</div>
 			<div class='col-6' style="margin-top: 180px; margin-bottom: 100px;">
  				<div class='moneytb'>
 					<table class='table table-hover'>
 						<thead>
-							<tr>
+							<tr class='table-primary' style="text-align: center;">
 								<th>Nation</th>
 								<th>currency</th>
 								<th>KRW</th>
@@ -120,7 +118,7 @@
 				<div class='populationtb'>
 					<table class='table'>
 						<thead>
-							<tr>
+							<tr class='table-primary'>
 								<th>Nation</th>
 								<th>Population In</th>
 								<th>Population Out</th>

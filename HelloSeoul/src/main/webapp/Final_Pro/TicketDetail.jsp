@@ -97,10 +97,6 @@
 			$("div a#scrap").click(function() {
 				console.log("test");
 			});
-			
-			$("div#booking").click(function(){
-				console.log("test");
-			})
 		});
 	</script>
 
@@ -247,6 +243,7 @@
 										<!-- 						</dd> -->
 									</dl>
 								</div>
+								<!--rn-05-->
 
 								<div class="rn-04" id="divTimeTable">
 									<div class="rn-04-left on">
@@ -452,9 +449,8 @@
 									<!-- 			</div> -->
 								</div>
 								<div class="rn-05">
-									<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03' id="booking">예매하기</a>
+									<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
 								</div>
-								<!--rn-05-->
 								<!--포인트-->
 
 								<!-- 				<div class="rn-product-area3">공연시간안내, 배송정보 -->

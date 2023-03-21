@@ -16,37 +16,71 @@
 <!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel='stylesheet' type='text/css'
+	href='/web/resources/ticketDetail/New/Css/Dsub.css?v=20210628'>
 
 <script type="text/javascript">
 	$(function() {
+		var val3=0;
 		$(".seat >button").click(function() {
-			//좌석벨류
-			alert($(this).val());
-
-			//유무
-			if ($(this).attr('class') == 'useseat btn btn-primary') {
-				alert('this seat is used!');
-			} else {
-				alert('emptyseat');
-				//function seat use ajax
+			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
+			console.log(action);
+			console.log($(this).val());
+			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
+				if(val3<action){
+					++val3
+					$(this).attr('class','useseat btn btn-primary');
+				}else if(val3==action){
+					console.log("cant");
+					val3=action
+					alert("좌석을 다 고르셨습니다.");
+				}
+			}else if($(this).attr('class')=='useseat btn btn-primary'){
+				
+				--val3
+				$(this).attr('class','emptyeseat btn btn-outline-primary');	
+				
 			}
+
 		});
 		var val1=0;
 		var val2=0;
 		$("button#minusButton1").click(function(){
-			$("button#seatVal1").html(--val1);
+			if($("button#seatVal1").html()<0){
+				$("button#seatVal1").html(0);
+			}else if($("button#seatVal1").html()>0){
+				$("button#seatVal1").html(--val1);
+			}
 		});
 		$("button#plusButton1").click(function(){
-			$("button#seatVal1").html(++val1);
+			if(((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())))==8){
+				$("button#seatVal1").html($("button#seatVal1").html());
+			}else if($("button#seatVal1").html()<8){
+				$("button#seatVal1").html(++val1);
+			}else if($("button#seatVal1").html()==8){
+				$("button#seatVal1").html(8);
+			}
 		});
 		
 		
 		$("button#minusButton2").click(function(){
-			$("button#seatVal2").html(--val2);
+			if($("button#seatVal2").html()<0){
+				$("button#seatVal2").html(0);
+			}else if($("button#seatVal2").html()>0){
+				$("button#seatVal2").html(--val2);
+			}
 		});
 		$("button#plusButton2").click(function(){
-			$("button#seatVal2").html(++val2);
+			if(((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())))==8){
+				$("button#seatVal2").html($("button#seatVal2").html());
+			}else if($("button#seatVal2").html()<8){
+				$("button#seatVal2").html(++val2);
+			}else if($("button#seatVal2").html()==8){
+				$("button#seatVal2").html(8);
+				
+			}
 		});
+	
 
 	});
 </script>
@@ -70,6 +104,7 @@
 
 </head>
 <body>
+
 	<section class='section'>
 	
 		<div class='container-fluid'
@@ -80,10 +115,10 @@
 				style="left-margin: 30%; align-items: center;">
 				<div class='seat col-12' style="margin-top:15px; display:flex;">
 <!-- 				---------------성인,청소년 인원수----------------- -->
-				<div  class="col-5" style="display:flex;">성인 &nbsp;&nbsp;
+				<div  class="col-5" style="display:flex;margin-left: 15%">성인 &nbsp;&nbsp;
 					<button type="button" id="minusButton1" title="성인 좌석 선택 감소">-</button>
 				<div >
-					<button type="button" id="seatVal1" title="성인 현재 좌석 선택 수" value="0">0</button>
+					<button type="button" id="seatVal1" title="성인 현재 좌석 선택 수" value="1">0</button>
 				</div>
 					<button type="button" id="plusButton1" title="성인 좌석 선택 증가">+</button>
 			    </div>
@@ -91,61 +126,55 @@
 				<div class="col-4" style=" display:flex;">청소년&nbsp;
 					<button type="button" id="minusButton2" title="청소년 좌석 선택 감소">-</button>
 				<div >
-					<button type="button" id="seatVal2" title="청소년 현재 좌석 선택 수" value="0">0</button>
+					<button type="button" id="seatVal2" title="청소년 현재 좌석 선택 수" value="1">0</button>
 				</div>
 					<button type="button" id="plusButton2" title="청소년 좌석 선택 증가">+</button>
 				</div>
 			</div>
 <!-- 							-----------------스크린,좌석 ---------------- -->
+			
 				<div class='bg-primary'
-					style="margin-top: 15px; margin-bottom: 15px; width: 60%; height: 30px; margin-left: 15%; font-weight: bold; text-align: center; color: white;">screen</div>
+					style="margin-top: 15px; margin-bottom: 15px; width: 60%; height: 30px; margin-left: 20%; font-weight: bold; text-align: center; color: white;">screen</div>
 
 				<div style="margin-bottom: 15px;">
-					<c:forEach var='i' begin="0" end="9">
+					<c:forEach var='i' items="A,B,C,D,E,F,G,H,I">
 						<div class='seat col-12' style="display: inline-flex;">
-							<h3>${i}</h3>
+							<h3 style=" width: 5%;" >${i}</h3>
+							<div class="seat"style="width: 90%; display:flex;">
 							<c:forEach var='x' begin="0" end="9">
-<!-- 							<button type="button" -->
-<!-- 											class="emptyeseat btn btn-outline-primary" -->
-<%-- 											style="margin: 1px;" value="${i}">${i}-${x}</button> --%>
-								<c:choose>
-									<c:when test="${x==0}">   <!-- db에서 불러온 선택여부가 1일때 -->
-										<button type="button"
+							<button type="button"
 											class="emptyeseat btn btn-outline-primary"
-											style="margin: 1px;" value="${i}">${i}-${x}</button>
-									</c:when>
-									<c:otherwise>   <!-- db에서 불러온 선택여부가 0일때 -->
-										<button type="button" class="useseat btn btn-primary"
-											style="margin: 1px;" value="${i}">${i}-${x}</button>
-									</c:otherwise>
-								</c:choose>
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${i}${x}">${i}&nbsp;${x}</button>
+
 							</c:forEach>
+							</div>
 						</div>
 					</c:forEach>
+					
 				</div>
 			</div>
 			<div class='col-1' style="border-right: solid 1px;"></div>
 <!-- 			--------------------------------------상영하는 컨텐츠의 이미지가 나오는 곳---------------------------------------------------------- -->
-			<div class='col-2'><span><img src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_185.JPG" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
+			<div class='col-2'><span><img src="${bookinginfo.imgsrc}" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
 <!-- 		------------------------------------상영하는 컨텐츠의 정보------------------------------------------ -->
 			<div class='col-2' >
 			<div >
 			<div class='seatbar col-12' style=" height: 100%; margin-top:20%; margin-left:5%; font-size: 25px" >
 			
 				<div  style="display: block;">
-					<span >제목:스즈메의 문단속(2D)</span>
+					<span >제목:${bookinginfo.title}</span>
 				</div>
 				
 				<div  style="display: block;">
-					<span  title="12세 관람가">관람등급:12세 관람가</span>
+					<span  title="12세 관람가">관람등급:${bookinginfo.grade}</span>
 				</div>
 				<div  style="display: block;">
-					<span  title="12세 관람가">상영시간:90분</span>
+					<span  title="12세 관람가">상영시간:${bookinginfo.runtime}</span>
 				</div>
 			
 				<div  style="display: block;">
 					<span >장소:</span>
-					<span><a target="_blank" style="width:100%;" onmousedown="javascript:logClick('SUMMARY/극장상세보기');" href="http://www.cgv.co.kr/theaters/?theaterCode=0001" title="CGV 강변">CGV 강변</a></span>
+					<span><a target="_blank" style="width:100%;">${bookinginfo.loc_name}</a></span>
 				</div>
 				<div style="display: block;">
 					<span >일시:</span>
@@ -154,12 +183,16 @@
 				<div  style="display: block;">
 					<span >상영관:</span>
 					<span title="2관 [LCK관]">2관 [LCK관]</span>
+					
 				</div>
 				<div  style="display: block;">
 					<span >인원</span>
 					<span  title=""></span>
 				</div>
 				<div  title="극장선택" style="display: none;"></div>
+				<div class="rn-05">
+					<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+				</div>
 			</div>
 			
 			
