@@ -214,24 +214,6 @@
 	
 	// 일정 제거
 	function deletePlan() {
-<<<<<<< HEAD
-		var checkBox = $("input[name='select_location']:checked");
-				
-		checkBox.each(function(i){
-			var checkTr = checkBox.parent().parent().eq(i);
-			checkTr.remove();
-			console.log(i);
-		}); // checkBox.each
-		
-		// url의 no 가져오기
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
-				
-		if($("table input[type='checkbox']").is(":checked")){
-			$("table input[type='checkbox']").prop('checked',false);
-		}
-	} // deletePlan()
-=======
 		var checkBox = $("input[name='planner_select_location']:checked");
 		checkBox.each(function(i, iVal){
 			let removeTr = iVal.parentElement.parentElement;
@@ -264,7 +246,6 @@
 		});
 		
 	} // storePlanner()
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	
 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	function addMarker(position, idx, title) {
@@ -346,11 +327,7 @@
 					</div>	
 					<div class='settingbt'>
 						<button onclick="deletePlan()">일정 제거</button>
-<<<<<<< HEAD
-						<button class="create_planner_button" onclick="location.href='MyPageShow.jsp;'">플래너 저장</button>
-=======
 						<button onclick="storePlanner()">플래너 저장</button>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					</div>			
 				</div>
 				
