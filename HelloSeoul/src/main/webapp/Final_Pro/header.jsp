@@ -29,7 +29,6 @@ $(function(){
 			document.location.href ="/web/HelloSeoulLogout";
 		}
 		else if(($(this).attr('id'))=='comm'){		
-			//document.location.href ="/web/boardSelect";
 			document.location.href ="/web/boardSelect";
 		}
 		else if(($(this).attr('id'))=='mypage'){

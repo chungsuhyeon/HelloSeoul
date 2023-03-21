@@ -35,14 +35,15 @@ public class projectcontroller {
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model) {
 		model.addAttribute("board",dao.selectBoard());
-		return "making/workbench";
+		return "Final_Pro/ComList";
 	}
 	@RequestMapping(value="infoSelect")
 	public String infoSelect(int no,Model model) {
 		dao.hitAction(no);
 		model.addAttribute("info", dao.selectInfoBoard(no));
 		model.addAttribute("reply",dao.selectReply(no));
-		return "Final_Pro/ComInfo";
+		return "making/workbench";
+		//return "Final_Pro/ComInfo";
 	}
 	@RequestMapping(value="deleteCom")
 	public String deleteCom(int no,Model model,@RequestParam(value="user_id")String id) {

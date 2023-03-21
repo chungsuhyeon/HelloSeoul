@@ -86,7 +86,7 @@
 		</div>
 		<div class='container-fluid' style="display: inline-flex;">
 			<div class='col-6'>
- 				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
+ 				<h1>Calender</h1>
 			</div>
 			<div class='col-6' style="margin-top: 180px; margin-bottom: 100px;">
  				<div class='moneytb'>
