@@ -32,8 +32,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 	 }
 	
 	public List<String> selectcontinent(String id){
-		return this.getSqlSession().selectList("selectcontinent", id);
-		
+		return this.getSqlSession().selectList("selectcontinent", id);	
 		//List<JoinSeoulContinenxtBean>
 	}
 	

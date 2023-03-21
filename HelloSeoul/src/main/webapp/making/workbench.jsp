@@ -27,10 +27,14 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-<<<<<<< HEAD
+
 .tablebar tr > th{
 	width: 5%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 .infobar{
 	font-size: 20px;
 }
@@ -51,8 +55,7 @@ $(function(){
 	width: 100%;
 	height: 100%;
 }
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+
 </style>
 <!-- Style Section End -->
 
@@ -68,7 +71,12 @@ $(function(){
 					<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
 					<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 					<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}'>
+<<<<<<< HEAD
 					<span>[
+=======
+
+		<span>[
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 							<c:choose>
 								<c:when test="${i.com_ctg eq 1}">1</c:when>
 								<c:when test="${i.com_ctg eq 2}">2</c:when>
@@ -92,6 +100,10 @@ $(function(){
 					</div>
 					<div class='photobar col-6'>
 						photoline
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					<span id='titlespan'>
 						<c:choose>
 							<c:when test="${i.com_ctg eq 1}">[11111]</c:when>
@@ -115,10 +127,18 @@ $(function(){
 					</div>
 					<div class='photobar col-6'>
 						<img alt="test" src="/web/resources/final_style/img/indexFood.jpg">
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					</div>
 				</div>
 				<div class='setbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					go list
 					</div>
 					<div class='goodbad col-4'>
@@ -139,6 +159,10 @@ $(function(){
 				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
 				<h2>Community List</h2>
 				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					<button type="button" class="btn btn-primary">List</button>
 					</div>
 					<div class='goodbad col-4'>
@@ -158,7 +182,15 @@ $(function(){
 					<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
 					<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
 					</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				<table class="table table-hover" style="border: solid;">
 					<thead>
     					<tr class="table-primary">
@@ -210,8 +242,8 @@ $(function(){
       						<a class="page-link" href="#">&raquo;</a>
     					</li>
   					</ul>
-=======
-			</c:forEach>	
+				</c:forEach>	
+
 			<div class='replebar mt-4 bg-light'>
 				<div class='col-12' style="text-align: center;">All Reple</div>
 				<div class='replein col-12' style="display: inline-flex;">
@@ -221,9 +253,21 @@ $(function(){
 					<div class='col-2'>
 						<button type="button" class="btn btn-primary" style="width: 100%; height: 100%;">Apply</button>
 					</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			<div class='replebar'>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				
 				<div class='replyboard col-10' style="margin-left: 10px;">
 					<div class='replecontents'>
@@ -264,6 +308,10 @@ $(function(){
 				</div>
 		</c:forEach>
  -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>

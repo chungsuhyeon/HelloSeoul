@@ -21,21 +21,35 @@
 
 <script type="text/javascript">
 	$(function() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		var arrIndex=0;
+<<<<<<< HEAD
 		var val4=[];
 		$("a#tiketing").click(function(){
 			
 			console.log($(".useseat.btn.btn-primary").val());
 			console.log(val4);
 		});
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		var val3=0;
 		var seatArr=[];
+<<<<<<< HEAD
 		var val5=0;
 		var val3=0;
 
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		$(".seat >button").click(function() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
+<<<<<<< HEAD
 
 			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			console.log(action);
@@ -45,6 +59,8 @@
 			console.log(val4);
 			
 // 			val4=$(this).val();
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 				if(val3<Allperson){
 					++val3
