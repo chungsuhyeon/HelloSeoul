@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+<<<<<<< HEAD
 
 	<insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
 	    INSERT INTO 
@@ -24,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	<insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
 	    INSERT INTO 
 	 		userboard(user_id,user_nick,user_pw,user_name,user_nation,user_tel,user_birth,user_gender,user_pp,user_first)
@@ -35,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select country_name from nation
         where continent = #{value}
 	</select>
+<<<<<<< HEAD
 
   <insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
  INSERT INTO 
@@ -43,6 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  </insert>
 
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
  
  
 
