@@ -29,7 +29,6 @@ $(function(){
 			document.location.href ="/web/HelloSeoulLogout";
 		}
 		else if(($(this).attr('id'))=='comm'){		
-			//document.location.href ="/web/boardSelect";
 			document.location.href ="/web/boardSelect";
 		}
 		else if(($(this).attr('id'))=='mypage'){
@@ -111,11 +110,11 @@ li div > a{
         </li>
       </ul>
       <div class="setbar d-flex">
-       	<button type="button" class="btn btn-dark" id="comm">Community</button>
+        	<button type="button" class="btn btn-dark" id="comm">Community</button>
        	<c:choose>
 	       	<c:when test="${user_id eq null}">
 		       	<button type="button" class="btn btn-dark" id="login">Login</button>
-		       	<button type="button" class="btn btn-dark" id="join">Join</button>	       	
+ 		       	<button type="button" class="btn btn-dark" id="join">Join</button>
 	       	</c:when>
 	       	<c:otherwise>
 		       	<button type="button" class="btn btn-dark" id="logout">Logout</button>
