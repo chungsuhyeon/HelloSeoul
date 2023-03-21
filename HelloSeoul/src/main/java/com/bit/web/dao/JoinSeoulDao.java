@@ -39,7 +39,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 	
 	public String getcontinent(String user_contient) {
 		System.out.println(user_contient);
-		return "";
+		return "";   
 	}
 		
 }	

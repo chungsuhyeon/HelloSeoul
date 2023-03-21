@@ -41,8 +41,8 @@ public class JoinSeoulController {
 	@PostMapping(value = "joinMemberInsert")
 	public String joinMemberInsert(JoinSeoulBean bean) {
 		System.out.println(bean);
-		System.out.println(bean.getUser_nation().getClass().getName());// User_nation Å¸ÀÔ È®ÀÎ
-		// 33 Ãâ·Â
+		System.out.println(bean.getUser_nation().getClass().getName());// User_nation íƒ€ì… í™•ì¸
+		// 33 ì¶œë ¥
 		// System.out.println(user_nation);
 
 		bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
