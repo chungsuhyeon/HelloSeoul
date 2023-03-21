@@ -1,5 +1,7 @@
 package com.bit.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +27,7 @@ public class JoinSeoulController {
 		// return "test";
 	}
 	
+<<<<<<< HEAD
 	@PostMapping(value = "ajaxcontinent")
 	  
 	@ResponseBody
@@ -32,6 +35,15 @@ public class JoinSeoulController {
 		System.out.println(id); 
 		return "";
 	  
+=======
+	@PostMapping(value = "ajaxcontinent")	  
+	@ResponseBody
+	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+		System.out.println("controller"+id); 
+		//return "success";
+		//return dao.selectcontinent(id); 
+		return dao.selectcontinent(id);
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	  
 	  }
 	

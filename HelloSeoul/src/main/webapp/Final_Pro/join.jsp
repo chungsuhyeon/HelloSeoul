@@ -77,6 +77,7 @@ $(function(){
     	    	  dataType:'text',
     	    	  success:function(result){
     	    		 alert(result);
+<<<<<<< HEAD
     	    		     	    		  
     	    	  }    	    	    	 
     	    	 
@@ -84,8 +85,27 @@ $(function(){
     	        
     	 
      });  
+=======
+    	    		  //$(result).each(function(idx, list){
+    	    		  //	 console.log(list); 
+    	    		 for(let i =0; i < list(result).length; i++){
+    	    			 alert(result[i]);
+    	    		 } //for   
+    	    		 
+    	    	  },//success
+    	    	  
+    	    	  error:function(){
+	   				 alert('error');
+	   			  }	//error
+    	    	 
+    	         });//ajax      
+     });//function     
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
      /* ========================================================================================================*/     
 
  	   // 국적입력하면 전화번호에 국가번호 입력, 포커스 다음칸으로 

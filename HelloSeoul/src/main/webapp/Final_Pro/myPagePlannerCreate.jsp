@@ -18,6 +18,9 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$("input[name='planner_shour']").blur(function(){
+			alert($(this).val());
+		});
 		
 	});
 	
@@ -171,22 +174,21 @@
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-				console.log(result);
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
 							
 				$(result).each(function(index, list){
 					$(activeTab.getAttribute('href') + " table tbody").append(
 							`<tr>
 								<td style="width: 5%;">
-									<input type="checkbox" name="select_location" value="\${list.loc_pc}">
+									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 									<input type="hidden" name="select_location_x" value="\${list.loc_x}">
 									<input type="hidden" name="select_location_y" value="\${list.loc_y}">
 								</td>
 								<td style="display: inline-flex;">
 									<div class='timeseting' style="display: inline-flex; width: 20%">
-										<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault" height="10px">
+										<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault">
 										<span>&nbsp; : &nbsp;</span>
-										<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault" height="5px">
+										<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault">
 									</div>
 									<div class='loctextline' style='width: 70%; margin-left: 10px;'>
 										<span>\${list.loc_name}</span>
@@ -205,13 +207,14 @@
 			}
 		}); // ajax
 		
-		if($("table input[type='checkbox']").is(":checked")){
-			$("table input[type='checkbox']").prop('checked',false);
+		if($("table input[name='select_location']").is(":checked")){
+			$("table input[name='select_location']").prop('checked',false);
 		}
 	} // updatePlan()
 	
 	// 일정 제거
 	function deletePlan() {
+<<<<<<< HEAD
 		var checkBox = $("input[name='select_location']:checked");
 				
 		checkBox.each(function(i){
@@ -228,6 +231,40 @@
 			$("table input[type='checkbox']").prop('checked',false);
 		}
 	} // deletePlan()
+=======
+		var checkBox = $("input[name='planner_select_location']:checked");
+		checkBox.each(function(i, iVal){
+			let removeTr = iVal.parentElement.parentElement;
+			$(removeTr).remove();
+		}); // checkBox.each
+		
+		// url의 no 가져오기
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+				
+		if($("table input[name='planner_select_location']").is(":checked")){
+			$("table input[name='planner_select_location']").prop('checked',false);
+		}
+	} // deletePlan()
+	
+	// 생성한 플래너 저장
+	function storePlanner(){
+// 		let inputTime = document.querySelectorAll("input.form-control");
+// 		console.log(inputTime);
+// 		return false;
+		
+// 		let inputTime = document.getElementsByClassName("form-control").val();
+// 		console.log(inputTime);
+		
+// 		var $inputTime = document.querySelector("input.form-control");
+// 		console.log($inputTime);
+
+		$("input.form-control").each(function(){
+			var text
+		});
+		
+	} // storePlanner()
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	
 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	function addMarker(position, idx, title) {
@@ -306,50 +343,14 @@
 					
 					<!-- tab contents -->
 					<div id='myTabContent border border-info-1' class='tab-content'>
-					<!-- <div class='tab-pane fade active show' id='Day0' role='tabpanel'>
-							<table class='table table-hover'>
-								<tbody>
-									<tr class='table-light'>
-										<td>
-											<a href='#'>Location</a>
-											<br>
-											<span>Gungu > Loc Ctg > Detail Ctg > </span>
-										</td>
-									</tr>
-									<tr class='table-light'>
-										<td>
-											<a href='#'>Location</a>
-											<br>
-											<span>Gungu > Loc Ctg > Detail Ctg > </span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="tab-pane fade" id="Day2" role="tabpanel">
-							<table class='table table-hover'>
-								<tbody>
-									<tr class='table-light'>
-										<td>
-											<a href='#'>Location Name1</a>
-											<br>
-											<span>Gungu > Loc Ctg > Detail Ctg > </span>
-										</td>
-									</tr>
-									<tr class='table-light'>
-										<td>
-											<a href='#'>Location Name2</a>
-											<br>
-											<span>Gungu > Loc Ctg > Detail Ctg > </span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div> -->
 					</div>	
 					<div class='settingbt'>
 						<button onclick="deletePlan()">일정 제거</button>
+<<<<<<< HEAD
 						<button class="create_planner_button" onclick="location.href='MyPageShow.jsp;'">플래너 저장</button>
+=======
+						<button onclick="storePlanner()">플래너 저장</button>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 					</div>			
 				</div>
 				
