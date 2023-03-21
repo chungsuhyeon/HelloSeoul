@@ -64,18 +64,42 @@ $(function(){
 			   }			   
 		   }); 
     }); // 아이디 중복체크
+    /* ========================================================================================================*/      
+     $("select#continent").change(function(){
+    	 //alert('test');
+     	 alert($("select[name='continent']").val())
+    	 let user_continent = $("select[name='continent']").val() 
+      	   $.ajax({
+    	    	  url:'/web/ajaxcontinent',
+    	    	  type:'POST',
+    	    	  data:{id:user_continent},
+    	    	  contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+    	    	  dataType:'text',
+    	    	  success:function(result){
+    	    		 alert(result);
+    	    		  //$(result).each(function(idx, list){
+    	    		  //	 console.log(list); 
+    	    		 for(let i =0; i < list(result).length; i++){
+    	    			 alert(result[i]);
+    	    		 } //for   
+    	    		 
+    	    	  },//success
+    	    	  
+    	    	  error:function(){
+	   				 alert('error');
+	   			  }	//error
+    	    	 
+    	         });//ajax      
+     });//function     
     
-    
-
-    
+     /* ========================================================================================================*/     
 
  	   // 국적입력하면 전화번호에 국가번호 입력, 포커스 다음칸으로 
 		$("select[name='user_nation']").change(function(){
 	 		$("input[name='user_tel1']").val($("select[name='user_nation']").val());
 	 		$("input[name='user_tel2']").focus();
 	 		$("input[name='user_tel1']").attr("disabled",true);
-	 		//alert($("select[name='user_nation1']").val());
-		
+	 		//alert($("select[name='user_nation1']").val());		
     	}); //국적,국가번호 입력 
 	
 	  
@@ -90,10 +114,10 @@ $(function(){
 		        	$("input[name='user_pw2']").val('');
 		        	$("input[name='user_pw']").focus();
 		        	alert("비밀번호를 확인하세요");
-		        }  
-
+		        } 
 		   });
-/* ========================================================================================================*/   
+  
+    	
 		 // 가입정보 저장  	   
 	   $("button#save").click(function(){ //값 유무 확인		   
 		   $("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
@@ -111,7 +135,8 @@ $(function(){
 	       $("form[name='joinFrm']").submit(); 
 	   
 	   });
-/* ========================================================================================================*/  
+
+
 });
 </script>
 <!--JS Section End -->
@@ -188,38 +213,34 @@ $(function(){
 			  					<input type="text" class="form-control" name="user_name2" placeholder="Last Name" id="inputDefault">
 			  					<input type="hidden" class="form-control" name="user_name" id="user_name">
 		  					</div>
-	  					</div>  					
+	  					</div>  
 	  					
-	  					
+
+   				
   					<label class="col-form-label mt-4" for="inputDefault">Nation</label>
-  						<div>
-		  				   	<div style="width: 300px;" class="form-group" style="display: inline-block;">
-		   					       <select class="form-select" name="user_nation" id="inputDefault">
-						                 <option selected="selected">사는국가</option>
-										 <option value="1">미국</option>
+  						<div >
+		  				   	<span  style="display: inline-flex;width: 180px;">
+		   					       <select class="form-select" name="continent" id="continent">
+						                 <option selected="selected">Continent</option>
+										 <option value="Asia" >Asia</option>
+										 <option value="Europe">Europe</option>
+										 <option value="Africa" >Africa</option>
+										 <option value="North America">North America</option>
+										 <option value="South America">South America</option>
+										 <option value="Oceania">Oceania</option>
+								   </select>		 
+							</span>	&nbsp;&nbsp;&nbsp;		 
+							<span  style="display: inline-flex;width: 200px;">	 
+                                    <select class="form-select" name="user_nation" id="inputDefault">
+						                 <option selected="selected">Nation</option>
+										 <option value="1" type="text" id="미국">미국</option>
 										 <option value="7">러시아</option>
-										 <option value="33">프랑스</option>
+										 <option value="33" type="text" id="프랑스">프랑스</option>
 										 <option value="34">스페인</option>
 										 <option value="44">영국</option>
-										 <option value="49">독일</option>
-										 <option value="61">호주</option>										 
-									</select>	 
-								<input type="hidden" class="form-control" name="user_nat" id="inputDefault">		 
-			  				</div>
-			  				
-			  				<div style="width: 300px;" class="form-group" style="display:inline-block;">
-		   					       <select class="form-select" name="user_nation" id="inputDefault">
-						                 <option selected="selected">사는국가</option>
-										 <option value="1">미국</option>
-										 <option value="7">러시아</option>
-										 <option value="33">프랑스</option>
-										 <option value="34">스페인</option>
-										 <option value="44">영국</option>
-										 <option value="49">독일</option>
-										 <option value="61">호주</option>										 
-									</select>	 
-								<input type="hidden" class="form-control" name="user_nat" id="inputDefault">		 
-			  				</div>
+										 <option value="49">독일</option>										
+									</select> 									 
+			  				</span>
 	  					</div>
   					<label for="exampleSelect1" class="form-label mt-4">TelePhone</label><br>
 	  					<div class="form-group" style="display: inline-flex;">

@@ -1,5 +1,7 @@
 package com.bit.web.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,9 +27,20 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		this.getSqlSession().insert("insertMember",bean);
 	}	
 	
-	 public String getJoinnation(String user_nation) {
-		 return this.getSqlSession().selectOne("getJoinnation",user_nation);
+	public String getJoinnation(String user_nation) {
+		return this.getSqlSession().selectOne("getJoinnation",user_nation);
 	 }
+	
+	public List<String> selectcontinent(String id){
+		return this.getSqlSession().selectList("selectcontinent", id);
+		
+		//List<JoinSeoulContinenxtBean>
+	}
+	
+	public String getcontinent(String user_contient) {
+		System.out.println(user_contient);
+		return "";
+	}
 		
 }	
 		
