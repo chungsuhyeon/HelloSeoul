@@ -53,8 +53,6 @@ $(function(){
 
 >>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 				<a href="/web/Final_Pro/join.jsp"><img alt="" src="/web/resources/final_style/img/icon/add-user.png"></a>
-				</c:when>
-				<c:otherwise>
 				<a href="/web/myPageLoad"><img alt="" src="/web/resources/final_style/img/icon/user.png"></a>
 <<<<<<< HEAD
 =======
