@@ -32,7 +32,7 @@ $(function(){
 
 </head>
 <footer class='footer container-fluid bg-primary'>
-	<div class='d-flex justify-content-center bg-black'>
+	<div class='d-flex justify-content-center bg-primary'>
 		<h1>Testing</h1>
 	</div>
 </footer>
