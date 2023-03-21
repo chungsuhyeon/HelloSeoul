@@ -97,6 +97,10 @@
 			$("div a#scrap").click(function() {
 				console.log("test");
 			});
+			
+			$("div#booking").click(function(){
+				console.log("test");
+			})
 		});
 	</script>
 
@@ -122,7 +126,7 @@
 		</noscript>
 		<!-- End Google Tag Manager (noscript) -->
 
-
+<form>
 		<div class="rnew-top-wrap">
 			<div class="rnew-top">
 				<div class="rntop-img">
@@ -243,10 +247,6 @@
 										<!-- 						</dd> -->
 									</dl>
 								</div>
-								<div class="rn-05">
-									<a href='#' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
-								</div>
-								<!--rn-05-->
 
 								<div class="rn-04" id="divTimeTable">
 									<div class="rn-04-left on">
@@ -451,6 +451,10 @@
 									<!-- 				</div><div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div> -->
 									<!-- 			</div> -->
 								</div>
+								<div class="rn-05">
+									<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03' id="booking">예매하기</a>
+								</div>
+								<!--rn-05-->
 								<!--포인트-->
 
 								<!-- 				<div class="rn-product-area3">공연시간안내, 배송정보 -->
@@ -469,5 +473,6 @@
 							<!--rn-03-right-->
 						</div>
 						<!--rn-03-->
+						</form>
 </body>
 </html>

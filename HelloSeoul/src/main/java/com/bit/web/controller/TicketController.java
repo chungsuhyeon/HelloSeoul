@@ -66,4 +66,11 @@ public class TicketController {
 		return "Final_Pro/Theatermain";
 	}
 	
+	@RequestMapping(value = "booking")
+	public String bookingSeat(int no,Model model) {
+		HashMap<String, Object>map=new HashMap<String, Object>();
+		model.addAttribute("bookinginfo", dao.selectBookingInfo(no));
+		return "making/seat";
+	}
+	
 }

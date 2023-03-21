@@ -31,20 +31,21 @@
 				//function seat use ajax
 			}
 		});
-		var val=0;
+		var val1=0;
+		var val2=0;
 		$("button#minusButton1").click(function(){
-			$("button#seatVal1").html(val--);
+			$("button#seatVal1").html(--val1);
 		});
 		$("button#plusButton1").click(function(){
-			$("button#seatVal1").html(val++);
+			$("button#seatVal1").html(++val1);
 		});
 		
 		
 		$("button#minusButton2").click(function(){
-			$("button#seatVal2").html(val--);
+			$("button#seatVal2").html(--val2);
 		});
 		$("button#plusButton2").click(function(){
-			$("button#seatVal2").html(val++);
+			$("button#seatVal2").html(++val2);
 		});
 
 	});
@@ -69,7 +70,6 @@
 
 </head>
 <body>
-
 	<section class='section'>
 	
 		<div class='container-fluid'
@@ -105,20 +105,20 @@
 						<div class='seat col-12' style="display: inline-flex;">
 							<h3>${i}</h3>
 							<c:forEach var='x' begin="0" end="9">
-							<button type="button"
-											class="emptyeseat btn btn-outline-primary"
-											style="margin: 1px;" value="${i}">${i}-${x}</button>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${x%2==0}"> --%>
-<!-- 										<button type="button" -->
+<!-- 							<button type="button" -->
 <!-- 											class="emptyeseat btn btn-outline-primary" -->
 <%-- 											style="margin: 1px;" value="${i}">${i}-${x}</button> --%>
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<!-- 										<button type="button" class="useseat btn btn-primary" -->
-<%-- 											style="margin: 1px;" value="${i}">${i}-${x}</button> --%>
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
+								<c:choose>
+									<c:when test="${x==0}">   <!-- db에서 불러온 선택여부가 1일때 -->
+										<button type="button"
+											class="emptyeseat btn btn-outline-primary"
+											style="margin: 1px;" value="${i}">${i}-${x}</button>
+									</c:when>
+									<c:otherwise>   <!-- db에서 불러온 선택여부가 0일때 -->
+										<button type="button" class="useseat btn btn-primary"
+											style="margin: 1px;" value="${i}">${i}-${x}</button>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</div>
 					</c:forEach>

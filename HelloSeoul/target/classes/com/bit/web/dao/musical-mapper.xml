@@ -101,6 +101,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE NO=#{VALUE}
 	</select>
 	
+	<select id="selectBookingInfo" parameterType="Integer" resultType="MusicalBean">
+		SELECT NO, TITLE, LOC_NAME, IMGSRC, REVIEWS, GRADE, RUNTIME FROM TICKETDB
+		WHERE NO=#{VALUE}
+	</select>
+	
 	
 <!-- 	<select id="selectSeqNumber" resultType="Integer"> -->
 <!-- 		SELECT MUSICALLIST_DWQ.NEXT -->
