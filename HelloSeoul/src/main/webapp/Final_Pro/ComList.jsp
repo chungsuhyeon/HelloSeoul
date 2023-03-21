@@ -1,156 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
+<%@ page isELIgnored="false" %>
+
+<!DOCTYPE html PUBLIC >
 <html>
+
 <head>
-<meta charset="UTF-8">
 
-<!-- Icon Error Begin-->
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<!-- Icon Error End-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-<title>Hello, Seoul!</title>
+<title>Start Simple Web</title>
+<!-- Bootstrap Core CSS -->
+<link href="/web/resources/comcss/css/bootstrap.min.css" rel="stylesheet">
 
-<!--JS Section Begin -->
+<!-- Custom CSS -->
+<link href="/web/resources/comcss/css/clean-blog.css" rel="stylesheet">
+<link href="/web/resources/comcss/css/board.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 <script type="text/javascript">
-$(function(){
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("login plz");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
-		}
+	$(function(){
+		$("a#board-write").click(function(){
+			if($("input#user_id").val()==""){
+				alert("login plz");
+			}
+			else if($("input#user_id").val()!=""){
+				location.replace("/web/Final_Pro/ComWrite.jsp");
+			}
+		});
 	});
-});
+
 </script>
-<!--JS Section End -->
-
-<!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
-<style type="text/css">
-@
-</style>
-<!-- Style Section End -->
-
-
 </head>
 <body>
-<jsp:include page="./header.jsp"></jsp:include>
-	<section class='section bg-light'>
-		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<!-- 커뮤니티 글 제목 태그 -->
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
+
+<jsp:include page="header.jsp"></jsp:include>
+
+
+	<!-- Page Header -->
+	<!-- Set your background image for this header on the line below. -->
+	
+	<div class="board-field"  style="margin-top: 50px">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" >
+			<div class="board-toolbar" 	style="text-align: right; margin-bottom: 20px">
+<!-- 				<a href="/web/Final_Pro/ComWrite.jsp" class="btn btn-primary btn-sm" id="board-write"><i -->
+			<a href="#" class="btn btn-primary btn-sm" id="board-write"><i
+					class="glyphicon glyphicon-pencil" style="margin-right: 15px"></i>쓰기</a>
 			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-		</div>
-		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
-			<div class='col-4'>
-				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
-					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
-					<div class='tagbox'>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+			
+			
+			<div class="list-group"  	>
+			<c:forEach items="${board }" var="i">
+				
+				<a href="/web/infoSelect?no=${i.com_no }" class="list-group-item">
+				
+					<div class="board-title">
+						<span class="board-category">[
+						<c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						
+						</c:choose>
+						
+						
+						
+						
+						
+						
+						]</span>
+						${i.com_title }  <span class="badge">New</span>
 					</div>
-				</div>
+					<div class="board-meta"
+						style="font-weight: 400; font-size: 1.2rem; color: #404040">
+						<p>
+						<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
+							<i class="glyphicon glyphicon-user"></i> ${i.user_nick } 님 <i
+								class="glyphicon glyphicon-comment"></i> ${i.reply } <i
+								class="glyphicon glyphicon-ok"></i> ${i.com_hit } <i
+								class="glyphicon glyphicon-time"></i> ${i.com_regdate }
+						</p>
+					</div>
+				</a>
+				
+			
+			
+			</c:forEach>
 			</div>
-			<div class='col-8'>
-				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
-				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
-				<h2>Community List</h2>
-				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
-				</div>
-				<table class="table table-hover" style="border: solid;">
-					<thead>
-    					<tr class="table-primary">
-      						<th>ComNo</th>
-      						<th>Category</th>
-      						<th>Title</th>
-      						<th>Nick</th>
-      						<th>RegDate</th>
-    					</tr>
-	  				</thead>
-  					<tbody>
-  						<c:forEach items="${board}" var='i'>
-    						<tr class="table-info">
-      							<td>${i.com_no}</td>
-      							<td>${i.com_ctg }</td>
-      							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
-      							<td>${i.user_nick}</td>
-      							<td>${i.com_regdate}</td>
-    						</tr>
-  						</c:forEach>
-  					</tbody>
-  				</table>
-  				<div class='d-flex justify-content-center'>
-  					<ul class="pagination pagination-sm">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-    					<li class="page-item active">
-      						<a class="page-link" href="#">1</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">2</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">3</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">4</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">5</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">&raquo;</a>
-    					</li>
-  					</ul>
-				</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-8" align="center">
+				<ul class="pagination">
+					<li><a  href="#">이전</a></li>
+					<li><a href="#">1</a></li>
+					<li class="active"><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">...</a></li>
+					<li><a href="#">19</a></li>
+					<li><a href="#">다음</a></li>
+				</ul>
 			</div>
 		</div>
-	</section>
-	<footer>
-	<jsp:include page="./footer.jsp"></jsp:include>
-	</footer>
+	</div>
+	<!-- Footer -->
+	<body>
+		<div class="container">
+		
+			
+		</div>
+	</body>
+<!-- 	<footer>
+					<p class="copyright text-muted">Copyright &copy;2016 SIST. All
+						rights reserved | code by milib</p>
+						</footer> -->
+	<!-- jQuery -->
+
 </body>
+
 </html>

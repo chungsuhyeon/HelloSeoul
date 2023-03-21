@@ -19,7 +19,14 @@
 
 <script type="text/javascript">
 $(function(){
-
+	$('.write').click(function(){
+		if($("input#user_id").val()==""){
+			alert("login plz");
+		}
+		else if($("input#user_id").val()!=""){
+			location.replace("/web/Final_Pro/ComWrite.jsp");
+		}
+	});
 });
 </script>
 <!--JS Section End -->
@@ -27,6 +34,7 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
+<<<<<<< HEAD
 .infobar{
 	font-size: 20px;
 }
@@ -47,6 +55,7 @@ $(function(){
 	width: 100%;
 	height: 100%;
 }
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </style>
 <!-- Style Section End -->
 
@@ -79,7 +88,6 @@ $(function(){
 						<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png"> ${i.good}
 						<img alt="combad" src="/web/resources/final_style/img/icon/combad.png"> ${i.bad}
 					</span>
-				</div>
 				<div class='contentsbar' style="display: inline-flex; width: 100%;">
 					<div class='textbar col-6'>
 						${i.com_cont}
@@ -111,7 +119,6 @@ $(function(){
 					</div>
 				</div>
 			</c:forEach>	
-			</div>
 			<div class='replebar mt-4 bg-light'>
 				<div class='col-12' style="text-align: center;">All Reple</div>
 				<div class='replein col-12' style="display: inline-flex;">
