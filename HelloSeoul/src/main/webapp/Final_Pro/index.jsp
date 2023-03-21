@@ -34,9 +34,7 @@
 
 </head>
 <body>
-	<header>
-		<jsp:include page="header.jsp"></jsp:include>
-	</header>
+<jsp:include page="header.jsp"></jsp:include>
 	<section class='section'>
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   			<div class="carousel-indicators">
@@ -84,6 +82,7 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
+<<<<<<< HEAD
 		<div class='container-fluid bg-light' style="display: inline-flex;">
 			<div class='calender col-6'>
 			<h1>Calender</h1>
@@ -145,6 +144,14 @@
 						</tbody>
 					</table>
 				</div>					 
+=======
+		<div class='container-fluid' style="display: inline-flex;">
+			<div class='col-6'>
+				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
+			</div>
+			<div class='col-6'>
+				<jsp:include page="./Coin.jsp"></jsp:include>				
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>

@@ -31,9 +31,16 @@ $(function(){
 
 
 </head>
+<<<<<<< HEAD
 <footer class='footer container-fluid bg-primary' style="display: inline-flex; height: 100px;">
 	<div class='col-4'>
+=======
+<footer class='footer container-fluid bg-primary'>
+	<div class='d-flex justify-content-center bg-black'>
+		<h1>Testing</h1>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	</div>
+<<<<<<< HEAD
 	<div class='iconbar col-4 mt-4' style="display: inline-flex;">
 		<div class='d-flex justify-content-center w-100'>
 			<a href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/icon/home.png"></a>
@@ -43,5 +50,7 @@ $(function(){
 	</div>
 	<div class='col-4'>
 	</div>
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </footer>
 </html>

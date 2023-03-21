@@ -39,6 +39,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+<<<<<<< HEAD
 	<section class='section d-flex justify-content-center bg-info'>
 		<div class='tablebar col-6 mt-4 mb-4 bg-light' style="border-radius: 25px;">
 			<form action="/web/boardInsert" method="post">
@@ -88,6 +89,117 @@ $(function(){
 			<div class='buttonbar mb-4 d-flex justify-content-evenly'>
 				<button type="button" class="postbar btn btn-success">Post</button>
 				<button type="button" class="cancelbar btn btn-danger">Cancel</button>
+=======
+	<section class='section bg-light'>
+		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
+			<div class='newcomm' style="display: inline-flex; position: relative;">
+				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
+					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
+					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+				</div>
+				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
+					<!-- 커뮤니티 글 제목 태그 -->
+					<h3>Title Test line ...!!!!!</h3>
+				</div>
+			</div>
+			<div class='newcomm' style="display: inline-flex; position: relative;">
+				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
+					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+				</div>
+				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
+					<h3>Title Test line ...!!!!!</h3>
+				</div>
+			</div>
+			<div class='newcomm' style="display: inline-flex; position: relative;">
+				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
+					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+				</div>
+				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
+					<h3>Title Test line ...!!!!!</h3>
+				</div>
+			</div>
+		</div>
+		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
+			<div class='col-4'>
+				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
+					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
+					<div class='tagbox'>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+					</div>
+				</div>
+			</div>
+			<div class='col-8'>
+				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
+				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
+				<h2>Community List</h2>
+				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
+				</div>
+				<table class="table table-hover" style="border: solid;">
+					<thead>
+    					<tr class="table-primary">
+      						<th>ComNo</th>
+      						<th>Category</th>
+      						<th>Title</th>
+      						<th>Nick</th>
+      						<th>RegDate</th>
+    					</tr>
+	  				</thead>
+  					<tbody>
+  						<c:forEach items="${board}" var='i'>
+    						<tr class="table-info">
+      							<td>${i.com_no}</td>
+      							<td><c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						
+						</c:choose></td>
+      							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
+      							<td>${i.user_nick}</td>
+      							<td>${i.com_regdate}</td>
+    						</tr>
+  						</c:forEach>
+  					</tbody>
+  				</table>
+  				<div class='d-flex justify-content-center'>
+  					<ul class="pagination pagination-sm">
+    					<li class="page-item disabled">
+      						<a class="page-link" href="#">&laquo;</a>
+    					</li>
+    					<li class="page-item active">
+      						<a class="page-link" href="#">1</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">2</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">3</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">4</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">5</a>
+    					</li>
+    					<li class="page-item">
+      						<a class="page-link" href="#">&raquo;</a>
+    					</li>
+  					</ul>
+				</div>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>
