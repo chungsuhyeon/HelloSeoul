@@ -283,7 +283,8 @@ public class HelloSeoulController {
 	// 메인 플래너 생성
 	@PostMapping(value = "ajaxAddPlannerSchedule")
 	@ResponseBody
-	public List<Object> ajaxPlannerScheduleAdd(HttpServletRequest request, @RequestParam(value = "codeList[]") String[] loc_code) {
+	public List<Object> ajaxPlannerScheduleAdd(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "codeList[]") String[] loc_code) {
+
 		String str = "(";
 		for(int i=0; i<loc_code.length; i++) {
 			str += loc_code[i] + ",";
@@ -291,10 +292,10 @@ public class HelloSeoulController {
 		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
 		str += ")";
 		
+		System.out.println(str);
+		
 		return helloDao.selectMainDbData(str);
 	}
-	
-	// 작성한 플래너 insert
 
 	
 }
