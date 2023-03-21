@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectMusicalList2" resultType="MusicalBean">
 	<![CDATA[
-		SELECT NO,TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=8 AND NO<=12
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=8 AND NO<=12
 		]]>
 	</select>
 	
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectMovieList2" resultType="MusicalBean">
 	<![CDATA[
-		SELECT NO,TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=33 AND NO<=37
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=33 AND NO<=37
 		]]>
 	</select>
 	
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectTheaterList2" resultType="MusicalBean">
 	<![CDATA[
-		SELECT NO,TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=58 AND NO<=62
+		SELECT TITLE,IMGSRC,PTITLE FROM TICKETDB WHERE NO>=58 AND NO<=62
 		]]>
 	</select>
 	
@@ -96,9 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<select id="selectTicketInfo" parameterType="Integer" resultType="MusicalBean">
+	<select id="selectTicketInfo" parameterType="String" resultType="MusicalBean">
 		SELECT NO, TITLE, RUNDATE, LOC_NAME, IMGSRC, REVIEWS, GRADE, RUNTIME, PERFORMER, PRICE FROM TICKETDB
-		WHERE NO=#{VALUE}
+		WHERE IMGSRC=#{VALUE}
 	</select>
 	
 	

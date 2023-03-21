@@ -82,8 +82,8 @@ public class TicketDao extends SqlSessionDaoSupport{
 	}
 	
 	
-	public Object selectTicketInfo(int no) {
-		return this.getSqlSession().selectOne("selectTicketInfo", no);
+	public Object selectTicketInfo(String imgsrc) {
+		return this.getSqlSession().selectOne("selectTicketInfo", imgsrc);
 	}
 	
 	public Integer selectSeqNumber() {
