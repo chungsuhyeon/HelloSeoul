@@ -77,14 +77,20 @@ $(function(){
     	    	  dataType:'text',
     	    	  success:function(result){
     	    		 alert(result);
-    	    		     	    		  
-    	    	  }    	    	    	 
+    	    		  //$(result).each(function(idx, list){
+    	    		  //	 console.log(list); 
+    	    		 for(let i =0; i < list(result).length; i++){
+    	    			 alert(result[i]);
+    	    		 } //for   
+    	    		 
+    	    	  },//success
+    	    	  
+    	    	  error:function(){
+	   				 alert('error');
+	   			  }	//error
     	    	 
-    	         });  
-    	        
-    	 
-     });  
-    
+    	         });//ajax      
+     });//function     
     
      /* ========================================================================================================*/     
 

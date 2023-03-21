@@ -1,5 +1,7 @@
 package com.bit.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,13 +27,13 @@ public class JoinSeoulController {
 		// return "test";
 	}
 	
-	@PostMapping(value = "ajaxcontinent")
-	  
+	@PostMapping(value = "ajaxcontinent")	  
 	@ResponseBody
-	public String selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-		System.out.println(id); 
-		return "";
-	  
+	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+		System.out.println("controller"+id); 
+		//return "success";
+		//return dao.selectcontinent(id); 
+		return dao.selectcontinent(id);
 	  
 	  }
 	
