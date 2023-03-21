@@ -27,15 +27,6 @@ public class JoinSeoulController {
 		// return "test";
 	}
 	
-<<<<<<< HEAD
-	@PostMapping(value = "ajaxcontinent")
-	  
-	@ResponseBody
-	public String selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-		System.out.println(id); 
-		return "";
-	  
-=======
 	@PostMapping(value = "ajaxcontinent")	  
 	@ResponseBody
 	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
@@ -43,7 +34,6 @@ public class JoinSeoulController {
 		//return "success";
 		//return dao.selectcontinent(id); 
 		return dao.selectcontinent(id);
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	  
 	  }
 	
@@ -51,8 +41,8 @@ public class JoinSeoulController {
 	@PostMapping(value = "joinMemberInsert")
 	public String joinMemberInsert(JoinSeoulBean bean) {
 		System.out.println(bean);
-		System.out.println(bean.getUser_nation().getClass().getName());// User_nation íƒ€ì… í™•ì¸
-		// 33 ì¶œë ¥
+		System.out.println(bean.getUser_nation().getClass().getName());// User_nation Å¸ÀÔ È®ÀÎ
+		// 33 Ãâ·Â
 		// System.out.println(user_nation);
 
 		bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
