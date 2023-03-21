@@ -21,7 +21,6 @@
 
 <script type="text/javascript">
 	$(function() {
-<<<<<<< HEAD
 		var val4=[];
 		$("a#tiketing").click(function(){
 			
@@ -30,21 +29,16 @@
 		});
 		var val3=0;
 		var val5=0;
-=======
 		var val3=0;
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		$(".seat >button").click(function() {
 			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			console.log(action);
 			console.log($(this).val());
-<<<<<<< HEAD
 			val4[val5]=$(this).val();
 			val5++
 			console.log(val4);
 			
 // 			val4=$(this).val();
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 				if(val3<action){
 					++val3
