@@ -260,7 +260,7 @@ function check_id2(){
 				<c:choose>
 				<c:when test="${user_id eq i.user_id }">
 				
-				<a class="btn btn-default btn-xs" onclick="check_id()">수정</a> 
+				<a class="btn btn-default btn-xs" onclick="check_id()">수정a</a> 
 				<a target="_action_frame_bbs" class="btn btn-default btn-xs" onclick="check_id2()">삭제</a>
 				</c:when>
 				</c:choose>

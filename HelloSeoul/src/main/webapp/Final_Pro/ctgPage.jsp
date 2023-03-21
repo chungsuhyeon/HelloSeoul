@@ -8,7 +8,7 @@
 <!-- Icon Error Begin-->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
-<title>Insert title here</title>
+<title>Insert title here1</title>
 <!--JS Section Begin -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68fb4c87ba8765d71119fecd40096446"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -22,46 +22,6 @@ $(function(){
 		ajaxpro(sel);
  		
 	});
-	
-	//search
-	$('.searchbt').click(function(){
-		if($('#locsg').val()=='choose'||$('#detailctg').val()=='all'||$('#query').val().length==0){
-	 		alert('plz!!!!!@!!!!!!!!!!!!');
-	 		return false;
-	 		}else{
-	 			$.ajax({
-	 				type:'post',
-	 				url:'/web/searchList',
-	 				data : {'loc_sg':$('#locsg').val(),
-	 						'detailctg':$('#detailctg').val(),
-	 						'query':$('#query').val()},
-	 				dataType:'json',
-	 				success : function(r){
-	 					$("#tablebd > tr").remove();
-	 					for(var x in r){
-		 					$("#tablebd").append(`
-		 							\${x}
-									<tr class='table-light'>
-										<td><input type="checkbox" id='jjim' value="\${r[x].loc_pc}"></td>
-										<td id="locname">\${r[x].loc_name}</td>
-									</tr>
-									`);
-	 					}
-	 					$('td#locname').click(function(){
-	 						var sel = $(this).text();
-	 						console.log(sel);
-	 						ajaxpro(sel);
-	 				 		
-	 					});
-	 				},
-	 				error : function(x){
-	 					alert("error!!");	
-	 				}
-	 			});
-	 		}
-	});
-	
-	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
 		var jjimpoint = new Array();
@@ -143,11 +103,6 @@ function ajaxpro(sel){
 	});
 	
 }
-$('document').ready(function(){
-	$('#detailctg').val('${detail}').prop("selected",true);
-	
-});
-
 
 function ajaxpro2(jjimpoint){
 	$.ajax({
@@ -182,7 +137,6 @@ function ajaxpro2(jjimpoint){
 <!-- Style Section End -->
 </head>
 <body>
-	
 	<header>
 	<jsp:include page="./header.jsp"></jsp:include>
 	</header>
@@ -190,40 +144,23 @@ function ajaxpro2(jjimpoint){
 		<div class='col-2 border-primary'>
 			<!-- loc ajax -->
 			<div class='searchbar1 col-12' style="display: inline-flex;">
-				<select class='form-select' id='locsg'>
+				<select class='form-select' id='locctg'>
 					<option value="choose">Location</option>
 					<c:forEach var='sg' items="${locsg}" varStatus="cnt">
 					<option value="${sg.kr_gu}">${sg.en_gu}</option>
 					</c:forEach>
 				</select>
 				<select class='form-select' id='detailctg'>
-				<c:if test="${menuctg=='음식점'}">
-					<option value="all">Detail</option>
-					<option value="korea">Korea</option>
-					<option value="china">China</option>
-					<option value="america">America</option>
-					<option value="japan">Japan</option>
-				</c:if>
-				<c:if test="${menuctg=='상점'}">
-					<option value="all">Detail</option>
-					<option value="korea">Korea</option>
-					<option value="china">China</option>
-					<option value="america">America</option>
-					<option value="japan">Japan</option>
-				</c:if>
-				<c:if test="${menuctg=='핫플'}">
-					<option value="all">Detail</option>
-					<option value="street">Street</option>
-					<option value="cafe">Cafe</option>
-					<option value="themapark">ThemaPark</option>
-					<option value="sports">Sports</option>
-				</c:if>
-				
+					<option value="choose">Detail</option>
+					<option value="한식">Korea</option>
+					<option value="중식">China</option>
+					<option value="양식">America</option>
+					<option value="일식">Japan</option>
 				</select>
 			</div>
 			<div class='searchbar2 col-12' style="display: inline-flex;">
-				<input type="text" class="form-control" placeholder="Location Name" id="query">
-				<button type="button" class="searchbt btn btn-primary">Search</button>
+				<input type="text" class="form-control" placeholder="Location Name" id="inputDefault">
+				<button type="button" class="btn btn-primary">Search</button>
 			</div>
 			<div></div>
 			<div class='ctglist'>

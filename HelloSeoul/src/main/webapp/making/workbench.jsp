@@ -19,14 +19,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("login plz");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
-		}
-	});
+
 });
 </script>
 <!--JS Section End -->
@@ -34,64 +27,66 @@ $(function(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-@
+.tablebar tr > th{
+	width: 5%;
+}
 </style>
 <!-- Style Section End -->
 
 
 </head>
 <body>
-<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	<section class='section bg-light'>
-		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+	<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+	<section class='section d-flex justify-content-center bg-info'>
+		<div class='col-6 mt-4 mb-4'>
+			<div class='infobar bg-light'>
+			<c:forEach items="${info}" var="i">
+				<div class='titlebar'>
+					<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
+					<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
+					<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}'>
+					<span>[
+							<c:choose>
+								<c:when test="${i.com_ctg eq 1}">1</c:when>
+								<c:when test="${i.com_ctg eq 2}">2</c:when>
+								<c:otherwise>3</c:otherwise>
+							</c:choose>
+							] ${i.com_title}
+					</span>
+					<br>
+					<span>
+						<img alt="user" src="/web/resources/final_style/img/icon/comuser.png"> ${i.user_nick}
+						<img alt="reple" src="/web/resources/final_style/img/icon/reple.png"> ${i.reply}
+						<img alt="hit" src="/web/resources/final_style/img/icon/hit.png"> ${i.com_hit}
+						<img alt="regdate" src="/web/resources/final_style/img/icon/regdate.png"> ${i.com_regdate}
+						<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png"> ${i.good}
+						<img alt="combad" src="/web/resources/final_style/img/icon/combad.png"> ${i.bad}
+					</span>
 				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<!-- 커뮤니티 글 제목 태그 -->
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-		</div>
-		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
-			<div class='col-4'>
-				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
-					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
-					<div class='tagbox'>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+				<div class='contentsbar' style="display: inline-flex; width: 100%;">
+					<div class='textbar col-6'>
+						${i.com_cont}
+					</div>
+					<div class='photobar col-6'>
+						photoline
 					</div>
 				</div>
+				<div class='setbar col-12' style="display: inline-flex;">
+					<div class='backbar col-4'>
+					go list
+					</div>
+					<div class='goodbad col-4'>
+					img good ${i.good } img ${i.bad }
+					</div>
+					<div class='settingbar col-4' style="display: inline-flex;">
+					<button type="button" class="btn btn-danger">Report</button>
+					<button type="button" class="btn btn-primary">Modify</button>
+					<button type="button" class="btn btn-primary">Delete</button>
+					<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
+					<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
+					</div>
+				</div>
+			</c:forEach>	
 			</div>
 			<div class='col-8'>
 				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
@@ -113,7 +108,12 @@ $(function(){
   						<c:forEach items="${board}" var='i'>
     						<tr class="table-info">
       							<td>${i.com_no}</td>
-      							<td>${i.com_ctg }</td>
+      							<td><c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						
+						</c:choose></td>
       							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
       							<td>${i.user_nick}</td>
       							<td>${i.com_regdate}</td>
@@ -146,6 +146,8 @@ $(function(){
     					</li>
   					</ul>
 				</div>
+			<div class='replebar'>
+
 			</div>
 		</div>
 	</section>

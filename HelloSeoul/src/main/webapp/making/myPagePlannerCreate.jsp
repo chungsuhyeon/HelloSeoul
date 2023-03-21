@@ -64,10 +64,6 @@
 .div{
 	display:flex !important;
 }
-
-input.form-control{
-	width: 1000px !important;
-}
 </style>
 <!-- Style Section End -->
 
@@ -165,7 +161,7 @@ input.form-control{
    							</tr>
 						</thead>
 						<tbody>
-   							<tr class="table-active" style="height: 10px;">
+   							<tr class="table-active">
    								<th scope="row"><input type="checkbox" name="select_location" value="장소코드1"></th>
       							<td>
       								<a href="#">1번 찜 장소</a>
