@@ -32,8 +32,11 @@ $(function(){
 
 </head>
 <footer class='footer container-fluid bg-primary'>
-	<div class='d-flex justify-content-center bg-primary'>
-		<h1>Testing</h1>
+	<div class='col-4'>
+	</div>
+	<div class='col-4'>
+	</div>
+	<div class='col-4'>
 	</div>
 </footer>
 </html>
