@@ -19,9 +19,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$(".postbar").click(function(){
-		$("form").submit();
-	});
+
 });
 </script>
 <!--JS Section End -->
@@ -38,9 +36,42 @@ $(function(){
 
 </head>
 <body>
-<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+	<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	<section class='section d-flex justify-content-center bg-info'>
-
+		<div class='col-6 mt-4 mb-4'>
+			<div class='infobar bg-light'>
+				<div class='titlebar'>
+					<input type="hidden" id='com_no' name='com_no' value=''>
+					<input type="hidden" id='user_id' name='user_id' value=''>
+					<input type="hidden" id='boarduser_id' name='boarduser_id' value=''>
+					<span>[Category] ComTitle</span>
+					<br>
+					<span>img Nick img Reple img Hit img Regdate img Good img Bad</span>
+				</div>
+				<div class='contentsbar' style="display: inline-flex; width: 100%;">
+					<div class='textbar col-6'>
+						textline
+					</div>
+					<div class='photobar col-6'>
+						photoline
+					</div>
+				</div>
+				<div class='setbar' style="display: inline-flex;">
+					<div class='backbar col-4'>
+					go list
+					</div>
+					<div class='goodbad col-4'>
+					img good img bad
+					</div>
+					<div class='settingbar col-4'>
+					report modify delete reple scrap
+					</div>
+				</div>	
+			</div>
+			<div class='replebar'>
+				
+			</div>
+		</div>
 	</section>
 	<footer>
 	<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
