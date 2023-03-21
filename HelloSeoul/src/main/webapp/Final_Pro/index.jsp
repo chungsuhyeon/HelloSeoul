@@ -82,7 +82,6 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
-<<<<<<< HEAD
 		<div class='container-fluid bg-light' style="display: inline-flex;">
 			<div class='calender col-6'>
 			<h1>Calender</h1>
@@ -144,14 +143,6 @@
 						</tbody>
 					</table>
 				</div>					 
-=======
-		<div class='container-fluid' style="display: inline-flex;">
-			<div class='col-6'>
-				<jsp:include page="./CalenderIndex.jsp"></jsp:include>
-			</div>
-			<div class='col-6'>
-				<jsp:include page="./Coin.jsp"></jsp:include>				
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			</div>
 		</div>
 	</section>
