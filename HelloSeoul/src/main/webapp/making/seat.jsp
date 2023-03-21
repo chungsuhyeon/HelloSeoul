@@ -42,6 +42,14 @@
 <link type="text/css" rel="stylesheet"
 	href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
+<<<<<<< HEAD
+.screen {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </style>
 <!-- Style Section End -->
 
@@ -51,9 +59,14 @@
 <body>
 
 	<section class='section'>
+<<<<<<< HEAD
+		<div class='container-fluid' style="display: inline-flex; border: solid;">
+		<div class="screen" align="center">Screen</div>
+=======
 		<div class='container-fluid'
 			style="left-margin: 30%; display: flex; border: solid;">
 			<div class='col-1'></div>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			<!-- 좌석표 -->
 			<div class='seatbar col-4'
 				style="left-margin: 30%; align-items: center;">
@@ -101,6 +114,25 @@
 					</c:forEach>
 				</div>
 			</div>
+<<<<<<< HEAD
+			<!-- 테이블 시작 및 결제 관련 -->
+<!-- 			<div class='paybar col-4'> -->
+<!-- 				<table class='table table-hover'> -->
+<!-- 					<thead> -->
+<!-- 						<tr class='table-primary'> -->
+<!-- 							<th>th</th> -->
+<!-- 							<th>th</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 					<tbody> -->
+<!-- 						<tr class='table-info'> -->
+<!-- 							<td>td</td> -->
+<!-- 							<td>td</td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 				</table> -->
+<!-- 			</div> -->
+=======
 			<div class='col-1' style="border-right: solid 1px;"></div>
 			<div class='col-2'><span><img src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_185.JPG" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
 			<div class='col-2' >
@@ -142,6 +174,7 @@
 			
 			<!-- btn-right -->
 			
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		</div>
 			</div>
 			<div class='col-2' ></div>
