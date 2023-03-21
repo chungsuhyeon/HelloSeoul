@@ -31,6 +31,21 @@
 				//function seat use ajax
 			}
 		});
+		var val=0;
+		$("button#minusButton1").click(function(){
+			$("button#seatVal1").html(val--);
+		});
+		$("button#plusButton1").click(function(){
+			$("button#seatVal1").html(val++);
+		});
+		
+		
+		$("button#minusButton2").click(function(){
+			$("button#seatVal2").html(val--);
+		});
+		$("button#plusButton2").click(function(){
+			$("button#seatVal2").html(val++);
+		});
 
 	});
 </script>
@@ -42,14 +57,11 @@
 <link type="text/css" rel="stylesheet"
 	href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-<<<<<<< HEAD
 .screen {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </style>
 <!-- Style Section End -->
 
@@ -59,37 +71,32 @@
 <body>
 
 	<section class='section'>
-<<<<<<< HEAD
-		<div class='container-fluid' style="display: inline-flex; border: solid;">
-		<div class="screen" align="center">Screen</div>
-=======
+	
 		<div class='container-fluid'
 			style="left-margin: 30%; display: flex; border: solid;">
 			<div class='col-1'></div>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			<!-- 좌석표 -->
 			<div class='seatbar col-4'
 				style="left-margin: 30%; align-items: center;">
 				<div class='seat col-12' style="margin-top:15px; display:flex;">
+<!-- 				---------------성인,청소년 인원수----------------- -->
 				<div  class="col-5" style="display:flex;">성인 &nbsp;&nbsp;
-								<button type="button"  title="성인 좌석 선택 감소">-</button>
-								<div >
-									<button type="button" title="성인 현재 좌석 선택 수"
-										>2</button>
-									
-								</div>
-								<button type="button" title="성인 좌석 선택 증가">+</button>
-							</div>
-							<div class="col-4" style=" display:flex;">청소년&nbsp;
-							<button type="button"  title="성인 좌석 선택 감소">-</button>
-								<div >
-									<button type="button" title="성인 현재 좌석 선택 수"
-										>2</button>
-									
-								</div>
-								<button type="button" title="성인 좌석 선택 증가">+</button>
-							</div>
-							</div>
+					<button type="button" id="minusButton1" title="성인 좌석 선택 감소">-</button>
+				<div >
+					<button type="button" id="seatVal1" title="성인 현재 좌석 선택 수" value="0">0</button>
+				</div>
+					<button type="button" id="plusButton1" title="성인 좌석 선택 증가">+</button>
+			    </div>
+							
+				<div class="col-4" style=" display:flex;">청소년&nbsp;
+					<button type="button" id="minusButton2" title="청소년 좌석 선택 감소">-</button>
+				<div >
+					<button type="button" id="seatVal2" title="청소년 현재 좌석 선택 수" value="0">0</button>
+				</div>
+					<button type="button" id="plusButton2" title="청소년 좌석 선택 증가">+</button>
+				</div>
+			</div>
+<!-- 							-----------------스크린,좌석 ---------------- -->
 				<div class='bg-primary'
 					style="margin-top: 15px; margin-bottom: 15px; width: 60%; height: 30px; margin-left: 15%; font-weight: bold; text-align: center; color: white;">screen</div>
 
@@ -98,47 +105,31 @@
 						<div class='seat col-12' style="display: inline-flex;">
 							<h3>${i}</h3>
 							<c:forEach var='x' begin="0" end="9">
-								<c:choose>
-									<c:when test="${x%2==0}">
-										<button type="button"
+							<button type="button"
 											class="emptyeseat btn btn-outline-primary"
 											style="margin: 1px;" value="${i}">${i}-${x}</button>
-									</c:when>
-									<c:otherwise>
-										<button type="button" class="useseat btn btn-primary"
-											style="margin: 1px;" value="${i}">${i}-${x}</button>
-									</c:otherwise>
-								</c:choose>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${x%2==0}"> --%>
+<!-- 										<button type="button" -->
+<!-- 											class="emptyeseat btn btn-outline-primary" -->
+<%-- 											style="margin: 1px;" value="${i}">${i}-${x}</button> --%>
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										<button type="button" class="useseat btn btn-primary" -->
+<%-- 											style="margin: 1px;" value="${i}">${i}-${x}</button> --%>
+<%-- 									</c:otherwise> --%>
+<%-- 								</c:choose> --%>
 							</c:forEach>
 						</div>
 					</c:forEach>
 				</div>
 			</div>
-<<<<<<< HEAD
-			<!-- 테이블 시작 및 결제 관련 -->
-<!-- 			<div class='paybar col-4'> -->
-<!-- 				<table class='table table-hover'> -->
-<!-- 					<thead> -->
-<!-- 						<tr class='table-primary'> -->
-<!-- 							<th>th</th> -->
-<!-- 							<th>th</th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<!-- 					<tbody> -->
-<!-- 						<tr class='table-info'> -->
-<!-- 							<td>td</td> -->
-<!-- 							<td>td</td> -->
-<!-- 						</tr> -->
-<!-- 					</tbody> -->
-<!-- 				</table> -->
-<!-- 			</div> -->
-=======
 			<div class='col-1' style="border-right: solid 1px;"></div>
+<!-- 			--------------------------------------상영하는 컨텐츠의 이미지가 나오는 곳---------------------------------------------------------- -->
 			<div class='col-2'><span><img src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_185.JPG" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
+<!-- 		------------------------------------상영하는 컨텐츠의 정보------------------------------------------ -->
 			<div class='col-2' >
 			<div >
-			<!-- btn-left -->
-			
 			<div class='seatbar col-12' style=" height: 100%; margin-top:20%; margin-left:5%; font-size: 25px" >
 			
 				<div  style="display: block;">
@@ -172,9 +163,8 @@
 			</div>
 			
 			
-			<!-- btn-right -->
+		
 			
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		</div>
 			</div>
 			<div class='col-2' ></div>
