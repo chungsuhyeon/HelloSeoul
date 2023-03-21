@@ -164,26 +164,34 @@
 			var checkTd = checkTr.children(); // 장소코드있는 td	
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
-		
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
-		
+				
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
 			url: '/web/ajaxAddPlannerSchedule',
 			type: 'post',
-			data:{codeList:locDataList, no:no},
+			data:{codeList:locDataList},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				console.log(result);
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
+<<<<<<< HEAD
+							
+				$(result).each(function(index, list){
+					$(activeTab.getAttribute('href') + " table tbody").append(
+							`<tr>
+								<td style="width: 5%;">
+									<input type="checkbox" name="select_location" value="\${list.loc_pc}">
+									<input type="hidden" name="select_location_x" value="\${list.loc_x}">
+									<input type="hidden" name="select_location_y" value="\${list.loc_y}">
+=======
 				$(activeTab.getAttribute('href')).append(
 						`<table class='table table-hover'>
 							<tbody>
 							<tr class='table-light'>
 								<td style="width: 5%">
 									<input type="checkbox" name="select_location" value="?">
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 								</td>
 								<td style="display: inline-flex;">
 									<div class='timeseting' style="display: inline-flex; width: 20%">
@@ -212,6 +220,49 @@
 		}
 	} // updatePlan()
 	
+<<<<<<< HEAD
+	// 일정 제거
+	function deletePlan() {
+		var checkBox = $("input[name='select_location']:checked");
+				
+		checkBox.each(function(i){
+			var checkTr = checkBox.parent().parent().eq(i);
+			checkTr.remove();
+			console.log(i);
+		}); // checkBox.each
+		
+		// url의 no 가져오기
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+				
+		if($("table input[type='checkbox']").is(":checked")){
+			$("table input[type='checkbox']").prop('checked',false);
+		}
+	} // deletePlan()
+	
+	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+	function addMarker(position, idx, title) {
+		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+        imgOptions =  {
+            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+            offset : new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        },
+        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+        marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage,
+        });
+
+	    marker.setMap(map); // 지도 위에 마커를 표출합니다
+	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+	    
+	    return marker;
+	}
+	
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 </script>
 <!--JS Section End -->
 
@@ -255,7 +306,7 @@
 			<div class="main col-12" style="display: inline-flex;">
 			
 				<!--tab-->
-				<div class='tabbar col-5'>
+				<div class='tabbar col-5 bg-light'>
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
@@ -303,7 +354,7 @@
 						</div> -->
 					</div>	
 					<div class='settingbt'>
-						<button onclick="location.href='MyPagedreate.jsp;'">일정 제거</button>
+						<button onclick="deletePlan()">일정 제거</button>
 						<button class="create_planner_button" onclick="location.href='MyPageShow.jsp;'">플래너 저장</button>
 					</div>			
 				</div>
