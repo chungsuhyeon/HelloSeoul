@@ -12,6 +12,7 @@ import com.bit.web.vo.JoinSeoulBean;
 
 @Repository
 public class JoinSeoulDao extends SqlSessionDaoSupport {
+	
 	@Inject
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		super.setSqlSessionFactory(sqlSessionFactory);
@@ -32,13 +33,14 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 	 }
 	
 	public List<String> selectcontinent(String id){
-		return this.getSqlSession().selectList("selectcontinent", id);	
+		return this.getSqlSession().selectList("selectcontinent", id);
+		
 		//List<JoinSeoulContinenxtBean>
 	}
 	
 	public String getcontinent(String user_contient) {
 		System.out.println(user_contient);
-		return "";
+		return "";   
 	}
 		
 }	
