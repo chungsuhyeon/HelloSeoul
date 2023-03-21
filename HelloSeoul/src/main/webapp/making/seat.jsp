@@ -21,44 +21,49 @@
 
 <script type="text/javascript">
 	$(function() {
-<<<<<<< HEAD
-		var val4=[];
-		$("a#tiketing").click(function(){
-			
-			console.log($(".useseat.btn.btn-primary").val());
-			console.log(val4);
-		});
+
+		var arrIndex=0;
 		var val3=0;
-		var val5=0;
-=======
-		var val3=0;
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+		var seatArr=[];
 		$(".seat >button").click(function() {
-			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
-			console.log(action);
-			console.log($(this).val());
-<<<<<<< HEAD
-			val4[val5]=$(this).val();
-			val5++
-			console.log(val4);
-			
-// 			val4=$(this).val();
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
-				if(val3<action){
+				if(val3<Allperson){
 					++val3
+					seatArr[arrIndex]=$(this).val();
+					arrIndex++
+// 					console.log(seatArr);
 					$(this).attr('class','useseat btn btn-primary');
-				}else if(val3==action){
+					filtered  = seatArr.filter(function(item) {
+						 return item !== null && item !== undefined && item !== '';
+						});
+					console.log(filtered);
+					
+				}else if(val3==Allperson){
 					console.log("cant");
-					val3=action
+					val3=Allperson
 					alert("좌석을 다 고르셨습니다.");
+					filtered  = seatArr.filter(function(item) {
+						 return item !== null && item !== undefined && item !== '';
+						});
+// 					console.log(filtered);
 				}
 			}else if($(this).attr('class')=='useseat btn btn-primary'){
-				
 				--val3
-				$(this).attr('class','emptyeseat btn btn-outline-primary');	
 				
+				$(this).attr('class','emptyeseat btn btn-outline-primary');	
+				for (var i = 0; i < seatArr.length; i++) {
+					if(seatArr[i]===$(this).val()){
+						seatArr.splice(i,1);
+						
+					}
+				}
+			
+				filtered  = seatArr.filter(function(item) {
+					 return item !== null && item !== undefined && item !== '';
+					});
+				console.log(filtered);
+
 			}
 
 		});
@@ -208,12 +213,10 @@
 					<span >인원</span>
 					<span  title=""></span>
 				</div>
-			<div class="rn-05">
-									<a href='#' id="tiketing" class='rn-bb03'>예매하기</a>
-								</div>
+			
 				<div  title="극장선택" style="display: none;"></div>
 				<div class="rn-05">
-					<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+					<a href='#'  class='rn-bb03'>예매하기</a>
 				</div>
 			</div>
 			
