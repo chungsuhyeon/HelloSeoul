@@ -82,17 +82,11 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
-<<<<<<< HEAD
-		<div class='container-fluid bg-light' style="display: inline-flex;">
-			<div class='calender col-6'>
-			<h1>Calender</h1>
-  			</div>
-=======
 		<div class='container-fluid' style="display: inline-flex;">
 			<div class='col-6'>
  				<h1>Calender</h1>
 			</div>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+
 			<div class='col-6' style="margin-top: 180px; margin-bottom: 100px;">
  				<div class='moneytb'>
 					<table class='table table-hover'>
