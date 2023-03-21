@@ -16,9 +16,12 @@
 <!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel='stylesheet' type='text/css'
+	href='/web/resources/ticketDetail/New/Css/Dsub.css?v=20210628'>
 
 <script type="text/javascript">
 	$(function() {
+<<<<<<< HEAD
 		var val4=[];
 		$("a#tiketing").click(function(){
 			
@@ -27,15 +30,21 @@
 		});
 		var val3=0;
 		var val5=0;
+=======
+		var val3=0;
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		$(".seat >button").click(function() {
 			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			console.log(action);
 			console.log($(this).val());
+<<<<<<< HEAD
 			val4[val5]=$(this).val();
 			val5++
 			console.log(val4);
 			
 // 			val4=$(this).val();
+=======
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 				if(val3<action){
 					++val3
@@ -165,26 +174,26 @@
 			</div>
 			<div class='col-1' style="border-right: solid 1px;"></div>
 <!-- 			--------------------------------------상영하는 컨텐츠의 이미지가 나오는 곳---------------------------------------------------------- -->
-			<div class='col-2'><span><img src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86815/86815_185.JPG" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
+			<div class='col-2'><span><img src="${bookinginfo.imgsrc}" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
 <!-- 		------------------------------------상영하는 컨텐츠의 정보------------------------------------------ -->
 			<div class='col-2' >
 			<div >
 			<div class='seatbar col-12' style=" height: 100%; margin-top:20%; margin-left:5%; font-size: 25px" >
 			
 				<div  style="display: block;">
-					<span >제목:스즈메의 문단속(2D)</span>
+					<span >제목:${bookinginfo.title}</span>
 				</div>
 				
 				<div  style="display: block;">
-					<span  title="12세 관람가">관람등급:12세 관람가</span>
+					<span  title="12세 관람가">관람등급:${bookinginfo.grade}</span>
 				</div>
 				<div  style="display: block;">
-					<span  title="12세 관람가">상영시간:90분</span>
+					<span  title="12세 관람가">상영시간:${bookinginfo.runtime}</span>
 				</div>
 			
 				<div  style="display: block;">
 					<span >장소:</span>
-					<span><a target="_blank" style="width:100%;" onmousedown="javascript:logClick('SUMMARY/극장상세보기');" href="http://www.cgv.co.kr/theaters/?theaterCode=0001" title="CGV 강변">CGV 강변</a></span>
+					<span><a target="_blank" style="width:100%;">${bookinginfo.loc_name}</a></span>
 				</div>
 				<div style="display: block;">
 					<span >일시:</span>
@@ -203,6 +212,9 @@
 									<a href='#' id="tiketing" class='rn-bb03'>예매하기</a>
 								</div>
 				<div  title="극장선택" style="display: none;"></div>
+				<div class="rn-05">
+					<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+				</div>
 			</div>
 			
 			
