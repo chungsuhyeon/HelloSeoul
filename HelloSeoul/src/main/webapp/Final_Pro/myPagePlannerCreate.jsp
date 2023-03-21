@@ -18,10 +18,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("input[name='planner_shour']").blur(function(){
-			alert($(this).val());
-		});
-		
+				
 	});
 	
 	// 플래너 생성 로드시
@@ -198,7 +195,12 @@
 								</td>
 							</tr>`
 					);
-				}); // for문					
+				}); // for문	
+				
+				$("input[name='planner_shour']").blur(function(){
+					alert($(this).val());
+					alert("asdklfjasl;dkfja;sldkfjl;askdjf");
+				});
 				
 				// 지도에 순서대로 마커 뿌리기 (보류)
 			},
@@ -279,13 +281,10 @@
 	.div{
 		display:flex !important;
 	}
+	
  	input.form-control{ 
  		height: 50px !important; 
  	}
- 	
-/* 	tr.table-light { */
-/* 		height: 50px !important; */
-/* 	} */
 </style>
 <!-- Style Section End -->
 
