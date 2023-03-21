@@ -194,6 +194,7 @@
 <!-- 						</dd> -->
 					</dl>
 				</div>
+				
 				<div class="rn-05">
 					<a href='#' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
 				</div><!--rn-05-->					
