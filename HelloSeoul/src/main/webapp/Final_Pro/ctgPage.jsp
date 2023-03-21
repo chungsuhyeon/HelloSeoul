@@ -8,7 +8,7 @@
 <!-- Icon Error Begin-->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
-<title>Insert title here</title>
+<title>Insert title here1</title>
 <!--JS Section Begin -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68fb4c87ba8765d71119fecd40096446"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
