@@ -31,12 +31,17 @@ $(function(){
 
 
 </head>
-<footer class='footer container-fluid bg-primary'>
+<div class='footer container-fluid bg-primary' style="display: inline-flex;">
 	<div class='col-4'>
+	</div>
+	<div class='iconbar col-4' style="display: inline-flex;">
+		<div class='d-flex justify-content-center w-100'>
+			<a href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/icon/home.png"></a>
+			<a href="#"><img alt="" src="/web/resources/final_style/img/icon/up-arrow.png" style="margin-left: 50px; margin-right: 50px;"></a>
+			<a href="/web/myPageLoad"><img alt="" src="/web/resources/final_style/img/icon/user.png"></a>
+		</div>
 	</div>
 	<div class='col-4'>
 	</div>
-	<div class='col-4'>
-	</div>
-</footer>
+</div>
 </html>
