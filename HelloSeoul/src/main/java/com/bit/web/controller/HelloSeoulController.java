@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.MypageMainPlannerBean;
 
 @Controller
 public class HelloSeoulController {
@@ -275,7 +276,7 @@ public class HelloSeoulController {
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		int diffDate = end.compareTo(start);
-		plannerInfo.put("numDate", diffDate+1);
+		plannerInfo.put("numDate", diffDate + 1);
 		
 		return plannerInfo;
 	}
@@ -294,7 +295,13 @@ public class HelloSeoulController {
 		return helloDao.selectMainDbData(str);
 	}
 	
-	// 작성한 플래너 insert
+	// 작성한 플래너 insert / update
+	@PostMapping(value = "mainPlannerData")
+	public void formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @RequestParam(value = "loc_x") List<Float> loc_x) {
+		if(modi.equals("insert")) {
+			System.out.println("formMainPlannerAdd " + loc_x);
+		}
+	}
 
 	
 }
