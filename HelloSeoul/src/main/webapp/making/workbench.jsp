@@ -111,10 +111,10 @@ function check_id2(){
 				alert("login plz");
 				}
 			else{
-				$("button#bad").html("<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
-				$("button#good").html("<i class='glyphicon glyphicon-thumbs-up'></i>공감");
-				$("i#top-bad").html("");
-				$("i#top-good").html("");
+				$("button#good").html("<img alt='like' src='/web/resources/final_style/img/icon/like.png'>Good");
+				$("button#bad").html("<img alt='dislike' src='/web/resources/final_style/img/icon/dislike.png'>Bad");
+				$("span#top-bad").html("");
+				$("span#top-good").html("");
 				$.ajax({
 					type : 'POST',
 					url : '/web/goodAction',
@@ -127,8 +127,8 @@ function check_id2(){
 						$(p).each(function(index, x) {
 						$("button#good").append(x.GOOD);
 						$("button#bad").append(x.BAD);
-						$("i#top-bad").append(x.BAD);
-						$("i#top-good").append(x.GOOD);
+						$("span#top-bad").append(x.BAD);
+						$("span#top-good").append(x.GOOD);
 						});
 						},
 					error : function() {
@@ -137,44 +137,37 @@ function check_id2(){
 					});
 				}
 			});
-		$("button#bad")
-				.click(
-						function() {
-							if ($("input#user_id").val() == "") {
-								alert("login plz");
-							} else {
-								$("button#bad")
-										.html(
-												"<i class='glyphicon glyphicon-thumbs-down'></i>비공감");
-								$("button#good")
-										.html(
-												"<i class='glyphicon glyphicon-thumbs-up'></i>공감");
-								$("i#top-bad").html("");
-								$("i#top-good").html("");
-								$.ajax({
-									type : 'POST',
-									url : '/web/badAction',
-									data : {
-										com_no : $("input#com_no").val(),
-										user_id : $("input#user_id").val()
-									},
-									dataType : 'json',
-									success : function(p) {
-										$(p).each(function(index, x) {
-											$("button#good").append(x.GOOD);
-											$("button#bad").append(x.BAD);
-											//	 					console.log($("i#top-good").html("1"));
-											$("i#top-bad").append(x.BAD);
-											$("i#top-good").append(x.GOOD);
-										});
-									},
-									error : function() {
-										console.log("error");
-									}
-
-								});
-							}
+		$("button#bad").click(function() {
+			if ($("input#user_id").val() == ""){
+				alert("login plz");
+				}
+			else{
+				$("button#good").html("<img alt='like' src='/web/resources/final_style/img/icon/like.png'>Good");
+				$("button#bad").html("<img alt='dislike' src='/web/resources/final_style/img/icon/dislike.png'>Bad");
+				$("span#top-bad").html("");
+				$("span#top-good").html("");
+				$.ajax({
+					type : 'POST',
+					url : '/web/badAction',
+					data : {
+							com_no : $("input#com_no").val(),
+							user_id : $("input#user_id").val()
+							},
+					dataType : 'json',
+					success : function(p) {
+						$(p).each(function(index, x) {
+						$("button#good").append(x.GOOD);
+						$("button#bad").append(x.BAD);
+						$("span#top-bad").append(x.BAD);
+						$("span#top-good").append(x.GOOD);
 						});
+						},
+					error : function() {
+						console.log("error");
+						}
+					});
+				}
+			});
 	});
 </script>
 <!--JS Section End -->
@@ -233,8 +226,10 @@ function check_id2(){
 							<img alt="reple" src="/web/resources/final_style/img/icon/reple.png"> ${i.reply}
 							<img alt="hit" src="/web/resources/final_style/img/icon/hit.png"> ${i.com_hit}
 							<img alt="regdate" src="/web/resources/final_style/img/icon/regdate.png"> ${i.com_regdate}
-							<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png"> ${i.good}
-							<img alt="combad" src="/web/resources/final_style/img/icon/combad.png"> ${i.bad}
+							<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png">
+							<span id='top-good'>${i.good}</span>
+							<img alt="combad" src="/web/resources/final_style/img/icon/combad.png">
+							<span id='top-bad'>${i.bad}</span>
 						</span>
 					</div>
 					<div class='contentsbar' style="display: inline-flex; width: 100%;">
@@ -254,7 +249,7 @@ function check_id2(){
 							<img alt="like" src="/web/resources/final_style/img/icon/like.png">
 							Good ${i.good}
 						</button>
-						<button type="button" class="btn btn-warning">
+						<button type="button" class="btn btn-warning" id='bad'>
 							<img alt="dislike" src="/web/resources/final_style/img/icon/dislike.png">
 							Bad ${i.bad}
 						</button>
