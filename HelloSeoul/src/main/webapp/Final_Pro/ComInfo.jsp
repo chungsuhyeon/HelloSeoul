@@ -289,15 +289,15 @@ function check_id2(){
 			</fieldset>
 		</form>
 		<strong class="screen_out">전체 댓글</strong>
-		<input type="hidden" value="${i.rep_no }" id="rep_no">
 		<div id="replyboard">
 			<c:forEach items="${reply }" var="i">
+					<input type="hidden" value="${i.rep_no }" id="rep_no">
 					<input type="hidden" value="${i.user_id }" id="rep_user_id">
 				<div class="list_cmt">
 					<div class="cmt_head"></div>
 					<div class="cmt_body">
 										
-						<span class="info_append"> <span class="txt_name">${i.user_nick }</span>
+						<span class="info_append"> <span class="txt_name">${i.user_nizck }</span>
 							<span class="txt_bar">|</span> <span class="txt_time">${i.rep_regdate }
 						</span>
 						</span>
