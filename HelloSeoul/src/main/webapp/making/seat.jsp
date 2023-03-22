@@ -31,26 +31,12 @@
 				 return item !== null && item !== undefined && item !== '';
 				});
 			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered);
-			 
-// 			$.ajax({type : 'POST',
-// 			 	   url : '/web/ticketing',
-// 					data : {seatVal:filtered,
-// 							no:$("input#no").val(),	
-// 							user_id:$("input#user_id").val()
-// 					},
-// 					dataType : 'list',
-// 					success : function(p) {
-// 						console.log(p);
-						
-// 					},
-// 					error : function() {
-// 						console.log("error");
-// 					}
-
-// 				});
+			
 			
 		});
 		$(".seat >button").click(function() {
+			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
+				console.log("yes");
 			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 				if(val3<Allperson){
@@ -78,7 +64,9 @@
 				}
 
 			}
-
+			}else if($(this).attr('class')=='useseat btn btn-primary'){
+				alert('예약 불가능한 자리입니다');
+			}
 		});
 		var val1=0;
 		var val2=0;
@@ -179,28 +167,35 @@
 							<h3 style=" width: 5%;" >${i}</h3>
 							<div class="seat"style="width: 90%; display:flex;">
 							<c:forEach var='x' begin="0" end="9">
-
-							
-<!-- 							<button type="button" -->
-<!-- 											class="useseat btn btn-primary" -->
-<%-- 											style="margin: 1px;display: inline-flex; width: 10%; height:45px; " value="${i}${x}">${i}&nbsp;${x} </button> --%>
-
-							
- 							<button type="button"
+							<c:set var="xx" value="${i }${x }"></c:set>
+							<c:forEach var='tt' items="${seat}">
+								<c:if test="${xx == tt}">
+								<button type="button"
+											class="useseat btn btn-primary"
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x} </button>
+								<c:set var='k' value='${tt}'></c:set> 
+								</c:if>
+							</c:forEach>
+							<c:choose>
+							<c:when test="${xx ne k}">
+								<button type="button"
 											class="emptyeseat btn btn-outline-primary"					
-											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${i}${x}">${i}&nbsp;${x}</button> 
-						
-							
-						
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x}</button>
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
+							</c:choose>
+
+
 							</c:forEach>
 							</div>
 						</div>
 					</c:forEach>
-					${seat }
-					<c:forEach var="i" items="${seat }">
-					${i }
 					
-					</c:forEach>
+					<!-- ttt -->
+
+					<!-- ttt -->
+					
 					<c:forEach var="j" items="${seat }">
 					<c:set var="sea	" value="${j }"></c:set>
 					<c:forEach var="k" items="0,1,2,3,4,5,6,7,8">

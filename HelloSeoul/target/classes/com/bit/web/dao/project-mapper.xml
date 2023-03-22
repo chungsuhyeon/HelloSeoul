@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<update id="updateBoard" parameterType="com.bit.web.vo.ComBoard" >
 	update communityboard set com_no=#{com_no},user_id=#{user_id},com_ctg=#{com_ctg},com_title=#{com_title},com_cont=#{com_cont},com_filename=#{com_filename}
-	,com_hit=#{com_hit},com_redate=sysdate,user_nick=#{user_nick}
+	,com_hit=#{com_hit},com_regdate=sysdate,user_nick=#{user_nick}
 	 where com_no=#{com_no}
 	</update>
 	<select id="selectId" resultType="String" parameterType="String">
