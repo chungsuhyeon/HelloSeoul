@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <!DOCTYPE html>
 <html>
@@ -25,6 +25,31 @@
 		var arrIndex=0;
 		var val3=0;
 		var seatArr=[];
+		
+		$("a#tiketing").click(function(){
+			 filtered  = seatArr.filter(function(item) {
+				 return item !== null && item !== undefined && item !== '';
+				});
+			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered);
+			 
+// 			$.ajax({type : 'POST',
+// 			 	   url : '/web/ticketing',
+// 					data : {seatVal:filtered,
+// 							no:$("input#no").val(),	
+// 							user_id:$("input#user_id").val()
+// 					},
+// 					dataType : 'list',
+// 					success : function(p) {
+// 						console.log(p);
+						
+// 					},
+// 					error : function() {
+// 						console.log("error");
+// 					}
+
+// 				});
+			
+		});
 		$(".seat >button").click(function() {
 			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
@@ -32,21 +57,15 @@
 					++val3
 					seatArr[arrIndex]=$(this).val();
 					arrIndex++
-// 					console.log(seatArr);
+
 					$(this).attr('class','useseat btn btn-primary');
-					filtered  = seatArr.filter(function(item) {
-						 return item !== null && item !== undefined && item !== '';
-						});
-					console.log(filtered);
+
 					
 				}else if(val3==Allperson){
 					console.log("cant");
 					val3=Allperson
 					alert("좌석을 다 고르셨습니다.");
-					filtered  = seatArr.filter(function(item) {
-						 return item !== null && item !== undefined && item !== '';
-						});
-// 					console.log(filtered);
+
 				}
 			}else if($(this).attr('class')=='useseat btn btn-primary'){
 				--val3
@@ -55,14 +74,8 @@
 				for (var i = 0; i < seatArr.length; i++) {
 					if(seatArr[i]===$(this).val()){
 						seatArr.splice(i,1);
-						
 					}
 				}
-			
-				filtered  = seatArr.filter(function(item) {
-					 return item !== null && item !== undefined && item !== '';
-					});
-				console.log(filtered);
 
 			}
 
@@ -166,15 +179,34 @@
 							<h3 style=" width: 5%;" >${i}</h3>
 							<div class="seat"style="width: 90%; display:flex;">
 							<c:forEach var='x' begin="0" end="9">
-							<button type="button"
-											class="emptyeseat btn btn-outline-primary"
-											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${i}${x}">${i}&nbsp;${x}</button>
 
+							
+<!-- 							<button type="button" -->
+<!-- 											class="useseat btn btn-primary" -->
+<%-- 											style="margin: 1px;display: inline-flex; width: 10%; height:45px; " value="${i}${x}">${i}&nbsp;${x} </button> --%>
+
+							
+ 							<button type="button"
+											class="emptyeseat btn btn-outline-primary"					
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${i}${x}">${i}&nbsp;${x}</button> 
+						
+							
+						
 							</c:forEach>
 							</div>
 						</div>
 					</c:forEach>
+					${seat }
+					<c:forEach var="i" items="${seat }">
+					${i }
 					
+					</c:forEach>
+					<c:forEach var="j" items="${seat }">
+					<c:set var="sea	" value="${j }"></c:set>
+					<c:forEach var="k" items="0,1,2,3,4,5,6,7,8">
+					
+					</c:forEach>
+					</c:forEach>
 				</div>
 			</div>
 			<div class='col-1' style="border-right: solid 1px;"></div>
@@ -216,9 +248,12 @@
 			
 				<div  title="극장선택" style="display: none;"></div>
 				<div class="rn-05">
-					<a href='#'  class='rn-bb03'>예매하기</a>
+					<a href='#' id="tiketing" class='rn-bb03'>예매하기</a>
 				</div>
 			</div>
+			<input type="hidden" id="user_id" value="${user_id }">
+			<input type="hidden" id="no" value="${bookinginfo.no }">
+			
 			
 			
 		
