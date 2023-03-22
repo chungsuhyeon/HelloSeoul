@@ -17,10 +17,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-	<select id="selectcontinent" parameterType="String" resultType="String">
-		select country_name from nation
-        where continent = #{value}
-	</select>
+	<select id="selectcontinent" parameterType="String" resultType="java.util.HashMap">
+ 		select country_no, country_name from nation 
+         where continent = #{value} 
+ 	</select> 
+	
+	
+	
+	
+<!-- 	<select id="selectcontinent" parameterType="String" resultType="String"> -->
+<!-- 		select country_name from nation -->
+<!--         where continent = #{value} -->
+<!-- 	</select> -->
  
  
 

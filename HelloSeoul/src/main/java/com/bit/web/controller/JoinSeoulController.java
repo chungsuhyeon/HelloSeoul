@@ -1,5 +1,6 @@
 package com.bit.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,30 @@ public class JoinSeoulController {
 		// return "test";
 	}
 	
+	
+	// 대륙 해시맵으로 불러오기 
 	@PostMapping(value = "ajaxcontinent")	  
 	@ResponseBody
-	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-		System.out.println("controller"+id); 
+	public List<Object> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+//		System.out.println("controller"+id); 
+		//System.out.println(dao.selectcontinent(id));
 		//return "success";
-		//return dao.selectcontinent(id); 
 		return dao.selectcontinent(id);
-	  
-	  }
+	    }	
 	
+	
+	
+//	// 대륙 리스트로 불러오기 
+//	@PostMapping(value = "ajaxcontinent")	  
+//	@ResponseBody
+//	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+//		System.out.println("controller"+id); 
+//		//return "success";
+//		return dao.selectcontinent(id);
+//	    }
+//	
+//	
+//	
 
 	@PostMapping(value = "joinMemberInsert")
 	public String joinMemberInsert(JoinSeoulBean bean) {

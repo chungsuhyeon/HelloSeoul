@@ -1,5 +1,6 @@
 package com.bit.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,10 +33,11 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		return this.getSqlSession().selectOne("getJoinnation",user_nation);
 	 }
 	
-	public List<String> selectcontinent(String id){
+	public List<Object> selectcontinent(String id){
+//		System.out.println(id);
 		return this.getSqlSession().selectList("selectcontinent", id);
 		
-		//List<JoinSeoulContinenxtBean>
+		//List<Object>
 	}
 	
 	public String getcontinent(String user_contient) {

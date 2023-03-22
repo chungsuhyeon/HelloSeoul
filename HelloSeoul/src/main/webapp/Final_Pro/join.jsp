@@ -67,24 +67,28 @@ $(function(){
     /* ========================================================================================================*/      
      $("select#continent").change(function(){
     	 //alert('test');
-     	 alert($("select[name='continent']").val())
+//      	 alert($("select[name='continent']").val())
     	 let user_continent = $("select[name='continent']").val() 
       	   $.ajax({
     	    	  url:'/web/ajaxcontinent',
     	    	  type:'POST',
     	    	  data:{id:user_continent},
     	    	  contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-    	    	  dataType:'text',
+    	    	  dataType:'json',
     	    	  success:function(result){
-    	    		 alert(result);
-    	    		  //$(result).each(function(idx, list){
-    	    		  //	 console.log(list); 
-    	    		 for(let i =0; i < list(result).length; i++){
-    	    			 alert(result[i]);
-    	    		 } //for   
-    	    		 
+    	    		  
+//     	    		  console.log(result);
+    	    		  $(result).each(function(idx, list){
+    	    			  console.log(idx);
+    	    			  console.log(list);
+    	    			  console.log(list['COUNTRY_NAME']);
+    	    			  console.log(list['COUNTRY_NO']);
+    	    	      $("select#user_nation")		  
+    	    			  
+    	    		 	  
+    	    		  });
+
     	    	  },//success
-    	    	  
     	    	  error:function(){
 	   				 alert('error');
 	   			  }	//error
@@ -231,14 +235,14 @@ $(function(){
 								   </select>		 
 							</span>	&nbsp;&nbsp;&nbsp;		 
 							<span  style="display: inline-flex;width: 200px;">	 
-                                    <select class="form-select" name="user_nation" id="inputDefault">
-						                 <option selected="selected">Nation</option>
-										 <option value="1" type="text" id="미국">미국</option>
-										 <option value="7">러시아</option>
-										 <option value="33" type="text" id="프랑스">프랑스</option>
-										 <option value="34">스페인</option>
-										 <option value="44">영국</option>
-										 <option value="49">독일</option>										
+                                    <select class="form-select" name="user_nation" id="user_nation">
+<!-- 						                 <option selected="selected">Nation</option> -->
+<!-- 										 <option value="1" >미국</option> -->
+<!-- 										 <option value="7">러시아</option> -->
+<!-- 										 <option value="33" >프랑스</option> -->
+<!-- 										 <option value="34">스페인</option> -->
+<!-- 										 <option value="44">영국</option> -->
+<!-- 										 <option value="49">독일</option>										 -->
 									</select> 									 
 			  				</span>
 	  					</div>
@@ -263,9 +267,9 @@ $(function(){
   						<div>
 		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
   			  				      <select class="form-select" name="user_gender" id="inputDefault">
-						              <option selected="selected">성별</option>
-									  <option value="1">남자</option>
-									  <option value="2">여자</option>
+						              <option selected="selected">Gender</option>
+									  <option value="1">male</option>
+									  <option value="2">female</option>
 								</select>		  									  
 			  				</div>
 	  					</div>
