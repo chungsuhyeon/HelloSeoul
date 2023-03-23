@@ -95,12 +95,8 @@
 }
 
 /* customline */
-.headerline{
-	padding-bottom: 20px;
-	
-}
-.footerline{
-	padding-top: 20px;	
+section{
+	min-height: calc(100vh - (122px + 100px));
 }
 
 body {
