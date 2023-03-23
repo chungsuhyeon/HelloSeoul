@@ -94,6 +94,10 @@
   }
 }
 
+.section{
+	height: 3000px;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
