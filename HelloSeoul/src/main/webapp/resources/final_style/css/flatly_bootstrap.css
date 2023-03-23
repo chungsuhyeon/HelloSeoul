@@ -94,8 +94,13 @@
   }
 }
 
-.section{
-	height: 3000px;
+/* customline */
+.headerline{
+	padding-bottom: 20px;
+	
+}
+.footerline{
+	padding-top: 20px;	
 }
 
 body {
