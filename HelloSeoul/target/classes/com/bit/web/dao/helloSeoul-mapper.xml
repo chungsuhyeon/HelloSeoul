@@ -51,6 +51,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from maindb
 		where loc_pc in ${value}
 	</select>
+	
+	<insert id="plannerScheduleInsert" parameterType="mypageMainPlanner">
+		insert into mainplanner(planner_no, user_id, loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin)
+		values(#{planner_no}, #{user_id}, #{loc_pc}, #{loc_name}, #{loc_ctg1}, #{loc_ctg2}, #{loc_sg}, #{loc_x}, #{loc_y}, #{planner_date}, #{planner_shour}, #{planner_smin})
+	</insert>
 
 </mapper>
 

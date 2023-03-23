@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypageMainPlannerList;
 
 @Controller
 public class HelloSeoulController {
@@ -246,21 +248,23 @@ public class HelloSeoulController {
 			
 //			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
 //			return new ModelAndView(direct);
-			return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
+			return "redirect:/allPageLoad?no=" + no + "&modi=" + modi;
 		}
 //		return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
-		return "redirect:/createMainPlanner?modi=" + modi;
+		return "redirect:/allPageLoad?modi=" + modi;
 //		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 	
 	// 플래너 메인 생성 페이지 이동
-	@RequestMapping(value = "createMainPlanner")
+	@RequestMapping(value = "allPageLoad")
 	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
 		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
-		else { // 플래너 수정
+		else if(modi.equals("updatePlanner")) { // 플래너 수정
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		} else { // show 로드
+			return new ModelAndView("Final_Pro/myPageShow");
 		}
 	}
 	
@@ -297,11 +301,20 @@ public class HelloSeoulController {
 	
 	// 작성한 플래너 insert / update
 	@PostMapping(value = "mainPlannerData")
-	public void formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @RequestParam(value = "loc_x") List<Float> loc_x) {
+	@ResponseBody
+	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @ModelAttribute(value="MypageMainPlannerList") MypageMainPlannerList list) {
+		String user_id = (String) request.getSession().getAttribute("user_id");
+		
 		if(modi.equals("insert")) {
-			System.out.println("formMainPlannerAdd " + loc_x);
+			if(list.getMainPlannerList() != null) {
+				for(int i=0; i<list.getMainPlannerList().size(); i++) {
+					list.getMainPlannerList().get(i).setUser_id(user_id);
+					helloDao.plannerScheduleInsert(list.getMainPlannerList().get(i));
+				} // for문
+			} 
 		}
+		
+		return "success";
 	}
-
-	
+		
 }
