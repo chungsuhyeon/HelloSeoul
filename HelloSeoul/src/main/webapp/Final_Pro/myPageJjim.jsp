@@ -179,8 +179,8 @@
 			<div class='menu col-12'>
 				<!-- 뒤로가기 & 플래너 수정 버튼 -->
 				<ol class='breadcrumb'>
-					<li class='breadcrumb-item'><a href='/web/myPageLoad'>BACK</a></li>
-					<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>PLANNER CREATE</a></li>
+					<li class='breadcrumb-item'><a href='/web/myPageLoad'>My Page</a></li>
+					<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>Planner Create</a></li>
 				</ol>
 			</div>
 			<div class='main col-12' style="display: inline-flex;">	

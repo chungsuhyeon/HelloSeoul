@@ -94,6 +94,11 @@
   }
 }
 
+/* customline */
+section{
+	min-height: calc(100vh - (122px + 100px));
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

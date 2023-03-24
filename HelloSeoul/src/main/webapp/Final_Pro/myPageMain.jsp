@@ -92,11 +92,11 @@
 			<!-- Contents Div Box -->
 			<div class='contdivbox'>
 				<div>
-					<table class="loadMyPlanner table table-hover">
+					<table class="loadMyPlanner table table-hover" name="planner_no">
   						<thead>
     						<tr>
-      							<th>PlanTitle</th>
-      							<td>Happy Seoul Travel</td>
+      							<th>Planner Title</th>
+      							<td>planner_title</td>
     						</tr>
   						</thead>
   						<tbody>
@@ -109,7 +109,7 @@
     	  						<td>2023.03.03 ~ 2023.03.04</td>
     						</tr>
     						<tr>
-      							<th>Default</th>
+      							<th>Planner Memo</th>
       							<td>Column content</td>
     						</tr>
     						<tr>
@@ -118,92 +118,9 @@
     						</tr>
     					</tbody>
     				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<th>Column heading</th>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<th>Column heading</th>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<td>Happy Seoul Travel</td>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Location</th>
-      							<td>Seoul</td>
-    						</tr>
-    						<tr>
-	      						<th>Date</th>
-    	  						<td>2023.03.03 ~ 2023.03.04</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>				
+				</div>			
 			</div>
+			
 			<!-- Paging Button -->
 			<div class='pagingbox'>
 				<div>
