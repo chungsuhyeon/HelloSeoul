@@ -37,7 +37,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 //		System.out.println(id);
 		return this.getSqlSession().selectList("selectcontinent", id);
 		
-		//List<Object>
+	
 	}
 	
 	public String getcontinent(String user_contient) {

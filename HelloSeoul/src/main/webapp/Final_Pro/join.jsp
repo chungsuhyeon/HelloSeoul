@@ -52,11 +52,11 @@ $(function(){
 			   success:function(result){
 				  // console.log(result);
 				  if(result=='true'){
-					  $("span#sid").html("<font color='white'> email 중복입니다</font>");
+					  $("span#sid").html("<font color='white'> Duplicate email address</font>");
 					  $("input[name='user_id1']").val('');
 					  $("input[name='user_id1']").focus();
 				 }else{
-					 $("span#sid").html("<font color='white'>email 사용<br>가능합니다</font>")
+					 $("span#sid").html("<font color='white'>Available email address</font>")
 				 }
 			   },
 			   error:function(){
@@ -75,18 +75,21 @@ $(function(){
     	    	  data:{id:user_continent},
     	    	  contentType:'application/x-www-form-urlencoded; charset=UTF-8',
     	    	  dataType:'json',
-    	    	  success:function(result){
-    	    		  
+    	    	  success:function(result){  
 //     	    		  console.log(result);
-    	    		  $(result).each(function(idx, list){
-    	    			  console.log(idx);
-    	    			  console.log(list);
+//      	    		  console.log(result.length);
+   	    		  $(result).each(function(idx, list){
+//     	    			  console.log(idx);
+//     	    			  console.log(list);
     	    			  console.log(list['COUNTRY_NAME']);
-    	    			  console.log(list['COUNTRY_NO']);
-    	    	      $("select#user_nation")		  
-    	    			  
-    	    		 	  
-    	    		  });
+    	    			  console.log(list['COUNTRY_NO']); 	    	
+//     	    	     for(var i = 0 ;i<result.length ;i++){
+    	    			  var myNationName = list['COUNTRY_NAME'];
+       	    		      var myNationNo = list['COUNTRY_NO'];   
+     	    	         	    		        	        
+      	    	        	 $("select#user_nation").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
+//       	    	        }
+   	    		  });
 
     	    	  },//success
     	    	  error:function(){
@@ -96,8 +99,14 @@ $(function(){
     	         });//ajax      
      });//function     
     
-     /* ========================================================================================================*/     
+     /* ========================================================================================================*/    
+     
+   
+	
 
+     
+     
+    
  	   // 국적입력하면 전화번호에 국가번호 입력, 포커스 다음칸으로 
 		$("select[name='user_nation']").change(function(){
 	 		$("input[name='user_tel1']").val($("select[name='user_nation']").val());
@@ -121,6 +130,12 @@ $(function(){
 		        } 
 		   });
   
+		//입력정보 확인
+    	$("button#total_check").click(function(){
+			     window.open("/web/Final_Pro/joinCheck.jsp","확인","left=100,right= 200, top=200,width=400, height=400");
+
+			});
+    	
     	
 		 // 가입정보 저장  	   
 	   $("button#save").click(function(){ //값 유무 확인		   
@@ -151,6 +166,25 @@ $(function(){
 .form-control {
 	width: 40%;
 }
+</style>
+
+
+
+
+<style>
+    #wrapper{
+        width:300px;
+        margin:auto;
+    }
+    #txtContact{
+        width:fit-content;
+        margin:auto;
+    }
+    #btnSubmit{
+        width:100px;
+        margin:auto;
+        display:block;
+    }
 </style>
 <!-- Style Section End -->
 
@@ -297,10 +331,20 @@ $(function(){
 								 </select>		  								  
 			  				</div>
 	  					</div>
-	  					<br>		
-  				<div class="d-grid gap-2">
-  					<button class="btn btn-lg btn-primary mt-2" type="button" id="save">Join Button</button>
-  				</div>
+	  					
+			  		<div id="wrapper" style="background-color:green;">
+		                 <h1 id="txtContact"> Contact </h1>
+		                 <button type="submit" id="btnSubmit" > 완료 </button>
+		          </div> 					
+	  					
+  		
+				  		<div class="d-grid gap-2">
+					  		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  					          <button class="btn btn-lg btn-primary mt-2" type="button" id="total_check">check</button>
+	  						      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  					           <button class="btn btn-lg btn-primary mt-2" type="button" id="save"> summit</button>
+  					         </span>
+  			           </div>
 			</form>
 		</div>
 	</section>
