@@ -10,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MypageMainPlannerBean;
 
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
@@ -63,5 +64,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("selectMainDbData", codeList);
 	}
 	
+	// 생성한 일정 insert
+	public void plannerScheduleInsert(MypageMainPlannerBean bean) {
+		this.getSqlSession().insert("plannerScheduleInsert", bean);
+	}
 	
 }

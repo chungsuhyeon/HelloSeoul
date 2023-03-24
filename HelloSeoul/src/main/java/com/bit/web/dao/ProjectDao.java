@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.util.Hash;
 
@@ -123,6 +124,14 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public List<Object>  selectGBboard(int com_no) {
 		return this.getSqlSession().selectList("selectGBboard", com_no);
 	}
+	
+	public String insertSeatTable(SeatBoard board) {
+		return this.getSqlSession().selectOne("insertSeatTable",board);
+	}
+	public	List<Object> selectSeatTable(int no) {
+		return this.getSqlSession().selectList("selectSeatTable",no);
+	}
+	
 }
 
 

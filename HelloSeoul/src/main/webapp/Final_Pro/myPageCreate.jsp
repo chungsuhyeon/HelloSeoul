@@ -83,7 +83,7 @@
 						<thead>
 							<tr class="table-primary">
 								<th colspan="2">
-									<h4>Join</h4>
+									<h4>Planner Create</h4>
 								</th>
 							</tr>
 						</thead>
@@ -120,7 +120,7 @@
 							</tr>
 							<tr>
 								<td style="width:50%;">
-									<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="btn_submit">Submit</button>
+									<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="btn_submit">Create</button>
 								</td>
 								<td>
 									<button class="btn btn-lg btn-danger" type="button" style="width: 100%" id="btn_cancle">Cancel</button>

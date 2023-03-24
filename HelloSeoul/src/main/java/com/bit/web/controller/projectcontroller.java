@@ -1,12 +1,18 @@
 package com.bit.web.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.print.DocFlavor.STRING;
+import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.web.dao.ProjectDao;
+import com.bit.web.dao.TicketDao;
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.util.JSON;
 
@@ -26,6 +34,8 @@ import com.mongodb.util.JSON;
 public class projectcontroller {
 	@Resource
 	ProjectDao dao;
+	@Resource
+	TicketDao tkdao;
 	@PostMapping(value="boardInsert")
 	public String boardInsert(ComBoard board) {
 		board.setCom_no(dao.selectBoradNo());	
@@ -143,6 +153,35 @@ public class projectcontroller {
 			dao.badBoardMi(com_no);
 		}
 		return dao.selectGBboard(com_no);
+	}
+	@RequestMapping(value="ticketing")
+	public String ticketing(SeatBoard board,@RequestParam int no,@RequestParam String user_id ,@RequestParam(value="seatVal") List<String>seatVal,Model model) {
+		System.out.println(seatVal);
+		System.out.println(no);
+		System.out.println(user_id);
+		
+		for(String seat:seatVal) {
+			board.setNo(no);
+			board.setUser_id(user_id);
+			board.setSeat(seat);
+			dao.insertSeatTable(board);
+			System.out.println(board	);
+		}
+		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(no));
+		model.addAttribute("seat",seatVal2);
+		System.out.println(seatVal2);
+		
+//		System.out.println(dao.selectSeatTable(no));
+	      
+		return "/making/tiketok";
+		
+	}
+	@RequestMapping(value = "booking")
+	public String bookingSeat(int no,Model model) {
+		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(no));
+		model.addAttribute("seat",seatVal2);
+		model.addAttribute("bookinginfo",tkdao.selectBookingInfo(no));
+		return "making/seat";
 	}
 }
 	
