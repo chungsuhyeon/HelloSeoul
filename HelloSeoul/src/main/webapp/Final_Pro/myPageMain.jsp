@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,8 @@
 <script type="text/javascript">
 	$(function(){
 		$(".loadMyPlanner").click(function(){
-			location.href="/web/Final_Pro/myPageShow.jsp";
+			var no = $(this).parent().attr('name');
+			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 		}); // $(".loadMyPlanner").click
 				
 	}); // function
@@ -45,7 +47,7 @@
 	}
 	
 	table{
-		width: 450px !important;
+		width: 445px !important;
 		height : 350px !important;
 	}
 	
@@ -74,7 +76,7 @@
 						&nbsp;&nbsp;&nbsp;
 						Age : ${userInfo.USER_AGE}
 						&nbsp;&nbsp;&nbsp;
-						Purpose of visit : ${userInfo.USER_PP}
+						Tourism purpose : ${userInfo.USER_PP}
 						&nbsp;&nbsp;&nbsp;
 						1st place in tourism : ${userInfo.USER_FIRST}
 					</h4>
@@ -90,8 +92,8 @@
 			<!-- Contents Div Box -->
 			<div class='contdivbox'>
 				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
-					<div>
-						<table class="loadMyPlanner table table-hover" name="planner_no">
+					<div name="${i.PLANNER_NO}">
+						<table class="loadMyPlanner table table-hover">
 	<!--   						<thead> -->
 	<!--     						<tr> -->
 	<!--       							<th>Planner Title</th> -->
@@ -109,7 +111,7 @@
 	    						</tr>
 	    						<tr>
 		      						<th>Date</th>
-	    	  						<td>${substring(i.PLANNER_START, 0,10)} ~ ${i.PLANNER_END}</td>
+	    	  						<td>${fn:substringBefore(i.PLANNER_START, ' ')} ~ ${fn:substringBefore(i.PLANNER_END, ' ')}</td>
 	    						</tr>
 	    						<tr>
 	      							<th>Planner Memo</th>
