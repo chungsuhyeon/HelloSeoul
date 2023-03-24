@@ -2,6 +2,7 @@ package com.bit.web.controller;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -52,8 +53,8 @@ public class projectcontroller {
 		dao.hitAction(no);
 		model.addAttribute("info", dao.selectInfoBoard(no));
 		model.addAttribute("reply",dao.selectReply(no));
-		return "making/workbench";
-		//return "Final_Pro/ComInfo";
+
+		return "Final_Pro/ComInfo";
 	}
 	@RequestMapping(value="deleteCom")
 	public String deleteCom(int no,Model model,@RequestParam(value="user_id")String id) {
@@ -177,11 +178,24 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value = "booking")
-	public String bookingSeat(int no,Model model) {
+	public String bookingSeat(int no,Model model,String date,String time) {
+		System.out.println(date);
+		System.out.println(time);
 		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(no));
 		model.addAttribute("seat",seatVal2);
 		model.addAttribute("bookinginfo",tkdao.selectBookingInfo(no));
+		String realdate=date+" "+time;
+		model.addAttribute("date",realdate);
 		return "making/seat";
 	}
+	@RequestMapping (value = "contentImg")
+	public String ImgCheck(int no,Model model) {
+//		System.out.println("contentImg");
+//		System.out.println(imgsrc);
+		model.addAttribute("ticketinfo", tkdao.selectTicketInfo(no));
+		System.out.println(model);
+		return "making/dhTicketDetail";
+	}
+
 }
 	

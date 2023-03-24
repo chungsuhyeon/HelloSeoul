@@ -62,9 +62,11 @@
 						// tabContent
 						$("div.tab-content").append(
 								`<div class='tab-pane fade active show' id='Day\${i}' role='tabpanel'>
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
+									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm">
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
+									</form>
 								</div>`						
 						);
 					} else {
@@ -75,9 +77,11 @@
 						);
 						$("div.tab-content").append(
 								`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
+									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm">
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
+									</form>
 								</div>`						
 						);
 					}
@@ -166,7 +170,7 @@
 
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('no');
-				
+		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
 			url: '/web/ajaxAddPlannerSchedule',
@@ -177,40 +181,43 @@
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
 				let day_info = $(activeTab).attr('href');
-							
+				
+				var num = 0;
+
 				$(result).each(function(index, list){
-					$($(activeTab).attr('href') + " table tbody").append(
+					$($(activeTab).attr('href') + " form table tbody").append(
 							`<tr>
 								<td style="width: 5%;">
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 								</td>
-								<td style="display: inline-flex;">
-									<div class='timeseting' style="display: inline-flex; width: 30%">
-										<input type="number" class="form-control" placeholder="HH" name="planner_shour[]" id="planner_shour" min='0' max='23' required>
+								<td style="width:100%; display: inline-flex;">
+									<div class='timeseting' style="display: inline-flex; width: 40%">
+										<input type="number" class="form-control" placeholder="HH" name="mainPlannerList[\${num}].planner_shour" id="planner_shour" min='0' max='23' required>
 										<span>&nbsp; : &nbsp;</span>
-										<input type="number" class="form-control" placeholder="mm" name="planner_smin[]" id="planner_smin" min='0' max='59' required>
+										<input type="number" class="form-control" placeholder="mm" name="mainPlannerList[\${num}].planner_smin" id="planner_smin" min='0' max='59' required>
 									</div>
-									<div class='loctextline' style='width: 70%; margin-left: 20px;'>
+									<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 										<span>\${list.loc_name}</span>
-										<input type="text" name='planner_no' value="\${no}">
-										<input type="text" name='loc_name' value="\${list.loc_name}">
+										<input type="hidden" name='mainPlannerList[\${num}].planner_no' value="\${no}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_name' value="\${list.loc_name}">
 										<br>
 										<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
-										<input type="text" name="loc_pc" value="\${list.loc_pc}">
-										<input type="text" name='loc_sg' value="\${list.loc_sg}">
-										<input type="text" name='loc_ctg1' value="\${list.loc_ctg1}">
-										<input type="text" name='loc_ctg2' value="\${list.loc_ctg2}">
-										<input type="text" name="loc_x" value="\${list.loc_x}">
-										<input type="text" name="loc_y" value="\${list.loc_y}">
-										<input type="text" name="planner_date" value="\${day_info.substring(1)}">
+										<input type="hidden" name="mainPlannerList[\${num}].loc_pc" value="\${list.loc_pc}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_sg' value="\${list.loc_sg}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_ctg1' value="\${list.loc_ctg1}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_ctg2' value="\${list.loc_ctg2}">
+										<input type="hidden" name="mainPlannerList[\${num}].loc_x" value="\${list.loc_x}">
+										<input type="hidden" name="mainPlannerList[\${num}].loc_y" value="\${list.loc_y}">
+										<input type="hidden" name="mainPlannerList[\${num}].planner_date" value="\${day_info.substring(1)}">
 									</div>
 								</td>
 							</tr>`
 					);
-				}); // for문		
+					num += 1;
+				}); // for문	
 				
 				$("input#planner_shour").blur(function(){
-					if($(this).val() < 0 || $(this).val() > 24){
+					if($(this).val() < 0 || $(this).val() >= 24){
 						alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
 						$(this).val("");
 						$(this).focus();
@@ -219,7 +226,7 @@
 				});
 				
 				$("input#planner_smin").blur(function(){
-					if($(this).val() < 0 || $(this).val() > 60){
+					if($(this).val() < 0 || $(this).val() >= 60){
 						alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
 						$(this).val("");
 						$(this).focus();						
@@ -255,8 +262,10 @@
 	
 	// 생성한 플래너 저장
 	function storePlanner(){
-		const inputTimeMin = document.getElementsByClassName("form-control");
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
 		
+		const inputTimeMin = document.getElementsByClassName("form-control");
 		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다.
 		  for (let i = 0; i < inputTimeMin.length; i++) {
 		    if (!inputTimeMin[i].checkValidity()) {
@@ -265,7 +274,28 @@
 		    }
 		  }
 		
-		$("form[name='mypageMainPlannerFrm']").submit();
+		var forms = document.getElementsByName("mypageMainPlannerFrm");
+		
+		$(forms).each(function(idx, form){
+			var formData = $(form).serialize();
+			
+			$.ajax({
+				type:"POST",
+				url:form.action,
+				data: formData,
+				dataType: 'text',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				async:false,
+				success: function(result){
+				},
+				error: function(xhr, status, error) {
+					console.log("error : " + error);
+			    }
+			}); // ajax
+		}); // $(forms).each
+		
+		// show 페이지로 이동
+		document.location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 		
 	} // storePlanner()
 	
@@ -346,15 +376,15 @@
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
-					<form method="post" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm">
 						<!-- tab contents -->
+						
 						<div id='myTabContent border border-info-1' class='tab-content'>
 						</div>	
+						
 						<div class='settingbt'>
 							<button onclick="deletePlan()">일정 제거</button>
 							<button onclick="storePlanner()">플래너 저장</button>
 						</div>			
-					</form>				
 				
 				</div>
 				
