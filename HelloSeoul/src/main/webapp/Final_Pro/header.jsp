@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <!-- Icon Error Begin-->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
-
 <title>Hello, Seoul</title>
-
 <!--JS Section Begin -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -38,7 +34,6 @@ $(function(){
 });
 </script>
 <!--JS Section End -->
-
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
@@ -55,8 +50,6 @@ li div > a{
 }
 </style>
 <!-- Style Section End -->
-
-
 </head>
 <header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -75,31 +68,36 @@ li div > a{
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">FOOD</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="./ctgMain.jsp">koera</a>
-            <a class="dropdown-item" href="./ctgPage.jsp">china</a>
-            <a class="dropdown-item" href="./ctgPage.jsp">america</a>
-            <a class="dropdown-item" href="./ctgPage.jsp">japan</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=all">All</a>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=korea">korea</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=china">china</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=america">america</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=japan">japan</a>
             <a class="dropdown-item" href="/web/gotoctg?ctg=음식점">Search</a>
           </div>
         </li>
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">SHOPPING</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=all">All</a>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=korea">korea</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=china">china</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=america">america</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=japan">japan</a>
             <a class="dropdown-item" href="/web/gotoctg?ctg=상점">Search</a>
           </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">HOTSPOT</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=all">All</a>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=street">Street</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=cafe">Cafe</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=themapark">ThemaPark</a>
+            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=sports">Sports</a>
             <a class="dropdown-item" href="/web/gotoctg?ctg=볼거리">Search</a>
           </div>
         </li>

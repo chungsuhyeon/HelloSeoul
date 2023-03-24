@@ -18,14 +18,12 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("input[name='planner_shour']").blur(function(){
-			alert($(this).val());
-		});
-		
+				
 	});
 	
 	// 플래너 생성 로드시
 	$('document').ready(function(){
+		
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('no');
 		
@@ -64,9 +62,11 @@
 						// tabContent
 						$("div.tab-content").append(
 								`<div class='tab-pane fade active show' id='Day\${i}' role='tabpanel'>
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
+									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm">
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
+									</form>
 								</div>`						
 						);
 					} else {
@@ -77,9 +77,11 @@
 						);
 						$("div.tab-content").append(
 								`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
+									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm">
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
+									</form>
 								</div>`						
 						);
 					}
@@ -104,7 +106,7 @@
 							`<tr class="table-active">
 								<th scope="row"><input type="checkbox" name="select_location" value="\${list['loc_pc']}"></th>
 									<td>
-										<a href='#' id='local_name'>\${list['loc_name']}</a>
+										<a href='#' id='local_name' name='loc_name'>\${list['loc_name']}</a>
 										<br>
 										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
 									</td>
@@ -165,7 +167,10 @@
 			var checkTd = checkTr.children(); // 장소코드있는 td	
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
-				
+
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
 			url: '/web/ajaxAddPlannerSchedule',
@@ -175,32 +180,62 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
-							
+				let day_info = $(activeTab).attr('href');
+				
+				var num = 0;
+
 				$(result).each(function(index, list){
-					$(activeTab.getAttribute('href') + " table tbody").append(
+					$($(activeTab).attr('href') + " form table tbody").append(
 							`<tr>
 								<td style="width: 5%;">
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
-									<input type="hidden" name="select_location_x" value="\${list.loc_x}">
-									<input type="hidden" name="select_location_y" value="\${list.loc_y}">
 								</td>
-								<td style="display: inline-flex;">
-									<div class='timeseting' style="display: inline-flex; width: 20%">
-										<input type="text" class="form-control" placeholder="HH" name="planner_shour" id="inputDefault">
+								<td style="width:100%; display: inline-flex;">
+									<div class='timeseting' style="display: inline-flex; width: 40%">
+										<input type="number" class="form-control" placeholder="HH" name="mainPlannerList[\${num}].planner_shour" id="planner_shour" min='0' max='23' required>
 										<span>&nbsp; : &nbsp;</span>
-										<input type="text" class="form-control" placeholder="mm" name="planner_smin" id="inputDefault">
+										<input type="number" class="form-control" placeholder="mm" name="mainPlannerList[\${num}].planner_smin" id="planner_smin" min='0' max='59' required>
 									</div>
-									<div class='loctextline' style='width: 70%; margin-left: 10px;'>
+									<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 										<span>\${list.loc_name}</span>
+										<input type="hidden" name='mainPlannerList[\${num}].planner_no' value="\${no}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_name' value="\${list.loc_name}">
 										<br>
 										<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
+										<input type="hidden" name="mainPlannerList[\${num}].loc_pc" value="\${list.loc_pc}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_sg' value="\${list.loc_sg}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_ctg1' value="\${list.loc_ctg1}">
+										<input type="hidden" name='mainPlannerList[\${num}].loc_ctg2' value="\${list.loc_ctg2}">
+										<input type="hidden" name="mainPlannerList[\${num}].loc_x" value="\${list.loc_x}">
+										<input type="hidden" name="mainPlannerList[\${num}].loc_y" value="\${list.loc_y}">
+										<input type="hidden" name="mainPlannerList[\${num}].planner_date" value="\${day_info.substring(1)}">
 									</div>
 								</td>
 							</tr>`
 					);
-				}); // for문					
+					num += 1;
+				}); // for문	
+				
+				$("input#planner_shour").blur(function(){
+					if($(this).val() < 0 || $(this).val() >= 24){
+						alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
+						$(this).val("");
+						$(this).focus();
+						return false;
+					}
+				});
+				
+				$("input#planner_smin").blur(function(){
+					if($(this).val() < 0 || $(this).val() >= 60){
+						alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
+						$(this).val("");
+						$(this).focus();						
+						return false;
+					}
+				});
 				
 				// 지도에 순서대로 마커 뿌리기 (보류)
+				
 			},
 			error: function(){
 				alert("error : " + error);
@@ -219,11 +254,7 @@
 			let removeTr = iVal.parentElement.parentElement;
 			$(removeTr).remove();
 		}); // checkBox.each
-		
-		// url의 no 가져오기
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
-				
+						
 		if($("table input[name='planner_select_location']").is(":checked")){
 			$("table input[name='planner_select_location']").prop('checked',false);
 		}
@@ -231,19 +262,40 @@
 	
 	// 생성한 플래너 저장
 	function storePlanner(){
-// 		let inputTime = document.querySelectorAll("input.form-control");
-// 		console.log(inputTime);
-// 		return false;
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
 		
-// 		let inputTime = document.getElementsByClassName("form-control").val();
-// 		console.log(inputTime);
+		const inputTimeMin = document.getElementsByClassName("form-control");
+		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다.
+		  for (let i = 0; i < inputTimeMin.length; i++) {
+		    if (!inputTimeMin[i].checkValidity()) {
+		      alert("Please enter the schedule time");
+		      return false;
+		    }
+		  }
 		
-// 		var $inputTime = document.querySelector("input.form-control");
-// 		console.log($inputTime);
-
-		$("input.form-control").each(function(){
-			var text
-		});
+		var forms = document.getElementsByName("mypageMainPlannerFrm");
+		
+		$(forms).each(function(idx, form){
+			var formData = $(form).serialize();
+			
+			$.ajax({
+				type:"POST",
+				url:form.action,
+				data: formData,
+				dataType: 'text',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				async:false,
+				success: function(result){
+				},
+				error: function(xhr, status, error) {
+					console.log("error : " + error);
+			    }
+			}); // ajax
+		}); // $(forms).each
+		
+		// show 페이지로 이동
+		document.location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 		
 	} // storePlanner()
 	
@@ -279,9 +331,11 @@
 	.div{
 		display:flex !important;
 	}
- 	input.form-control{ 
- 		height: 50px !important; 
- 	}
+	
+  	input.form-control{
+  		height: 50px !important;
+/*   		width: 100px !important; */
+  	}
  	
 /* 	tr.table-light { */
 /* 		height: 50px !important; */
@@ -322,13 +376,16 @@
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
-					<!-- tab contents -->
-					<div id='myTabContent border border-info-1' class='tab-content'>
-					</div>	
-					<div class='settingbt'>
-						<button onclick="deletePlan()">일정 제거</button>
-						<button onclick="storePlanner()">플래너 저장</button>
-					</div>			
+						<!-- tab contents -->
+						
+						<div id='myTabContent border border-info-1' class='tab-content'>
+						</div>	
+						
+						<div class='settingbt'>
+							<button onclick="deletePlan()">일정 제거</button>
+							<button onclick="storePlanner()">플래너 저장</button>
+						</div>			
+				
 				</div>
 				
 				<!-- jjim bar -->

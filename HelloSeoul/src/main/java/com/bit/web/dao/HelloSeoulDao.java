@@ -10,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MypageMainPlannerBean;
 
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
@@ -26,6 +27,11 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	// 회원정보 (마이페이지 메인에 회원정보 출력하기 위함)
 	public HashMap<String, Object> getUserInfo(String id){
 		return this.getSqlSession().selectOne("getUserInfo", id);		
+	}
+	
+	// 회원이 생성했던 플래너 load
+	public List<Object> getUserPlanner(String id){
+		return this.getSqlSession().selectList("getUserPlanner", id);
 	}
 	
 	// 회원의 찜 리스트 검색
@@ -63,5 +69,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("selectMainDbData", codeList);
 	}
 	
+	// 생성한 일정 insert
+	public void plannerScheduleInsert(MypageMainPlannerBean bean) {
+		this.getSqlSession().insert("plannerScheduleInsert", bean);
+	}
 	
 }

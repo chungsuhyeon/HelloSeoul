@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <!DOCTYPE html>
 <html>
@@ -21,36 +21,31 @@
 
 <script type="text/javascript">
 	$(function() {
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		var arrIndex=0;
-<<<<<<< HEAD
 		var val4=[];
 		$("a#tiketing").click(function(){
 			
 			console.log($(".useseat.btn.btn-primary").val());
 			console.log(val4);
 		});
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+
 		var val3=0;
 		var seatArr=[];
-<<<<<<< HEAD
 		var val5=0;
 		var val3=0;
 
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+		$("a#tiketing").click(function(){
+			 filtered  = seatArr.filter(function(item) {
+				 return item !== null && item !== undefined && item !== '';
+				});
+			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered);
+			
+			
+		});
 		$(".seat >button").click(function() {
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
+			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
+				console.log("yes");
 			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
-<<<<<<< HEAD
-
 			var action=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 			console.log(action);
 			console.log($(this).val());
@@ -59,28 +54,20 @@
 			console.log(val4);
 			
 // 			val4=$(this).val();
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 				if(val3<Allperson){
 					++val3
 					seatArr[arrIndex]=$(this).val();
 					arrIndex++
-// 					console.log(seatArr);
+
 					$(this).attr('class','useseat btn btn-primary');
-					filtered  = seatArr.filter(function(item) {
-						 return item !== null && item !== undefined && item !== '';
-						});
-					console.log(filtered);
+
 					
 				}else if(val3==Allperson){
 					console.log("cant");
 					val3=Allperson
 					alert("좌석을 다 고르셨습니다.");
-					filtered  = seatArr.filter(function(item) {
-						 return item !== null && item !== undefined && item !== '';
-						});
-// 					console.log(filtered);
+
 				}
 			}else if($(this).attr('class')=='useseat btn btn-primary'){
 				--val3
@@ -89,17 +76,13 @@
 				for (var i = 0; i < seatArr.length; i++) {
 					if(seatArr[i]===$(this).val()){
 						seatArr.splice(i,1);
-						
 					}
 				}
-			
-				filtered  = seatArr.filter(function(item) {
-					 return item !== null && item !== undefined && item !== '';
-					});
-				console.log(filtered);
 
 			}
-
+			}else if($(this).attr('class')=='useseat btn btn-primary'){
+				alert('예약 불가능한 자리입니다');
+			}
 		});
 		var val1=0;
 		var val2=0;
@@ -200,15 +183,41 @@
 							<h3 style=" width: 5%;" >${i}</h3>
 							<div class="seat"style="width: 90%; display:flex;">
 							<c:forEach var='x' begin="0" end="9">
-							<button type="button"
-											class="emptyeseat btn btn-outline-primary"
-											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${i}${x}">${i}&nbsp;${x}</button>
+							<c:set var="xx" value="${i }${x }"></c:set>
+							<c:forEach var='tt' items="${seat}">
+								<c:if test="${xx == tt}">
+								<button type="button"
+											class="useseat btn btn-primary"
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x} </button>
+								<c:set var='k' value='${tt}'></c:set> 
+								</c:if>
+							</c:forEach>
+							<c:choose>
+							<c:when test="${xx ne k}">
+								<button type="button"
+											class="emptyeseat btn btn-outline-primary"					
+											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x}</button>
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
+							</c:choose>
+
 
 							</c:forEach>
 							</div>
 						</div>
 					</c:forEach>
 					
+					<!-- ttt -->
+
+					<!-- ttt -->
+					
+					<c:forEach var="j" items="${seat }">
+					<c:set var="sea	" value="${j }"></c:set>
+					<c:forEach var="k" items="0,1,2,3,4,5,6,7,8">
+					
+					</c:forEach>
+					</c:forEach>
 				</div>
 			</div>
 			<div class='col-1' style="border-right: solid 1px;"></div>
@@ -250,9 +259,12 @@
 			
 				<div  title="극장선택" style="display: none;"></div>
 				<div class="rn-05">
-					<a href='#'  class='rn-bb03'>예매하기</a>
+					<a href='#' id="tiketing" class='rn-bb03'>예매하기</a>
 				</div>
 			</div>
+			<input type="hidden" id="user_id" value="${user_id }">
+			<input type="hidden" id="no" value="${bookinginfo.no }">
+			
 			
 			
 		

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypageMainPlannerList;
 
 @Controller
 public class HelloSeoulController {
@@ -59,9 +62,10 @@ public class HelloSeoulController {
 	// mypage main
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request, Model model) {
+		String user_id = (String)request.getSession().getAttribute("user_id");
 
 		// 개인정보 넘기기		
-		HashMap<String, Object> userDBInfo = helloDao.getUserInfo((String)request.getSession().getAttribute("user_id"));
+		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(user_id);
 		
 		// DB 생일
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
@@ -126,7 +130,13 @@ public class HelloSeoulController {
 			break;
 		}
 		
-		model.addAttribute("userInfo", userInfo);		
+		model.addAttribute("userInfo", userInfo);
+		
+		// 생성된 플래너
+		List<Object> userCreatedPlanner = helloDao.getUserPlanner(user_id);
+		System.out.println(userCreatedPlanner);
+		model.addAttribute("userCreatedPlanner", userCreatedPlanner);
+		
 		return new ModelAndView("Final_Pro/myPageMain");
 	}
 	
@@ -245,21 +255,23 @@ public class HelloSeoulController {
 			
 //			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
 //			return new ModelAndView(direct);
-			return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
+			return "redirect:/allPageLoad?no=" + no + "&modi=" + modi;
 		}
 //		return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
-		return "redirect:/createMainPlanner?modi=" + modi;
+		return "redirect:/allPageLoad?modi=" + modi;
 //		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 	
 	// 플래너 메인 생성 페이지 이동
-	@RequestMapping(value = "createMainPlanner")
+	@RequestMapping(value = "allPageLoad")
 	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
 		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
-		else { // 플래너 수정
+		else if(modi.equals("updatePlanner")) { // 플래너 수정
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		} else { // show 로드
+			return new ModelAndView("Final_Pro/myPageShow");
 		}
 	}
 	
@@ -275,7 +287,7 @@ public class HelloSeoulController {
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		int diffDate = end.compareTo(start);
-		plannerInfo.put("numDate", diffDate+1);
+		plannerInfo.put("numDate", diffDate + 1);
 		
 		return plannerInfo;
 	}
@@ -294,7 +306,22 @@ public class HelloSeoulController {
 		return helloDao.selectMainDbData(str);
 	}
 	
-	// 작성한 플래너 insert
-
-	
+	// 작성한 플래너 insert / update
+	@PostMapping(value = "mainPlannerData")
+	@ResponseBody
+	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @ModelAttribute(value="MypageMainPlannerList") MypageMainPlannerList list) {
+		String user_id = (String) request.getSession().getAttribute("user_id");
+		
+		if(modi.equals("insert")) {
+			if(list.getMainPlannerList() != null) {
+				for(int i=0; i<list.getMainPlannerList().size(); i++) {
+					list.getMainPlannerList().get(i).setUser_id(user_id);
+					helloDao.plannerScheduleInsert(list.getMainPlannerList().get(i));
+				} // for문
+			} 
+		}
+		
+		return "success";
+	}
+		
 }
