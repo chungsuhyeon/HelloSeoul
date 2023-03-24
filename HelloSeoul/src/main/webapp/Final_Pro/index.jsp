@@ -34,7 +34,9 @@
 
 </head>
 <body>
+<header class='headerline'>
 <jsp:include page="header.jsp"></jsp:include>
+</header>
 	<section class='section'>
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   			<div class="carousel-indicators">
@@ -147,7 +149,7 @@
 			</div>
 		</div>
 	</section>
-	<footer>
+	<footer class='footerline'>
 	<jsp:include page="./footer.jsp"></jsp:include>
 	</footer>
 </body>
