@@ -21,14 +21,14 @@ public class TicketController {
 	private TicketDao dao;
 	private MusicalBean bean;
 
-	@RequestMapping (value = "contentImg")
-	public String ImgCheck(int no,Model model) {
+//	@RequestMapping (value = "contentImg")
+//	public String ImgCheck(int no,Model model) {
 //		System.out.println("contentImg");
 //		System.out.println(imgsrc);
-		model.addAttribute("ticketinfo", dao.selectTicketInfo(no));
-		System.out.println(model);
-		return "Final_Pro/TicketDetail";
-	}
+//		model.addAttribute("ticketinfo", dao.selectTicketInfo(no));
+//		System.out.println(model);
+//		return "Final_Pro/TicketDetail";
+//	}
 	
 	@RequestMapping (value = "musicalList")
 	public String musicallist(Model model) {
@@ -66,11 +66,11 @@ public class TicketController {
 		return "Final_Pro/Theatermain";
 	}
 	
-	@RequestMapping(value = "booking")
-	public String bookingSeat(int no,Model model) {
-		HashMap<String, Object>map=new HashMap<String, Object>();
-		model.addAttribute("bookinginfo", dao.selectBookingInfo(no));
-		return "making/seat";
-	}
+//	@RequestMapping(value = "booking")
+//	public String bookingSeat(int no,Model model) {
+//		HashMap<String, Object>map=new HashMap<String, Object>();
+//		model.addAttribute("bookinginfo", dao.selectBookingInfo(no));
+//		return "making/seat";
+//	}
 	
 }
