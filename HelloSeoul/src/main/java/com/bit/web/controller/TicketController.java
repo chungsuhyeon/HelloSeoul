@@ -21,14 +21,14 @@ public class TicketController {
 	private TicketDao dao;
 	private MusicalBean bean;
 
-	@RequestMapping (value = "contentImg")
-	public String ImgCheck(int no,Model model) {
+//	@RequestMapping (value = "contentImg")
+//	public String ImgCheck(int no,Model model) {
 //		System.out.println("contentImg");
 //		System.out.println(imgsrc);
-		model.addAttribute("ticketinfo", dao.selectTicketInfo(no));
-		System.out.println(model);
-		return "Final_Pro/TicketDetail";
-	}
+//		model.addAttribute("ticketinfo", dao.selectTicketInfo(no));
+//		System.out.println(model);
+//		return "Final_Pro/TicketDetail";
+//	}
 	
 	@RequestMapping (value = "musicalList")
 	public String musicallist(Model model) {
