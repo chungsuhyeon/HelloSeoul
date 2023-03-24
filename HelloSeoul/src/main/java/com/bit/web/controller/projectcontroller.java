@@ -155,22 +155,24 @@ public class projectcontroller {
 		}
 		return dao.selectGBboard(com_no);
 	}
+	
 	@RequestMapping(value="ticketing")
-	public String ticketing(SeatBoard board,@RequestParam int no,@RequestParam String user_id ,@RequestParam(value="seatVal") List<String>seatVal,Model model) {
+	public String ticketing(SeatBoard board,@RequestParam int no,@RequestParam String user_id ,@RequestParam(value="seatVal") List<String>seatVal,Model model,String rundate) {
 		System.out.println(seatVal);
 		System.out.println(no);
 		System.out.println(user_id);
-		
+		System.out.println(rundate);
 		for(String seat:seatVal) {
 			board.setNo(no);
 			board.setUser_id(user_id);
 			board.setSeat(seat);
+			board.setRundate(rundate);
 			dao.insertSeatTable(board);
 			System.out.println(board	);
 		}
-		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(no));
-		model.addAttribute("seat",seatVal2);
-		System.out.println(seatVal2);
+//		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable());
+//		model.addAttribute("seat",seatVal2);
+//		System.out.println(seatVal2);
 		
 //		System.out.println(dao.selectSeatTable(no));
 	      
@@ -178,13 +180,18 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value = "booking")
-	public String bookingSeat(int no,Model model,String date,String time) {
+	public String bookingSeat(int no,Model model,String date,String rundate) {
 		System.out.println(date);
-		System.out.println(time);
-		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(no));
+		System.out.println(rundate);
+		String realdate=date+" "+rundate;
+		HashMap<String, Object>map= new HashMap<String, Object>();
+		map.put("rundate", realdate);
+		map.put("no", no);
+		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(map));
+		System.out.println(seatVal2);
 		model.addAttribute("seat",seatVal2);
 		model.addAttribute("bookinginfo",tkdao.selectBookingInfo(no));
-		String realdate=date+" "+time;
+		
 		model.addAttribute("date",realdate);
 		return "making/seat";
 	}
