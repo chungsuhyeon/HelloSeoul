@@ -70,8 +70,6 @@
 				</div>
 				<div>
 					<h4>
-						Name : ${userInfo.USER_NAME}
-						&nbsp;&nbsp;&nbsp;
 						Nationality : ${userInfo.USER_NATION}
 						&nbsp;&nbsp;&nbsp;
 						Age : ${userInfo.USER_AGE}
@@ -91,34 +89,36 @@
 			</div>
 			<!-- Contents Div Box -->
 			<div class='contdivbox'>
-				<div>
-					<table class="loadMyPlanner table table-hover" name="planner_no">
-  						<thead>
-    						<tr>
-      							<th>Planner Title</th>
-      							<td>planner_title</td>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Location</th>
-      							<td>Seoul</td>
-    						</tr>
-    						<tr>
-	      						<th>Date</th>
-    	  						<td>2023.03.03 ~ 2023.03.04</td>
-    						</tr>
-    						<tr>
-      							<th>Planner Memo</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>			
+				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
+					<div>
+						<table class="loadMyPlanner table table-hover" name="planner_no">
+	<!--   						<thead> -->
+	<!--     						<tr> -->
+	<!--       							<th>Planner Title</th> -->
+	<!--       							<td>planner_title</td> -->
+	<!--     						</tr> -->
+	<!--   						</thead> -->
+	  						<tbody>
+	  							<tr>
+	      							<th>Planner Title</th>
+	      							<td>${i.PLANNER_TITLE}</td>
+	    						</tr>
+	    						<tr>
+	      							<th>Location</th>
+	      							<td>Seoul</td>
+	    						</tr>
+	    						<tr>
+		      						<th>Date</th>
+	    	  						<td>${substring(i.PLANNER_START, 0,10)} ~ ${i.PLANNER_END}</td>
+	    						</tr>
+	    						<tr>
+	      							<th>Planner Memo</th>
+	      							<td>${i.PLANNER_INFO}</td>
+	    						</tr>
+	    					</tbody>
+	    				</table>
+					</div>
+				</c:forEach>			
 			</div>
 			
 			<!-- Paging Button -->

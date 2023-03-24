@@ -78,7 +78,6 @@ public class HelloSeoulController {
 		
 		// 정보 넘길거
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NAME", userDBInfo.get("USER_NAME")); // 이름
 		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
 		
 		// 나이계산
