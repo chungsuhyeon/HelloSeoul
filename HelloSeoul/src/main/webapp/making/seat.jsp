@@ -31,7 +31,8 @@
 			 filtered  = seatArr.filter(function(item) {
 				 return item !== null && item !== undefined && item !== '';
 				});
-			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered);
+			 var rundate=$("span#rundate").text();
+			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered+"&rundate="+rundate);
 			
 			
 		});
@@ -212,8 +213,10 @@
 					
 					</c:forEach>
 					</c:forEach>
+				
 				</div>
 			</div>
+			
 			<div class='col-1' style="border-right: solid 1px;"></div>
 <!-- 			--------------------------------------상영하는 컨텐츠의 이미지가 나오는 곳---------------------------------------------------------- -->
 			<div class='col-2'><span><img src="${bookinginfo.imgsrc}" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
@@ -239,7 +242,7 @@
 				</div>
 				<div style="display: block;">
 					<span >일시:</span>
-					<span  title="2023.3.20(월) 20:25">${date }</span>
+					<span  title="2023.3.20(월) 20:25" id="rundate">${date }</span>
 				</div>
 				<div  style="display: block;">
 					<span >상영관:</span>
