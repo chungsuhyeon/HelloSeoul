@@ -29,6 +29,11 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("getUserInfo", id);		
 	}
 	
+	// 회원이 생성했던 플래너 load
+	public List<Object> getUserPlanner(String id){
+		return this.getSqlSession().selectList("getUserPlanner", id);
+	}
+	
 	// 회원의 찜 리스트 검색
 	public List<Object> getUserJjimList(String id){
 		return this.getSqlSession().selectList("getUserJjimList", id);

@@ -62,9 +62,10 @@ public class HelloSeoulController {
 	// mypage main
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request, Model model) {
+		String user_id = (String)request.getSession().getAttribute("user_id");
 
 		// 개인정보 넘기기		
-		HashMap<String, Object> userDBInfo = helloDao.getUserInfo((String)request.getSession().getAttribute("user_id"));
+		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(user_id);
 		
 		// DB 생일
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
@@ -129,7 +130,13 @@ public class HelloSeoulController {
 			break;
 		}
 		
-		model.addAttribute("userInfo", userInfo);		
+		model.addAttribute("userInfo", userInfo);
+		
+		// 생성된 플래너
+		List<Object> userCreatedPlanner = helloDao.getUserPlanner(user_id);
+		System.out.println(userCreatedPlanner);
+		model.addAttribute("userCreatedPlanner", userCreatedPlanner);
+		
 		return new ModelAndView("Final_Pro/myPageMain");
 	}
 	
