@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 <h1>
 예매완료
 

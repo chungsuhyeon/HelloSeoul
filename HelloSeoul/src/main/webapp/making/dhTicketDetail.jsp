@@ -67,6 +67,7 @@
 		$(document).ready(function() {
 			if (0 == "1") {
 				getExhbt();
+				
 			}
 		});
 
@@ -78,6 +79,7 @@
 				dataType : "html",
 				success : function(data, textStatus) {
 					if (data != "") {
+						
 						//$(".sec07").after(data)
 						$(".sec07").append(data)
 					}
@@ -97,7 +99,26 @@
 			$("div a#scrap").click(function() {
 				console.log("test");
 			});
+				var selecttm=0	
+			$("button#time").click(function(){
+					$("button#time").css("background-color", "");
+					$(this).css("background-color", "red");
+					var time=$(this).text();
+					var trimtime=time.trim();
+					$("input#realtime").val(trimtime);
+			});
 		});
+		
+		
+		
+		function jsf_pdi_GoPerfSale(){
+			
+			 var ticketno=$('#ticketinfono').val();
+			 var date=$('#period_1').val();
+			var time=$("input#realtime").val();
+			location.replace("/web/booking?no="+ticketno+"&date="+date+"&time="+time);
+		}
+		
 	</script>
 
 	<form name="mainForm" method="post"
@@ -121,8 +142,8 @@
 				height='0' width='0' style='display: none; visibility: hidden'></iframe>
 		</noscript>
 		<!-- End Google Tag Manager (noscript) -->
+</form>
 
-<form>
 		<div class="rnew-top-wrap">
 			<div class="rnew-top">
 				<div class="rntop-img">
@@ -214,6 +235,7 @@
 								<div class="rn-product-area1">
 									<!--등급, 관람시간, 출연, 가격, 혜택-->
 									<dl>
+									
 										<dt>등급</dt>
 										<dd>&nbsp;${ticketinfo.grade}</dd>
 										<dt>관람시간</dt>
@@ -259,174 +281,23 @@
 										</div>
 										<div class="rn-04-left-wrap">
 											<div class="rn-04-left-cal">
-												<!--캘린더-->
-												<div id="rncalendar" class="hasDatepicker">
-													<div
-														class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"
-														style="display: block;">
-														<div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
-															<a class="ui-datepicker-prev ui-corner-all ui-state-disabled" title="이전 달">
-															<span class="ui-icon ui-icon-circle-triangle-w">이전 달</span>
-																</a>
-																<a class="ui-datepicker-next ui-corner-all"	data-handler="next" data-event="click" title="다음 달">
-																<span class="ui-icon ui-icon-circle-triangle-e">다음 달</span>
-																</a>
-															<div class="ui-datepicker-title" align="center">
-															<span class="ui-datepicker-year">2023</span>
-															.&nbsp;
-															<span class="ui-datepicker-month">03</span>
-															</div>
-														</div>
-														<table class="ui-datepicker-calendar">
-															<thead>
-																<tr>
-																	<th scope="col" class="ui-datepicker-week-end"><span
-																		title="일">일</span></th>
-																	<th scope="col"><span title="월">월</span></th>
-																	<th scope="col"><span title="화">화</span></th>
-																	<th scope="col"><span title="수">수</span></th>
-																	<th scope="col"><span title="목">목</span></th>
-																	<th scope="col"><span title="금">금</span></th>
-																	<th scope="col" class="ui-datepicker-week-end"><span
-																		title="토">토</span></th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
-																	<td
-																		class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
-																	<td
-																		class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">1</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">2</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">3</span></td>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">4</span></td>
-																</tr>
-																<tr>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">5</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">6</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">7</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">8</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">9</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">10</span></td>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">11</span></td>
-																</tr>
-																<tr>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">12</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">13</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">14</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">15</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">16</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">17</span></td>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">18</span></td>
-																</tr>
-																<tr>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default"
-																		style="color: rgb(237, 64, 55);">19</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled  ui-datepicker-today"><span
-																		class="ui-state-default">20</span></td>
-																	<td
-																		class=" ui-datepicker-days-cell-over  ui-datepicker-current-day"
-																		data-handler="selectDay" data-event="click"
-																		data-month="2" data-year="2023"><a
-																		class="ui-state-default ui-state-active eveon"
-																		href="#">21</a></td>
-																	<td class=" " data-handler="selectDay"
-																		data-event="click" data-month="2" data-year="2023"><a
-																		class="ui-state-default eveon" href="#">22</a></td>
-																	<td class=" " data-handler="selectDay"
-																		data-event="click" data-month="2" data-year="2023"><a
-																		class="ui-state-default eveon" href="#">23</a></td>
-																	<td class=" " data-handler="selectDay"
-																		data-event="click" data-month="2" data-year="2023"><a
-																		class="ui-state-default eveon" href="#">24</a></td>
-																	<td class=" ui-datepicker-week-end "
-																		data-handler="selectDay" data-event="click"
-																		data-month="2" data-year="2023"><a
-																		class="ui-state-default eveon" href="#">25</a></td>
-																</tr>
-																<tr>
-																	<td class=" ui-datepicker-week-end "
-																		data-handler="selectDay" data-event="click"
-																		data-month="2" data-year="2023"><a
-																		class="ui-state-default eveon" href="#">26</a></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">27</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">28</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">29</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">30</span></td>
-																	<td
-																		class=" ui-datepicker-unselectable ui-state-disabled "><span
-																		class="ui-state-default">31</span></td>
-																	<td
-																		class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
+												캘린더
+												<jsp:include page="testmonth.jsp"></jsp:include>
+
 											</div>
-											<!--회차정보-->
+											회차정보
 											<div
 												class="rn-04-left-calist scroll-color mCustomScrollbar _mCS_2 mCS_no_scrollbar"
 												id="PerfPlayTime" style="height: 233px;">
-												<a href="#" idtime="1218909" title="오후 8시 00분"
-													onclick="jsf_pdi_ChangePlayTime('calendar','1218909','오후8시00분');"><span>1회</span>
-													오후 8시 00분</a>
-											</div>
+												<span>1회</span><button id="time">
+													오후 6시 00분</button></div>
+													<div
+												class="rn-04-left-calist scroll-color mCustomScrollbar _mCS_2 mCS_no_scrollbar"
+												id="PerfPlayTime" style="height: 233px;">
+													<span >2회</span><button id="time">
+													오후 8시 00분</button></div>
+													<input type="hidden" id="realtime" >
+											
 										</div>
 										<div class="rn-04-popbox" style="display: none; opacity: 0;">
 											<p class="rn-04-popbox-tit">본 상품은 관람 당일 예매가 가능한 상품입니다.</p>
@@ -449,7 +320,8 @@
 									<!-- 			</div> -->
 								</div>
 								<div class="rn-05">
-									<a href='/web/booking?no=${ticketinfo.no}' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
+								<input type="hidden" id="ticketinfono" value=${ticketinfo.no }>
+									<a href='#' onclick='jsf_pdi_GoPerfSale();' class='rn-bb03'>예매하기</a>
 								</div>
 								<!--포인트-->
 
