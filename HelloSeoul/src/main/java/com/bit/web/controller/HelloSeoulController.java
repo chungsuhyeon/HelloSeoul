@@ -144,7 +144,6 @@ public class HelloSeoulController {
 	public String mypageJjimListLoad(HttpServletRequest request){
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		List<Object> userJjimList = helloDao.getUserJjimList(user_id);
-//		System.out.println("HelloSeoulController mypageJjimListLoad userJjimList " + userJjimList);
 		
 		String finalStr = "";
 		String tab1 = "";
@@ -261,13 +260,10 @@ public class HelloSeoulController {
 	}
 		
 	// 메인 플래너 생성 페이지 로드
-	@PostMapping(value = "ajaxMypagePlannerCreate")
+	@PostMapping(value = "ajaxMypagePlannerTabBar")
 	@ResponseBody
-	public HashMap<String, Object> ajaxPlannerFirstCreate(HttpServletRequest request, @RequestParam(value = "no") int no) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("user_id", (String) request.getSession().getAttribute("user_id"));
-		map.put("no", no);
-		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(map);
+	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {
+		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(no);
 		
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -275,6 +271,14 @@ public class HelloSeoulController {
 		plannerInfo.put("numDate", diffDate + 1);
 		
 		return plannerInfo;
+	}
+	
+	
+	// 생성한 플래너의 일정
+	@PostMapping(value = "ajaxMypagePlannerTabContent")
+	@ResponseBody
+	public List<Object> ajaxPlannerTabContentSelect(@RequestParam(value = "no") int no){
+		return helloDao.mainPlannerDataSelect(no);
 	}
 	
 	// 메인 플래너 생성

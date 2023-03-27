@@ -125,11 +125,15 @@
 					htmlInner += `<tr class='table-light'>
 									<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
 									</tr>
-									<tr class='table-light'>
-										<td><span> 정보 : \${result.loc_info}</span>	</td>
-									</tr>
-								</tbody>
-							</table>`;
+									<tr class='table-light'>`;
+									
+					if(result.loc_info.startsWith('https')){
+						htmlInner += `<td><span> 정보 : </span> <a href="\${result.loc_info}" target="_blank">\${result.loc_info}</a>	</td>`
+					} else {
+						htmlInner += `<td><span> 정보 : \${result.loc_info}</span></td>`
+					}
+					
+					htmlInner += `</tr></tbody></table>`;
 					
 					$("div.detailbar").append(htmlInner);
 					

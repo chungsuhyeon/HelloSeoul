@@ -379,7 +379,7 @@
 						href='/web/contentImg?no=${i.no}'
 						title='${i.title}'><dl>
 								<dt>
-									${i.ranking }<span class='dash'>-</span>
+									${i.ranking}위<span class='dash'>-</span>
 								</dt>
 								<dd>
 									<img

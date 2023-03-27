@@ -30,11 +30,11 @@ public class sunrestcontroller {
 		return dao.showDb();
 	}
 	
-	@PostMapping(value = "searchFood")
-	public List<MainDbBean> searchFood(String loc_sg, int loc_ctg2, String query) {
+	@PostMapping(value = "searchList")
+	public List<MainDbBean> searchList(String loc_sg, String detailctg, String query) {
 		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		map.put("loc_sg", loc_sg);
-		map.put("loc_ctg2", loc_ctg2);
+		map.put("loc_ctg2", detailctg);
 		map.put("query", query);		
 		System.out.println(map);
 		System.out.println(dao.searchFood(map));

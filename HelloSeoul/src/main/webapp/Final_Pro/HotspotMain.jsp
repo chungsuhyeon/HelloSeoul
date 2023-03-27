@@ -36,7 +36,7 @@ $(function(){
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	<section class='section'>
-		<div class='container d-block'>
+		<div class='container d-block' >
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   				<div class="carousel-inner">
 				    <div class="carousel-item active">
@@ -86,7 +86,7 @@ $(function(){
 			<div class='infobar' style="">
 				<ul class='infocard' style="list-style: none; width: 100%; height: 800px;">
 					<c:forEach var='i' begin="0" end="7">
-					<a href="#">
+					<a href="/web/Final_Pro/HotspotInfo.jsp">
 						<li class='mb-4' style="float: left;">
 							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
 			  					<h3 class="card-header">Location Name</h3>
