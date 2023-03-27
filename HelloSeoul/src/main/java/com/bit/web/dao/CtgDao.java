@@ -35,8 +35,8 @@ public class CtgDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("readyForLocation");
 	}
 	//show table
-	public List<HashMap<Object, String>> readyForCategory(String loc_ctg1){
-		return this.getSqlSession().selectList("readyForCategory",loc_ctg1);
+	public List<HashMap<Object, String>> readyForCategory(){
+		return this.getSqlSession().selectList("readyForCategory");
 	}
 	
 	public MainDbBean searchInsertJjim(int loc_pc) {
