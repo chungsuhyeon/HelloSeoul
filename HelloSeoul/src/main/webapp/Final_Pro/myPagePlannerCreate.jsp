@@ -180,7 +180,6 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
-				let day_info = $(activeTab).attr('href');
 				
 				var num = 0;
 
@@ -363,9 +362,7 @@
 			
 			<!-- 플래너 타이틀 -->
 			<div class='col-12'>
-				<div class='col-6' style="display: inline-flex;" id="planTitle">
-<%--     				<span id="readOnlyInput" style="align-items: center">${plannerInfo.title}</span>			 --%>
-				</div>
+				<div class='col-6' style="display: inline-flex;" id="planTitle"></div>
 			</div>
 			
 			<!-- 메인 플래너 내용 -->	
