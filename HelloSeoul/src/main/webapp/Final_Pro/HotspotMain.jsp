@@ -86,7 +86,7 @@ $(function(){
 			<div class='infobar' style="">
 				<ul class='infocard' style="list-style: none; width: 100%; height: 800px;">
 					<c:forEach var='i' begin="0" end="7">
-					<a href="#">
+					<a href="/web/Final_Pro/HostspotInfo.jsp">
 						<li class='mb-4' style="float: left;">
 							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
 			  					<h3 class="card-header">Location Name</h3>

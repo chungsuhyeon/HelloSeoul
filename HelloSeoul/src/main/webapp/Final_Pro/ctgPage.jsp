@@ -151,7 +151,9 @@ function ajaxpro(sel){
 								`<table class='table'>
 									<tbody>
 										<tr>
-											<td rowspan="6" style="width: 300px;">장소사진</td>
+											<td rowspan="6" style="width: 300px;">
+											<img src='/web/resources/file_img/\${loc.loc_img}'>
+											</td>
 											<td class='table-light' style="width: 20%;">Locatin Name</td>
 											<td>\${loc.loc_name}</td>
 										</tr>
@@ -220,6 +222,12 @@ function ajaxpro2(jjimpoint){
 .infobar{
 	padding-left: 10px;
 }
+
+.infobar img{
+	object-fot:cover;
+ 	width: 100%;
+ 	height: 100%;
+	}
 </style>
 <!-- Style Section End -->
 </head>
