@@ -29,7 +29,7 @@
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
-			url: '/web/ajaxMypagePlannerCreate',
+			url: '/web/ajaxMypagePlannerTabBar',
 			type: 'post',
 			data: {no:no},
 			dataType: 'json',
@@ -180,6 +180,7 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
+				let day_info = $(activeTab).attr('href');
 				
 				var num = 0;
 
