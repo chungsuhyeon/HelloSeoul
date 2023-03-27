@@ -39,12 +39,6 @@
 </header>
 	<section class='section'>
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  			<div class="carousel-indicators">
-    			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-  			</div>
   			<div class="carousel-inner">
     			<div class="carousel-item active">
       				<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" class="d-block w-100" alt="...">
@@ -86,10 +80,13 @@
 		</div>
 		<div class='container-fluid' style="display: inline-flex;">
 			<div class='col-6'>
- 				<h1>Calender</h1>
+				<h1>Calander</h1>
+				<div class='mt-4' style="margin-right: 10px;">
+ 					<jsp:include page="../making/testmonth.jsp"></jsp:include>
+				</div>
 			</div>
 
-			<div class='col-6' style="margin-top: 180px; margin-bottom: 100px;">
+			<div class='col-6' style="margin-top: 80px; margin-bottom: 100px;">
  				<div class='moneytb'>
 					<table class='table table-hover'>
 						<thead>
@@ -118,33 +115,8 @@
 						</tbody>
 					</table>
 				</div>
-				<div class='populationtb'>
-					<table class='table'>
-						<thead>
-							<tr class='table-primary'>
-								<th>Nation</th>
-								<th>Population In</th>
-								<th>Population Out</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
+				<div>
+				<iframe src="https://kr.widgets.investing.com/live-currency-cross-rates?theme=darkTheme&pairs=13926,13925,13927,1915,13923,13924,1918,1919,1031410,1920,1921,1922,14486,1925,1926,13922,1928,1089823" width="100%" height="600" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe><div class="poweredBy" style="font-family: Arial, Helvetica, sans-serif;">Publisher<a href="https://kr.investing.com?utm_source=WMT&amp;utm_medium=referral&amp;utm_campaign=LIVE_CURRENCY_X_RATES&amp;utm_content=Footer%20Link" target="_blank" rel="nofollow">Investing.com</a></div>
 				</div>					 
 			</div>
 		</div>

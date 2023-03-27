@@ -43,7 +43,6 @@ $(function(){
 }
 .setbar > button{
 	margin-left: 10px;
-	margin-bottom: 50px;
 }
 li div > a{
 	font-size: 15px;
@@ -52,59 +51,24 @@ li div > a{
 <!-- Style Section End -->
 </head>
 <header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  	<div class='container-fluid'>
-    <a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/seoul_logo.png"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/web/Final_Pro/index.jsp">HOME
-<!--             <span class="visually-hidden">(current)</span> -->
-          </a>
-        </li>
-       <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">FOOD</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=all">All</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=korea">korea</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=china">china</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=america">america</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점&detail=japan">japan</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=음식점">Search</a>
-          </div>
-        </li>
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">SHOPPING</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=all">All</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=korea">korea</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=china">china</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=america">america</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점&detail=japan">japan</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=상점">Search</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">HOTSPOT</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=all">All</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=street">Street</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=cafe">Cafe</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=themapark">ThemaPark</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=핫플&detail=sports">Sports</a>
-            <a class="dropdown-item" href="/web/gotoctg?ctg=볼거리">Search</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/web/musicalList">TICKET</a>
-        </li>
-      </ul>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  		<div class='container-fluid'>
+    		<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/seoul_logo.png"></a>
+    		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      			<span class="navbar-toggler-icon"></span>
+    		</button>
+    		<div class="collapse navbar-collapse" id="navbarColor01">
+      			<ul class="navbar-nav me-auto">
+			    	<li class="nav-item">
+			        	<a class="nav-link" href="/web/gotoctg">Location</a>
+			        </li>
+			    	<li class="nav-item">
+			        	<a class="nav-link" href="/web/Final_Pro/HotspotMain.jsp">HotSpot</a>
+			        </li>
+        			<li class="nav-item">
+          				<a class="nav-link" href="/web/musicalList">TICKET</a>
+        			</li>
+      			</ul>
       <div class="setbar d-flex">
         	<button type="button" class="btn btn-dark" id="comm">Community</button>
        	<c:choose>
