@@ -326,7 +326,7 @@ function ajaxpro2(jjimpoint){
 			<script type="text/javascript">
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = { 
-    					center: new kakao.maps.LatLng(34.450701, 127.570667), // 지도의 중심좌표
+    					center: new kakao.maps.LatLng(37.555946, 126.97231716), // 지도의 중심좌표
     					level: 3 // 지도의 확대 레벨
 						};
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
