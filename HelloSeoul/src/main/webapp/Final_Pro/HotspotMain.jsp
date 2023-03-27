@@ -36,7 +36,7 @@ $(function(){
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	<section class='section'>
-		<div class='container d-block'>
+		<div class='container d-block' >
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   				<div class="carousel-inner">
 				    <div class="carousel-item active">
