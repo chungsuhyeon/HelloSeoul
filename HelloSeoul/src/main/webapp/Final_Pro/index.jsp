@@ -86,7 +86,7 @@
 				</div>
 			</div>
 
-			<div class='col-6' style="margin-top: 100px; margin-bottom: 100px;">
+			<div class='col-6' style="margin-top: 80px; margin-bottom: 100px;">
  				<div class='moneytb'>
 					<table class='table table-hover'>
 						<thead>
@@ -115,33 +115,8 @@
 						</tbody>
 					</table>
 				</div>
-				<div class='populationtb'>
-					<table class='table'>
-						<thead>
-							<tr class='table-primary'>
-								<th>Nation</th>
-								<th>Population In</th>
-								<th>Population Out</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
+				<div>
+				<iframe src="https://kr.widgets.investing.com/live-currency-cross-rates?theme=darkTheme&pairs=13926,13925,13927,1915,13923,13924,1918,1919,1031410,1920,1921,1922,14486,1925,1926,13922,1928,1089823" width="100%" height="600" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe><div class="poweredBy" style="font-family: Arial, Helvetica, sans-serif;">Publisher<a href="https://kr.investing.com?utm_source=WMT&amp;utm_medium=referral&amp;utm_campaign=LIVE_CURRENCY_X_RATES&amp;utm_content=Footer%20Link" target="_blank" rel="nofollow">Investing.com</a></div>
 				</div>					 
 			</div>
 		</div>
