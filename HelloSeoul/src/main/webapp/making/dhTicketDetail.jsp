@@ -115,8 +115,9 @@
 			
 			 var ticketno=$('#ticketinfono').val();
 			 var date=$('#period_1').val();
-			var time=$("input#realtime").val();
-			location.replace("/web/booking?no="+ticketno+"&date="+date+"&time="+time);
+			var rundate=$("input#realtime").val();
+			
+			location.replace("/web/booking?no="+ticketno+"&date="+date+"&rundate="+rundate);
 		}
 		
 	</script>

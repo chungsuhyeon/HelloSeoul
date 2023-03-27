@@ -128,8 +128,8 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public String insertSeatTable(SeatBoard board) {
 		return this.getSqlSession().selectOne("insertSeatTable",board);
 	}
-	public	List<Object> selectSeatTable(int no) {
-		return this.getSqlSession().selectList("selectSeatTable",no);
+	public	List<Object> selectSeatTable(HashMap<String, Object>map) {
+		return this.getSqlSession().selectList("selectSeatTable",map);
 	}
 	
 }
