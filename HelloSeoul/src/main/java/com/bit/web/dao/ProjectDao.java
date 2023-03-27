@@ -131,7 +131,9 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public	List<Object> selectSeatTable(HashMap<String, Object>map) {
 		return this.getSqlSession().selectList("selectSeatTable",map);
 	}
-	
+	public List<Object> selecttop3(){
+		return this.getSqlSession().selectList("selecttop3");
+	}
 }
 
 

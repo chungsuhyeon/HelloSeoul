@@ -1,5 +1,7 @@
 package com.bit.web.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,5 @@ public class ComBoard {
 	private int good;
 	private int bad;
 	private int reply;
+//	private MultipartFile file;
 }
