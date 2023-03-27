@@ -23,12 +23,55 @@ $(function(){
  		
 	});
 	
+	$('#foodctg').click(function(){
+		if($('#foodctg').val()=='food'){
+			$('#detailctg option').remove();
+			$('#detailctg').append(`
+					<option value="all">All</option>
+					<option value="korean">Korean</option>
+					<option value="chinese">Chinese</option>
+					<option value="weston">Weston</option>
+					<option value="japanese">Japanese</option>					
+					<option value="bar">Bar</option>					
+					<option value="etc">Etc</option>					
+					`);
+		}
+		else if($('#foodctg').val()=='tour'){
+			$('#detailctg option').remove();
+			$('#detailctg').append(`
+					<option value="all">All</option>
+					<option value="landmark">Landmark</option>
+					<option value="nature">Nature</option>
+					<option value="history">History</option>
+					<option value="etc">Etc</option>					
+					`);
+		}
+		else if($('#foodctg').val()=='shopping'){
+			$('#detailctg option').remove();
+			$('#detailctg').append(`
+					<option value="traditionalMarket">TraditionalMarket</option>
+					<option value="departmentstore">Departmentstore</option>
+					<option value="goodsstore">goodsstore</option>
+					<option value="etc">Etc</option>					
+					`);
+		}
+		else{
+			$('#detailctg option').remove();
+			$('#detailctg').append(`
+					<option value="nodata">Choose</option>				
+					`);
+		}
+		
+		
+	});	
+	
 	//search
 	$('.searchbt').click(function(){
-		if($('#locsg').val()=='choose'||$('#detailctg').val()=='all'||$('#query').val().length==0){
-	 		alert('plz!!!!!@!!!!!!!!!!!!');
+		if($('#locsg').val()=='choose'||$('#detailctg').val()==null||$('#query').val().length==0){
+	 		alert('Select Please');
 	 		return false;
-	 		}else{
+	 		}
+		else{
 	 			$.ajax({
 	 				type:'post',
 	 				url:'/web/searchList',
@@ -37,22 +80,28 @@ $(function(){
 	 						'query':$('#query').val()},
 	 				dataType:'json',
 	 				success : function(r){
-	 					$("#tablebd > tr").remove();
-	 					for(var x in r){
-		 					$("#tablebd").append(`
-		 							\${x}
-									<tr class='table-light'>
-										<td><input type="checkbox" id='jjim' value="\${r[x].loc_pc}"></td>
-										<td id="locname">\${r[x].loc_name}</td>
-									</tr>
-									`);
+	 					if(r[0]==null){
+	 						alert('No Search Data');
 	 					}
-	 					$('td#locname').click(function(){
-	 						var sel = $(this).text();
-	 						console.log(sel);
-	 						ajaxpro(sel);
-	 				 		
-	 					});
+	 					else{
+		 					$("#tablebd > tr").remove();
+		 					for(var x in r){
+			 					$("#tablebd").append(`
+			 							\${x}
+										<tr class='table-light'>
+											<td><input type="checkbox" id='jjim' value="\${r[x].loc_pc}"></td>
+											<td id="locname">\${r[x].loc_name}</td>
+										</tr>
+										`);
+		 					}
+		 					$('td#locname').click(function(){
+		 						var sel = $(this).text();
+		 						console.log(sel);
+		 						ajaxpro(sel);
+		 				 		
+		 					});
+	 					}
+
 	 				},
 	 				error : function(x){
 	 					alert("error!!");	
@@ -193,28 +242,14 @@ function ajaxpro2(jjimpoint){
 					<option value="${sg.kr_gu}">${sg.en_gu}</option>
 					</c:forEach>
 				</select>
+				<select class='form-select' id='foodctg'>
+					<option value="nodata">-----</option>
+					<option value="food">Food</option>
+					<option value="tour">Tour</option>
+					<option value="shopping">Shopping</option>
+				</select>
 				<select class='form-select' id='detailctg'>
-				<c:if test="${menuctg=='음식점'}">
-					<option value="all">All</option>
-					<option value="korea">Korea</option>
-					<option value="china">China</option>
-					<option value="america">America</option>
-					<option value="japan">Japan</option>
-				</c:if>
-				<c:if test="${menuctg=='상점'}">
-					<option value="all">All</option>
-					<option value="korea">Korea</option>
-					<option value="china">China</option>
-					<option value="america">America</option>
-					<option value="japan">Japan</option>
-				</c:if>
-				<c:if test="${menuctg=='핫플'}">
-					<option value="all">All</option>
-					<option value="street">Street</option>
-					<option value="cafe">Cafe</option>
-					<option value="themapark">ThemaPark</option>
-					<option value="sports">Sports</option>
-				</c:if>
+				
 				</select>
 			</div>
 			<div class='searchbar2 col-12' style="display: inline-flex;">

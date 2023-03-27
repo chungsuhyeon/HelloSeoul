@@ -18,7 +18,6 @@ public class Ctgcontroller {
 	@GetMapping(value = "gotoctg")
 	public String goToCtgPage(String ctg, String detail, Model model) {
 		model.addAttribute("locsg",dao.readyForLocation());
-		model.addAttribute("locinfo",dao.readyForCategory(ctg));
 		model.addAttribute("detail", detail);
 		model.addAttribute("menuctg", ctg);
 		return "Final_Pro/ctgPage";
