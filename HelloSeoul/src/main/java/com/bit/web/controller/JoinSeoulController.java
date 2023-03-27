@@ -18,15 +18,29 @@ public class JoinSeoulController {
 	@Autowired
 	private JoinSeoulDao dao;
 
-	@PostMapping(value = "ajaxFindID")
-	@ResponseBody
-	public String findId(@RequestParam(value = "id", required = false, defaultValue = "blue@bit.com") String id) {
-		System.out.println(id);
-		System.out.println(dao.ajaxGetId(id));
-		// return "ok";
-		return dao.ajaxGetId(id) != null ? String.valueOf(true) : String.valueOf(false);
-		// return "test";
-	}
+	
+// email 중복체크
+		@PostMapping(value = "ajaxFindID")
+		@ResponseBody
+		public String ajaxFindID(@RequestParam(value = "id", required = false, defaultValue = "blue@bit.com") String id) {
+			System.out.println(id);
+			System.out.println(dao.ajaxGetId(id));
+			// return "ok";
+			return dao.ajaxGetId(id) != null ? String.valueOf(true) : String.valueOf(false);
+			// return "test";
+		}
+	
+// nick name 중복체크
+		@PostMapping(value = "checkUsernick")
+		@ResponseBody
+		public String findId(@RequestParam(value = "nickname", required = false, defaultValue = "") String nickname) {
+			System.out.println("controll+"+nickname);
+			System.out.println(dao.getNick(nickname));
+			// return "ok";
+			return dao.getNick(nickname) != null ? String.valueOf(true) : String.valueOf(false);
+			// return "test";
+		}
+		
 	
 	
 	// 대륙 해시맵으로 불러오기 

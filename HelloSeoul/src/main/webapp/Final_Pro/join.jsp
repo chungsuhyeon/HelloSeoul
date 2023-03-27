@@ -18,25 +18,25 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
-	   // 아이디(이메일)등록
-	   $("select[name='user_id3']").change(function(){
-		   if($(this).val()=='direct'){
-			   //$("input[name='user_id2']").attr("disabled",false);
-			   //$("input[name='user_id2']").attr("readonly",false);
-			   $("input[name='user_id2']").removeAttr("readonly");
-			   $("input[name='user_id2']").val('');
-			   $("input[name='user_id2']").focus();
-		   }else{
-			   //$("input[name='user_id2']").attr("disabled",true);
-			   $("input[name='user_id2']").attr("readonly",true);
-			   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
-			 
-		   }			   
-	   });  // 아이디(이메일)등록
+	// email 등록
+		   $("select[name='user_id3']").change(function(){
+			   if($(this).val()=='direct'){
+				   //$("input[name='user_id2']").attr("disabled",false);
+				   //$("input[name='user_id2']").attr("readonly",false);
+				   $("input[name='user_id2']").removeAttr("readonly");
+				   $("input[name='user_id2']").val('');
+				   $("input[name='user_id2']").focus();
+			   }else{
+				   //$("input[name='user_id2']").attr("disabled",true);
+				   $("input[name='user_id2']").attr("readonly",true);
+				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
+				 
+		 		  }			   
+	 		  }); // email 등록
 
 
 
-           // 아이디 중복체크 
+    // email 중복체크 
            $("button#check").click(function(){
          	 // alert('test');
 	       //alert($("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val()));
@@ -52,19 +52,62 @@ $(function(){
 			   success:function(result){
 				  // console.log(result);
 				  if(result=='true'){
-					  $("span#sid").html("<font color='white'> Duplicate email address</font>");
+					  $("span#sid").html("<br><font color='red'>Disavailable</font>");
 					  $("input[name='user_id1']").val('');
 					  $("input[name='user_id1']").focus();
 				 }else{
-					 $("span#sid").html("<font color='white'>Available email address</font>")
+					 $("span#sid").html("<br><font color='white'>Available</font>")
+				 }
+			   },
+			   error:function(){
+				   alert('error');
+			   }			   
+			   }); 
+ 		   }); // email 중복체크
+      
+    
+      // nick name  중복체크 
+           $("button#userNick").click(function(){
+         	  //alert('test');	      
+	     
+	       let user_nick =$("input[name='user_nick']").val();	  
+	           alert($("input[name='user_nick']").val());
+	       $.ajax({
+			   url:'/web/checkUsernick',
+			   type:'POST',	
+			   data:{nickname:user_nick},
+			   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+			   dataType:'text',
+			   success:function(result){
+				  console.log(result);
+				  if(result=='true'){
+					  $("span#sid").html("<br><font color='red'>Disavailable★</font>");
+					  $("input[name='user_nick']").val('');
+					  $("input[name='user_nick']").focus();
+				 }else{
+					 $("span#sid").html("<br><font color='white'>Available★</font>")
 				 }
 			   },
 			   error:function(){
 				   alert('error');
 			   }			   
 		   }); 
-    }); // 아이디 중복체크
-    /* ========================================================================================================*/      
+       }); // nick name  중복체크  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
      $("select#continent").change(function(){
     	 //alert('test');
 //      	 alert($("select[name='continent']").val())
@@ -90,14 +133,13 @@ $(function(){
       	    	        	 $("select#user_nation").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
 //       	    	        }
    	    		  });
-
     	    	  },//success
     	    	  error:function(){
 	   				 alert('error');
 	   			  }	//error
     	    	 
     	         });//ajax      
-     });//function     
+          });//function     
     
      /* ========================================================================================================*/    
      
@@ -105,16 +147,7 @@ $(function(){
 	
 
      
-     
-    
- 	   // 국적입력하면 전화번호에 국가번호 입력, 포커스 다음칸으로 
-		$("select[name='user_nation']").change(function(){
-	 		$("input[name='user_tel1']").val($("select[name='user_nation']").val());
-	 		$("input[name='user_tel2']").focus();
-	 		$("input[name='user_tel1']").attr("disabled",true);
-	 		//alert($("select[name='user_nation1']").val());		
-    	}); //국적,국가번호 입력 
-	
+
 	  
     	//password 중복체크
 		   $("input[name='user_pw2']").blur(function(){ //포커스가 다른곳으로 가면 콜솔창에서 blur가 나온다 
@@ -170,21 +203,14 @@ $(function(){
 
 
 
-
+<!-- check,join button style -->
 <style>
-    #wrapper{
-        width:300px;
-        margin:auto;
-    }
-    #txtContact{
-        width:fit-content;
-        margin:auto;
-    }
-    #btnSubmit{
-        width:100px;
-        margin:auto;
-        display:block;
-    }
+.find-btn{
+	text-align: center;
+}
+.btn-primary mt-2{
+	display :inline-block;
+}
 </style>
 <!-- Style Section End -->
 
@@ -196,7 +222,7 @@ $(function(){
 	</header>
 	<section class=bg-light>
 		<div class='container bg-dark' style="width: 800px; margin-top: 20px; border-radius: 30px;">
-			<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  JOIN PAGE</h2>
+			<h2 align="center">JOIN PAGE</h2>
 			<form action="/web/joinMemberInsert" name="joinFrm" method="post">
 				<div class="form-group">
   					<label class="col-form-label mt-4" for="inputDefault">ID</label>
@@ -207,7 +233,7 @@ $(function(){
 			  				    <input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault">
 			  				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 			  				         <select class="form-select" name="user_id3" id="inputDefault">
-						                 <option selected="selected" value="direct">직접입력</option>
+						                 <option selected="selected" value="direct">Direct input</option>
 										 <option value="naver.com">naver.com</option>
 										 <option value="daum.net">daum.net</option>
 										 <option value="bit.com">bit.com</option>
@@ -217,7 +243,7 @@ $(function(){
 										 
 								<input type="hidden" class="form-control" name="user_id" id="inputDefault">	&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="d-grid gap-2">
-  										<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="check" type="button">중복체크<span id="sid"></</span></button>
+  										<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="check" type="button">Email-Check<span id="sid"></span></button>
   									</div>
 			  				</div>
 	  					</div>
@@ -225,7 +251,10 @@ $(function(){
   					<label class="col-form-label mt-4" for="inputDefault">Nick Name</label>
 	  					<div>
 		  				   	<div class="form-group" style="display: inline-flex;">
-			  					<input style="width: 400px;" type="text" class="form-control" placeholder="Nick Name" name="user_nick"  id="inputDefault">			  					
+			  					<input style="width: 400px;" type="text" class="form-control" placeholder="Nick Name" name="user_nick"  id="inputDefault">&nbsp;&nbsp;&nbsp;&nbsp;
+				  					<div class="d-grid gap-2">
+				  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="userNick" type="button">Nick-Check</button>
+				  					</div>			  					
 			  				</div>
 	  					</div>
 	  					
@@ -242,17 +271,7 @@ $(function(){
   						  	<!--   <input style="width: 400px;" type="hidden" name="user_pw"  class="form-control" id="inputDefault"> -->
   						    </div>
   						</div> 	  					
-  					
-  					<label class="col-form-label mt-4" for="inputDefault">Name</label>
-	  					<div>
-		  				   	<div class="form-group" style="display: inline-flex;">
-			  					<input type="text" class="form-control" name="user_name1" placeholder="First Name" id="inputDefault">
-			  					&nbsp;&nbsp;&nbsp;&nbsp;
-			  					<input type="text" class="form-control" name="user_name2" placeholder="Last Name" id="inputDefault">
-			  					<input type="hidden" class="form-control" name="user_name" id="user_name">
-		  					</div>
-	  					</div>  
-	  					
+  								
 
    				
   					<label class="col-form-label mt-4" for="inputDefault">Nation</label>
@@ -269,32 +288,13 @@ $(function(){
 								   </select>		 
 							</span>	&nbsp;&nbsp;&nbsp;		 
 							<span  style="display: inline-flex;width: 200px;">	 
-                                    <select class="form-select" name="user_nation" id="user_nation">
-<!-- 						                 <option selected="selected">Nation</option> -->
-<!-- 										 <option value="1" >미국</option> -->
-<!-- 										 <option value="7">러시아</option> -->
-<!-- 										 <option value="33" >프랑스</option> -->
-<!-- 										 <option value="34">스페인</option> -->
-<!-- 										 <option value="44">영국</option> -->
-<!-- 										 <option value="49">독일</option>										 -->
+                                    <select class="form-select" name="user_nation" id="user_nation">						                 
 									</select> 									 
 			  				</span>
-	  					</div>
-  					<label for="exampleSelect1" class="form-label mt-4">TelePhone</label><br>
-	  					<div class="form-group" style="display: inline-flex;">
-		  					<input style="width: 150px;" type="text" class="form-control" name="user_tel1" placeholder="Country Number" id="inputDefault">
-		  						<h4>&nbsp;&nbsp;-&nbsp;&nbsp;</h4>
-		      				<input style="width: 150px;" type="text" class="form-control" name="user_tel2" placeholder="First Number" id="inputDefault">
-		      					<h4>&nbsp;&nbsp;-&nbsp;&nbsp;</h4>
-		  					<input style="width: 150px;" type="text" class="form-control" name="user_tel3" placeholder="Middle Number" id="inputDefault">
-		  						<h4>&nbsp;&nbsp;-&nbsp;&nbsp;</h4>
-		  					<input style="width: 150px;" type="text" class="form-control" name="user_tel4" placeholder="Back Number" id="inputDefault">
-		  				    <input type="hidden" class="form-control" name="user_tel" placeholder="Back Number" id="inputDefault">
-	    				</div>
-	    				<br>
+	  					</div>  					
 
   					<label class="col-form-label mt-4" for="inputDefault">Birth</label>
-  						<input style="width: 450px;" name="user_birth" type="date" class="form-control">
+  						<input style="width: 450px;" name="user_birth" type="date" class="form-control"  >
   					<!-- <fieldset class="form-group"> -->
   					
   					<label class="col-form-label mt-4" for="inputDefault">Gender</label>
@@ -311,41 +311,34 @@ $(function(){
   						<div>
 		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
   			  				      <select class="form-select" name="user_pp" id="inputDefault">
-						              <option selected="selected">목적</option>
-									  <option value="1">관광</option>
-									  <option value="2">업무</option>
-									  <option value="3">학업</option>
-									  <option value="4">기타</option>
+						              <option selected="selected">Purpose</option>
+									  <option value="1">travel</option>
+									  <option value="2">business trip</option>
+									  <option value="3">study</option>
+									  <option value="4">etc</option>
 								 </select>		  									  
 			  				</div>
 	  					</div>
-	  					<label class="col-form-label mt-4" for="inputDefault">First</label>
+	  					<label class="col-form-label mt-4" for="inputDefault">Priority</label>
   						<div>
 		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
   			  				      <select class="form-select" name="user_first" id="inputDefault">
-						              <option selected="selected">우선순위</option>
-									  <option value="1">쇼핑</option>
-									  <option value="2">관광</option>	
-									  <option value="3">행사참여</option>
-									  <option value="4">기타</option>
+						              <option selected="selected">Priority</option>
+									  <option value="1">food</option>
+									  <option value="2">tour</option>	
+									  <option value="3">entertainment</option>
+									  <option value="4">etc</option>
 								 </select>		  								  
 			  				</div>
-	  					</div>
+	  					</div>				
 	  					
-			  		<div id="wrapper" style="background-color:green;">
-		                 <h1 id="txtContact"> Contact </h1>
-		                 <button type="submit" id="btnSubmit" > 완료 </button>
-		          </div> 					
 	  					
-  		
-				  		<div class="d-grid gap-2">
-					  		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	  					          <button class="btn btn-lg btn-primary mt-2" type="button" id="total_check">check</button>
-	  						      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  					           <button class="btn btn-lg btn-primary mt-2" type="button" id="save"> summit</button>
-  					         </span>
-  			           </div>
-			</form>
+	  			    	<div class="find-btn" >					  		 
+	  					          <button class="btn btn-lg btn-primary mt-2" type="button" id="total_check">check</button>	
+	  					          &nbsp;&nbsp;&nbsp;&nbsp;  						     
+  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save"> join up</button>
+  					    </div>					
+                </form>
 		</div>
 	</section>
 </body>

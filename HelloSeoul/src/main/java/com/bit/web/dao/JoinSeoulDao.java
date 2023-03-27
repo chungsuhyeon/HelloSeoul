@@ -19,11 +19,19 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	
-	public String ajaxGetId(String id) {
-		//System.out.println(id);
-		//System.out.println(this.getSqlSession().selectOne("ajaxGetId",id));
-		return this.getSqlSession().selectOne("ajaxGetId",id);
-	}
+//email 중복체크
+		public String ajaxGetId(String id) {
+			//System.out.println(id);
+			//System.out.println(this.getSqlSession().selectOne("ajaxGetId",id));
+			return this.getSqlSession().selectOne("ajaxGetId",id);
+		}
+		
+//Nick name 중복체크
+		public String getNick(String nickname) {
+			System.out.println("dao +"+nickname);
+			System.out.println(this.getSqlSession().selectOne("getNick +",nickname));
+			return this.getSqlSession().selectOne("getNick",nickname);
+		}
 	
 	public void insertMember(JoinSeoulBean bean) {
 		this.getSqlSession().insert("insertMember",bean);
