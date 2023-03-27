@@ -7,4 +7,5 @@ public class SeatBoard {
 	private int no;
 	private String user_id;
 	private String seat;
+	private String rundate;
 }

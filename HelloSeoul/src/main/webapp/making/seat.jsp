@@ -20,6 +20,7 @@
 	href='/web/resources/ticketDetail/New/Css/Dsub.css?v=20210628'>
 
 <script type="text/javascript">
+
 	$(function() {
 
 		var arrIndex=0;
@@ -30,43 +31,53 @@
 			 filtered  = seatArr.filter(function(item) {
 				 return item !== null && item !== undefined && item !== '';
 				});
-			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered);
+			 var rundate=$("span#rundate").text();
+			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered+"&rundate="+rundate);
 			
 			
 		});
+		//EMPTYSEAT=빈좌석,USERSEAT=예약된좌석,SUCCESS=선택한좌석
 		$(".seat >button").click(function() {
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
-				console.log("yes");
-			var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
-			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
-				if(val3<Allperson){
-					++val3
-					seatArr[arrIndex]=$(this).val();
-					arrIndex++
-
-					$(this).attr('class','useseat btn btn-primary');
-
+					console.log("yes");
+				var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
+				if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
+					if(val3<Allperson){
+						++val3
+						seatArr[arrIndex]=$(this).val();
+						arrIndex++
+	
+						$(this).attr('class','btn btn-success');
+	
+						
+					}else if(val3==Allperson){
+						console.log("cant");
+						val3=Allperson
+						alert("좌석을 다 고르셨습니다.");
+	
+					}
+				}else if($(this).attr('class')=='useseat btn btn-primary'){
+					--val3
 					
-				}else if(val3==Allperson){
-					console.log("cant");
-					val3=Allperson
-					alert("좌석을 다 고르셨습니다.");
-
+					$(this).attr('class','emptyeseat btn btn-outline-primary');	
+					for (var i = 0; i < seatArr.length; i++) {
+						if(seatArr[i]===$(this).val()){
+							seatArr.splice(i,1);
+						}
+					}
+	
 				}
 			}else if($(this).attr('class')=='useseat btn btn-primary'){
+				alert('예약 불가능한 자리입니다');
+			}else if($(this).attr('class')=='btn btn-success'){
 				--val3
-				
 				$(this).attr('class','emptyeseat btn btn-outline-primary');	
 				for (var i = 0; i < seatArr.length; i++) {
 					if(seatArr[i]===$(this).val()){
 						seatArr.splice(i,1);
 					}
 				}
-
-			}
-			}else if($(this).attr('class')=='useseat btn btn-primary'){
-				alert('예약 불가능한 자리입니다');
-			}
+		}
 		});
 		var val1=0;
 		var val2=0;
@@ -172,7 +183,7 @@
 								<c:if test="${xx == tt}">
 								<button type="button"
 											class="useseat btn btn-primary"
-											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x} </button>
+											style="margin: 1px;display: inline-flex; width: 60px; height:45px; " value="${xx}">${i}&nbsp;${x} </button>
 								<c:set var='k' value='${tt}'></c:set> 
 								</c:if>
 							</c:forEach>
@@ -180,7 +191,7 @@
 							<c:when test="${xx ne k}">
 								<button type="button"
 											class="emptyeseat btn btn-outline-primary"					
-											style="margin: 1px;display: inline-flex; width: 100%; height:45px; " value="${xx}">${i}&nbsp;${x}</button>
+											style="margin: 1px;display: inline-flex; width: 60px; height:45px; " value="${xx}">${i}&nbsp;${x}</button>
 							</c:when>
 							<c:otherwise>
 							</c:otherwise>
@@ -202,8 +213,10 @@
 					
 					</c:forEach>
 					</c:forEach>
+				
 				</div>
 			</div>
+			
 			<div class='col-1' style="border-right: solid 1px;"></div>
 <!-- 			--------------------------------------상영하는 컨텐츠의 이미지가 나오는 곳---------------------------------------------------------- -->
 			<div class='col-2'><span><img src="${bookinginfo.imgsrc}" alt="영화 포스터" style="margin-top:20%;display: inline; width: 100%;height: 80%; "></span></div>
@@ -229,7 +242,7 @@
 				</div>
 				<div style="display: block;">
 					<span >일시:</span>
-					<span  title="2023.3.20(월) 20:25">2023.3.20(월) 20:25</span>
+					<span  title="2023.3.20(월) 20:25" id="rundate">${date }</span>
 				</div>
 				<div  style="display: block;">
 					<span >상영관:</span>

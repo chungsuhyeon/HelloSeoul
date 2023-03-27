@@ -110,10 +110,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertSeatTable" parameterType="com.bit.web.vo.SeatBoard">
-	insert into seattable values(#{no},#{user_id},#{seat})
+	insert into seattable values(#{no},#{user_id},#{seat},#{rundate})
 	</insert>
-	<select id="selectSeatTable" resultType="String" parameterType="Integer">
-	select seat from seattable where no=#{value}
+	<select id="selectSeatTable" resultType="String" parameterType="HashMap">
+	select seat from seattable where no=#{no} and rundate=#{rundate}
 	
 	</select>
 	

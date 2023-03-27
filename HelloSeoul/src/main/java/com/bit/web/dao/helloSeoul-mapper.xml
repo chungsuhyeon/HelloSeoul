@@ -11,9 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUserInfo" parameterType="String" resultType="java.util.HashMap">
-		select *
+		select user_nick, user_nation, user_birth, user_gender, user_pp, user_first
 		from userboard 
 		where user_id = #{value}
+	</select>
+	
+	<select id="getUserPlanner" parameterType="String" resultType="java.util.HashMap">
+		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info
+		from planner
+		where user_id = #{value}
+		order by planner_no desc
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">

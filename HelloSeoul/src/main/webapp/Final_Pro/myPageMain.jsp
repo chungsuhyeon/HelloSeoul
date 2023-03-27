@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,8 @@
 <script type="text/javascript">
 	$(function(){
 		$(".loadMyPlanner").click(function(){
-			location.href="/web/Final_Pro/myPageShow.jsp";
+			var no = $(this).parent().attr('name');
+			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 		}); // $(".loadMyPlanner").click
 				
 	}); // function
@@ -45,7 +47,7 @@
 	}
 	
 	table{
-		width: 450px !important;
+		width: 445px !important;
 		height : 350px !important;
 	}
 	
@@ -70,13 +72,11 @@
 				</div>
 				<div>
 					<h4>
-						Name : ${userInfo.USER_NAME}
-						&nbsp;&nbsp;&nbsp;
 						Nationality : ${userInfo.USER_NATION}
 						&nbsp;&nbsp;&nbsp;
 						Age : ${userInfo.USER_AGE}
 						&nbsp;&nbsp;&nbsp;
-						Purpose of visit : ${userInfo.USER_PP}
+						Tourism purpose : ${userInfo.USER_PP}
 						&nbsp;&nbsp;&nbsp;
 						1st place in tourism : ${userInfo.USER_FIRST}
 					</h4>
@@ -91,119 +91,38 @@
 			</div>
 			<!-- Contents Div Box -->
 			<div class='contdivbox'>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<td>Happy Seoul Travel</td>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Location</th>
-      							<td>Seoul</td>
-    						</tr>
-    						<tr>
-	      						<th>Date</th>
-    	  						<td>2023.03.03 ~ 2023.03.04</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<th>Column heading</th>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<th>Column heading</th>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>
-				<div>
-					<table class="loadMyPlanner table table-hover">
-  						<thead>
-    						<tr>
-      							<th>PlanTitle</th>
-      							<td>Happy Seoul Travel</td>
-    						</tr>
-  						</thead>
-  						<tbody>
-    						<tr>
-      							<th>Location</th>
-      							<td>Seoul</td>
-    						</tr>
-    						<tr>
-	      						<th>Date</th>
-    	  						<td>2023.03.03 ~ 2023.03.04</td>
-    						</tr>
-    						<tr>
-      							<th>Default</th>
-      							<td>Column content</td>
-    						</tr>
-    						<tr>
-	      						<th>Default</th>
-    	  						<td>Column content</td>
-    						</tr>
-    					</tbody>
-    				</table>
-				</div>				
+				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
+					<div name="${i.PLANNER_NO}">
+						<table class="loadMyPlanner table table-hover">
+	<!--   						<thead> -->
+	<!--     						<tr> -->
+	<!--       							<th>Planner Title</th> -->
+	<!--       							<td>planner_title</td> -->
+	<!--     						</tr> -->
+	<!--   						</thead> -->
+	  						<tbody>
+	  							<tr>
+	      							<th>Planner Title</th>
+	      							<td>${i.PLANNER_TITLE}</td>
+	    						</tr>
+	    						<tr>
+	      							<th>Location</th>
+	      							<td>Seoul</td>
+	    						</tr>
+	    						<tr>
+		      						<th>Date</th>
+	    	  						<td>${fn:substringBefore(i.PLANNER_START, ' ')} ~ ${fn:substringBefore(i.PLANNER_END, ' ')}</td>
+	    						</tr>
+	    						<tr>
+	      							<th>Planner Memo</th>
+	      							<td>${i.PLANNER_INFO}</td>
+	    						</tr>
+	    					</tbody>
+	    				</table>
+					</div>
+				</c:forEach>			
 			</div>
+			
 			<!-- Paging Button -->
 			<div class='pagingbox'>
 				<div>

@@ -62,9 +62,10 @@ public class HelloSeoulController {
 	// mypage main
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request, Model model) {
+		String user_id = (String)request.getSession().getAttribute("user_id");
 
 		// 개인정보 넘기기		
-		HashMap<String, Object> userDBInfo = helloDao.getUserInfo((String)request.getSession().getAttribute("user_id"));
+		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(user_id);
 		
 		// DB 생일
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
@@ -77,7 +78,6 @@ public class HelloSeoulController {
 		
 		// 정보 넘길거
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NAME", userDBInfo.get("USER_NAME")); // 이름
 		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
 		
 		// 나이계산
@@ -106,30 +106,35 @@ public class HelloSeoulController {
 			userInfo.put("USER_PP", "experience"); // 경험
 			break;
 		default : 
-			userInfo.put("USER_PP", "Not selected");
+			userInfo.put("USER_PP", "etc");
 			break;
 		}
 		
 		// 관광 1순위
 		switch (user_first) {
 		case 1:
-			userInfo.put("USER_FIRST", "food"); // 음식점
+			userInfo.put("USER_FIRST", "food");
 			break;
 		case 2:
-			userInfo.put("USER_FIRST", "cultural experience");
+			userInfo.put("USER_FIRST", "tour");
 			break;
 		case 3:
 			userInfo.put("USER_FIRST", "shopping");
 			break;
 		case 4:
-			userInfo.put("USER_FIRST", "history tour");
+			userInfo.put("USER_FIRST", "entertainment");
 			break;
 		default : 
-			userInfo.put("USER_PP", "Not selected");
+			userInfo.put("USER_PP", "etc");
 			break;
 		}
 		
-		model.addAttribute("userInfo", userInfo);		
+		model.addAttribute("userInfo", userInfo);
+		
+		// 생성된 플래너
+		List<Object> userCreatedPlanner = helloDao.getUserPlanner(user_id);
+		model.addAttribute("userCreatedPlanner", userCreatedPlanner);
+		
 		return new ModelAndView("Final_Pro/myPageMain");
 	}
 	
@@ -254,20 +259,7 @@ public class HelloSeoulController {
 		return "redirect:/allPageLoad?modi=" + modi;
 //		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
-	
-	// 플래너 메인 생성 페이지 이동
-	@RequestMapping(value = "allPageLoad")
-	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
-		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
-			return new ModelAndView("Final_Pro/myPagePlannerCreate");
-		}
-		else if(modi.equals("updatePlanner")) { // 플래너 수정
-			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
-		} else { // show 로드
-			return new ModelAndView("Final_Pro/myPageShow");
-		}
-	}
-	
+		
 	// 메인 플래너 생성 페이지 로드
 	@PostMapping(value = "ajaxMypagePlannerCreate")
 	@ResponseBody
@@ -305,16 +297,27 @@ public class HelloSeoulController {
 	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @ModelAttribute(value="MypageMainPlannerList") MypageMainPlannerList list) {
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		
-		if(modi.equals("insert")) {
-			if(list.getMainPlannerList() != null) {
-				for(int i=0; i<list.getMainPlannerList().size(); i++) {
-					list.getMainPlannerList().get(i).setUser_id(user_id);
-					helloDao.plannerScheduleInsert(list.getMainPlannerList().get(i));
-				} // for문
-			} 
+		if(list.getMainPlannerList() != null) {
+			for(int i=0; i<list.getMainPlannerList().size(); i++) {
+				list.getMainPlannerList().get(i).setUser_id(user_id);
+				helloDao.plannerScheduleInsert(list.getMainPlannerList().get(i));
+			} // for문
 		}
 		
 		return "success";
+	}
+
+	// 플래너 메인 생성 페이지 이동
+	@RequestMapping(value = "allPageLoad")
+	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
+		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");
+		}
+		else if(modi.equals("updatePlanner")) { // 플래너 수정
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		} else { // show 로드
+			return new ModelAndView("Final_Pro/myPageShow");
+		}
 	}
 		
 }
