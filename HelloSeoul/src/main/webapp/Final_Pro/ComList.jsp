@@ -43,7 +43,9 @@ $(function(){
 <body>
 <jsp:include page="./header.jsp"></jsp:include>
 	<section class='section bg-light'>
+
 		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
+		<c:forEach var="i" items="${top3 }">
 			<div class='newcomm' style="display: inline-flex; position: relative;">
 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
 					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
@@ -51,25 +53,26 @@ $(function(){
 				</div>
 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
 					<!-- 커뮤니티 글 제목 태그 -->
-					<h3>Title Test line ...!!!!!</h3>
+					<h3>${i.com_title }</h3>
 				</div>
 			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<h3>Title Test line ...!!!!!</h3>
-				</div>
-			</div>
+			</c:forEach>
+<!-- 			<div class='newcomm' style="display: inline-flex; position: relative;"> -->
+<!-- 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;"> -->
+<!-- 					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;"> -->
+<!-- 				</div> -->
+<!-- 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px"> -->
+<!-- 					<h3>Title Test line ...!!!!!</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class='newcomm' style="display: inline-flex; position: relative;"> -->
+<!-- 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;"> -->
+<!-- 					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;"> -->
+<!-- 				</div> -->
+<!-- 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px"> -->
+<!-- 					<h3>Title Test line ...!!!!!</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
 			<div class='col-4'>
