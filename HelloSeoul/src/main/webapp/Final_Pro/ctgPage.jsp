@@ -151,31 +151,33 @@ function ajaxpro(sel){
 								`<table class='table'>
 									<tbody>
 										<tr>
-											<td rowspan="6" style="width: 300px;">장소사진</td>
-											<td style="width: 20%;">Locatin Name</td>
+											<td rowspan="6" style="width: 300px;">
+											<img src='/web/resources/file_img/\${loc.loc_img}'>
+											</td>
+											<td class='table-light' style="width: 20%;">Locatin Name</td>
 											<td>\${loc.loc_name}</td>
 										</tr>
 										<tr>
-											<td>Category</td>
+											<td class='table-light'>Category</td>
 											<td>\${loc.loc_ctg2}</td>
 										</tr>
 										<tr>
-											<td>Address</td>
+											<td class='table-light'>Address</td>
 											<td>\${loc.loc_addr}</td>
 										</tr>
 										<tr>
-											<td>영업시간</td>
+											<td class='table-light'>영업시간</td>
 											<td>\${loc.loc_op} ~ \${loc.loc_cl}</td>
 										</tr>
 										<tr>
-											<td>Tel</td>
+											<td class='table-light'>Tel</td>
 											<td>\${loc.loc_tel}</td>
 										</tr>
 										<tr>
-											<td>기타</td>
+											<td class='table-light'>기타</td>
 											<td>\${loc.loc_name}</td>
 										</tr>
-										<tr>
+										<tr class='table-primary'>
 											<td colspan="3" style="text-align: center;">장소정보</td>
 										</tr>
 										<tr>
@@ -191,10 +193,6 @@ function ajaxpro(sel){
 	});
 	
 }
-$('document').ready(function(){
-	$('#detailctg').val('${detail}').prop("selected",true);
-	
-});
 function ajaxpro2(jjimpoint){
 	$.ajax({
 		type:'post',
@@ -219,11 +217,17 @@ function ajaxpro2(jjimpoint){
 	padding-left: 10% !important;
 }
 .infobar tr td{
-	border : solid;
+	/* border : solid; */
 }
 .infobar{
 	padding-left: 10px;
 }
+
+.infobar img{
+	object-fot:cover;
+ 	width: 100%;
+ 	height: 100%;
+	}
 </style>
 <!-- Style Section End -->
 </head>
@@ -267,7 +271,7 @@ function ajaxpro2(jjimpoint){
 					</thead>
 					<tbody id="tablebd">
 					<!-- table body ajax -->
-						<c:forEach var="loc" items="${locinfo}" varStatus="cnt">
+						<c:forEach var="loc" items="${maindb}" varStatus="cnt">
 							<tr class='table-light'>
 								<td><input type="checkbox" id='jjim' value="${loc.LOC_PC}"></td>
 								<td id="locname">${loc.LOC_NAME}</td>
@@ -285,30 +289,30 @@ function ajaxpro2(jjimpoint){
 				<tbody>
 					<tr>
 						<td rowspan="6" style="width: 300px;">장소사진</td>
-						<td style="width: 20%;">장소명</td>
+						<td class='table-light' style="width: 20%;">장소명</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>세부 카테고리</td>
+						<td class='table-light'>세부 카테고리</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>장소주소</td>
+						<td class='table-light'>장소주소</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>영업시간</td>
+						<td class='table-light'>영업시간</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>전화번호</td>
+						<td class='table-light'>전화번호</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>기타</td>
+						<td class='table-light'>기타</td>
 						<td></td>
 					</tr>
-					<tr>
+					<tr class='table-primary'>
 						<td colspan="3" style="text-align: center;">장소정보</td>
 					</tr>
 					<tr>
@@ -317,12 +321,12 @@ function ajaxpro2(jjimpoint){
 				</tbody>
 			</table>
 		</div>
-		<div class="col-4">
+		<div class="col-4" style="margin-left: 10px;">
 			<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>	
 			<script type="text/javascript">
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = { 
-    					center: new kakao.maps.LatLng(34.450701, 127.570667), // 지도의 중심좌표
+    					center: new kakao.maps.LatLng(37.555946, 126.97231716), // 지도의 중심좌표
     					level: 3 // 지도의 확대 레벨
 						};
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다

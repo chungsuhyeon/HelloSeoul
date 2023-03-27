@@ -21,7 +21,6 @@ SELECT * FROM LOCATION_SIGUNGU
 <select id="readyForCategory" parameterType="String" resultType="java.util.HashMap">
 SELECT LOC_PC,LOC_NAME
 FROM MAINDB
-WHERE LOC_CTG1 = #{loc_ctg1}
 </select>
 
 
