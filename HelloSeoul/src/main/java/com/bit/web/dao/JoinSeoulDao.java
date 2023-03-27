@@ -28,8 +28,8 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		
 //Nick name 중복체크
 		public String getNick(String nickname) {
-			System.out.println("dao +"+nickname);
-			System.out.println(this.getSqlSession().selectOne("getNick +",nickname));
+			//System.out.println(nickname);
+			//System.out.println(this.getSqlSession().selectOne("getNick",nickname));
 			return this.getSqlSession().selectOne("getNick",nickname);
 		}
 	

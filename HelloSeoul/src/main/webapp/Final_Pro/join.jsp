@@ -32,81 +32,87 @@ $(function(){
 				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
 				 
 		 		  }			   
-	 		  }); // email 등록
+	 		  }); // email 등록-end
+	
 
+    // email 형식 및 중복체크
+	           $("button#check").click(function(){ 	        	   
+ 	        	   let user_id =$("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val(); 	        	 
+ 	        	   var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; ///^[0-9a-zA-Z]/: 이메일 주소의 첫 글자는 숫자나 알파벳으로 시작, /i : 대소문자 구분X
+ 	        	   //alert(user_id.match(pattern));	 		       
+	        	   if(user_id.match(pattern)==null){
+	        		   alert("올바른 형식요망 ex)seoul@gmail.com");
+	        		   $("input[name='user_id1']").val('');
+	        		   $("input[name='user_id1']").focus();
+	        		   $("input[name='user_id2']").val('');        		   
+	        	   }
+	        	   else{
+	     		       $.ajax({
+	     				   url:'/web/ajaxFindID',
+	     				   type:'POST',	
+	     				   data:{id:user_id},
+	     				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+	     				   dataType:'text',
+	     				   success:function(result){
+	     					  // console.log(result);
+	     					  if(result=='true'){
+	     						  $("span#sid").html("<br><font color='red'>Disavailable</font>");
+	     						  $("input[name='user_id1']").val('');
+	     						  $("input[name='user_id1']").focus();
+	     					 }else{
+	     						 $("span#sid").html("<br><font color='white'>Available</font>")
+	     					 }
+	     				   },
+	     				   error:function(){
+	     					   alert('error');
+	     				   }			   
+	     				   });	        	    
+	        	   }   
 
-
-    // email 중복체크 
-           $("button#check").click(function(){
-         	 // alert('test');
-	       //alert($("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val()));
-	       alert($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
-	       let user_id =$("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val();	  
-	       
-	       $.ajax({
-			   url:'/web/ajaxFindID',
-			   type:'POST',	
-			   data:{id:user_id},
-			   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-			   dataType:'text',
-			   success:function(result){
-				  // console.log(result);
-				  if(result=='true'){
-					  $("span#sid").html("<br><font color='red'>Disavailable</font>");
-					  $("input[name='user_id1']").val('');
-					  $("input[name='user_id1']").focus();
-				 }else{
-					 $("span#sid").html("<br><font color='white'>Available</font>")
-				 }
-			   },
-			   error:function(){
-				   alert('error');
-			   }			   
-			   }); 
- 		   }); // email 중복체크
-      
+	 		   }); //email 형식 및 중복체크-end
+	 		   
+	
     
       // nick name  중복체크 
-           $("button#userNick").click(function(){
-         	  //alert('test');	      
+	           $("button#userNick").click(function(){
+	         	  alert('test');	  	     
+		       let user_nick =$("input[name='user_nick']").val();	
+		       var pattern_nick = /^[a-zA-Z]{2,5}$/i;
+		       if(user_nick.match(pattern)==null){
+		    	   alert("5글자이하로")
+		       }else{
+		    	   alert("맞아 다음으로 ")
+		       }
+		       
+		       
+// 		          alert($("input[name='user_nick']").val());
+// 		       $.ajax({
+// 				   url:'/web/checkUsernick',
+// 				   type:'POST',	
+// 				   data:{nickname:user_nick},
+// 				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+// 				   dataType:'text',
+// 				   success:function(data){
+// 					  //console.log(data);
+// 					  if(data=='true'){
+// 						  $("span#nick").html("<br><font color='red'>Disavailable★</font>");
+// 						  $("input#user_nick").val('');
+// 						  $("input#user_nick").focus();
+// 					 }else{
+// 						 $("span#nick").html("<br><font color='white'>Available★</font>")
+// 					 }
+// 				   },
+// 				   error:function(){
+// 					   alert('error');
+// 				   }			   
+// 			   }); 
+	       }); // nick name  중복체크-end   
+	       
 	     
-	       let user_nick =$("input[name='user_nick']").val();	  
-	           alert($("input[name='user_nick']").val());
-	       $.ajax({
-			   url:'/web/checkUsernick',
-			   type:'POST',	
-			   data:{nickname:user_nick},
-			   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-			   dataType:'text',
-			   success:function(result){
-				  console.log(result);
-				  if(result=='true'){
-					  $("span#sid").html("<br><font color='red'>Disavailable★</font>");
-					  $("input[name='user_nick']").val('');
-					  $("input[name='user_nick']").focus();
-				 }else{
-					 $("span#sid").html("<br><font color='white'>Available★</font>")
-				 }
-			   },
-			   error:function(){
-				   alert('error');
-			   }			   
-		   }); 
-       }); // nick name  중복체크  
+	       
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+	       
     
      $("select#continent").change(function(){
     	 //alert('test');
@@ -251,9 +257,9 @@ $(function(){
   					<label class="col-form-label mt-4" for="inputDefault">Nick Name</label>
 	  					<div>
 		  				   	<div class="form-group" style="display: inline-flex;">
-			  					<input style="width: 400px;" type="text" class="form-control" placeholder="Nick Name" name="user_nick"  id="inputDefault">&nbsp;&nbsp;&nbsp;&nbsp;
+			  					<input style="width: 400px;" type="text" class="form-control" placeholder="Nick Name" name="user_nick"  id="user_nick">&nbsp;&nbsp;&nbsp;&nbsp;
 				  					<div class="d-grid gap-2">
-				  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="userNick" type="button">Nick-Check</button>
+				  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="userNick" type="button">Nick-Check<span id="nick"></span></button>
 				  					</div>			  					
 			  				</div>
 	  					</div>

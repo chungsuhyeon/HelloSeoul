@@ -33,9 +33,9 @@ public class JoinSeoulController {
 // nick name 중복체크
 		@PostMapping(value = "checkUsernick")
 		@ResponseBody
-		public String findId(@RequestParam(value = "nickname", required = false, defaultValue = "") String nickname) {
-			System.out.println("controll+"+nickname);
-			System.out.println(dao.getNick(nickname));
+		public String findNick(@RequestParam(value = "nickname", required = false, defaultValue = "") String nickname) {
+			//System.out.println(nickname);
+			//System.out.println(dao.getNick(nickname));
 			// return "ok";
 			return dao.getNick(nickname) != null ? String.valueOf(true) : String.valueOf(false);
 			// return "test";

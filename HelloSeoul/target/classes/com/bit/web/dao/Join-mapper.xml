@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--Nick name 중복체크 -->
 		<select id="getNick" parameterType="String" resultType="String">
 			select * from userboard
-			where user_nick =#{value}
+			where user_nick=#{value}
 		</select>
 
 
