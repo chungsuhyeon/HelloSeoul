@@ -122,7 +122,6 @@ $(function(){
 				
 			}
 		});
-		console.log(jjimpoint);
 		ajaxpro2(jjimpoint);
 	});
 });//functionload
@@ -200,7 +199,7 @@ function ajaxpro2(jjimpoint){
 		dataType:'text',
 		data: {'jjimpoint':jjimpoint},
 		success : function(r){
-			alert(r);
+			alert("same count :"+r);
 		},
 		error : function(x){
 			

@@ -30,6 +30,17 @@ FROM MAINDB
 WHERE LOC_PC = #{loc_pc}
 </select>
 
+<select id="checkJjimList" parameterType="String" resultType="Integer">
+SELECT LOC_PC
+FROM JJIM
+WHERE USER_ID = #{user_id}
+</select>
+
+<insert id="insertjjim" parameterType="mypageJjim">
+INSERT INTO JJIM(USER_ID,LOC_PC,LOC_NAME,LOC_CTG1,LOC_CTG2,LOC_SG)
+VALUES(#{user_id},#{loc_pc},#{loc_name},#{loc_ctg1},#{loc_ctg2},#{loc_sg})
+</insert>
+
 </mapper>
 
 

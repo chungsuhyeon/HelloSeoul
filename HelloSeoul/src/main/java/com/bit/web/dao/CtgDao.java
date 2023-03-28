@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MypageJjimBean;
 
 @Repository
 public class CtgDao extends SqlSessionDaoSupport{
@@ -41,5 +42,13 @@ public class CtgDao extends SqlSessionDaoSupport{
 	
 	public MainDbBean searchInsertJjim(int loc_pc) {
 		return this.getSqlSession().selectOne("searchInsertJjim",loc_pc);
+	}
+	
+	public List<Integer> checkJjimList(String user_id){
+		return this.getSqlSession().selectList("checkJjimList",user_id);
+	}
+	
+	public void insertjjim(MypageJjimBean bean) {
+		this.getSqlSession().insert("insertjjim", bean);
 	}
 }
