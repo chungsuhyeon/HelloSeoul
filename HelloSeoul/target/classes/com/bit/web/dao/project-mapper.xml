@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select communityboard_seq.nextval from dual
 	</select>
 	<select id="selectBoard" resultType="com.bit.web.vo.ComBoard" >
-	select * from communityboard
+	select * from communityboard order by com_no desc
 	</select>
 	<select id="selectInfoBoard" resultType="com.bit.web.vo.ComBoard" parameterType="Integer">
 	select * from communityboard where com_no=#{value}
@@ -115,6 +115,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectSeatTable" resultType="String" parameterType="HashMap">
 	select seat from seattable where no=#{no} and rundate=#{rundate}
 	
+	</select>
+	
+	<select id="selecttop3" resultType="com.bit.web.vo.ComBoard">
+		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3]]>
 	</select>
 	
 </mapper>
