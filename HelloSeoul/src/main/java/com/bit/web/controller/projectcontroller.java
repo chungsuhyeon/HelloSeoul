@@ -128,6 +128,7 @@ public class projectcontroller {
 		}
 		return "redirect:/infoSelect?no="+boardno;
 	}
+//	?
 	@RequestMapping(value="goodAction")
 	@ResponseBody
 	public List<Object> goodAction(int com_no,String user_id,gbboard board,HashMap<String, Object>map) {
