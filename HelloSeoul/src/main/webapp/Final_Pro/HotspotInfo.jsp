@@ -19,7 +19,34 @@
 
 <script type="text/javascript">
 $(function(){
+	$.ajax({
+		type:'post',
+		url:'/web/hotspotrecommend',
+		data:{'sg' : $('#sg').val() },
+		dataType:'json',
+		success : function(r){
+			for(var i=0;i<r.length;i++){
+				$('.cardbar').append(`
+						<a href='/web/gotoHotspotinfo?pc=\${r[i].loc_pc}'>
+						<li style="float: left;">
+						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
+							<h3 class='card-header'>\${r[i].loc_name}</h3>
+							<div class='card-body'>
+								<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">						
+							</div>
+						</div>
+						</li>
+						</a>
+						`);
+				
+			}
+			
+		},
+		error : function(x){
+			alert("error!");
+		}
 		
+	});
 });
 </script>
 <!--JS Section End -->
@@ -38,8 +65,9 @@ $(function(){
 	<section class='container'>
 		<div class='ctgbar'>
 			<div class='titlebar' style="text-align: center;">
-				<p>CateGoryName</p>
-				<p>Title</p>
+				<input type="hidden" id="sg" value="${info.loc_sg}">
+				<p>${info.loc_ctg2}</p>
+				<p>${info.loc_name}</p>
 				<p>Img Icon</p>
 			</div>
 			<hr class='hr-blurry'/>
@@ -51,21 +79,21 @@ $(function(){
 					<table>
 						<tr>
 							<td colspan='2'>
-							Contents
+							${info.loc_info}
 							</td>
 						</tr>
 						<tr>
-							<th>ColumnName</th>
-							<td>Contents</td>
+							<th>GU</th>
+							<td>${info.loc_sg}</td>
 						</tr>
 						<tr>
-							<th>ColumnName</th>
-							<td>Contents</td>
+							<th>Address</th>
+							<td>${info.loc_addr}</td>
 						</tr>
 						<tr>
-							<th>ColumnName</th>
-							<td>Contents</td>
-						</tr>
+							<th>Tel</th>
+							<td>${info.loc_tel}</td>
+						</tr> 
 						<tr>
 							<th>ColumnName</th>
 							<td>Contents</td>
@@ -86,30 +114,6 @@ $(function(){
 			<hr class='hr hr-blurry'/>
 			<div class='tobar'>
 				<ul class='cardbar' style="list-style-type: none;">
-					<li style="float: left;">
-						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
-							<h3 class='card-header'>Location Name</h3>
-							<div class='card-body'>
-								<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">						
-							</div>
-						</div>
-					</li>
-					<li style="float: left;">
-						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
-							<h3 class='card-header'>Location Name</h3>
-							<div class='card-body'>
-								<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">						
-							</div>
-						</div>
-					</li>
-					<li style="float: left;">
-						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
-							<h3 class='card-header'>Location Name</h3>
-							<div class='card-body'>
-								<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">						
-							</div>
-						</div>
-					</li>
 					<li style="float: left;">
 						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
 							<h3 class='card-header'>Location Name</h3>

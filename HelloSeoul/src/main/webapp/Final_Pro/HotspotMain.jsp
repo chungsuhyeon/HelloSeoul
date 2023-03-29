@@ -19,7 +19,27 @@
 
 <script type="text/javascript">
 $(function(){
-		
+	$('#searchbt').click(function(){
+		if($('#query').val().length!=0){
+			alert($('#query').val());
+			
+			$.ajax({
+				type: 'post',
+				url: '/web/searchHot',
+				data: {'query': $('#query').val()},
+				dataType: 'json',
+				success: function(s){
+					alert(s);
+				},
+				error: function(x){
+					alert("Error!");	
+				}
+			});
+			
+		}else{
+			alert("plz!");
+		}
+	});
 });
 </script>
 <!--JS Section End -->
@@ -79,22 +99,22 @@ $(function(){
 				</ol>
 				</div>
 				<div class='searchbar d-flex'>
-					<input type="text" class="form-control" id="query" placeholder="Location Name" value=" ">
-					<button type="button" class="btn btn-primary">Search</button>
+					<input type="text" class="form-control" id="query" placeholder="Location Name" value="">
+					<button type="button" class="btn btn-primary" id="searchbt">Search</button>
 				</div>
 			</div>
 			<div class='infobar' style="">
 				<ul class='infocard' style="list-style: none; width: 100%; height: 800px;">
-					<c:forEach var='i' begin="0" end="7">
-					<a href="/web/Final_Pro/HotspotInfo.jsp">
+					<c:forEach var='i' items="${hotspot}">
+						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">
 						<li class='mb-4' style="float: left;">
 							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
-			  					<h3 class="card-header">Location Name</h3>
+			  					<h3 class="card-header">${i.loc_name}</h3>
 			  					<div class='card-body'>
 									<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">
 			  					</div>
 			  					<div class="card-body">
-				    				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    				<p class="card-text">${i.loc_info}</p>
 				  				</div>
 				  				<div class="card-footer text-muted">
 			    				2 days ago

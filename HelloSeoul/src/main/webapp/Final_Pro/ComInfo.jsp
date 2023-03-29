@@ -237,7 +237,7 @@ function check_id2(){
 							${i.com_cont}
 						</div>
 						<div class='photobar col-6'>
-							<img alt="test" src="/web/resources/final_style/img/indexFood.jpg">
+							<img alt="test" src="/web/resources/test/${i.com_filename }">
 						</div>
 					</div>
 					<div class='settingbar col-12' style="display: inline-flex;">
