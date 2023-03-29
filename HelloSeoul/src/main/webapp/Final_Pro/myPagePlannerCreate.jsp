@@ -185,27 +185,28 @@
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 								</td>
 								<td>
-								<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
-									<div class='timeseting' style="display: inline-flex; width: 40%">
-										<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' required>
-										<span>&nbsp; : &nbsp;</span>
-										<input type="number" class="form-control" placeholder="mm" name="planner_smin" id="planner_smin" min='0' max='59' required>
-									</div>
-									<div class='loctextline' style='width: 100%; margin-left: 20px;'>
-										<span>\${list.loc_name}</span>
-										<input type="hidden" name='planner_no' value="\${no}">
-										<input type="hidden" name='loc_name' value="\${list.loc_name}">
-										<br>
-										<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
-										<input type="hidden" name="loc_pc" value="\${list.loc_pc}">
-										<input type="hidden" name='loc_sg' value="\${list.loc_sg}">
-										<input type="hidden" name='loc_ctg1' value="\${list.loc_ctg1}">
-										<input type="hidden" name='loc_ctg2' value="\${list.loc_ctg2}">
-										<input type="hidden" name="loc_x" value="\${list.loc_x}">
-										<input type="hidden" name="loc_y" value="\${list.loc_y}">
-										<input type="hidden" name="planner_date" value="\${day_info.substring(1)}">
-									</div>
-								</form></td>
+									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
+										<div class='timeseting' style="display: inline-flex; width: 40%">
+											<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' required>
+											<span>&nbsp; : &nbsp;</span>
+											<input type="number" class="form-control" placeholder="mm" name="planner_smin" id="planner_smin" min='0' max='59' required>
+										</div>
+										<div class='loctextline' style='width: 100%; margin-left: 20px;'>
+											<span>\${list.loc_name}</span>
+											<input type="hidden" name='planner_no' value="\${no}">
+											<input type="hidden" name='loc_name' value="\${list.loc_name}">
+											<br>
+											<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
+											<input type="hidden" name="loc_pc" value="\${list.loc_pc}">
+											<input type="hidden" name='loc_sg' value="\${list.loc_sg}">
+											<input type="hidden" name='loc_ctg1' value="\${list.loc_ctg1}">
+											<input type="hidden" name='loc_ctg2' value="\${list.loc_ctg2}">
+											<input type="hidden" name="loc_x" value="\${list.loc_x}">
+											<input type="hidden" name="loc_y" value="\${list.loc_y}">
+											<input type="hidden" name="planner_date" value="\${day_info.substring(1)}">
+										</div>
+									</form>
+								</td>
 							</tr>`
 							
 					);

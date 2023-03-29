@@ -67,7 +67,7 @@
 											<tbody></tbody>
 										</table>
 									</form>
-								</div>`	apink0423apin				
+								</div>`		
 						);
 					} else {
 						$("ul[name='dayTabbar']").append(
