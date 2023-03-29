@@ -257,7 +257,7 @@ $(function(){
       						<a class="page-link" href="#">&raquo;</a>
     					</li>
   					</ul>
-				</c:forEach>	
+
 
 			<div class='replebar mt-4 bg-light'>
 				<div class='col-12' style="text-align: center;">All Reple</div>
