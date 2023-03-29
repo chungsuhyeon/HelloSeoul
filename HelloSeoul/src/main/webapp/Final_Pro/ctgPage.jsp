@@ -113,6 +113,10 @@ $(function(){
 	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
+		if($('usedrid').val()==null){
+			alert("Login Plz");
+			return false;
+		}
 		var jjimpoint = new Array();
 		var cnt = 0;
 		$("input[id='jjim']").each(function(){
@@ -120,6 +124,10 @@ $(function(){
 				jjimpoint[cnt] = ($(this).val());
 				cnt += 1;
 				
+			}
+			if(cnt==0){
+				alert("please select");
+				return false;
 			}
 		});
 		ajaxpro2(jjimpoint);
@@ -236,6 +244,7 @@ function ajaxpro2(jjimpoint){
 	<jsp:include page="./header.jsp"></jsp:include>
 	</header>
 	<section class='container-fluid pt-4' style="display: inline-flex;">
+		<input type="hidden" id="userid" value="${user_id}"/>
 		<div class='col-2 border-primary'>
 			<!-- loc ajax -->
 			<div class='searchbar1 col-12' style="display: inline-flex;">

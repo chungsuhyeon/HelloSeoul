@@ -114,8 +114,8 @@ public class sunrestcontroller {
 	@PostMapping(value = "userrecom")
 	public String userrecom(String userid) {
 		System.out.println(userid);
-		if(userid!=null) {
-			userid="sibal";
+		if(userid!="") {
+			//dao.selecttagimg rownum3
 		}
 		return userid;
 	}
