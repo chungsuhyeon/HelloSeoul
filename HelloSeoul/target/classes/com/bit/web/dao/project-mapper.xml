@@ -12,14 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBoradNo" resultType="Integer">
 	select communityboard_seq.nextval from dual
 	</select>
-	<select id="selectBoard" resultType="HashMap" parameterType="HashMap" >
-	<![CDATA[select rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply from
-(select rownum rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply from communityboard order by com_no desc)
-where rw between #{start} and #{end}]]>
+	<select id="selectBoard" resultType="com.bit.web.vo.ComBoard" >
+	select * from communityboard order by com_no desc
 	</select>
-<!-- 	<select id="selectBoard" resultType="com.bit.web.vo.ComBoard" > -->
-<!-- 	select * from communityboard order by com_no desc -->
-<!-- 	</select> -->
 	<select id="selectInfoBoard" resultType="com.bit.web.vo.ComBoard" parameterType="Integer">
 	select * from communityboard where com_no=#{value}
 	</select>
@@ -126,9 +121,6 @@ where rw between #{start} and #{end}]]>
 		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3]]>
 	</select>
 	
-	<select id="getTotalRow" resultType="java.lang.Integer">
-	<![CDATA[select count(*) from communityboard]]>
-	</select>
 </mapper>
 
 

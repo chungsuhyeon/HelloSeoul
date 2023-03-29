@@ -166,7 +166,7 @@ function ajaxpro(sel){
 										</tr>
 										<tr>
 											<td class='table-light'>영업시간</td>
-											<td>\${loc.loc_op} ~ \${loc.loc_cl}</td>
+											<td>\${loc.loc_time}</td>
 										</tr>
 										<tr>
 											<td class='table-light'>Tel</td>
@@ -260,7 +260,7 @@ function ajaxpro2(jjimpoint){
 				<button type="button" class="searchbt btn btn-primary">Search</button>
 			</div>
 			<div></div>
-			<div class='ctglist'>
+			<div class='ctglist' style="overflow: scroll; height: 600px;">
 				<table class='table table-hover'>
 					<thead>
 						<tr class='table-primary'>

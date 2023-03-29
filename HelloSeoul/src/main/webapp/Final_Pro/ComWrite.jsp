@@ -22,9 +22,6 @@ $(function(){
 	$(".postbar").click(function(){
 		$("form").submit();
 	});
-	$(".cancelbar").click(function(){
-		location.replace("/web/boardSelect");
-	});
 });
 </script>
 <!--JS Section End -->

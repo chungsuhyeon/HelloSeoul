@@ -24,16 +24,12 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> showDb() {
 		return this.getSqlSession().selectList("showDb");
 	}
-	
-	public List<MainDbBean> searchFood(HashMap<Object, Object> map){
-		return this.getSqlSession().selectList("searchFood",map);
-	}
-	
-	
-	
 	//gungu
 	public List<LocGunGuBean> readyForLocation(){
 		return this.getSqlSession().selectList("readyForLocation");
+	}
+	public List<MainDbBean> searchFood(HashMap<Object, Object> map){
+		return this.getSqlSession().selectList("searchFood",map);
 	}
 	//show table
 	public List<HashMap<Object, String>> readyForCategory(){
@@ -50,5 +46,21 @@ public class CtgDao extends SqlSessionDaoSupport{
 	
 	public void insertjjim(MypageJjimBean bean) {
 		this.getSqlSession().insert("insertjjim", bean);
+	}
+	
+	public List<MainDbBean> searchHot(String query){
+		return this.getSqlSession().selectList("searchHot",query);
+	}
+	
+	public List<MainDbBean> readyForHotspot(){
+		return this.getSqlSession().selectList("readyForHotspot");
+	}
+	
+	public MainDbBean hotspotinfo(int loc_pc) {
+		return this.getSqlSession().selectOne("hotspotinfo", loc_pc);
+	}
+	
+	public List<MainDbBean> hotspotrecom(String loc_sg){
+		return this.getSqlSession().selectList("hotspotrecom", loc_sg);
 	}
 }

@@ -19,6 +19,20 @@
 
 <script type="text/javascript">
 	$(function(){
+		$.ajax({
+			type:'post',
+			url:'/web/userrecom',
+			data: {'userid' : $('#userid').val()},
+			datatype:'text',
+			success:function(r){
+				console.log(r);
+			},
+			error:function(x){
+				alert("error!");
+			}
+			
+			
+		});
 		
 	});
 </script>
@@ -38,6 +52,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 </header>
 	<section class='section'>
+		<input type="hidden" id="userid" value="${user_id}">
 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   			<div class="carousel-inner">
     			<div class="carousel-item active">
@@ -78,7 +93,10 @@
     		<span class="visually-hidden">Next</span>
   			</button>
 		</div>
-		<div class='container-fluid' style="display: inline-flex;">
+		<div class='container-fluid'>
+			<div class='col-12'>
+			<hr class='hr'>
+			</div>
 			<div class='col-6'>
 				<h1>Calander</h1>
 				<div class='mt-4' style="margin-right: 10px;">
