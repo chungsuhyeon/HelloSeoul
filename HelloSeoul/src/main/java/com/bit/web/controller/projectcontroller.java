@@ -1,7 +1,7 @@
 package com.bit.web.controller;
 
 
-import java.io.File;
+import java.io.File;	
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit.web.dao.ProjectDao;
 import com.bit.web.dao.TicketDao;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
 import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
@@ -42,17 +44,26 @@ public class projectcontroller {
 	ProjectDao dao;
 	@Resource
 	TicketDao tkdao;
+	@Autowired
+	private PaginAction pageAction;
 //	@PostMapping(value="boardInsert")
 //	public String boardInsert(ComBoard board) {
 //		board.setCom_no(dao.selectBoradNo());	
 //		dao.boardInsert(board);
 //		return "redirect:/boardSelect";
 //	}
+	
 	@GetMapping(value="boardSelect")
-	public String boardSelect(ComBoard board,Model model) {
-		System.out.println(dao.selecttop3());
+	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
+		PageBean pageBean=pageAction.paging(request);
+		HashMap<String, Object>map=new HashMap<String, Object>();
+		map.put("start", pageBean.getStart());
+		map.put("end",pageBean.getEnd());
+		model.addAttribute("pageBean",pageBean);
+	
+		
 		model.addAttribute("top3",dao.selecttop3());
-		model.addAttribute("board",dao.selectBoard());
+		model.addAttribute("board",dao.selectBoard(map));
 		return "Final_Pro/ComList";
 	}
 	@RequestMapping(value="infoSelect")
@@ -73,7 +84,7 @@ public class projectcontroller {
 		}else{
 			return "redirect:/infoSelect?no="+no;
 		}
-		model.addAttribute("board",dao.selectBoard());	
+			
 		return "redirect:/boardSelect";
 	}
 	@RequestMapping(value="modifyAction")
@@ -92,8 +103,8 @@ public class projectcontroller {
 	public String boardUpdate(int no,ComBoard board,Model model) {
 		board.setCom_no(no);
 		dao.updateBoard(board);
-		model.addAttribute("board",dao.selectBoard());
-		return "Final_Pro/ComList";
+		
+		return "redirect:/boardSelect";
 	}
 	@RequestMapping(value="replyInsert")
 	@ResponseBody
@@ -220,7 +231,7 @@ public class projectcontroller {
 		System.out.println("용량크기(byte) : " + size);
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test\\";
+		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 		
 		
 		/*
@@ -238,7 +249,7 @@ public class projectcontroller {
 		System.out.println("생성된 고유문자열" + uniqueName);
 		System.out.println("확장자명" + fileExtension);
 		
-		String filename=uniqueName+"."+fileExtension;
+		String filename=uniqueName+fileExtension;
 		board.setCom_filename(filename);
 		
 		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전

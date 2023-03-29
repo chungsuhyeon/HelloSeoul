@@ -27,6 +27,10 @@ $(function(){
 			location.replace("/web/Final_Pro/ComWrite.jsp");
 		}
 	});
+	$("div#top3list").click(function(){
+		var no=$(this).text();
+		document.location.href="/web/infoSelect?no="+no;
+	});
 });
 </script>
 <!--JS Section End -->
@@ -41,15 +45,18 @@ $(function(){
 
 </head>
 <body>
+
 <jsp:include page="./header.jsp"></jsp:include>
 	<section class='section bg-light'>
 
 		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
 		<c:forEach var="i" items="${top3 }">
 			<div class='newcomm' style="display: inline-flex; position: relative;">
-				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;">
+					<div ></div>
+				<div id="top3list"  class='newcomm-contents bg-image' style="background-image:url('/web/resources/test/${i.com_filename }'); width:500px; height:600px; margin: 50px;">
+			 	${i.com_no }
 					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
-					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
+				<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
 				</div>
 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
 					<!-- 커뮤니티 글 제목 태그 -->
@@ -115,38 +122,62 @@ $(function(){
   					<tbody>
   						<c:forEach items="${board}" var='i'>
     						<tr class="table-info">
-      							<td>${i.com_no}</td>
-      							<td>${i.com_ctg }</td>
-      							<td><a href="/web/infoSelect?no=${i.com_no}">${i.com_title}</a></td>
-      							<td>${i.user_nick}</td>
-      							<td>${i.com_regdate}</td>
+      							<td>${i.COM_NO}</td>
+      							<td>${i.COM_CTG }</td>
+      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
+      							<td>${i.USER_NICK}</td>
+      							<td>${i.COM_REGDATE}</td>
     						</tr>
   						</c:forEach>
   					</tbody>
   				</table>
   				<div class='d-flex justify-content-center'>
   					<ul class="pagination pagination-sm">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-    					<li class="page-item active">
-      						<a class="page-link" href="#">1</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">2</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">3</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">4</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">5</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">&raquo;</a>
-    					</li>
+  					<c:choose>
+  						<c:when test="${pageBean.currentBlock==1 }">
+    						<li class="page-item disabled">
+      							<a class="page-link" href="#">&laquo;</a>
+    						</li>
+    					</c:when>
+    					<c:otherwise>
+    						<li class="page-item">
+      							<a class="page-link" href="/web/boardSelect?page=${pageBean.startPage-1 }">&laquo;</a>
+    						</li>
+    					</c:otherwise>
+    				</c:choose>
+    					<c:forEach var="i" begin="${pageBean.startPage}" end="${pageBean.endPage }">
+    						<c:choose>
+    							<c:when test="${pageBean.currentPage==i }">
+    								<li class="page-item active">
+      									<a class="page-link" href="#">${i }</a>
+    								</li>
+    							</c:when>
+    							
+    							<c:otherwise>
+    								<li class="page-item">
+      									<a class="page-link" href="/web/boardSelect?page=${i }">${i }</a>
+    								</li>
+    							</c:otherwise>
+    						</c:choose>
+    					
+    					
+    					</c:forEach>
+   					
+					<c:choose>
+  						<c:when test="${pageBean.totalPage==pageBean.endPage }">
+    						<li class="page-item disabled">
+      							<a class="page-link" href="#">&raquo;</a>
+      							
+    						</li>
+    					</c:when>
+    					<c:otherwise>
+    						<li class="page-item">
+      							<a class="page-link" href="/web/boardSelect?page=${pageBean.endPage+1 }">&raquo;</a>
+      							
+    						</li>
+    					</c:otherwise>
+    				</c:choose>
+    					
   					</ul>
 				</div>
 			</div>
