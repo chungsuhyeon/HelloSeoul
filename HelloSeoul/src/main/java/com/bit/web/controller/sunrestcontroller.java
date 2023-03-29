@@ -99,5 +99,25 @@ public class sunrestcontroller {
 //		}
 		return sameCount;
 	}
+	
+	@PostMapping(value = "searchHot")
+	public List<MainDbBean> searchHotspot(String query) {
+		return dao.searchHot(query);
+	}
+	
+	@PostMapping(value = "hotspotrecommend")
+	public List<MainDbBean> hotspotrecom(String sg){
+		System.out.println(sg);
+		return dao.hotspotrecom(sg);
+	}
+	
+	@PostMapping(value = "userrecom")
+	public String userrecom(String userid) {
+		System.out.println(userid);
+		if(userid!=null) {
+			userid="sibal";
+		}
+		return userid;
+	}
 
 }

@@ -63,7 +63,7 @@ li div > a{
 			        	<a class="nav-link" href="/web/gotoctg">Location</a>
 			        </li>
 			    	<li class="nav-item">
-			        	<a class="nav-link" href="/web/Final_Pro/HotspotMain.jsp">HotSpot</a>
+			        	<a class="nav-link" href="/web/gotohotspot">HotSpot</a>
 			        </li>
         			<li class="nav-item">
           				<a class="nav-link" href="/web/musicalList">TICKET</a>
