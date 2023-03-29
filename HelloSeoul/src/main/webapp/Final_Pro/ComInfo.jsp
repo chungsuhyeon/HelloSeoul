@@ -168,6 +168,10 @@ function check_id2(){
 					});
 				}
 			});
+		
+		$("button#list").click(function(){
+			location.replace("/web/boardSelect");
+		});
 	});
 </script>
 <!--JS Section End -->
@@ -237,12 +241,12 @@ function check_id2(){
 							${i.com_cont}
 						</div>
 						<div class='photobar col-6'>
-							<img alt="test" src="/web/resources/final_style/img/indexFood.jpg">
+							<img alt="test" src="/web/resources/test/${i.com_filename }">
 						</div>
 					</div>
 					<div class='settingbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
-						<button type="button" class="btn btn-primary">List</button>
+						<button type="button" id="list"class="btn btn-primary">List</button>
 					</div>
 					<div class='goodbad col-4'>
 						<button type="button" class="btn btn-success" id='good'>
