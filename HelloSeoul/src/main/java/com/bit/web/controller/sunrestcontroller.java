@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.CtgDao;
+import com.bit.web.service.CtgService;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
@@ -24,80 +25,22 @@ import scala.collection.generic.BitOperations.Int;
 public class sunrestcontroller {
 	
 	@Resource
-	private CtgDao dao;
+	private CtgService ctg;
 	
-	@PostMapping(value = "showMainDb")	
+	@PostMapping(value = "showLocInfo")	
 	public List<MainDbBean> showDb() {
-		
-		return dao.showDb();
+		return ctg.showLocinfo();
 	}
 	
 	@PostMapping(value = "searchList")
 	public List<MainDbBean> searchList(String loc_sg, String detailctg, String query) {
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("loc_sg", loc_sg);
-		map.put("loc_ctg2", detailctg);
-		map.put("query", query);		
-		System.out.println(map);
-		System.out.println(dao.searchFood(map));
-		return dao.searchFood(map);
+		return ctg.searchLoc(loc_sg, detailctg, query);
 	}
 	
 	@PostMapping(value="insertJjim")
-	public int insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
-		//System.out.println(jjimpoint.contains(1234));
-		//contains
+	public void insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
 		String user_id = (String) resq.getSession().getAttribute("user_id");
-		List<Integer> listjjim =  dao.checkJjimList(user_id);
-		int sameCount = 0;
-		
-		
-		for(int i: jjimpoint) {
-			if(listjjim.contains(i)) {
-				sameCount +=1;
-				continue;
-			}
-			else {
-				MainDbBean dbbean = dao.searchInsertJjim(i);
-				MypageJjimBean jbean = new MypageJjimBean();
-				jbean.setUser_id(user_id);
-				jbean.setLoc_pc(dbbean.getLoc_pc());
-				jbean.setLoc_name(dbbean.getLoc_name());
-				jbean.setLoc_ctg1(dbbean.getLoc_ctg1());
-				jbean.setLoc_ctg2(dbbean.getLoc_ctg2());
-				jbean.setLoc_sg(dbbean.getLoc_sg());
-				System.out.println(jbean);
-				dao.insertjjim(jbean);				
-			}
-		}
-		
-//		for(int i : jjimpoint) {
-//			int x = 0;
-//			
-//			for(int j : listjjim) {
-//				if(j==i) {
-//					x = 0;
-//					sameCount +=1;
-//					break;
-//				}
-//				else {
-//					x += 1;
-//				}
-//			}
-//			if(x>0) {
-//				MainDbBean dbbean = dao.searchInsertJjim(i);
-//				MypageJjimBean jbean = new MypageJjimBean();
-//				jbean.setUser_id(user_id);
-//				jbean.setLoc_pc(dbbean.getLoc_pc());
-//				jbean.setLoc_name(dbbean.getLoc_name());
-//				jbean.setLoc_ctg1(dbbean.getLoc_ctg1());
-//				jbean.setLoc_ctg2(dbbean.getLoc_ctg2());
-//				jbean.setLoc_sg(dbbean.getLoc_sg());
-//				System.out.println(jbean);
-//				dao.insertjjim(jbean);
-//			}
-//		}
-		return sameCount;
+		ctg.insertJjim(jjimpoint, user_id);
 	}
 	
 	@PostMapping(value = "searchHot")
