@@ -39,46 +39,30 @@ public class JoinSeoulController {
 			// return "ok";
 			return dao.getNick(nickname) != null ? String.valueOf(true) : String.valueOf(false);
 			// return "test";
+		}		
+	
+	
+// 대륙 해시맵으로 불러오기 
+		@PostMapping(value = "ajaxcontinent")	  
+		@ResponseBody
+		public List<Object> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+//			System.out.println("controller"+id); 
+//			System.out.println(dao.selectcontinent(id));
+//			return "success";
+			return dao.selectcontinent(id);
+		    }	
+	
+
+// 회원가입정보 디비에 저장 		
+		@PostMapping(value = "joinMemberInsert")
+		public String joinMemberInsert(JoinSeoulBean bean) {
+			System.out.println(bean);
+			System.out.println(bean.getUser_nation().getClass().getName()); 
+			bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
+			dao.insertMember(bean);
+			System.out.println(bean);
+			// return "test";
+			return "Final_Pro/login";
 		}
-		
-	
-	
-	// 대륙 해시맵으로 불러오기 
-	@PostMapping(value = "ajaxcontinent")	  
-	@ResponseBody
-	public List<Object> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-//		System.out.println("controller"+id); 
-		//System.out.println(dao.selectcontinent(id));
-		//return "success";
-		return dao.selectcontinent(id);
-	    }	
-	
-	
-	
-//	// 대륙 리스트로 불러오기 
-//	@PostMapping(value = "ajaxcontinent")	  
-//	@ResponseBody
-//	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-//		System.out.println("controller"+id); 
-//		//return "success";
-//		return dao.selectcontinent(id);
-//	    }
-//	
-//	
-//	
-
-	@PostMapping(value = "joinMemberInsert")
-	public String joinMemberInsert(JoinSeoulBean bean) {
-		System.out.println(bean);
-		System.out.println(bean.getUser_nation().getClass().getName());// User_nation Ÿ�� Ȯ��
-		// 33 ���
-		// System.out.println(user_nation);
-
-		bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
-		dao.insertMember(bean);
-		System.out.println(bean);
-		// return "test";
-		return "Final_Pro/login";
-	}
 
 }
