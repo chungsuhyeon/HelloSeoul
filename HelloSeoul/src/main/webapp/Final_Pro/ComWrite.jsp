@@ -41,7 +41,7 @@ $(function(){
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	<section class='section d-flex justify-content-center bg-info'>
 		<div class='tablebar col-6 mt-4 mb-4 bg-light' style="border-radius: 25px;">
-			<form action="/web/boardInsert" method="post">
+			<form action="/web/boardInsert" method="post" enctype="multipart/form-data">
 				<table class='table'>
 					<tbody>
 						<tr>
@@ -78,7 +78,7 @@ $(function(){
 						<tr>
 							<th>File</th>
 							<td>
-								 <input class="form-control" type="file" id="com_filename" name='com_filename'>
+								 <input class="form-control" type="file" id="com_filename" name='file' >
 							</td>
 						</tr>
 	

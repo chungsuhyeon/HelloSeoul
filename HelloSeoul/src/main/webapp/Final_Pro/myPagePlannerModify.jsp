@@ -29,12 +29,12 @@
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
-			url: '/web/ajaxMypagePlannerCreate',
+			url: '/web/ajaxMypagePlannerTabBar',
 			type: 'post',
 			data: {no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function(result){												
+			success: function(result){
 				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
@@ -67,7 +67,7 @@
 											<tbody></tbody>
 										</table>
 									</form>
-								</div>`						
+								</div>`		
 						);
 					} else {
 						$("ul[name='dayTabbar']").append(
@@ -88,6 +88,45 @@
 					// 여행 시작 날짜에서 하루씩 더하기
 					start.setDate(start.getDate() + 1); // 더하면서 start가 바뀌기 때문에 i가 아니라 1을 더해야함
 				}
+
+				$.ajax({
+					url: '/web/ajaxMypagePlannerTabContent',
+					type: 'post',
+					data: {no:no},
+					dataType: 'json',
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					success: function(result){
+						console.log(result);
+						$(result).each(function(idx, list){
+							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
+							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
+							
+							$("div#" + list['planner_date'] + " table tbody").append(
+									`<tr class='table-light' name="old">
+										<td style="width: 5%;">
+											<input type="checkbox" name="planner_select_location" value="\${list["loc_pc"]}">
+										</td>
+										<td style="width:100%; display: inline-flex;">
+											<div class='timeseting' style="display: inline-flex; width: 40%">
+												<input type="number" class="form-control" placeholder="HH" name="planner_shour" val="\${list["planner_shour"]}" id="planner_shour" min='0' max='23' required>
+												<span>&nbsp; : &nbsp;</span>
+												<input type="number" class="form-control" placeholder="mm" name="planner_smin" val="\${list["planner_smin"]}" id="planner_smin" min='0' max='59' required>
+											</div>
+											<div class='loctextline' style='width: 100%; margin-left: 20px;'>
+												<span>\${list["loc_name"]}</span>
+												<br>
+												<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+											</div>
+										</td>
+									</tr>`								
+							);							
+						}); // $(result).each
+					},
+					error: function(){
+						alert("error : " + error);
+					}
+				}); // ajax taa-content
+					
 			},
 			error: function(){
 				alert("error : " + error);
@@ -186,7 +225,7 @@
 
 				$(result).each(function(index, list){
 					$($(activeTab).attr('href') + " form table tbody").append(
-							`<tr>
+							`<tr class='table-light' name="new">
 								<td style="width: 5%;">
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 								</td>
@@ -363,9 +402,7 @@
 			
 			<!-- 플래너 타이틀 -->
 			<div class='col-12'>
-				<div class='col-6' style="display: inline-flex;" id="planTitle">
-<%--     				<span id="readOnlyInput" style="align-items: center">${plannerInfo.title}</span>			 --%>
-				</div>
+				<div class='col-6' style="display: inline-flex;" id="planTitle"></div>
 			</div>
 			
 			<!-- 메인 플래너 내용 -->	
