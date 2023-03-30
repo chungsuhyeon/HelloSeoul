@@ -28,9 +28,7 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer selectBoradNo() {
 		return this.getSqlSession().selectOne("selectBoradNo");
 	}
-//	public List<Object> selectBoard(){
-//		return this.getSqlSession().selectList("selectBoard");
-//	}
+
 	public List<Object> selectBoard(HashMap<String, Object>map){
 		return this.getSqlSession().selectList("selectBoard",map);
 	}

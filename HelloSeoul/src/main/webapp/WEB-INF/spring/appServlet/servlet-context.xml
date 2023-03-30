@@ -49,9 +49,10 @@
 		<beans:property name="maxInMemorySize" value="10000000"></beans:property>
 	</beans:bean>
 
-<!-- 	<context:component-scan base-package="com.bit.web" /> -->
+	<context:component-scan base-package="com.bit.web" />
 	<context:component-scan base-package="com.bit.web.dao" />
 	<context:component-scan base-package="com.bit.web.controller" />
+	<context:component-scan base-package="com.bit.web.service" />
 	
 	
 </beans:beans>

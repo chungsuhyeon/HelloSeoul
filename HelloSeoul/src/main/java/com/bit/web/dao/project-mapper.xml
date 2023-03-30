@@ -23,7 +23,7 @@ where rw between #{start} and #{end}]]>
 	<select id="selectInfoBoard" resultType="com.bit.web.vo.ComBoard" parameterType="Integer">
 	select * from communityboard where com_no=#{value}
 	</select>
-	<update id="hitAction" >
+	<update id="hitAction" parameterType="Integer">
 	update communityboard set com_hit=com_hit+1 where com_no=#{value}
 	</update>
 	<insert id="replyInsert" parameterType="com.bit.web.vo.ReplyBoard">
