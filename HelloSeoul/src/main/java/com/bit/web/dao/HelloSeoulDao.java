@@ -20,8 +20,12 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원정보 (로그인)
-	public HashMap<String, String> getDbUser(String id) {
-		return this.getSqlSession().selectOne("getDbUser", id);
+	public String getDbUserPW(String id) {
+		return this.getSqlSession().selectOne("getDbUserPW", id);
+	}
+	
+	public String getDbUserNick(String id) {
+		return this.getSqlSession().selectOne("getDbUserNick", id);
 	}
 	
 	// 회원정보 (마이페이지 메인에 회원정보 출력하기 위함)
@@ -76,6 +80,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	// 생성한 일정 insert
 	public void plannerScheduleInsert(MypageMainPlannerBean bean) {
 		this.getSqlSession().insert("plannerScheduleInsert", bean);
+	}
+	
+	public void plannerScheduleDelete(int no) {
+		this.getSqlSession().delete("plannerScheduleDelete", no);
 	}
 	
 }

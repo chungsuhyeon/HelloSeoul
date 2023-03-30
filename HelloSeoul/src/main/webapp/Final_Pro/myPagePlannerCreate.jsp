@@ -185,7 +185,7 @@
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 								</td>
 								<td>
-									<form method="POST" action="/web/mainPlannerData?modi=insert" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
+									<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
 										<div class='timeseting' style="display: inline-flex; width: 40%">
 											<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' required>
 											<span>&nbsp; : &nbsp;</span>
@@ -208,7 +208,6 @@
 									</form>
 								</td>
 							</tr>`
-							
 					);
 				}); // for문	
 				
@@ -262,7 +261,7 @@
 		const no = urlParams.get('no');
 		
 		const inputTimeMin = document.getElementsByClassName("form-control");
-		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다.
+		// 모든 input 태그(시간, 분)에 대해 반복하며 제약조건을 확인
 		  for (let i = 0; i < inputTimeMin.length; i++) {
 		    if (!inputTimeMin[i].checkValidity()) {
 		      alert("Please enter the schedule time");
@@ -351,9 +350,9 @@
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Date Reset</a></li>
+  					<li class="breadcrumb-item"><a href="#">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
-  					<li class="breadcrumb-item"><a href="javascript:history.back();">Back</a></li>
+  					<li class="breadcrumb-item"><a href="javascript:history.back();">Mypage</a></li>
 				</ol>
 			</div>
 			
