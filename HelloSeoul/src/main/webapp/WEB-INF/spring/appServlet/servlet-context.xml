@@ -54,5 +54,4 @@
 	<context:component-scan base-package="com.bit.web.controller" />
 	<context:component-scan base-package="com.bit.web.service" />
 	
-	
 </beans:beans>
