@@ -113,7 +113,7 @@ $(function(){
 	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
-		if($('usedrid').val()==null){
+		if($('#userid').val()==null){
 			alert("Login Plz");
 			return false;
 		}
@@ -136,7 +136,7 @@ $(function(){
 function ajaxpro(sel){
 	$.ajax({
 		type:'post',
-		url:'/web/showMainDb',
+		url:'/web/showLocInfo',
 		dataType:'json',
 		success : function(r){
  				for(var x=0; x<r.length;x++){
@@ -207,7 +207,7 @@ function ajaxpro2(jjimpoint){
 		dataType:'text',
 		data: {'jjimpoint':jjimpoint},
 		success : function(r){
-			alert("same count :"+r);
+			alert("success");
 		},
 		error : function(x){
 			
