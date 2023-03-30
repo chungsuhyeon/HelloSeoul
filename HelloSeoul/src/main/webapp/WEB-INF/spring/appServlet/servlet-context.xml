@@ -53,9 +53,5 @@
 	<context:component-scan base-package="com.bit.web.dao" />
 	<context:component-scan base-package="com.bit.web.controller" />
 	<context:component-scan base-package="com.bit.web.service" />
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
-	
+
 </beans:beans>
