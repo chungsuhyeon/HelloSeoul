@@ -1,6 +1,6 @@
 package com.bit.web.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDate;	
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -62,24 +62,167 @@ public class HelloSeoulController {
 	public ModelAndView userInfoAll(HttpServletRequest request) {
 		String user_id = (String)request.getSession().getAttribute("user_id");
 
+<<<<<<< HEAD
 		ModelAndView mav = new ModelAndView();
+=======
+		// 媛쒖씤�젙蹂� �꽆湲곌린		
+		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(user_id);
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		
+<<<<<<< HEAD
 		mav.addObject("userInfo", contactService.userInfo(user_id));
 		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id));
 		mav.setViewName("Final_Pro/myPageMain");
+=======
+		// DB �깮�씪
+		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		
+<<<<<<< HEAD
 		return mav;
+=======
+		// �삤�뒛 �궇吏�
+		LocalDate today = LocalDate.now();
+		
+		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
+		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
+		
+		// �젙蹂� �꽆湲멸굅
+		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
+		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 援��쟻
+		
+		// �굹�씠怨꾩궛
+		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // �깮�씪 吏��궃 �궗�엺
+			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
+		} else { // �깮�씪 �븞吏��궓
+			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // �깮�씪 �븞吏��궃 �궗�엺
+				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
+			} else { // �깮�씪 吏��궓
+				userInfo.put("USER_AGE", today.getYear() - birth.getYear());
+			} 
+		}
+						
+		// 愿�愿묐ぉ�쟻
+		switch (user_pp) {
+		case 1:
+			userInfo.put("USER_PP", "travel"); // �뿬�뻾
+			break;
+		case 2:
+			userInfo.put("USER_PP", "business trip"); // 異쒖옣
+			break;
+		case 3:
+			userInfo.put("USER_PP", "study"); // �쑀�븰
+			break;
+		case 4:
+			userInfo.put("USER_PP", "experience"); // 寃쏀뿕
+			break;
+		default : 
+			userInfo.put("USER_PP", "etc");
+			break;
+		}
+		
+		// 愿�愿� 1�닚�쐞
+		switch (user_first) {
+		case 1:
+			userInfo.put("USER_FIRST", "food");
+			break;
+		case 2:
+			userInfo.put("USER_FIRST", "tour");
+			break;
+		case 3:
+			userInfo.put("USER_FIRST", "shopping");
+			break;
+		case 4:
+			userInfo.put("USER_FIRST", "entertainment");
+			break;
+		default : 
+			userInfo.put("USER_PP", "etc");
+			break;
+		}
+		
+		model.addAttribute("userInfo", userInfo);
+		
+		// �깮�꽦�맂 �뵆�옒�꼫
+		List<Object> userCreatedPlanner = helloDao.getUserPlanner(user_id);
+		model.addAttribute("userCreatedPlanner", userCreatedPlanner);
+		
+		return new ModelAndView("Final_Pro/myPageMain");
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	}
 	
-	// 찜 보기 화면
+	// 李� 蹂닿린 �솕硫�
 	@RequestMapping(value = "ajaxMypageJjim", method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mypageJjimListLoad(HttpServletRequest request){
+<<<<<<< HEAD
 		return contactService.userJjimList((String) request.getSession().getAttribute("user_id"));
+=======
+		String user_id = (String) request.getSession().getAttribute("user_id");
+		List<Object> userJjimList = helloDao.getUserJjimList(user_id);
+		
+		String finalStr = "";
+		String tab1 = "";
+		String tab2 = "";
+		String tab3 = "";
+		String tab4 = "";
+		String tab5 = "";
+		
+		for(Object i : userJjimList) {
+			MypageJjimBean bean = (MypageJjimBean) i;	
+			
+			if(bean.getLoc_ctg1().equals("�쓬�떇�젏")) {
+				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
+				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
+				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab1 += "</span></td></tr>";
+			}
+			else if (bean.getLoc_ctg1().equals("愿�愿묒�")){				
+				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
+				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
+				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab2 += "</span></td></tr>";
+			}
+			else if (bean.getLoc_ctg1().equals("�눥�븨")){				
+				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
+				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
+				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab3 += "</span></td></tr>";
+			}
+			else if (bean.getLoc_ctg1().equals("蹂쇨굅由�")){				
+				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
+				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
+				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab4 += "</span></td></tr>";
+			}
+			else { // �떚耳볦씤 寃쎌슦	
+				tab5 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
+				tab5 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
+				tab5 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab5 += "</span></td></tr>";
+			}
+		}		
+
+		finalStr += "<div class='tab-pane fade active show' id='food' role='tabpanel'><table class='table table-hover'><tbody>" + tab1 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='things_to_see' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
+		
+		return finalStr;
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	}
 	
+<<<<<<< HEAD
+=======
+	// 李� 由ъ뒪�듃 �옄泥� 蹂대궡湲�
+	@PostMapping(value = "ajaxWishList")
+	@ResponseBody
+	public List<Object> mypageWishListAll(HttpServletRequest request){
+		return helloDao.getUserJjimList((String) request.getSession().getAttribute("user_id"));
+	}
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	
-	// 찜 삭제
+	// 李� �궘�젣
 	@PostMapping(value="ajaxDeleteJjimList")
 	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -87,12 +230,12 @@ public class HelloSeoulController {
 		String user_id = (String) request.getSession().getAttribute("user_id");
 		map.put("user_id", user_id);
 		
-		// 삭제할 찜리스트의 장소코드
+		// �궘�젣�븷 李쒕━�뒪�듃�쓽 �옣�냼肄붾뱶
 		String str = "(";
 		for(int i=0; i<locDataList.length; i++) {
 			str += locDataList[i] + ",";			
 		}
-		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str = str.replaceAll(",$", ""); // 留덉�留� 臾몄옄�뿴�쓽 , �젣嫄�
 		str += ")";		
 		map.put("str", str);
 
@@ -101,18 +244,18 @@ public class HelloSeoulController {
 		return "redirect:/ajaxMypageJjim";
 	}
 		
-	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
+	// 李� �솕硫댁뿉�꽌 �옣�냼紐� �겢由��떆 �긽�꽭�젙蹂� 肉뚮━湲�
 	@PostMapping(value = "ajaxMypageJjimInfo")
 	@ResponseBody
 	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, @RequestParam(value = "loc_code")int loc_code){
 		return helloDao.getJjimInfo(loc_code);
 	}
 	
-	// 플래너 일정 생성 / 수정
+	// �뵆�옒�꼫 �씪�젙 �깮�꽦 / �닔�젙
 	@PostMapping(value = "createPlannerDate")
 	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
 	
-		// 새로운 플래너 생성을 위한 일정 생성
+		// �깉濡쒖슫 �뵆�옒�꼫 �깮�꽦�쓣 �쐞�븳 �씪�젙 �깮�꽦
 		if(modi.equals("createPlanner")) {
 			HashMap<String, Object> toDbMap = new HashMap<String, Object>();
 
@@ -135,6 +278,7 @@ public class HelloSeoulController {
 //		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 		
+<<<<<<< HEAD
 	// 찜 리스트 자체 보내기 = 플래너 일정 생성하는 곳의 찜 리스트
 	@PostMapping(value = "ajaxWishList")
 	@ResponseBody
@@ -143,20 +287,28 @@ public class HelloSeoulController {
 	}
 	
 	// 메인 플래너 생성 페이지 로드
+=======
+	// 硫붿씤 �뵆�옒�꼫 �깮�꽦 �럹�씠吏� 濡쒕뱶
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	@PostMapping(value = "ajaxMypagePlannerTabBar")
 	@ResponseBody
 	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {		
 		return contactService.mypagePlannerTabBar(no);
 	}
 	
+<<<<<<< HEAD
 	// 생성한 플래너의 일정
+=======
+	
+	// �깮�꽦�븳 �뵆�옒�꼫�쓽 �씪�젙
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	@PostMapping(value = "ajaxMypagePlannerTabContent")
 	@ResponseBody
 	public List<Object> ajaxPlannerTabContentSelect(@RequestParam(value = "no") int no){
 		return contactService.mypagePlannerTabContent(no);
 	}
 	
-	// 메인 플래너 생성
+	// 硫붿씤 �뵆�옒�꼫 �깮�꽦
 	@PostMapping(value = "ajaxAddPlannerSchedule")
 	@ResponseBody
 	public List<Object> ajaxPlannerScheduleAdd(HttpServletRequest request, @RequestParam(value = "codeList[]") String[] loc_code) {
@@ -164,12 +316,13 @@ public class HelloSeoulController {
 		for(int i=0; i<loc_code.length; i++) {
 			str += loc_code[i] + ",";
 		}
-		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str = str.replaceAll(",$", ""); // 留덉�留� 臾몄옄�뿴�쓽 , �젣嫄�
 		str += ")";
 		
 		return helloDao.selectMainDbData(str);
 	}
 	
+<<<<<<< HEAD
 	@PostMapping(value = "deletePlannerSchedule")
 	@ResponseBody
 	public String deletePlannerSchedule( @RequestParam(value = "no") int no) {
@@ -179,6 +332,9 @@ public class HelloSeoulController {
 	
 	
 	// 작성한 플래너 insert / update
+=======
+	// �옉�꽦�븳 �뵆�옒�꼫 insert / update
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 	@PostMapping(value = "mainPlannerData")
 	@ResponseBody
 	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {	
@@ -187,15 +343,21 @@ public class HelloSeoulController {
 		return "success";
 	}
 
-	// 플래너 메인 생성 페이지 이동
+	// �뵆�옒�꼫 硫붿씤 �깮�꽦 �럹�씠吏� �씠�룞
 	@RequestMapping(value = "allPageLoad")
 	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
-		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
+		if(modi.equals("createPlanner")) { // �깉濡쒖슫 �뵆�옒�꼫瑜� �깮�꽦
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
+<<<<<<< HEAD
 		else if(modi.equals("updatePlanner")) { // 플래너 일정 수정
 			return new ModelAndView("Final_Pro/myPagePlannerModify");			
 		} else { // show 로드
+=======
+		else if(modi.equals("updatePlanner")) { // �뵆�옒�꼫 �닔�젙
+			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		} else { // show 濡쒕뱶
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 			return new ModelAndView("Final_Pro/myPageShow");
 		}
 	}
