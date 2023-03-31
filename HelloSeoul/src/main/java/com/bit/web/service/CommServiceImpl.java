@@ -205,16 +205,7 @@ public class CommServiceImpl implements CommService{
 		model.addAttribute("top3",commdao.selecttop3());
 		model.addAttribute("board",commdao.selectBoard(map));
 	}
-//	@Override
-//	public List<Object> selectBoard(Map<String, Object> map) {
-//		// TODO Auto-generated method stub
-//		return commdao.selectBoard(map);
-//	}
-//	@Override
-//	public List<Object> selectBoardtop3() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 	
 	
 	

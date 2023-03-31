@@ -47,26 +47,11 @@ public class projectcontroller {
 	TicketDao tkdao;
 	@Autowired
 	private PaginAction pageAction;
-//	@PostMapping(value="boardInsert")
-//	public String boardInsert(ComBoard board) {
-//		board.setCom_no(dao.selectBoradNo());	
-//		dao.boardInsert(board);
-//		return "redirect:/boardSelect";
-//	}
 	@Resource
 	private CommService commService;
 	
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
-//		PageBean pageBean=pageAction.paging(request);
-//		model.addAttribute("pageBean",pageBean);
-//		HashMap<String, Object>map=new HashMap<String, Object>();
-//		map.put("start", pageBean.getStart());
-//		map.put("end",pageBean.getEnd());
-//	
-//		
-//		model.addAttribute("top3",dao.selecttop3());
-//		model.addAttribute("board",dao.selectBoard(map));
 		commService.selectBoard(board, model, request);
 		return "Final_Pro/ComList";
 	}
@@ -140,96 +125,12 @@ public class projectcontroller {
 		return commService.selectGBboard(com_no);
 	}
 	
-	@RequestMapping(value="ticketing")
-	public String ticketing(SeatBoard board,@RequestParam int no,@RequestParam String user_id ,@RequestParam(value="seatVal") List<String>seatVal,Model model,String rundate) {
-		System.out.println(seatVal);
-		System.out.println(no);
-		System.out.println(user_id);
-		System.out.println(rundate);
-		for(String seat:seatVal) {
-			board.setNo(no);
-			board.setUser_id(user_id);
-			board.setSeat(seat);
-			board.setRundate(rundate);
-			dao.insertSeatTable(board);
-			System.out.println(board	);
-		}
-//		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable());
-//		model.addAttribute("seat",seatVal2);
-//		System.out.println(seatVal2);
-		
-//		System.out.println(dao.selectSeatTable(no));
-	      
-		return "/making/tiketok";
-		
-	}
-	@RequestMapping(value = "booking")
-	public String bookingSeat(int no,Model model,String date,String rundate) {
-		System.out.println(date);
-		System.out.println(rundate);
-		String realdate=date+" "+rundate;
-		HashMap<String, Object>map= new HashMap<String, Object>();
-		map.put("rundate", realdate);
-		map.put("no", no);
-		List<Object>seatVal2=new ArrayList<Object>(dao.selectSeatTable(map));
-		System.out.println(seatVal2);
-		model.addAttribute("seat",seatVal2);
-		model.addAttribute("bookinginfo",tkdao.selectBookingInfo(no));
-		
-		model.addAttribute("date",realdate);
-		return "making/seat";
-	}
-	@RequestMapping (value = "contentImg")
-	public String ImgCheck(int no,Model model) {
-//		System.out.println("contentImg");
-//		System.out.println(imgsrc);
-		model.addAttribute("ticketinfo", tkdao.selectTicketInfo(no));
-		System.out.println(model);
-		return "making/dhTicketDetail";
-	}
+
+	
+
 
 	@RequestMapping(value="boardInsert")
 	public String boardInsert(ComBoard board,@RequestParam(value="file")MultipartFile file) {
-//		String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드!
-//		long size = file.getSize(); //파일 사이즈
-//		System.out.println(file);
-//		System.out.println("파일명 : "  + fileRealName);
-//		System.out.println("용량크기(byte) : " + size);
-//		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
-//		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-//		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
-//		
-//		
-//		/*
-//		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
-//		  업로드 하는 파일명이 언어 이외의 언어로 되어있을 수 있습니다. 
-//		  타인어를 지원하지 않는 환경에서는 정산 동작이 되지 않습니다.(리눅스가 대표적인 예시)
-//		  고유한 랜던 문자를 통해 db와 서버에 저장할 파일명을 새롭게 만들어 준다.
-//		 */
-//		
-//		UUID uuid = UUID.randomUUID();
-//		System.out.println(uuid.toString());
-//		String[] uuids = uuid.toString().split("-");
-//		
-//		String uniqueName = uuids[0];
-//		System.out.println("생성된 고유문자열" + uniqueName);
-//		System.out.println("확장자명" + fileExtension);
-//		
-//		String filename=uniqueName+fileExtension;
-//		board.setCom_filename(filename);
-//		
-//		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
-//		
-//		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // 적용 후
-//		try {
-//			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		board.setCom_no(dao.selectBoradNo());	
-//		dao.boardInsert(board);
 		commService.boardInsert(board, file);
 		return "redirect:/boardSelect";
 	}
