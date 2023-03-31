@@ -113,7 +113,7 @@ $(function(){
 	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
-		if($('#userid').val()==null){
+		if(${user_id==null}){
 			alert("Login Plz");
 			return false;
 		}
@@ -244,7 +244,7 @@ function ajaxpro2(jjimpoint){
 	<jsp:include page="./header.jsp"></jsp:include>
 	</header>
 	<section class='container-fluid pt-4' style="display: inline-flex;">
-		<input type="hidden" id="userid" value="${user_id}"/>
+		<input type="text" id="userid" value="${user_id}"/>
 		<div class='col-2 border-primary'>
 			<!-- loc ajax -->
 			<div class='searchbar1 col-12' style="display: inline-flex;">
