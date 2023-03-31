@@ -3,10 +3,14 @@ package com.bit.web.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,46 +43,39 @@ public class JoinSeoulController {
 			// return "ok";
 			return dao.getNick(nickname) != null ? String.valueOf(true) : String.valueOf(false);
 			// return "test";
+		}	
+	
+// 대륙 해시맵으로 불러오기 
+		@PostMapping(value = "ajaxcontinent")	  
+		@ResponseBody
+		public List<Object> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
+//			System.out.println("controller"+id); 
+//			System.out.println(dao.selectcontinent(id));
+//			return "success";
+			return dao.selectcontinent(id);
+		    }		
+
+// 회원가입정보 디비에 저장 		
+		@PostMapping(value = "joinMemberInsert")
+		public String joinMemberInsert(JoinSeoulBean bean) {
+			System.out.println(bean);
+			System.out.println(bean.getUser_nation().getClass().getName()); 
+			bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
+			dao.insertMember(bean);
+			System.out.println(bean);
+			// return "test";
+			return "Final_Pro/login";
 		}
 		
-	
-	
-	// 대륙 해시맵으로 불러오기 
-	@PostMapping(value = "ajaxcontinent")	  
-	@ResponseBody
-	public List<Object> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-//		System.out.println("controller"+id); 
-		//System.out.println(dao.selectcontinent(id));
-		//return "success";
-		return dao.selectcontinent(id);
-	    }	
-	
-	
-	
-//	// 대륙 리스트로 불러오기 
-//	@PostMapping(value = "ajaxcontinent")	  
-//	@ResponseBody
-//	public List<String> selectcontinent(@RequestParam(value ="id", required = false)String id) { 
-//		System.out.println("controller"+id); 
-//		//return "success";
-//		return dao.selectcontinent(id);
-//	    }
-//	
-//	
-//	
-
-	@PostMapping(value = "joinMemberInsert")
-	public String joinMemberInsert(JoinSeoulBean bean) {
-		System.out.println(bean);
-		System.out.println(bean.getUser_nation().getClass().getName());// User_nation Ÿ�� Ȯ��
-		// 33 ���
-		// System.out.println(user_nation);
-
-		bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
-		dao.insertMember(bean);
-		System.out.println(bean);
-		// return "test";
-		return "Final_Pro/login";
-	}
-
+// password 변경 업데이트		
+			@RequestMapping("joinPwUpdate")
+			public void joinPwUpdate(HttpServletRequest request) {
+				System.out.println(request);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("user_id", (String) request.getParameter("user_id"));
+				map.put("user_pw", (String) request.getParameter("user_pw"));	
+				System.out.println(map.get("user_id"));
+				dao.pwUpdate(map);	
+							
+			}
 }

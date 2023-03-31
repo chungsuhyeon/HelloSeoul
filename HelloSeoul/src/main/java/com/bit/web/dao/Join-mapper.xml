@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sist.spring.dao.joinmemberdao">
     
-    <!--emai 중복체크 -->
+    <!--email 중복체크 -->
 		<select id="ajaxGetId" parameterType="String" resultType="String">
 		   select * from userboard
 		   where user_id=#{value}
@@ -18,31 +18,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 
 
-	<insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
-	    INSERT INTO 
-	 		userboard(user_id,user_nick,user_pw,user_name,user_nation,user_tel,user_birth,user_gender,user_pp,user_first)
-	 		values(#{user_id},#{user_nick},#{user_pw},#{user_name},#{user_nation},#{user_tel},#{user_birth},#{user_gender},#{user_pp},#{user_first})
-	</insert>
 	
-	
-	<select id="selectcontinent" parameterType="String" resultType="java.util.HashMap">
- 		select country_no, country_name from nation 
-         where continent = #{value} 
- 	</select> 
-	
-	
-	
-	
-<!-- 	<select id="selectcontinent" parameterType="String" resultType="String"> -->
-<!-- 		select country_name from nation -->
-<!--         where continent = #{value} -->
-<!-- 	</select> -->
- 
- 
-
-	 <select id="getJoinnation" parameterType="String"  resultType="String">
-		select country_name from nation where country_no=#{value}
-	 </select> 
+   <!-- Nation 선택 -->
+		<select id="selectcontinent" parameterType="String" resultType="java.util.HashMap">
+	 	     select country_no, country_name from nation 
+	         where continent = #{value} 
+	         order by country_name  
+	 	</select> 
+	 	
+	 	
+   <!-- 국가번호->국가명으로 바꿈 -->
+	 	
+	 	 <select id="getJoinnation" parameterType="String"  resultType="String">
+	      	select country_name from nation where country_no=#{value}
+	     </select> 
+	  	
+	 	
+  <!-- 가입정보 DB저장 -->
+	 	<insert id="insertMember" parameterType="com.bit.web.vo.JoinSeoulBean">
+	        INSERT INTO 
+	 		userboard(user_id,user_nick,user_pw,user_nation,user_birth,user_gender,user_pp,user_first)
+	 		values(#{user_id},#{user_nick},#{user_pw},#{user_nation},#{user_birth},#{user_gender},#{user_pp},#{user_first})
+	   </insert>
+	   
+	   
+<!--  password 변경 -->
+      <update id="pwUpdate" parameterType="java.util.HashMap">
+           update userboard
+			set user_pw = #{user_pw}
+			where user_id = #{user_id}   
+      </update>
 
 </mapper>
 
