@@ -20,20 +20,29 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionRactory) {
 		super.setSqlSessionFactory(sqlSessionRactory);
 	}
-	
-	public List<MainDbBean> showDb() {
-		return this.getSqlSession().selectList("showDb");
-	}
-	//gungu
+	//show gungu
 	public List<LocGunGuBean> readyForLocation(){
 		return this.getSqlSession().selectList("readyForLocation");
 	}
-	public List<MainDbBean> searchFood(HashMap<Object, Object> map){
-		return this.getSqlSession().selectList("searchFood",map);
-	}
-	//show table
+	//show ctgtable
 	public List<HashMap<Object, String>> readyForCategory(){
 		return this.getSqlSession().selectList("readyForCategory");
+	}
+	//hotspot showdb 
+	public List<MainDbBean> readyForHotspot(){
+		return this.getSqlSession().selectList("readyForHotspot");
+	}
+	//hotspot info
+	public MainDbBean hotspotinfo(int loc_pc) {
+		return this.getSqlSession().selectOne("hotspotinfo", loc_pc);
+	}
+	//show loc info + map
+	public List<MainDbBean> showDb() {
+		return this.getSqlSession().selectList("showDb");
+	}
+	
+	public List<MainDbBean> searchLoc(HashMap<Object, Object> map){
+		return this.getSqlSession().selectList("searchLoc",map);
 	}
 	
 	public MainDbBean searchInsertJjim(int loc_pc) {
@@ -52,13 +61,7 @@ public class CtgDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("searchHot",query);
 	}
 	
-	public List<MainDbBean> readyForHotspot(){
-		return this.getSqlSession().selectList("readyForHotspot");
-	}
 	
-	public MainDbBean hotspotinfo(int loc_pc) {
-		return this.getSqlSession().selectOne("hotspotinfo", loc_pc);
-	}
 	
 	public List<MainDbBean> hotspotrecom(String loc_sg){
 		return this.getSqlSession().selectList("hotspotrecom", loc_sg);

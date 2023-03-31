@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.service.MypageService;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
@@ -27,177 +29,55 @@ import com.bit.web.vo.MypageMainPlannerBean;
 public class HelloSeoulController {
 	@Resource(name = "helloSeoulDao")
 	private HelloSeoulDao helloDao;
+	
+	@Resource
+	private MypageService contactService;
 
 	// login & session store
 	@RequestMapping("siteCheck")
 	public String loginProcess(HttpServletRequest request, String user_id, String password) {
-		HashMap<String, String> userInfo = helloDao.getDbUser(user_id);
-		
-		String dbPass = userInfo.get("USER_PW");
-		String nickName = userInfo.get("USER_NICK");
-				
-		if(dbPass!=null && dbPass.equals(password)) {
-			// login success		
+		String nickName = contactService.loginPass(user_id, password);
+						
+		if(nickName != null) {
+			// login success
 			request.getSession().setAttribute("user_id", user_id);
 			request.getSession().setAttribute("user_nickName", nickName);
 			request.getSession().setMaxInactiveInterval(60*60);
-			return "redirect:/Final_Pro/index.jsp";
+			return "Final_Pro/index";
 		} else {
-			return "redirect:/Final_Pro/login.jsp";
+			return "Final_Pro/login";
 		}
 	}
 	
 	// logout
 	@RequestMapping("HelloSeoulLogout")
-	public ModelAndView BoardLogout(HttpServletRequest request) {
+	public String BoardLogout(HttpServletRequest request) {
 		request.getSession().setAttribute("user_id", null);
-		request.getSession().setMaxInactiveInterval(0);		
-		return new ModelAndView("Final_Pro/index");
+		request.getSession().setMaxInactiveInterval(0);	
+		return "Final_Pro/index";
 	}
 	
 	// mypage main
 	@RequestMapping("myPageLoad")
-	public ModelAndView userInfoAll(HttpServletRequest request, Model model) {
+	public ModelAndView userInfoAll(HttpServletRequest request) {
 		String user_id = (String)request.getSession().getAttribute("user_id");
 
-		// 개인정보 넘기기		
-		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(user_id);
+		ModelAndView mav = new ModelAndView();
 		
-		// DB 생일
-		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		mav.addObject("userInfo", contactService.userInfo(user_id));
+		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id));
+		mav.setViewName("Final_Pro/myPageMain");
 		
-		// 오늘 날짜
-		LocalDate today = LocalDate.now();
-		
-		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
-		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
-		
-		// 정보 넘길거
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
-		
-		// 나이계산
-		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
-			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
-		} else { // 생일 안지남
-			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // 생일 안지난 사람
-				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
-			} else { // 생일 지남
-				userInfo.put("USER_AGE", today.getYear() - birth.getYear());
-			} 
-		}
-						
-		// 관광목적
-		switch (user_pp) {
-		case 1:
-			userInfo.put("USER_PP", "travel"); // 여행
-			break;
-		case 2:
-			userInfo.put("USER_PP", "business trip"); // 출장
-			break;
-		case 3:
-			userInfo.put("USER_PP", "study"); // 유학
-			break;
-		case 4:
-			userInfo.put("USER_PP", "experience"); // 경험
-			break;
-		default : 
-			userInfo.put("USER_PP", "etc");
-			break;
-		}
-		
-		// 관광 1순위
-		switch (user_first) {
-		case 1:
-			userInfo.put("USER_FIRST", "food");
-			break;
-		case 2:
-			userInfo.put("USER_FIRST", "tour");
-			break;
-		case 3:
-			userInfo.put("USER_FIRST", "shopping");
-			break;
-		case 4:
-			userInfo.put("USER_FIRST", "entertainment");
-			break;
-		default : 
-			userInfo.put("USER_PP", "etc");
-			break;
-		}
-		
-		model.addAttribute("userInfo", userInfo);
-		
-		// 생성된 플래너
-		List<Object> userCreatedPlanner = helloDao.getUserPlanner(user_id);
-		model.addAttribute("userCreatedPlanner", userCreatedPlanner);
-		
-		return new ModelAndView("Final_Pro/myPageMain");
+		return mav;
 	}
 	
 	// 찜 보기 화면
 	@RequestMapping(value = "ajaxMypageJjim", method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mypageJjimListLoad(HttpServletRequest request){
-		String user_id = (String) request.getSession().getAttribute("user_id");
-		List<Object> userJjimList = helloDao.getUserJjimList(user_id);
-		
-		String finalStr = "";
-		String tab1 = "";
-		String tab2 = "";
-		String tab3 = "";
-		String tab4 = "";
-		String tab5 = "";
-		
-		for(Object i : userJjimList) {
-			MypageJjimBean bean = (MypageJjimBean) i;	
-			
-			if(bean.getLoc_ctg1().equals("음식점")) {
-				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab1 += "</span></td></tr>";
-			}
-			else if (bean.getLoc_ctg1().equals("관광지")){				
-				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab2 += "</span></td></tr>";
-			}
-			else if (bean.getLoc_ctg1().equals("쇼핑")){				
-				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab3 += "</span></td></tr>";
-			}
-			else if (bean.getLoc_ctg1().equals("볼거리")){				
-				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab4 += "</span></td></tr>";
-			}
-			else { // 티켓인 경우	
-				tab5 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab5 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab5 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab5 += "</span></td></tr>";
-			}
-		}		
-
-		finalStr += "<div class='tab-pane fade active show' id='food' role='tabpanel'><table class='table table-hover'><tbody>" + tab1 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='things_to_see' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
-		
-		return finalStr;
+		return contactService.userJjimList((String) request.getSession().getAttribute("user_id"));
 	}
 	
-	// 찜 리스트 자체 보내기
-	@PostMapping(value = "ajaxWishList")
-	@ResponseBody
-	public List<Object> mypageWishListAll(HttpServletRequest request){
-		return helloDao.getUserJjimList((String) request.getSession().getAttribute("user_id"));
-	}
 	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
@@ -255,26 +135,25 @@ public class HelloSeoulController {
 //		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 		
+	// 찜 리스트 자체 보내기 = 플래너 일정 생성하는 곳의 찜 리스트
+	@PostMapping(value = "ajaxWishList")
+	@ResponseBody
+	public List<Object> mypageWishListAll(HttpServletRequest request){
+		return contactService.mypageScheduleWishList((String) request.getSession().getAttribute("user_id"));
+	}
+	
 	// 메인 플래너 생성 페이지 로드
 	@PostMapping(value = "ajaxMypagePlannerTabBar")
 	@ResponseBody
-	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {
-		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(no);
-		
-		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		int diffDate = end.compareTo(start);
-		plannerInfo.put("numDate", diffDate + 1);
-		
-		return plannerInfo;
+	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {		
+		return contactService.mypagePlannerTabBar(no);
 	}
-	
 	
 	// 생성한 플래너의 일정
 	@PostMapping(value = "ajaxMypagePlannerTabContent")
 	@ResponseBody
 	public List<Object> ajaxPlannerTabContentSelect(@RequestParam(value = "no") int no){
-		return helloDao.mainPlannerDataSelect(no);
+		return contactService.mypagePlannerTabContent(no);
 	}
 	
 	// 메인 플래너 생성
@@ -291,10 +170,18 @@ public class HelloSeoulController {
 		return helloDao.selectMainDbData(str);
 	}
 	
+	@PostMapping(value = "deletePlannerSchedule")
+	@ResponseBody
+	public String deletePlannerSchedule( @RequestParam(value = "no") int no) {
+		helloDao.plannerScheduleDelete(no);
+		return "success";
+	}
+	
+	
 	// 작성한 플래너 insert / update
 	@PostMapping(value = "mainPlannerData")
 	@ResponseBody
-	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, MypageMainPlannerBean bean) {
+	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {	
 		bean.setUser_id((String) request.getSession().getAttribute("user_id"));
 		helloDao.plannerScheduleInsert(bean);
 		return "success";
@@ -306,8 +193,8 @@ public class HelloSeoulController {
 		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
 			return new ModelAndView("Final_Pro/myPagePlannerCreate");
 		}
-		else if(modi.equals("updatePlanner")) { // 플래너 수정
-			return new ModelAndView("Final_Pro/myPagePlannerCreate");			
+		else if(modi.equals("updatePlanner")) { // 플래너 일정 수정
+			return new ModelAndView("Final_Pro/myPagePlannerModify");			
 		} else { // show 로드
 			return new ModelAndView("Final_Pro/myPageShow");
 		}
