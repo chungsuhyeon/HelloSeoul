@@ -41,7 +41,7 @@ $(function(){
  	        	   var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; ///^[0-9a-zA-Z]/: 이메일 주소의 첫 글자는 숫자나 알파벳으로 시작, /i : 대소문자 구분X
  	        	   //alert(user_id.match(pattern));	 		       
 	        	   if(user_id.match(pattern)==null){
-	        		   alert("올바른 형식요망 ex)seoul@gmail.com");
+	        		   alert("Please enter in the correct format \n ex)seoul@gmail.com");
 	        		   $("input[name='user_id1']").val('');
 	        		   $("input[name='user_id1']").focus();
 	        		   $("input[name='user_id2']").val('');        		   
@@ -66,136 +66,157 @@ $(function(){
 	     				   error:function(){
 	     					   alert('error');
 	     				   }			   
-	     				   });	        	    
-	        	   }   
-
-	 		   }); //email 형식 및 중복체크-end
-	 		   
+	     				 });	        	    
+	        	   } 
+	        	 }); //email 형식 및 중복체크-end	 		   
 	
     
-      // nick name  중복체크 
-	           $("button#userNick").click(function(){
-	         	  alert('test');	  	     
-		       let user_nick =$("input[name='user_nick']").val();	
-		       var pattern_nick = /^[a-zA-Z]{2,5}$/i;
-		       if(user_nick.match(pattern)==null){
-		    	   alert("5글자이하로")
-		       }else{
-		    	   alert("맞아 다음으로 ")
-		       }
+    // nickname 형식 및 중복체크 
+		           $("button#userNick").click(function(){	         		     
+			       let user_nick =$("input[name='user_nick']").val();	
+			       alert(user_nick);
+	 		       var pattern_nick = /^[a-zA-Z]{2,6}$/i; 	 		           
+			       if(user_nick.match(pattern_nick)==null){
+			    	   alert("6글자이하로");
+			    	   $("input[name='user_nick']").focus();
+	        		   $("input[name='user_nick']").val('');
+			       }
+			       else{	 		          
+		 		       $.ajax({
+		 				   url:'/web/checkUsernick',
+		 				   type:'POST',	
+		 				   data:{nickname:user_nick},
+		 				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+		 				   dataType:'text',
+		 				   success:function(data){
+		 					  //console.log(data);
+		 					  if(data=='true'){
+		 						  $("span#nick").html("<br><font color='red'>Disavailable★</font>");
+		 						  $("input#user_nick").val('');
+		 						  $("input#user_nick").focus();
+		 					 }else{
+		 						 $("span#nick").html("<br><font color='white'>Available★</font>")
+		 					 }
+		 				   },
+		 				   error:function(){
+		 					   alert('error');
+		 				   }
+	 				   });	        	    
+	 	        	  }
+ 	  	          }); // nickname 형식 및 중복체크-end    
 		       
 		       
-// 		          alert($("input[name='user_nick']").val());
-// 		       $.ajax({
-// 				   url:'/web/checkUsernick',
-// 				   type:'POST',	
-// 				   data:{nickname:user_nick},
-// 				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-// 				   dataType:'text',
-// 				   success:function(data){
-// 					  //console.log(data);
-// 					  if(data=='true'){
-// 						  $("span#nick").html("<br><font color='red'>Disavailable★</font>");
-// 						  $("input#user_nick").val('');
-// 						  $("input#user_nick").focus();
-// 					 }else{
-// 						 $("span#nick").html("<br><font color='white'>Available★</font>")
-// 					 }
-// 				   },
-// 				   error:function(){
-// 					   alert('error');
-// 				   }			   
-// 			   }); 
-	       }); // nick name  중복체크-end   
+  			        
+  	// password 네자이상 
+				 $("input[name='user_pw']").blur(function(){ 
+	  					 // console.log('blur'); 
+	  			        if($("input[name='user_pw']").val().length>=4){
+	  			        	
+	  			        }else{ 
+	  			        	alert("Please set it to 4 characters or more");	 
+                            $("input[name='user_pw']").val('');	         	
+ 	  			        	setTimeout(function(){
+ 	  			        		$("input[name='user_pw']").focus();
+ 	  			             }, 1);
+	  			        } 
+	  			   });// password 네자이상 -end
+	       
+ 	                	
+
+  	//password 입력값1,2같은지 확인 
+	  			   $("input[name='user_pw2']").blur(function(){ //포커스가 다른곳으로 가면 콘솔창에서 blur가 나온다 
+	  					 // console.log('blur'); 
+	  			        
+	  			        if($("input[name='user_pw']").val()==$("input[name='user_pw2']").val()){	
+	  			        	$("input[name='user_pw']").val();
+	  			        }else{
+	  			        	$("input[name='user_pw']").val('');
+	  			        	$("input[name='user_pw2']").val('');
+	  			        	setTimeout(function(){
+ 	  			        		$("input[name='user_pw']").focus();
+ 	  			             }, 1);
+	  			        	alert("Please Check Password");
+	  			        } 
+	  			   });	//password 입력값1,2같은지 확인 
 	       
 	     
 	       
     
-
-	       
+  // 국적선택(대륙선택 후 국가선택)    
+				     $("select#continent").change(function(){
+				    	 let user_continent = $("select[name='continent']").val() 
+				      	   $.ajax({
+				    	    	  url:'/web/ajaxcontinent',
+				    	    	  type:'POST',
+				    	    	  data:{id:user_continent},
+				    	    	  contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+				    	    	  dataType:'json',
+				    	    	  success:function(result){  
+// 				    	    		  console.log(result);
+// 				     	    		  console.log(result.length);
+				   	    		  $(result).each(function(idx, list){
+// 				    	    			  console.log(idx);
+// 				    	    			  console.log(list);
+				    	    			  console.log(list['COUNTRY_NAME']);
+				    	    			  console.log(list['COUNTRY_NO']); 	    	
+// 				    	    	     for(var i = 0 ;i<result.length ;i++){
+				    	    			  var myNationName = list['COUNTRY_NAME'];
+				       	    		      var myNationNo = list['COUNTRY_NO'];       	    	         	    		        	        
+				      	    	        	 $("select#user_nation").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
+// 				      	    	        }
+				   	    		  });
+				    	    	  },//success
+				    	    	  error:function(){
+					   				 alert('error');
+					   			  }	//error
+				    	    	 
+				    	         });//ajax      
+				          });//function     
     
-     $("select#continent").change(function(){
-    	 //alert('test');
-//      	 alert($("select[name='continent']").val())
-    	 let user_continent = $("select[name='continent']").val() 
-      	   $.ajax({
-    	    	  url:'/web/ajaxcontinent',
-    	    	  type:'POST',
-    	    	  data:{id:user_continent},
-    	    	  contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-    	    	  dataType:'json',
-    	    	  success:function(result){  
-//     	    		  console.log(result);
-//      	    		  console.log(result.length);
-   	    		  $(result).each(function(idx, list){
-//     	    			  console.log(idx);
-//     	    			  console.log(list);
-    	    			  console.log(list['COUNTRY_NAME']);
-    	    			  console.log(list['COUNTRY_NO']); 	    	
-//     	    	     for(var i = 0 ;i<result.length ;i++){
-    	    			  var myNationName = list['COUNTRY_NAME'];
-       	    		      var myNationNo = list['COUNTRY_NO'];   
-     	    	         	    		        	        
-      	    	        	 $("select#user_nation").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
-//       	    	        }
-   	    		  });
-    	    	  },//success
-    	    	  error:function(){
-	   				 alert('error');
-	   			  }	//error
-    	    	 
-    	         });//ajax      
-          });//function     
-    
-     /* ========================================================================================================*/    
-     
-   
-	
 
-     
+   // 가입정보 저장, 공백체크  	   
+				   $("button#save").click(function(){ //값 유무 확인		   
+					   $("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
+				   
+				       if($("input[name='user_nick']").val()==""){ //닉네임 
+				    	   alert("Please enter your Nick name");
+				    	  $("input[name='user_nick']").focus();
+				    	   exit;
+				       }				   
+				   
+				       if($("select[name='user_nation']").val()==null){ //국적 
+				    	   alert("Please enter your Nationality");
+				    	  $("select[name='continent']").focus();
+				    	   exit;
+				       }
+				       if($("input[name='user_birth']").val()==""){  //생일 
+				    	   alert("Please enter your Birthday");
+				    	   $("input[name='user_birth']").focus();
+				    	   exit;
+				       }
+				       if($("select[name='user_gender']").val()=="0"){ //성별
+				    	   alert("Please enter your Gender");
+				    	   $("select[name='user_gender']").focus();
+				    	   exit;
+				       }
+				       if($("select[name='user_pp']").val()=="0"){  //여행목적
+				    	   alert("Please enter your Travel Purposey");
+				    	   $("select[name='user_pp']").focus();
+				    	   exit;
+				       }
+				       if($("select[name='user_first']").val()=="0"){ //여행우선순우
+				    	   alert("Please enter your Travel Priority");
+				    	   $("select[name='user_first']").focus();
+				    	   exit;
+				       }
+				    	   
 
-	  
-    	//password 중복체크
-		   $("input[name='user_pw2']").blur(function(){ //포커스가 다른곳으로 가면 콜솔창에서 blur가 나온다 
-				 // console.log('blur'); 
-		        if($("input[name='user_pw']").val()==$("input[name='user_pw2']").val() && $("input[name='user_pw']").val().length>0){
-		        	
-		        	$("input[name='user_pw']").val();
-		        }else{
-		        	$("input[name='user_pw']").val('');
-		        	$("input[name='user_pw2']").val('');
-		        	$("input[name='user_pw']").focus();
-		        	alert("비밀번호를 확인하세요");
-		        } 
-		   });
-  
-		//입력정보 확인
-    	$("button#total_check").click(function(){
-			     window.open("/web/Final_Pro/joinCheck.jsp","확인","left=100,right= 200, top=200,width=400, height=400");
+				       $("form[name='joinFrm']").submit(); 
+				   
+				   }); //가입정보 저장, 공백체크 -end
+				
 
-			});
-    	
-    	
-		 // 가입정보 저장  	   
-	   $("button#save").click(function(){ //값 유무 확인		   
-		   $("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
-		   $("input[name='user_name']").val($("input[name='user_name1']").val()+' '+$("input[name='user_name2']").val());	   
-		   $("input[name='user_tel']").val($("input[name='user_tel1']").val()+'-'+$("input[name='user_tel2']").val()+'-'+$("input[name='user_tel3']").val()+'-'+$("input[name='user_tel4']").val());       
-		   alert($("select[name='user_nation']").val());
-		   
-		   $("select[name='user_nation']").val();
-		  //("select[name='user_nation']").val($("option[type='text']").attr("id"));
-		
-			
-		   //$("option[name='user_nation']").attr();    
-		   //alert($("option[type='text']").prop("id"));   	       
-	       //alert($("input#user_name").val().length);
-	       $("form[name='joinFrm']").submit(); 
-	   
-	   });
-
-
-});
+      });// 전체함수-end
 </script>
 <!--JS Section End -->
 
@@ -206,7 +227,6 @@ $(function(){
 	width: 40%;
 }
 </style>
-
 
 
 <!-- check,join button style -->
@@ -267,7 +287,7 @@ $(function(){
 	  				<label class="col-form-label mt-4" for="inputDefault">Password</label>
   						<div>
   						    <div class="form-group" style="display: inline-flex;">
-  						  	  <input style="width: 400px;" type="password" name="user_pw" class="form-control" id="inputDefault">
+  						  	  <input style="width: 400px;" type="password" name="user_pw" class="form-control" id="user_pw">
   						    </div>
   						</div>
   					<label class="col-form-label mt-4" for="inputDefault">Confirm password</label>
@@ -307,7 +327,7 @@ $(function(){
   						<div>
 		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
   			  				      <select class="form-select" name="user_gender" id="inputDefault">
-						              <option selected="selected">Gender</option>
+						              <option selected="selected" value="0">Gender</option>
 									  <option value="1">male</option>
 									  <option value="2">female</option>
 								</select>		  									  
@@ -317,7 +337,7 @@ $(function(){
   						<div>
 		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
   			  				      <select class="form-select" name="user_pp" id="inputDefault">
-						              <option selected="selected">Purpose</option>
+						              <option selected="selected" value="0">Purpose</option>
 									  <option value="1">travel</option>
 									  <option value="2">business trip</option>
 									  <option value="3">study</option>
@@ -327,9 +347,9 @@ $(function(){
 	  					</div>
 	  					<label class="col-form-label mt-4" for="inputDefault">Priority</label>
   						<div>
-		  				   	<div style="width: 400px;" class="form-group" style="display: inline-flex;">
+		  				   	<div style="width: 400px;" class="form-group" style="display:inline-flex;">
   			  				      <select class="form-select" name="user_first" id="inputDefault">
-						              <option selected="selected">Priority</option>
+						              <option selected="selected" value="0">Priority</option>
 									  <option value="1">food</option>
 									  <option value="2">tour</option>	
 									  <option value="3">entertainment</option>
@@ -339,10 +359,8 @@ $(function(){
 	  					</div>				
 	  					
 	  					
-	  			    	<div class="find-btn" >					  		 
-	  					          <button class="btn btn-lg btn-primary mt-2" type="button" id="total_check">check</button>	
-	  					          &nbsp;&nbsp;&nbsp;&nbsp;  						     
-  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save"> join up</button>
+	  			    	<div class="find-btn" >	  					            						     
+  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save" style="width: 300px;"> join up</button>
   					    </div>					
                 </form>
 		</div>

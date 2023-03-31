@@ -16,6 +16,37 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
+
+// $(function(){
+// //가입아이디 체크  
+// $("input[name='user_id']").blur(function(){
+	 
+// 	 let user_id = $("input[name='user_id']").val();
+// 	 var pattern = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i;
+// 	 alert(user_id);
+// 	 alert(user_id.match(pattern));
+	 
+// 	 if(user_id.match(pattern)==null){
+// 		 alert("Please enter your registered Email \n ex) seoul@gmail.com");
+// 		 $("input[name='user_id']").focus();
+// 		 $("input[name='user_id']").val('');
+		 
+// 	 }
+//  	 else{
+//  		 alert("ok")
+//  	  	$("input[name='password']").focus();     	    
+//  	   } 
+// }); // 가입아이디 체크-end
+
+// });// 전체함수-end
+
+
+
+
+
+
+
+
 	$(function(){
 		$("button").click(function(){
 			if(($(this).attr('id'))=='login'){
@@ -31,10 +62,12 @@
 			else if(($(this).attr('id'))=='join'){
 				document.location.href ="/web/Final_Pro/join.jsp";
 			}
-			else if(($(this).attr('id'))=='findID'){
-				document.location.href ="";
+			else if(($(this).attr('id'))=='findPw'){
+				document.location.href ="/web/Final_Pro/joinCheck.jsp";
 			}
 		});
+		
+		
 	});
 </script>
 <!--JS Section End -->
@@ -64,15 +97,15 @@
 				<div class='loginbar bg-light' style="border-radius: 20px; padding-bottom: 10px; margin-top: 200px;">
 					<form method="post" action="${pageContext.request.contextPath}/siteCheck">
 						<div class="form-group">
-	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">ID</label>
+	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">&nbsp;&nbsp;&nbsp;&nbsp;ID</label>
 	  						<input class="form-control form-control-lg" type="text" placeholder="ID" id="inputID" name="user_id">
-	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Password</label>
+	  						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">&nbsp;&nbsp;&nbsp;&nbsp;Password</label>
 	  						<input class="form-control form-control-lg" type="password" placeholder="Password" id="inputPassword" name="password">
 						</div>
 						<div class='buttonbar d-flex justify-content-around' style="display: inline-flex; margin-top: 10px; margin-bottom: 10px;">
-						<button type="submit" class="btn btn-primary" id="login">Login</button>
-						<button type="button" class="btn btn-success" id="join">Join</button>
-						<button type="button" class="btn btn-danger" id="findID">Find Id</button>
+							<button type="submit" class="btn btn-primary" id="login">Login</button>
+							<button type="button" class="btn btn-success" id="join">Join</button>
+							<button type="button" class="btn btn-danger" id="findPw">Find Password</a></button>
 						</div>
 					</form>
 				</div>
