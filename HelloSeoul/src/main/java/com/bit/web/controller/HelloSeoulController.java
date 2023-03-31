@@ -1,9 +1,7 @@
 package com.bit.web.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +22,6 @@ import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
-import com.bit.web.vo.MypageMainPlannerList;
 
 @Controller
 public class HelloSeoulController {
@@ -298,16 +294,9 @@ public class HelloSeoulController {
 	// 작성한 플래너 insert / update
 	@PostMapping(value = "mainPlannerData")
 	@ResponseBody
-	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, @ModelAttribute(value="MypageMainPlannerList") MypageMainPlannerList list) {
-		String user_id = (String) request.getSession().getAttribute("user_id");
-		
-		if(list.getMainPlannerList() != null) {
-			for(int i=0; i<list.getMainPlannerList().size(); i++) {
-				list.getMainPlannerList().get(i).setUser_id(user_id);
-				helloDao.plannerScheduleInsert(list.getMainPlannerList().get(i));
-			} // for문
-		}
-		
+	public String formMainPlannerAdd(HttpServletRequest request, @RequestParam(value = "modi") String modi, MypageMainPlannerBean bean) {
+		bean.setUser_id((String) request.getSession().getAttribute("user_id"));
+		helloDao.plannerScheduleInsert(bean);
 		return "success";
 	}
 

@@ -33,79 +33,41 @@ $(function(){
 				 
 		 		  }			   
 	 		  }); // email 등록-end
-	
-
-    // email 형식 및 중복체크
-	           $("button#check").click(function(){ 	        	   
- 	        	   let user_id =$("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val(); 	        	 
- 	        	   var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; ///^[0-9a-zA-Z]/: 이메일 주소의 첫 글자는 숫자나 알파벳으로 시작, /i : 대소문자 구분X
- 	        	   //alert(user_id.match(pattern));	 		       
-	        	   if(user_id.match(pattern)==null){
-	        		   alert("Please enter in the correct format \n ex)seoul@gmail.com");
-	        		   $("input[name='user_id1']").val('');
-	        		   $("input[name='user_id1']").focus();
-	        		   $("input[name='user_id2']").val('');        		   
-	        	   }
-	        	   else{
-	     		       $.ajax({
-	     				   url:'/web/ajaxFindID',
-	     				   type:'POST',	
-	     				   data:{id:user_id},
-	     				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-	     				   dataType:'text',
-	     				   success:function(result){
-	     					  // console.log(result);
-	     					  if(result=='true'){
-	     						  $("span#sid").html("<br><font color='red'>Disavailable</font>");
-	     						  $("input[name='user_id1']").val('');
-	     						  $("input[name='user_id1']").focus();
-	     					 }else{
-	     						 $("span#sid").html("<br><font color='white'>Available</font>")
-	     					 }
-	     				   },
-	     				   error:function(){
-	     					   alert('error');
-	     				   }			   
-	     				 });	        	    
-	        	   } 
-	        	 }); //email 형식 및 중복체크-end	 		   
-	
-    
-    // nickname 형식 및 중복체크 
-		           $("button#userNick").click(function(){	         		     
-			       let user_nick =$("input[name='user_nick']").val();	
-			       alert(user_nick);
-	 		       var pattern_nick = /^[a-zA-Z]{2,6}$/i; 	 		           
-			       if(user_nick.match(pattern_nick)==null){
-			    	   alert("6글자이하로");
-			    	   $("input[name='user_nick']").focus();
-	        		   $("input[name='user_nick']").val('');
-			       }
-			       else{	 		          
-		 		       $.ajax({
-		 				   url:'/web/checkUsernick',
+	 		  
+// 가입아이디 체크  
+			$("button#user_id").click(function(){
+				 var pattern = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i;
+				 let user_id = $("input[name='user_id']").val();
+				 //alert(user_id.match(pattern));
+				 
+				 if(user_id.match(pattern)==null){
+					 alert("Please enter your registered Email \n ex) seoul@gmail.com");
+					 $("input[name='user_id']").val('');
+					 $("input[name='user_id']").focus();
+				 }
+				 else{
+				       $.ajax({
+		 				   url:'/web/ajaxFindID',
 		 				   type:'POST',	
-		 				   data:{nickname:user_nick},
+		 				   data:{id:user_id},
 		 				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 		 				   dataType:'text',
-		 				   success:function(data){
-		 					  //console.log(data);
-		 					  if(data=='true'){
-		 						  $("span#nick").html("<br><font color='red'>Disavailable★</font>");
-		 						  $("input#user_nick").val('');
-		 						  $("input#user_nick").focus();
-		 					 }else{
-		 						 $("span#nick").html("<br><font color='white'>Available★</font>")
-		 					 }
-		 				   },
-		 				   error:function(){
-		 					   alert('error');
-		 				   }
-	 				   });	        	    
-	 	        	  }
- 	  	          }); // nickname 형식 및 중복체크-end    
-		       
-		       
+		 				   success:function(result){
+		 					   console.log(result);
+		    					  if(result=='false'){
+			                          alert("Please enter a correct email address"); 						  
+		 					     	  $("input[name='user_id']").val('');
+		 					     	  $("input[name='user_id']").focus();
+		    					 }else{
+		    						 alert("Please enter a new password");    						 
+		    						 $("input[name='user_id']").attr("readonly",true); 						 
+		    					 }
+		    					}			   
+		 				 });	        	    
+		    	   } 
+			}); // 가입아이디 체크-end
+	 		  
+
   			        
   	// password 네자이상 
 				 $("input[name='user_pw']").blur(function(){ 
@@ -135,17 +97,32 @@ $(function(){
 	  			        	setTimeout(function(){
  	  			        		$("input[name='user_pw']").focus();
  	  			             }, 1);
-	  			        	alert("Please Check Password");
+	  			        	alert("The entered password is different.\n Please Check Password");
 	  			        } 
 	  			   });	//password 입력값1,2같은지 확인 
-	       
+	  			   
+	  //password 수정(update)     
+	     $("button#user_pw").click(function(){	    	 
 	     
-	       
-    
-    
+	    	 if($("input[name='user_id']").val()==""){ //Email adress
+		    	   alert("Please enter your Email");
+		    	  $("input[name='user_id']").focus();
+		    	   exit;
+		       }				   
+		   
+		       if($("select[name='user_pw']").val()==""){ //new password
+		    	   alert("Please enter your Password");
+		    	  $("select[name='user_pw']").focus();
+		    	   exit;
+		       } 
+		       $("form[name='joinpw']").submit(); 		       
 
-				
+				if(($(this).attr('id'))=='user_pw'){  //페이지 이동 
+					document.location.href ="/web/Final_Pro/login.jsp";
+				}
 
+	      });
+	  			   
       });// 전체함수-end
 </script>
 <!--JS Section End -->
@@ -179,20 +156,19 @@ $(function(){
 	<section class=bg-light>
 		<div class='container bg-dark' style="width: 800px; margin-top: 20px; border-radius: 30px;">
 			<h2 align="center">Find Password</h2>
-			<form action="/web/joinMemberInsert" name="joinFrm" method="post">
-				<div class="form-group"> 					
-	  				
-	  						
-	  					  					
+			<form action="/web/joinPwUpdate" name="joinpw" method="post">
+				<div class="form-group"> 	
   					<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Email</label>
-	  					<div>
-		  				   	<div class="form-group" style="display: inline-flex;">
-			  					<input style="width: 400px;" type="text" class="form-control" placeholder="Email" name="user_nick"  id="user_nick">&nbsp;&nbsp;&nbsp;&nbsp;
-				  					<div class="d-grid gap-2">
-				  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="userNick" type="button">Email-Check<span id="nick"></span></button>
-				  					</div>			  					
-			  				</div>
-	  					</div>
+	  				    	<div>
+		  				    	<div class="form-group" style="display: inline-flex;">
+			  						<input style="width: 400px;" type="text" class="form-control" placeholder="Please enter your registered Email" name="user_id"  id="user_id">&nbsp;&nbsp;&nbsp;&nbsp;
+					  					<div class="d-grid gap-2">
+					  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="user_id" type="button">Email-Check<span id="user_id"></span></button>
+					  					</div>			  					
+			  			    	</div>
+	  				    	</div>
+	  					<br>
+  						<br>
 	  					
 	  				<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Password</label>
   						<div>
@@ -201,16 +177,16 @@ $(function(){
   						    </div>
   						</div>
   					<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Confirm password</label>
-  						 <div>
-  						    <div class="form-group" style="display: inline-flex;">
-  						  	  <input style="width: 400px;" type="password"  placeholder="Confirm password"  name="user_pw2"   class="form-control" id="inputDefault">  						  
-  						    </div>
-  						</div>  				
-  					
-	  					
-	  			    	<div class="find-btn" >	  					            						     
-  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save" style="width: 300px;">Password Reset </button>
-  					    </div>					
+  						  <div>
+  						      <div class="form-group" style="display: inline-flex;">
+  						  	     <input style="width: 400px;" type="password"  placeholder="Confirm password"  name="user_pw2"   class="form-control" id="inputDefault">&nbsp;&nbsp;&nbsp;&nbsp; 
+  						  	   	   	<div class="form-group" style="display: inline-flex;">			  					
+					  					<button style="height:35px;width: 180px;" class="btn btn-lg btn-primary mt-2" id="user_pw" type="button">Password Reset<span id="user_pw"></span></button>
+					  				 </div>  						  
+  						      </div>
+  						  </div> 
+  					    	<br>
+  					    	<br> 
                 </form>
 		</div>
 	</section>

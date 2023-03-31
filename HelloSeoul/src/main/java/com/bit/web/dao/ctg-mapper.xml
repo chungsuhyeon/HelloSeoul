@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sist.spring.dao.memberdao">
 <select id="showDb" resultType="mainDB">
-SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_OP, LOC_CL, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
 </select>
 <select id="searchFood" parameterType="java.util.HashMap" resultType="mainDB">
-SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_OP, LOC_CL, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
 WHERE LOC_SG = #{loc_sg} AND LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
 </select>
@@ -15,7 +15,7 @@ WHERE LOC_SG = #{loc_sg} AND LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{que
 
 
 <select id="readyForLocation" resultType="com.bit.web.vo.LocGunGuBean">
-SELECT * FROM LOCATION_SIGUNGU
+SELECT * FROM SIGUNGU
 </select>
 
 <select id="readyForCategory" parameterType="String" resultType="java.util.HashMap">
@@ -25,9 +25,48 @@ FROM MAINDB
 
 
 <select id="searchInsertJjim" parameterType="int" resultType="mainDB">
-SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_OP, LOC_CL, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
 WHERE LOC_PC = #{loc_pc}
+</select>
+
+<select id="checkJjimList" parameterType="String" resultType="Integer">
+SELECT LOC_PC
+FROM JJIM
+WHERE USER_ID = #{user_id}
+</select>
+
+<insert id="insertjjim" parameterType="mypageJjim">
+INSERT INTO JJIM(USER_ID,LOC_PC,LOC_NAME,LOC_CTG1,LOC_CTG2,LOC_SG)
+VALUES(#{user_id},#{loc_pc},#{loc_name},#{loc_ctg1},#{loc_ctg2},#{loc_sg})
+</insert>
+
+<select id="searchHot" parameterType="String" resultType="mainDB">
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_NAME = '%'||#{query}||'%'
+</select>
+
+<select id="readyForHotspot" resultType="mainDB">
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_CTG1 = 'tour'
+</select>
+
+<select id="hotspotinfo" resultType="mainDB" parameterType="int">
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_PC = #{loc_pc}
+</select>
+
+<select id="hotspotrecom" resultType="mainDB" parameterType="String">
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM(
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_SG = #{loc_sg}
+ORDER BY DBMS_RANDOM.VALUE)
+WHERE <![CDATA[ROWNUM<5]]> 
 </select>
 
 </mapper>

@@ -113,6 +113,10 @@ $(function(){
 	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
+		if($('usedrid').val()==null){
+			alert("Login Plz");
+			return false;
+		}
 		var jjimpoint = new Array();
 		var cnt = 0;
 		$("input[id='jjim']").each(function(){
@@ -121,8 +125,11 @@ $(function(){
 				cnt += 1;
 				
 			}
+			if(cnt==0){
+				alert("please select");
+				return false;
+			}
 		});
-		console.log(jjimpoint);
 		ajaxpro2(jjimpoint);
 	});
 });//functionload
@@ -167,7 +174,7 @@ function ajaxpro(sel){
 										</tr>
 										<tr>
 											<td class='table-light'>영업시간</td>
-											<td>\${loc.loc_op} ~ \${loc.loc_cl}</td>
+											<td>\${loc.loc_time}</td>
 										</tr>
 										<tr>
 											<td class='table-light'>Tel</td>
@@ -200,7 +207,7 @@ function ajaxpro2(jjimpoint){
 		dataType:'text',
 		data: {'jjimpoint':jjimpoint},
 		success : function(r){
-			alert(r);
+			alert("same count :"+r);
 		},
 		error : function(x){
 			
@@ -237,6 +244,7 @@ function ajaxpro2(jjimpoint){
 	<jsp:include page="./header.jsp"></jsp:include>
 	</header>
 	<section class='container-fluid pt-4' style="display: inline-flex;">
+		<input type="hidden" id="userid" value="${user_id}"/>
 		<div class='col-2 border-primary'>
 			<!-- loc ajax -->
 			<div class='searchbar1 col-12' style="display: inline-flex;">
@@ -261,7 +269,7 @@ function ajaxpro2(jjimpoint){
 				<button type="button" class="searchbt btn btn-primary">Search</button>
 			</div>
 			<div></div>
-			<div class='ctglist'>
+			<div class='ctglist' style="overflow: scroll; height: 600px;">
 				<table class='table table-hover'>
 					<thead>
 						<tr class='table-primary'>

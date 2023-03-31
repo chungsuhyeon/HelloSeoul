@@ -28,8 +28,11 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer selectBoradNo() {
 		return this.getSqlSession().selectOne("selectBoradNo");
 	}
-	public List<Object> selectBoard(){
-		return this.getSqlSession().selectList("selectBoard");
+//	public List<Object> selectBoard(){
+//		return this.getSqlSession().selectList("selectBoard");
+//	}
+	public List<Object> selectBoard(HashMap<String, Object>map){
+		return this.getSqlSession().selectList("selectBoard",map);
 	}
 	public List<Object> selectInfoBoard(int no){
 		return this.getSqlSession().selectList("selectInfoBoard",no);
@@ -131,7 +134,12 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public	List<Object> selectSeatTable(HashMap<String, Object>map) {
 		return this.getSqlSession().selectList("selectSeatTable",map);
 	}
-	
+	public List<Object> selecttop3(){
+		return this.getSqlSession().selectList("selecttop3");
+	}
+	public Integer getTotalRow() {
+		return this.getSqlSession().selectOne("getTotalRow");
+	}
 }
 
 

@@ -3,10 +3,14 @@ package com.bit.web.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,8 +43,7 @@ public class JoinSeoulController {
 			// return "ok";
 			return dao.getNick(nickname) != null ? String.valueOf(true) : String.valueOf(false);
 			// return "test";
-		}		
-	
+		}	
 	
 // 대륙 해시맵으로 불러오기 
 		@PostMapping(value = "ajaxcontinent")	  
@@ -50,8 +53,7 @@ public class JoinSeoulController {
 //			System.out.println(dao.selectcontinent(id));
 //			return "success";
 			return dao.selectcontinent(id);
-		    }	
-	
+		    }		
 
 // 회원가입정보 디비에 저장 		
 		@PostMapping(value = "joinMemberInsert")
@@ -64,5 +66,16 @@ public class JoinSeoulController {
 			// return "test";
 			return "Final_Pro/login";
 		}
-
+		
+// password 변경 업데이트		
+			@RequestMapping("joinPwUpdate")
+			public void joinPwUpdate(HttpServletRequest request) {
+				System.out.println(request);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("user_id", (String) request.getParameter("user_id"));
+				map.put("user_pw", (String) request.getParameter("user_pw"));	
+				System.out.println(map.get("user_id"));
+				dao.pwUpdate(map);	
+							
+			}
 }

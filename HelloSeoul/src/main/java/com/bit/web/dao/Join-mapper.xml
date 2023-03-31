@@ -40,7 +40,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		userboard(user_id,user_nick,user_pw,user_nation,user_birth,user_gender,user_pp,user_first)
 	 		values(#{user_id},#{user_nick},#{user_pw},#{user_nation},#{user_birth},#{user_gender},#{user_pp},#{user_first})
 	   </insert>
-
+	   
+	   
+<!--  password 변경 -->
+      <update id="pwUpdate" parameterType="java.util.HashMap">
+           update userboard
+			set user_pw = #{user_pw}
+			where user_id = #{user_id}   
+      </update>
 
 </mapper>
 

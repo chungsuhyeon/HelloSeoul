@@ -47,6 +47,12 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		public void insertMember(JoinSeoulBean bean) {
 			this.getSqlSession().insert("insertMember",bean);
 		}
+		
+// 비밀번호 찾기-> 새로운 비번으로 업데이트 
+		public void pwUpdate(HashMap<String, String>map) {
+			System.out.println("Da"+map);
+			this.getSqlSession().update("pwUpdate",map);
+		}
 			
 }	
 		
