@@ -90,10 +90,10 @@
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function(result){
-						console.log(result);
 						$(result).each(function(idx, list){
 							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
 							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
+							
 							$("div#" + list['planner_date'] + " table tbody").append(
 									`<tr class='table-light'>
 										<td>
@@ -143,7 +143,7 @@
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='/web/myPageLoad'>Mypage</a></li>
-					<li class='breadcrumb-item'><a href='./myPagePlannerCreate.jsp'>Planner Modify</a></li>
+					<li class='breadcrumb-item'><a href='/web/allPageLoad?no=${param.no}&modi=updatePlanner'>Planner Modify</a></li>
 					<li class='breadcrumb-item'><a href='#'>Planner Delete</a></li>
 				</ol>
 			</div>
@@ -161,29 +161,6 @@
 					
 					<!-- tab contents -->
 					<div id='myTabContent border border-info-1' class='tab-content'>
-<!-- 						<div class='tab-pane fade active show' id='Day1' role='tabpanel'> -->
-<!-- 							<table class='table table-hover'> -->
-<!-- 								<tbody> -->
-<!-- 									<tr class='table-light'> -->
-<!-- 										<td> -->
-<!-- 											<a href='#'>Location Name1</a> -->
-<!-- 											<br> -->
-<!-- 											<span>Gungu > Loc Ctg > Detail Ctg > </span> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-<!-- 									<tr class='table-light'> -->
-<!-- 										<td> -->
-<!-- 											<a href='#'>Location Name2</a> -->
-<!-- 											<br> -->
-<!-- 											<span>Gungu > Loc Ctg > Detail Ctg > </span> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-<!-- 								</tbody> -->
-<!-- 							</table> -->
-<!-- 						</div> -->
-<!-- 						<div class="tab-pane fade" id="Day2" role="tabpanel"> -->
-<!-- 							<p>contents</p> -->
-<!-- 						</div> -->
 					</div>
 				</div>
 				
