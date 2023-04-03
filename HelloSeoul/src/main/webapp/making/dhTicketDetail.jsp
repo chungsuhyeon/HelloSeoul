@@ -116,12 +116,17 @@
 			 var ticketno=$('#ticketinfono').val();
 			 var date=$('#period_1').val();
 			var rundate=$("input#realtime").val();
-			
-			location.replace("/web/booking?no="+ticketno+"&date="+date+"&rundate="+rundate);
+			if($("#user_id").val()==""){
+				alert("로그인이 필요합니다");
+			}else if(date=="" || rundate==""){
+				alert("날짜와 시간을 선택해주시기바랍니다.")
+			}else{
+				location.replace("/web/booking?no="+ticketno+"&date="+date+"&rundate="+rundate);
+			}
 		}
 		
 	</script>
-
+	<input type="hidden" value="${user_id }" id="user_id">
 	<form name="mainForm" method="post"
 		action="./44090?IdPerf=44090&amp;Gcode=009_403" id="mainForm">
 		<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
