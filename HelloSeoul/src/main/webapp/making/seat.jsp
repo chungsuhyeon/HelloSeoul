@@ -26,13 +26,33 @@
 		var arrIndex=0;
 		var val3=0;
 		var seatArr=[];
-		
+		var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 		$("a#tiketing").click(function(){
 			 filtered  = seatArr.filter(function(item) {
 				 return item !== null && item !== undefined && item !== '';
 				});
 			 var rundate=$("span#rundate").text();
-			 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered+"&rundate="+rundate);
+			 Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
+			 $(".seat>button").click(function(){
+				 if($(this).attr('class')=='emptyseat btn btn-outline-primary'){
+					 ++val3
+				 }else if($(this).attr('class')=='useseat btn btn-primary'){
+					 --val3
+				 }
+			 });
+			 console.log(val3);
+			 if(val3!=Allperson){
+				 alert("좌석을 전부 선택해주시기 바랍니다.");
+
+			
+			 }else if(Allperson==0||val3==0){
+				 alert("좌석을 선택해주시기 바랍니다.");
+				 				 
+			 }else if(val3 ==Allperson){
+				 location.replace("/web/ticketing?no="+$("input#no").val()+"&user_id="+$("input#user_id").val()+"&seatVal="+filtered+"&rundate="+rundate);
+				
+				 
+			 }
 			
 			
 		});
@@ -40,7 +60,7 @@
 		$(".seat >button").click(function() {
 			if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 					console.log("yes");
-				var Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
+				Allperson=((parseInt($("button#seatVal2").html()))+(parseInt($("button#seatVal1").html())));
 				if($(this).attr('class')=='emptyeseat btn btn-outline-primary'){
 					if(val3<Allperson){
 						++val3
