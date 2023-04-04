@@ -44,8 +44,8 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		 }
 			
 // 회원가입 정보 디비입력	
-		public void insertMember(JoinSeoulBean bean) {
-			this.getSqlSession().insert("insertMember",bean);
+		public void joinMemberInsert(JoinSeoulBean bean) {
+			this.getSqlSession().insert("joinMemberInsert",bean);
 		}
 		
 // 비밀번호 찾기-> 새로운 비번으로 업데이트 
