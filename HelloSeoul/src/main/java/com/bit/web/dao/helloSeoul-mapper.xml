@@ -86,6 +86,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from planner
 		where planner_no = #{no}
 	</delete>
+	
+	<select id="mypageplannerInfo" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
+		select planner_start, planner_end, planner_title, planner_info
+		from planner
+		where planner_no = #{no}
+	</select>
+	
+	<update id="mypageDateUpdate" parameterType="com.bit.web.vo.MypagePlannerBean">
+		update planner 
+		set planner_title = #{planner_title}, planner_start = #{planner_start}, planner_end = #{planner_end}, planner_info = #{planner_info}
+		where planner_no = #{planner_no}
+	</update>
 
 </mapper>
 

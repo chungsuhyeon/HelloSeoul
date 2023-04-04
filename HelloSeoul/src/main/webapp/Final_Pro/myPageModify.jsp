@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,14 +39,18 @@
 				alert("Please choose the date");
 				$("input[name='planner_start']").val('');
 				$("input[name='planner_end']").val('');
-				$("input[name='planner_start']").focus();	
+				$("input[name='planner_start']").focus();
 				return false;			
 			}						
 			$("form[name='mypageCreateDateFrm']").submit();
 		}); // $("button#btn_submit").click
 		
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
 		$("button#btn_cancle").click(function(){
-				document.location.href ="myPageMain.jsp";
+			// mypage show page 이동
+				document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		}); // $("button#btn_cancle").click
 		
 	}); // function
@@ -78,12 +82,13 @@
 		<div class='container-fluid bg-warning' style="display: inline-flex;">
 			<div class='col-4'></div>
 			<div class='col-4 mt-5'>
-				<form action="/web/PlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
+				<form action="/web/PlannerDate?modi=updatePlanner" name="mypageCreateDateFrm" method="post">
 					<table class="table table-hover bg-light" style="width: 80%;">
 						<thead>
 							<tr class="table-primary">
 								<th colspan="2">
 									<h4>Planner Create</h4>
+									<input type="hidden" name="planner_no" value="${param.no}">
 								</th>
 							</tr>
 						</thead>
@@ -93,7 +98,7 @@
 									<h4>Title : </h4>
 								</td>
 								<td>
-									<input type="text" class="form-control" placeholder="Input Title" id="title" name="planner_title">
+									<input type="text" class="form-control" placeholder="Input Title" id="title" name="planner_title" value="${plannerDateInfo.planner_title}">
 								</td>
 							</tr>
 							<tr>
@@ -101,7 +106,7 @@
 									<h4>Start Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control" style="width: 100%;" name="planner_start" onchange="minEndDate()">
+									<input type="date" class="form-control" style="width: 100%;" name="planner_start" onchange="minEndDate()" value="${fn:substring(plannerDateInfo.planner_start, 0, 10)}">
 								</td>
 							</tr>
 							<tr>
@@ -109,13 +114,13 @@
 									<h4>End Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control"  style="width: 100%;" name="planner_end" onchange="maxStartDate()">
+									<input type="date" class="form-control"  style="width: 100%;" name="planner_end" onchange="maxStartDate()" value="${fn:substring(plannerDateInfo.planner_end, 0, 10)}">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
 									<h4 style="text-align: center;">Planner memo</h4>
-									<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea>
+									<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info">${plannerDateInfo.planner_info}</textarea>
 								</td>
 							</tr>
 							<tr>

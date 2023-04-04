@@ -24,7 +24,8 @@
 	// 플래너 생성 로드시
 	$('document').ready(function(){
 		
-		const no = ${no};
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('planner_no');
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -163,7 +164,8 @@
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
 
-		const no = ${no};
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('planner_no');
 		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
@@ -285,8 +287,10 @@
 			}); // ajax
 		}); // $(forms).each
 		
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('planner_no');
 		// show 페이지로 이동
-		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + ${no};
+		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		
 	} // storePlanner()
 	
@@ -346,9 +350,9 @@
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="#">Date Reset</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
-  					<li class="breadcrumb-item"><a href="javascript:history.back();">Mypage</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageLoad">Mypage</a></li>
 				</ol>
 			</div>
 			

@@ -95,19 +95,15 @@ public class HelloSeoulController {
 	
 	// 플래너 일정 생성 / 수정
 	@PostMapping(value = "PlannerDate")
-	public ModelAndView plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, MypagePlannerBean bean) {
+	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, MypagePlannerBean bean) {
 		ModelAndView mav = new ModelAndView();
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
-			mav.addObject("no", contactService.mypagePlannerNext(request.getSession().getAttribute("user_id"), modi, bean));
-			mav.setViewName("Final_Pro/myPagePlannerCreate");
+			return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no=" + contactService.mypagePlannerNext(request.getSession().getAttribute("user_id"), modi, bean);
 		} else { // modi = updatePlanner(플래너 일정 수정)
-			System.out.println(bean.getPlanner_no());
-			mav.setViewName("Final_Pro/myPagePlannerModify");
+			contactService.mypagePlannerNext("user_id", modi, bean);			
+			return "redirect:/Final_Pro/myPagePlannerModify.jsp?planner_no="+bean.getPlanner_no();
 		}
-//		update할 때는 bean도 addObject 해주기
-//		 "redirect:/allPageLoad?modi=" + modi;
-		return mav;
 	}
 		
 	// 찜 리스트 자체 보내기 = 플래너 일정 생성하는 곳의 찜 리스트
@@ -158,6 +154,15 @@ public class HelloSeoulController {
 	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {	
 		contactService.mypageScheduleInsert(request.getSession().getAttribute("user_id"), bean);
 		return "success";
+	}
+	
+	@RequestMapping(value = "myPageDateReset")
+	@ResponseBody
+	public ModelAndView mypageDateResetPage(@RequestParam(value = "no") int no) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("plannerDateInfo", contactService.mypageDateInfo(no));
+		mav.setViewName("Final_Pro/myPageModify");
+		return mav;
 	}
 
 		

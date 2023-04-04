@@ -35,5 +35,7 @@ public interface MypageService {
 	void mypagePlannerDelete(int no);
 	
 	void mypageScheduleInsert(Object id, MypageMainPlannerBean bean);
-
+	
+	MypagePlannerBean mypageDateInfo(int no);
+	
 }

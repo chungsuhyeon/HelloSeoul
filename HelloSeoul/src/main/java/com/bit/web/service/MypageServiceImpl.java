@@ -214,8 +214,10 @@ public class MypageServiceImpl implements MypageService {
 			bean.setUser_id((String) id);
 			helloDao.plannerDataInsert(bean);
 			return no;
+		} else { // update
+			helloDao.mypageDateUpdate(bean);
+			return bean.getPlanner_no();
 		}
-		return 0;
 	}
 
 	@Override
@@ -244,6 +246,13 @@ public class MypageServiceImpl implements MypageService {
 		bean.setUser_id((String) id);
 		helloDao.plannerScheduleInsert(bean);
 	}
+
+	@Override
+	public MypagePlannerBean mypageDateInfo(int no) {
+		return helloDao.mypageplannerInfo(no);
+	}
+	
+	
 
 
 	

@@ -91,4 +91,12 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().delete("plannerAllDelete", no);
 	}
 	
+	public MypagePlannerBean mypageplannerInfo(int no) {
+		return this.getSqlSession().selectOne("mypageplannerInfo", no);
+	}
+	
+	public void mypageDateUpdate(MypagePlannerBean bean) {
+		this.getSqlSession().update("mypageDateUpdate", bean);
+	}
+	
 }
