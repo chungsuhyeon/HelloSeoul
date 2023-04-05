@@ -4,16 +4,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sist.spring.dao.helloSeoul">
 
-	<select id="getDbUser" parameterType="String" resultType="java.util.HashMap">
-		select user_pw, user_nick
+	<select id="getDbUserPW" parameterType="String" resultType="String">
+		select user_pw
 		from userboard 
 		where user_id = #{value}
 	</select>
 	
+	<select id="getDbUserNick" parameterType="String" resultType="String">
+		select user_nick
+		from userboard
+		where user_id = #{value}
+	</select>
+	
 	<select id="getUserInfo" parameterType="String" resultType="java.util.HashMap">
-		select *
+		select user_nick, user_nation, user_birth, user_gender, user_pp, user_first
 		from userboard 
 		where user_id = #{value}
+	</select>
+	
+	<select id="getUserPlanner" parameterType="String" resultType="java.util.HashMap">
+		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info
+		from planner
+		where user_id = #{value}
+		order by planner_no desc
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
@@ -25,6 +38,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="userJjimListDelete" parameterType="java.util.HashMap">
 		delete from jjim
 		where user_id = #{user_id} and loc_pc in ${str}
+	</delete>
+	
+	<select id="getJjimInfo" parameterType="Integer" resultType="mainDb">
+		select * from maindb where loc_pc = #{value}
+	</select>
+	
+	<select id="getPlannerNo" resultType="Integer">
+		select planner_seq.nextval from dual
+	</select>
+	
+	<insert id="plannerDataInsert" parameterType="java.util.HashMap">
+		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
+		values(#{no}, #{user_id}, #{title}, #{tripStart}, #{tripEnd}, #{memo})
+	</insert>
+	
+	<select id="firstMainPlannerCreate" parameterType="Integer" resultType="java.util.HashMap">
+		select planner_start, planner_end, planner_title
+		from planner
+		where planner_no = #{no}
+	</select>
+	
+	<select id="mainPlannerDataSelect" parameterType="Integer" resultType="mypageMainPlanner">
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin
+		from mainplanner
+		where planner_no = #{no}
+		order by planner_date, planner_shour, planner_smin
+	</select>
+	
+	<select id="selectMainDbData" parameterType="String" resultType="mainDb">
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y
+		from maindb
+		where loc_pc in ${value}
+	</select>
+	
+	<insert id="plannerScheduleInsert" parameterType="mypageMainPlanner">
+		insert into mainplanner(planner_no, user_id, loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin)
+		values(#{planner_no}, #{user_id}, #{loc_pc}, #{loc_name}, #{loc_ctg1}, #{loc_ctg2}, #{loc_sg}, #{loc_x}, #{loc_y}, #{planner_date}, #{planner_shour}, #{planner_smin})
+	</insert>
+	
+	<delete id="plannerScheduleDelete" parameterType="Integer">
+		delete from mainplanner
+		where planner_no = #{no}
 	</delete>
 
 </mapper>

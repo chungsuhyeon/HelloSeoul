@@ -14,14 +14,14 @@
 <meta property="fb:app_id">
 <title>YES24 티켓</title>
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/jquery-3.4.1_min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/jquery-3.4.1_min.js"></script>
 <!-- Google Tag Manager -->
 
 <!-- End Google Tag Manager -->
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/swiper_min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/swiper_min.js"></script>
 <script type="text/javascript"
-	src="/web/resources/ticketMain2/New/Js/jquery.lazy.min-1.js"></script>
+	src="/web/resources/ticketMain2/New/Js/jquery.lazy.min.js"></script>
 <script type="text/javascript"
 	src="/web/resources/ticketMain2/New/Js/Main.js?v=391"></script>
 
@@ -29,19 +29,42 @@
 <link rel="stylesheet" type="text/css"
 	href="/web/resources/ticketMain2/New/Css/reset.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/swiper-1.css">
+	href="/web/resources/ticketMain2/New/Css/swiper.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar-1.css">
+	href="/web/resources/ticketMain2/New/Css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/common-1.css?v=17">
+	href="/web/resources/ticketMain2/New/Css/common.css?v=17">
 <link rel="stylesheet" type="text/css"
-	href="/web/resources/ticketMain2/New/Css/main2-1.css?v=2020012203">
+	href="/web/resources/ticketMain2/New/Css/main2.css?v=2020012203">
 <script type="text/javascript">
 	$(function(){
 		$("div a#img").click(function(){
 			$("form").submit();
 		});
 	});
+	
+// 	$('document').ready(function(){
+// 		$.ajax({
+// 			url: '/web/ticketList',
+// 			type: 'post',
+// 			dataType: 'text',
+// 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+// 			success: function(result){
+							
+// 				$("div.tab-content").append(result);
+				
+// 				$("td > a").click(function(){
+// 			 		var tr = $(this).parent().parent();
+// 			 		var td = tr.children();
+// 			 		console.log(td.eq(0).children().val());
+// 				}); // $("td > a").click
+
+// 			},
+// 			error: function(){
+// 				alert("error : " + error);
+// 			}
+// 		}); // ajax
+// 	}); // $('document').ready
 </script>
 
 
@@ -55,7 +78,7 @@
 				<div class="swiper-wrapper">
 				<c:forEach var="i" items="${musicallist}" varStatus="cnt">
 						<div class="swiper-slide">
-							<a href="/web/contentImg?imgsrc=${i.imgsrc}"
+							<a href="/web/contentImg?no=${i.no}"
 								target="_self" title="${i.title}" id="img"><img id="imgsrc"
 								src="${i.imgsrc}"
 								alt="">
@@ -171,7 +194,7 @@
 		</p>   <!-- /WHAT"S HOT 이미지 -->
 		<div class="ms-list-imgs">   <!-- 첫줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
 		<c:forEach var="i" items="${musicallist2}" varStatus="cnt">
-		<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+		<a href="/web/contentImg?no=${i.no}" target="_self"
 				title="${i.title}" id="img"><div class="list-bigger-wrap">
 					<img class="lazyload" id="imgsrc"
 						data-src="${i.imgsrc}"
@@ -195,8 +218,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<로빈></로빈> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 30%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">30%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 30%</p> -->
+<!-- <!-- 						<p class="list-b-circle">30%</p> -->
 <!-- 					</div> -->
 <!-- 				</div></a> -->
 <!-- 				<a href="#" target="_self" -->
@@ -209,8 +232,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<어린왕자></어린왕자> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">20%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a><a href="#" target="_self" -->
 <%-- 				title="뮤지컬 <윌리엄과 윌리엄의 윌리엄들>" id="img"><div class="list-bigger-wrap"> --%>
@@ -222,8 +245,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<윌리엄과 윌리엄의 윌리엄들></윌리엄과> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">30%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a><a href="#" target="_self" -->
 <%-- 				title="뮤지컬 <미드나잇 : 앤틀러스>" id="img"><div class="list-bigger-wrap"> --%>
@@ -235,8 +258,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<미드나잇 : 앤틀러스></미드나잇> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">30%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">프리뷰 할인 30%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">30%</p> -->
 <!-- 					</div> -->
 <%-- 				</div></a><a href="#" target="_self" title="뮤지컬 <앨리스>" id="img"><div --%>
 <!-- 					class="list-bigger-wrap"> -->
@@ -248,14 +271,14 @@
 <!-- 							뮤지컬 -->
 <!-- 							<앨리스></앨리스> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">All For One 할인 25%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">25%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">All For One 할인 25%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">25%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a> -->
 		</div>   <!-- /첫줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
 		<div class="ms-list-imgs">  <!-- 둘째줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
 		<c:forEach var="i" items="${musicallist3}" varStatus="cnt">
-		<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+		<a href="/web/contentImg?no=${i.no}" target="_self"
 				title="${i.title}" id="img"><div class="list-bigger-wrap">
 					<img class="lazyload" id="imgsrc"
 						data-src="${i.imgsrc}"
@@ -279,8 +302,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<루드윅:베토벤 더 피아노></루드윅:베토벤> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">재관람 할인 30%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">30%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">재관람 할인 30%</p> -->
+<!-- <!-- 						<p class="list-b-circle">30%</p> --> 
 <!-- 					</div> -->
 <%-- 				</div></a><a href="#" target="_self" title="뮤지컬 <결투>" id="img"><div --%>
 <!-- 					class="list-bigger-wrap"> -->
@@ -292,8 +315,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<결투></결투> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">입문 할인 50%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">50%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">입문 할인 50%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">50%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a><a href="#" target="_self" -->
 <%-- 				title="뮤지컬 <천사에 관하여: 타락천사 편>" id="img"><div class="list-bigger-wrap"> --%>
@@ -305,8 +328,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<천사에 관하여: 타락천사 편></천사에> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">재관람 할인 20%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">20%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">재관람 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a><a href="#" target="_self" -->
 <%-- 				title="뮤지컬 <라흐마니노프>" id="img"> --%>
@@ -318,8 +341,8 @@
 <!-- 						<p class="list-b-tit1"> -->
 <!-- 							뮤지컬 <라흐마니노프></라흐마니노프> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">20%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">조기예매 할인 20%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">20%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div> -->
 <%-- 			</a><a href="#" target="_self" title="뮤지컬 <빨래>" id="img"><div --%>
@@ -332,8 +355,8 @@
 <!-- 							뮤지컬 -->
 <!-- 							<빨래></빨래> -->
 <!-- 						</p> -->
-<!-- <!-- 						<p class="list-b-tit2">R석 할인 25%</p> --> -->
-<!-- <!-- 						<p class="list-b-circle">25%</p> --> -->
+<!-- <!-- 						<p class="list-b-tit2">R석 할인 25%</p> --> 
+<!-- <!-- 						<p class="list-b-circle">25%</p> --> 
 <!-- 					</div> -->
 <!-- 				</div></a> -->
 		</div>   <!-- /둘째줄 5개의 컨텐츠 DIV 5개씩 묶고 끊기 -->
@@ -353,19 +376,19 @@
 				<ul>
 				<c:forEach var="i" items="${musicallist4}">
 				<li><a
-						href="/web/contentImg?imgsrc=${i.imgsrc}"
-						title="${i.title}" id="img"><dl>
+						href='/web/contentImg?no=${i.no}'
+						title='${i.title}'><dl>
 								<dt>
-									${i.ranking}<span class="dash">-</span>
+									${i.ranking}위<span class='dash'>-</span>
 								</dt>
 								<dd>
-									<img id="imgsrc"
-										src="${i.imgsrc}"
-										alt="">
+									<img
+										src='${i.imgsrc}'
+										alt=''>
 								</dd>
-								<dd class="ms5-l-txt">
-									<p class="ms5-l-txt1">${i.ptitle}</p>
-									<p class="ms5-l-txt2">
+								<dd class='ms5-l-txt'>
+									<p class='ms5-l-txt1'>${i.ptitle}</p>
+									<p class='ms5-l-txt2'>
 										${i.detail}
 									</p>
 								</dd>
@@ -474,7 +497,7 @@
 						
 						<c:forEach var="i" items="${musicallist5}">
 							<div class="swiper-slide">
-								<a href="/web/contentImg?imgsrc=${i.imgsrc}" target="_self"
+								<a href="/web/contentImg?no=${i.no}" target="_self"
 									title="${i.title}" id="img"><span><img id="imgsrc"
 										src="${i.imgsrc}"
 										alt=""></span>
@@ -512,7 +535,7 @@
 <!-- 											뮤지컬 -->
 <!-- 											<미드나잇 : 앤틀러스></미드나잇 : 앤틀러스> -->
 <!-- 										</p> -->
-<!-- <!-- 										<p class="ms5-r-txt2">프리뷰 할인 30%</p> --> -->
+<!-- <!-- 										<p class="ms5-r-txt2">프리뷰 할인 30%</p> --> 
 <!-- 									</div> -->
 <!-- 									<p>종로구</p> -->
 <!-- 									</a> -->
@@ -526,7 +549,7 @@
 <!-- 										<p class="ms5-r-txt1"> -->
 <!-- 											뮤지컬 <결투></결투> -->
 <!-- 										</p> -->
-<!-- <!-- 										<p class="ms5-r-txt2">청소년 할인 30%</p> --> -->
+<!-- <!-- 										<p class="ms5-r-txt2">청소년 할인 30%</p> --> 
 <!-- 									</div> -->
 <!-- 									<p>강남구</p></a> -->
 <!-- 							</div> -->

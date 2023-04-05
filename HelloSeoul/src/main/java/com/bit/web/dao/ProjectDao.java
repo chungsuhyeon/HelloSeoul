@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
-import com.bit.web.vo.goodbadBoard;
+import com.bit.web.vo.SeatBoard;
+import com.bit.web.vo.gbboard;
 import com.mongodb.util.Hash;
 
 @Repository
@@ -27,8 +28,9 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer selectBoradNo() {
 		return this.getSqlSession().selectOne("selectBoradNo");
 	}
-	public List<Object> selectBoard(){
-		return this.getSqlSession().selectList("selectBoard");
+
+	public List<Object> selectBoard(HashMap<String, Object>map){
+		return this.getSqlSession().selectList("selectBoard",map);
 	}
 	public List<Object> selectInfoBoard(int no){
 		return this.getSqlSession().selectList("selectInfoBoard",no);
@@ -78,7 +80,7 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public String selectReplyid(int no) {
 		return this.getSqlSession().selectOne("selectReplyid",no);
 	}
-	public String goodAction(goodbadBoard board) {
+	public String goodAction(gbboard board) {
 		return this.getSqlSession().selectOne("goodAction",board);
 	}
 	public String goodBoard(int com_no) {
@@ -96,7 +98,46 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public String goodbadDelete(HashMap<String, Object>map) {
 		return this.getSqlSession().selectOne("goodbadDelete",map);
 	}
+	public Integer goodbadSelectbad(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("goodbadSelectbad",map);
+	}
+	public String badAction(gbboard board) {
+		return this.getSqlSession().selectOne("badAction",board);
+	}
+	public String badBoard(int com_no) {
+		return this.getSqlSession().selectOne("badBoard",com_no);
+	}
+	public String badBoardMi(int com_no) {
+		return this.getSqlSession().selectOne("badBoardMi",com_no);
+	}
+	public Integer selectbad(int com_no) {
+		return this.getSqlSession().selectOne("selectbad",com_no);
+	}
+	public String updatebadGBboard(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("updatebadGBboard",map);
+	}
+	public String updategoodGBboard(HashMap<String, Object>map) {
+		return this.getSqlSession().selectOne("updategoodGBboard",map);
+	}
+	public String deleteGBboard(int no) {
+		return this.getSqlSession().selectOne("deleteGBboard",no);
+	}
+	public List<Object>  selectGBboard(int com_no) {
+		return this.getSqlSession().selectList("selectGBboard", com_no);
+	}
 	
+	public String insertSeatTable(SeatBoard board) {
+		return this.getSqlSession().selectOne("insertSeatTable",board);
+	}
+	public	List<Object> selectSeatTable(HashMap<String, Object>map) {
+		return this.getSqlSession().selectList("selectSeatTable",map);
+	}
+	public List<Object> selecttop3(){
+		return this.getSqlSession().selectList("selecttop3");
+	}
+	public Integer getTotalRow() {
+		return this.getSqlSession().selectOne("getTotalRow");
+	}
 }
 
 

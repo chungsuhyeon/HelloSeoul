@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,109 +18,35 @@
 <script type="text/javascript">
 	$(function(){
 		// tab 변경시 checked 해제
-		$(".nav >li").click(function(){
+		$(".nav > li").click(function(){
 			if($("table input[type='checkbox']").is(":checked")){
 				$("table input[type='checkbox']").prop('checked',false);
 			}
 		}); // $(".nav >li").click
-
-	
+				
+// 		.show.bs.tab : 클릭한 탭이 보이기 전에 실행합니다.
+// 		.shown.bs.tab : 클릭한 탭이 보인 후에 실행됩니다. 위와 시간적으로 거의 차이가 없습니다.
+// 		.hide.bs.tab : 이전의 탭이 감춰지기 전에 실행됩니다.
+// 		.hidden.bs.tab : 이전의 탭이 감춰진 후에 실행됩니다.
+		
 	}); // function
-	
 	
 	
 	$('document').ready(function(){
 		$.ajax({
 			url: '/web/ajaxMypageJjim',
 			type: 'post',
-// 			data: {user_id:'${user_id}'},
 			dataType: 'text',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-// 				var finalStr = "";
-// 				var tab1 = "";
-// 				var tab2 = "";
-// 				var tab3 = "";
-// 				var tab4 = "";
-// 				var tab5 = "";
-				
-// 				$(result).each(function(index, list){
-// 					if (list['loc_ctg1'] == "음식점"){
-// 						tab1 += '<tr class="table-light"><td><input type="checkbox" name="select_location" value=' + list['loc_pc'] + '></td>';
-// 						tab1 += '<td><a href="#" id="local_name">' + list['loc_name'] + '</a>';
-// 						tab1 += '<br><span style="font-size: 5px"> ' + list['loc_sg'] + ' > ' + list['loc_sg']  + ' > ' + list['loc_ctg1']  + ' > ' + list['loc_ctg2'];
-// 						tab1 += '</span></td></tr>';			
-// 					}
-// 					else if (list['loc_ctg1'] == "관광지"){
-// 						tab2 += '<tr class="table-light"><td><input type="checkbox" name="select_location" value=' + list['loc_pc'] + '></td>';
-// 						tab2 += '<td><a href="#">' + list['loc_name'] + '</a>';
-// 						tab2 += '<br><span style="font-size: 5px"> ' + list['loc_sg'] + ' > ' + list['loc_sg']  + ' > ' + list['loc_ctg1']  + ' > ' + list['loc_ctg2'];
-// 						tab2 += '</span></td></tr>';
-// 					}
-// 					else if (list['loc_ctg1'] == "쇼핑"){
-// 						tab3 += '<tr class="table-light"><td><input type="checkbox" name="select_location" value=' + list['loc_pc'] + '></td>';
-// 						tab3 += '<td><a href="#" >' + list['loc_name'] + '</a>';
-// 						tab3 += '<br><span style="font-size: 5px"> ' + list['loc_sg'] + ' > ' + list['loc_sg']  + ' > ' + list['loc_ctg1']  + ' > ' + list['loc_ctg2'];
-// 						tab3 += '</span></td></tr>';
-// 					}					
-// 					else if (list['loc_ctg1'] == "볼거리"){
-// 						tab4 += '<tr class="table-light"><td><input type="checkbox" name="select_location" value=' + list['loc_pc'] + '></td>';
-// 						tab4 += '<td><a href="#">' + list['loc_name'] + '</a>';
-// 						tab4 += '<br><span style="font-size: 5px"> ' + list['loc_sg'] + ' > ' + list['loc_sg']  + ' > ' + list['loc_ctg1']  + ' > ' + list['loc_ctg2'];
-// 						tab4 += '</span></td></tr>';
-// 					}					
-// 					else { // 티켓인 경우
-// 						tab5 += '<tr class="table-light"><td><input type="checkbox" name="select_location" value=' + list['loc_pc'] + '></td>';
-// 						tab5 += '<td><a href="#">' + list['loc_name'] + '</a>';
-// 						tab5 += '<br><span style="font-size: 5px"> ' + list['loc_sg'] + ' > ' + list['loc_sg']  + ' > ' + list['loc_ctg1']  + ' > ' + list['loc_ctg2'];
-// 						tab5 += '</span></td></tr>';	
-// 					}					
-// 				});
-				
-// 				finalStr += '<div class="tab-pane fade active show" id="food" role="tabpanel"><table class="table table-hover"><tbody>' + tab1 + '</tbody></table></div>';
-// 				finalStr += `<div class="tab-pane fade" id="shopping" role="tabpanel"><table class="table table-hover"><tbody>`;
-// 				finalStr += tab2;
-// 				finalStr += `</tbody></table></div>`;
-// 				finalStr += '<div class="tab-pane fade" id="hotspot" role="tabpanel"><table class="table table-hover"><tbody>' + tab3 + '</tbody></table></div>';
-// 				finalStr += '<div class="tab-pane fade" id="ticket" role="tabpanel"><table class="table table-hover"><tbody>' + tab4 + '</tbody></table></div>';
-// 				finalStr += '<div class="tab-pane fade" id="test" role="tabpanel"><table class="table table-hover"><tbody>' + tab5 + '</tbody></table></div>';
-							
 				$("div.tab-content").append(result);
-				
-				$("td > a").click(function(){
-			 		var tr = $(this).parent().parent();
-			 		var td = tr.children();
-			 		console.log(td.eq(0).children().val());	
-					
-// 					$(this).addClass('acting');
-// 					$("a[id='local_name']").each(function(){
-// 						if($(this).attr("class") == 'acting'){
-// 							var tr = $(this).parent().parent();
-// 							var td = tr.children();
-// 							console.log(td.eq(0).children().val());	
-// 							$(this).removeAttr('class', 'acting'); //onclick=load_jjim_info()
-// 						}
-// 					});
-				});
-
+				loc_pc_click();
 			},
 			error: function(){
 				alert("error : " + error);
 			}
 		}); // ajax
 	}); // $('document').ready
-	
-
-
-	
-
-// 	function load_jjim_info(){		
-// 		console.log($("#local_name").text());
-		
-// 		var tr = $(this).parent().parent();
-// 		var td = tr.children();
-// 		console.log(td.eq(0).children().val());		
-// 	}
 	
 	function delete_jjim_list(){
 		
@@ -134,9 +58,7 @@
 			var checkTd = checkTr.children(); // 장소코드있는 td	
 			locDataList.push(checkTd.eq(0).children().val());
 		}); // checkBox.each
-		
-		console.log(locDataList);
-		
+				
 		$.ajax({
 			url: '/web/ajaxDeleteJjimList',
 			type: 'post',
@@ -145,20 +67,99 @@
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				$("div.tab-content").empty();
-				console.log(result);
 				$("div.tab-content").append(result);
-								
-// 				$("td > a").click(function(){
-// 					alert("dfsdfsdf");
-// 			 		var tr = $(this).parent().parent();
-// 			 		var td = tr.children();
-// // 			 		console.log(td.eq(0).children().val());	
-// 				});
+
+				$("#food").removeClass("show active");
+				let elem = document.querySelector('ul.nav li a.active'); // object
+				$($(elem).attr('href')).addClass("show active");
+				
+				loc_pc_click();
 			},
 			error: function(){
 				alert("error : " + error);
 			}
-		});
+		}); // ajax
+	}
+	
+	function loc_pc_click(){
+		// 장소명 클릭
+		$("td > a").click(function(){
+	 		var tr = $(this).parent().parent();
+	 		var td = tr.children();			 		
+	 		var code = td.eq(0).children().val();
+	 		
+	 		$.ajax({
+				url: '/web/ajaxMypageJjimInfo',
+				type: 'post',
+				data: {loc_code:code},
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function(result){
+					$("div.detailbar").empty();
+					
+					var htmlInner = `<table class='table table-hover'><tbody><tr class='table-light'>`;
+					
+					if((result.loc_img).includes("http")){
+						htmlInner += `<td><img src="\${result.loc_img}" width="100%" height="300"></td></tr>`;
+					} else {
+						htmlInner += `<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td></tr>`;								
+					}
+					
+					htmlInner += `<tr class='table-light'>
+								<td><span> \${result.loc_name}</span>	</td>
+								</tr>
+								<tr class='table-light'>
+									<td><span> \${result.loc_sg} > \${result.loc_ctg1} > \${result.loc_ctg2} </span>	</td>
+								</tr>
+								<tr class='table-light'>
+									<td><span> 주소 : \${result.loc_addr}</span>	</td>
+								</tr>`;
+					
+					if(result.loc_op == " "){ // null값
+						htmlInner += `<tr class='table-light'><td><span> </span></td></tr>`;								
+					} else {
+						htmlInner += `<tr class='table-light'>
+										<td><span> 영업시간 : \${result.loc_op} ~ \${result.loc_cl}</span>	</td></tr>`;
+					}
+					
+					htmlInner += `<tr class='table-light'>
+									<td><span> 전화번호 : \${result.loc_tel}</span>	</td>
+									</tr>
+									<tr class='table-light'>`;
+									
+					if(result.loc_info.startsWith('https')){
+						htmlInner += `<td><span> 정보 : </span> <a href="\${result.loc_info}" target="_blank">\${result.loc_info}</a>	</td>`
+					} else {
+						htmlInner += `<td><span> 정보 : \${result.loc_info}</span></td>`
+					}
+					
+					htmlInner += `</tr></tbody></table>`;
+					
+					$("div.detailbar").append(htmlInner);
+					
+					// 지도 마커 스크립트
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
+					    };
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					// 마커가 표시될 위치입니다
+					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+					    position: markerPosition
+					});
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);
+					
+				},
+				error: function(){
+					alert("error : " + error);
+				}
+			}); // inner ajax
+	 		
+		}); // $("td > a").click
 	}
 
 </script>
@@ -176,84 +177,59 @@
 	<header>
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
+	
 	<section class='section'>
-	<div class='container-fluid'>
-		<div class='menu col-12'>
-			<!-- 뒤로가기 & 플래너 수정 버튼 -->
-			<ol class='breadcrumb'>
-				<li class='breadcrumb-item'><a href='/web/myPageLoad'>BACK</a></li>
-				<li class='breadcrumb-item'><a href='./myPagePlannerCreate.jsp'>PLANNER CREATE</a></li>
-			</ol>
-		</div>
-		<div class='main col-12' style="display: inline-flex;">
-			<div class='tabbar col-4'>
-				<!-- tab head -->
-				<ul class='nav nav-tabs bg-primary' role='tablist'>
-					<li class='nav-item' role='presentaion'>
-						<a class='nav-link active' data-bs-toggle='tab' href='#food' aria-selected='true' role='tab'>Food</a>
-					</li>
-					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#shopping' aria-selected='false' role='tab'>Shopping</a>
-					</li>					
-					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#hotspot' aria-selected='false' role='tab'>HotSpot</a>
-					</li>					
-					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#ticket' aria-selected='false' role='tab'>Ticket</a>
-					</li>					
-					<li class='nav-item' role='presentaion'>
-						<a class='nav-link' data-bs-toggle='tab' href='#test' aria-selected='false' role='tab'>Test</a>
-					</li>					
-				</ul>
-				<!-- tab contents -->
-					<div id='myTabContent border border-info-1' class='tab-content'>
-					</div>
-					
-					<div class='setbt'>
-						<button class="create_planner_button" onclick="delete_jjim_list()">Wish Delete</button>
-					</div>
+		<div class='container-fluid'>
+			<div class='menu col-12'>
+				<!-- 뒤로가기 & 플래너 수정 버튼 -->
+				<ol class='breadcrumb'>
+					<li class='breadcrumb-item'><a href='/web/myPageLoad'>My Page</a></li>
+					<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>Planner Create</a></li>
+				</ol>
 			</div>
-			<!-- 상세정보 -->
-			<div class='detailbar col-4'>
-				<table class='table table-hover'>
-				<tbody>
-					<tr class='table-light'>
-						<td><img src="/web/resources/hellomypage/img/buliding.png" width="100%" height="200"></td>
-					</tr>
-					<tr class='table-light'>
-						<td><span> 장소 명</span>	</td>
-					</tr>
-					<tr class='table-light'>
-						<td><span> 장소 명</span>	</td>
-					</tr>
-					<tr class='table-light'>
-						<td><span> 장소 명</span>	</td>
-					</tr>
-					<tr class='table-light'>
-						<td><span> 장소 명</span>	</td>
-					</tr>
-				</tbody>
-			</table>
-			</div>
-			<!-- 지도 -->
-			<div class='mapbar col-4'>
-				<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>
-				<script>
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    	mapOption = { 
-				        center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-				        level: 3 // 지도의 확대 레벨
-			    	};
-			
-					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-					var map = new kakao.maps.Map(mapContainer, mapOption); 
-				</script>
+			<div class='main col-12' style="display: inline-flex;">	
+				<div class='tabbar col-4'>
+					<!-- tab head -->
+					<ul class='nav nav-tabs bg-primary' role='tablist'>
+						<li class='nav-item' role='presentaion'>
+							<a class='nav-link active' data-bs-toggle='tab' href='#food' aria-selected='true' role='tab'>Food</a>
+						</li>
+						<li class='nav-item' role='presentaion'>
+							<a class='nav-link' data-bs-toggle='tab' href='#shopping' aria-selected='false' role='tab'>Shopping</a>
+						</li>					
+						<li class='nav-item' role='presentaion'>
+							<a class='nav-link' data-bs-toggle='tab' href='#hotspot' aria-selected='false' role='tab'>HotSpot</a>
+						</li>					
+						<li class='nav-item' role='presentaion'>
+							<a class='nav-link' data-bs-toggle='tab' href='#things_to_see' aria-selected='false' role='tab'>Ticket</a>
+						</li>					
+						<li class='nav-item' role='presentaion'>
+							<a class='nav-link' data-bs-toggle='tab' href='#ticket' aria-selected='false' role='tab'>Test</a>
+						</li>					
+					</ul>
+					<!-- tab contents -->
+						<div id='myTabContent border border-info-1' class='tab-content'>
+						</div>
+						
+						<div class='setbt'>
+							<button class="create_planner_button" onclick="delete_jjim_list()">Wish Delete</button>
+						</div>
 				</div>
+				<!-- 상세정보 -->
+				<div class='detailbar col-4'>
+				</div>
+				
+				<!-- 지도 -->
+				<div class='mapbar col-4'>
+					<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>
+				</div>
+				
 			</div>
 		</div>
 	</section>
+	
 	<footer>
-	<%-- 	<jsp:include page=""></jsp:include> --%>
+		<jsp:include page="./footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>
