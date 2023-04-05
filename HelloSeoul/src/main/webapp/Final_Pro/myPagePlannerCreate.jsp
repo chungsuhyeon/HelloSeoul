@@ -25,7 +25,7 @@
 	$('document').ready(function(){
 		
 		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = urlParams.get('planner_no');
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -165,7 +165,7 @@
 		}); // checkBox.each
 
 		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
+		const no = urlParams.get('planner_no');
 		
 		// 일정 테이블에 정보 추가 // 코드를 리스트로 보내서 in 이용해서 여러개 mapDB를 List 가져옴
 		$.ajax({
@@ -257,8 +257,6 @@
 	
 	// 생성한 플래너 저장
 	function storePlanner(){
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('no');
 		
 		const inputTimeMin = document.getElementsByClassName("form-control");
 		// 모든 input 태그(시간, 분)에 대해 반복하며 제약조건을 확인
@@ -289,8 +287,10 @@
 			}); // ajax
 		}); // $(forms).each
 		
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('planner_no');
 		// show 페이지로 이동
-		document.location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
+		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		
 	} // storePlanner()
 	
@@ -350,9 +350,9 @@
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="#">Date Reset</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
-  					<li class="breadcrumb-item"><a href="javascript:history.back();">Mypage</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageLoad">Mypage</a></li>
 				</ol>
 			</div>
 			

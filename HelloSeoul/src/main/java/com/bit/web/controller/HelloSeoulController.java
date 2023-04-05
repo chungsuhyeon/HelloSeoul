@@ -1,17 +1,12 @@
 package com.bit.web.controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,17 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.service.MypageService;
 import com.bit.web.vo.MainDbBean;
-import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypagePlannerBean;
 
 @Controller
 public class HelloSeoulController {
-	@Resource(name = "helloSeoulDao")
-	private HelloSeoulDao helloDao;
-	
 	@Resource
 	private MypageService contactService;
 
@@ -61,7 +52,6 @@ public class HelloSeoulController {
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request) {
 		String user_id = (String)request.getSession().getAttribute("user_id");
-
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("userInfo", contactService.userInfo(user_id));
@@ -81,23 +71,8 @@ public class HelloSeoulController {
 	
 	// 찜 삭제
 	@PostMapping(value="ajaxDeleteJjimList")
-	public String mypageJjimListDelete(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		String user_id = (String) request.getSession().getAttribute("user_id");
-		map.put("user_id", user_id);
-		
-		// 삭제할 찜리스트의 장소코드
-		String str = "(";
-		for(int i=0; i<locDataList.length; i++) {
-			str += locDataList[i] + ",";			
-		}
-		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
-		str += ")";		
-		map.put("str", str);
-
-		helloDao.userJjimListDelete(map);
-		
+	public String mypageJjimListDelete(HttpServletRequest request, @RequestParam(value = "deleteJjimList[]")String[] locDataList) {
+		contactService.mypageJjimDelete(request.getSession().getAttribute("user_id"), locDataList);
 		return "redirect:/ajaxMypageJjim";
 	}
 		
@@ -105,34 +80,20 @@ public class HelloSeoulController {
 	@PostMapping(value = "ajaxMypageJjimInfo")
 	@ResponseBody
 	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, @RequestParam(value = "loc_code")int loc_code){
-		return helloDao.getJjimInfo(loc_code);
+		return contactService.getlocInfo(loc_code);
 	}
 	
 	// 플래너 일정 생성 / 수정
-	@PostMapping(value = "createPlannerDate")
-	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi) {
-	
+	@PostMapping(value = "PlannerDate")
+	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, MypagePlannerBean bean) {
+		ModelAndView mav = new ModelAndView();
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
-			HashMap<String, Object> toDbMap = new HashMap<String, Object>();
-
-			int no = helloDao.getPlannerNo();
-			toDbMap.put("no", no);
-			toDbMap.put("user_id", (String) request.getSession().getAttribute("user_id"));
-			toDbMap.put("title", request.getParameter("title"));
-			toDbMap.put("tripStart", request.getParameter("tripStart"));
-			toDbMap.put("tripEnd", request.getParameter("tripEnd"));
-			toDbMap.put("memo", request.getParameter("memo"));
-		
-			helloDao.plannerDataInsert(toDbMap);
-			
-//			String direct = "redirect:/createMainPlanner?no=" + no + "&modi=newCreate";
-//			return new ModelAndView(direct);
-			return "redirect:/allPageLoad?no=" + no + "&modi=" + modi;
+			return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no=" + contactService.mypagePlannerNext(request.getSession().getAttribute("user_id"), modi, bean);
+		} else { // modi = updatePlanner(플래너 일정 수정)
+			contactService.mypagePlannerNext("user_id", modi, bean);			
+			return "redirect:/Final_Pro/myPagePlannerModify.jsp?planner_no="+bean.getPlanner_no();
 		}
-//		return "redirect:/createMainPlanner?no=" + no + "&modi=" + modi;
-		return "redirect:/allPageLoad?modi=" + modi;
-//		return new ModelAndView("Final_Pro/myPagePlannerCreate");
 	}
 		
 	// 찜 리스트 자체 보내기 = 플래너 일정 생성하는 곳의 찜 리스트
@@ -160,44 +121,39 @@ public class HelloSeoulController {
 	@PostMapping(value = "ajaxAddPlannerSchedule")
 	@ResponseBody
 	public List<Object> ajaxPlannerScheduleAdd(HttpServletRequest request, @RequestParam(value = "codeList[]") String[] loc_code) {
-		String str = "(";
-		for(int i=0; i<loc_code.length; i++) {
-			str += loc_code[i] + ",";
-		}
-		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
-		str += ")";
-		
-		return helloDao.selectMainDbData(str);
+		return contactService.mypagePlannerScheduleAdd(loc_code);
 	}
 	
 	@PostMapping(value = "deletePlannerSchedule")
 	@ResponseBody
-	public String deletePlannerSchedule( @RequestParam(value = "no") int no) {
-		helloDao.plannerScheduleDelete(no);
+	public String deletePlannerSchedule(@RequestParam(value = "no") int no) {
+		contactService.mypageScheduleDelete(no);
 		return "success";
 	}
 	
+	@RequestMapping(value = "mypagePlannerDelete")
+	public String mypagePlannerDataAllDelete(@RequestParam(value = "no") int no) {
+		contactService.mypageScheduleDelete(no);
+		contactService.mypagePlannerDelete(no);
+		return "redirect:/myPageLoad";
+	}
 	
-	// 작성한 플래너 insert / update
+	// 작성한 플래너 insert
 	@PostMapping(value = "mainPlannerData")
 	@ResponseBody
 	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {	
-		bean.setUser_id((String) request.getSession().getAttribute("user_id"));
-		helloDao.plannerScheduleInsert(bean);
+		contactService.mypageScheduleInsert(request.getSession().getAttribute("user_id"), bean);
 		return "success";
 	}
-
-	// 플래너 메인 생성 페이지 이동
-	@RequestMapping(value = "allPageLoad")
-	public ModelAndView mainPlannerPageLoad(HttpServletRequest request, @RequestParam(value = "no") int no, @RequestParam(value = "modi") String modi) {
-		if(modi.equals("createPlanner")) { // 새로운 플래너를 생성
-			return new ModelAndView("Final_Pro/myPagePlannerCreate");
-		}
-		else if(modi.equals("updatePlanner")) { // 플래너 일정 수정
-			return new ModelAndView("Final_Pro/myPagePlannerModify");			
-		} else { // show 로드
-			return new ModelAndView("Final_Pro/myPageShow");
-		}
+	
+	@RequestMapping(value = "myPageDateReset")
+	@ResponseBody
+	public ModelAndView mypageDateResetPage(@RequestParam(value = "no") int no) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("plannerDateInfo", contactService.mypageDateInfo(no));
+		mav.setViewName("Final_Pro/myPageModify");
+		return mav;
 	}
+
 		
 }
