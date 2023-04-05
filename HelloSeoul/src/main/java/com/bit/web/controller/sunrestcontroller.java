@@ -45,13 +45,13 @@ public class sunrestcontroller {
 	
 	@PostMapping(value = "searchHot")
 	public List<MainDbBean> searchHotspot(String query) {
-		return dao.searchHot(query);
+		return ctg.searchHot(query);
 	}
 	
 	@PostMapping(value = "hotspotrecommend")
 	public List<MainDbBean> hotspotrecom(String sg){
 		System.out.println(sg);
-		return dao.hotspotrecom(sg);
+		return ctg.hotspotrecom(sg);
 	}
 	
 	@PostMapping(value = "userrecom")
