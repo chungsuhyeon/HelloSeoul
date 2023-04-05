@@ -158,7 +158,7 @@ public class CommServiceImpl implements CommService{
 		System.out.println("용량크기(byte) : " + size);
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+		String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 		
 		
 		/*
@@ -171,7 +171,6 @@ public class CommServiceImpl implements CommService{
 		UUID uuid = UUID.randomUUID();
 		System.out.println(uuid.toString());
 		String[] uuids = uuid.toString().split("-");
-		
 		String uniqueName = uuids[0];
 		System.out.println("생성된 고유문자열" + uniqueName);
 		System.out.println("확장자명" + fileExtension);
