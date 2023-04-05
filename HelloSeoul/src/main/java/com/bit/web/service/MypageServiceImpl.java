@@ -32,53 +32,53 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public HashMap<String, Object> userInfo(String id) {
-		// 개인정보 넘기기	
+		// 媛쒖씤�젙蹂� �꽆湲곌린	
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
-		// DB 생일
+		// DB �깮�씪
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 		
-		// 오늘 날짜
+		// �삤�뒛 �궇吏�
 		LocalDate today = LocalDate.now();
 		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
 		
-		// 정보 넘길거
+		// �젙蹂� �꽆湲멸굅
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
+		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 援��쟻
 		
-		// 나이계산
-		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
+		// �굹�씠怨꾩궛
+		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // �깮�씪 吏��궃 �궗�엺
 			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
-		} else { // 생일 안지남
-			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // 생일 안지난 사람
+		} else { // �깮�씪 �븞吏��궓
+			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // �깮�씪 �븞吏��궃 �궗�엺
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
-			} else { // 생일 지남
+			} else { // �깮�씪 吏��궓
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear());
 			} 
 		}
 						
-		// 관광목적
+		// 愿�愿묐ぉ�쟻
 		switch (user_pp) {
 		case 1:
-			userInfo.put("USER_PP", "travel"); // 여행
+			userInfo.put("USER_PP", "travel"); // �뿬�뻾
 			break;
 		case 2:
-			userInfo.put("USER_PP", "business trip"); // 출장
+			userInfo.put("USER_PP", "business trip"); // 異쒖옣
 			break;
 		case 3:
-			userInfo.put("USER_PP", "study"); // 유학
+			userInfo.put("USER_PP", "study"); // �쑀�븰
 			break;
 		case 4:
-			userInfo.put("USER_PP", "experience"); // 경험
+			userInfo.put("USER_PP", "experience"); // 寃쏀뿕
 			break;
 		default : 
 			userInfo.put("USER_PP", "etc");
 			break;
 		}
 		
-		// 관광 1순위
+		// 愿�愿� 1�닚�쐞
 		switch (user_first) {
 		case 1:
 			userInfo.put("USER_FIRST", "food");
@@ -118,31 +118,31 @@ public class MypageServiceImpl implements MypageService {
 		for(Object i : userJjimList) {
 			MypageJjimBean bean = (MypageJjimBean) i;	
 			
-			if(bean.getLoc_ctg1().equals("음식점")) {
+			if(bean.getLoc_ctg1().equals("�쓬�떇�젏")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("관광지")){				
+			else if (bean.getLoc_ctg1().equals("愿�愿묒�")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("쇼핑")){				
+			else if (bean.getLoc_ctg1().equals("�눥�븨")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("볼거리")){				
+			else if (bean.getLoc_ctg1().equals("蹂쇨굅由�")){				
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
 			}
-			else { // 티켓인 경우	
+			else { // �떚耳볦씤 寃쎌슦	
 				tab5 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab5 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab5 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
