@@ -211,7 +211,7 @@ function check_id2(){
 					<div class='titlebar'>
 						<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
 						<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
-						<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}'>
+						<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
 						<span>
 							<c:choose>
 								<c:when test="${i.com_ctg eq 1}">[ctg1qwdqw]</c:when>
