@@ -21,6 +21,7 @@
 		
 	});
 	
+	
 	// 플래너 생성 로드시
 	$('document').ready(function(){
 		
@@ -119,6 +120,7 @@
 		}); // ajax
 	}); // $('document').ready
 	
+	
 </script>
 <!--JS Section End -->
 
@@ -128,6 +130,7 @@
 
 </style>
 <!-- Style Section End -->
+
 
 </head>
 <body>
@@ -140,8 +143,8 @@
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='/web/myPageLoad'>Mypage</a></li>
-					<li class='breadcrumb-item'><a href="/web/Final_Pro/myPagePlannerModify.jsp?planner_no=${param.no}">Planner Modify</a></li>
-					<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
+					<li class='breadcrumb-item'><a href='/web/allPageLoad?no=${param.no}&modi=updatePlanner'>Planner Modify</a></li>
+					<li class='breadcrumb-item'><a href='#'>Planner Delete</a></li>
 				</ol>
 			</div>
 			

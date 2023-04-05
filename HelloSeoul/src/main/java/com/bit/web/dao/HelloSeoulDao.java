@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageMainPlannerBean;
-import com.bit.web.vo.MypagePlannerBean;
 
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
@@ -45,8 +44,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원의 찜 리스트 삭제
-	public void userJjimListDelete(HashMap<String, Object> map) {
-		this.getSqlSession().delete("userJjimListDelete", map);
+	public void userJjimListDelete(HashMap<String, String> list) {
+		this.getSqlSession().delete("userJjimListDelete", list);
 	}
 	
 	// 찜 리스트에서 장소코드로 상세정보 조회
@@ -60,7 +59,7 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// planner table에 데이터 insert
-	public void plannerDataInsert(MypagePlannerBean map) {
+	public void plannerDataInsert(HashMap<String, Object> map) {
 		this.getSqlSession().insert("plannerDataInsert", map);
 	}
 	
@@ -85,18 +84,6 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	
 	public void plannerScheduleDelete(int no) {
 		this.getSqlSession().delete("plannerScheduleDelete", no);
-	}
-	
-	public void plannerAllDelete(int no) {
-		this.getSqlSession().delete("plannerAllDelete", no);
-	}
-	
-	public MypagePlannerBean mypageplannerInfo(int no) {
-		return this.getSqlSession().selectOne("mypageplannerInfo", no);
-	}
-	
-	public void mypageDateUpdate(MypagePlannerBean bean) {
-		this.getSqlSession().update("mypageDateUpdate", bean);
 	}
 	
 }

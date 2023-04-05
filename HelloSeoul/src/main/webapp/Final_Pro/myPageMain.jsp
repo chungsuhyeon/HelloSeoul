@@ -20,8 +20,7 @@
 	$(function(){
 		$(".loadMyPlanner").click(function(){
 			var no = $(this).parent().attr('name');
-// 			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
-			location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
+			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 		}); // $(".loadMyPlanner").click
 				
 	}); // function

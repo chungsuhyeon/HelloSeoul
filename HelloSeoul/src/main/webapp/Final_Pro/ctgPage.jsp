@@ -89,7 +89,7 @@ $(function(){
 			 					$("#tablebd").append(`
 			 							\${x}
 										<tr class='table-light'>
-											<td><input type="checkbox" name='jjim' value="\${r[x].loc_pc}"></td>
+											<td><input type="checkbox" id='jjim' value="\${r[x].loc_pc}"></td>
 											<td id="locname">\${r[x].loc_name}</td>
 										</tr>
 										`);
@@ -113,16 +113,15 @@ $(function(){
 	
 	//list jjim submit
 	$('#jjimsubmit').click(function(){
-		if(${user_id==null}){
+		if($('#userid').val()==null){
 			alert("Login Plz");
 			return false;
 		}
 		var jjimpoint = new Array();
 		var cnt = 0;
-		$("td > input[name='jjim']").each(function(){
+		$("input[id='jjim']").each(function(){
 			if($(this).prop("checked")){
 				jjimpoint[cnt] = ($(this).val());
-				alert($(this).val());
 				cnt += 1;
 				
 			}
@@ -244,7 +243,6 @@ function ajaxpro2(jjimpoint){
 	<header>
 	<jsp:include page="./header.jsp"></jsp:include>
 	</header>
-	<a href="/web/test.do">test</a>
 	<section class='container-fluid pt-4' style="display: inline-flex;">
 		<input type="hidden" id="userid" value="${user_id}"/>
 		<div class='col-2 border-primary'>
@@ -283,7 +281,7 @@ function ajaxpro2(jjimpoint){
 					<!-- table body ajax -->
 						<c:forEach var="loc" items="${maindb}" varStatus="cnt">
 							<tr class='table-light'>
-								<td><input type="checkbox" name='jjim' value="${loc.LOC_PC}"></td>
+								<td><input type="checkbox" id='jjim' value="${loc.LOC_PC}"></td>
 								<td id="locname">${loc.LOC_NAME}</td>
 							</tr>
 						</c:forEach>

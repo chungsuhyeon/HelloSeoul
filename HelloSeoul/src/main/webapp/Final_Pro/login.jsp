@@ -17,36 +17,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 
-// $(function(){
-// //가입아이디 체크  
-// $("input[name='user_id']").blur(function(){
-	 
-// 	 let user_id = $("input[name='user_id']").val();
-// 	 var pattern = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i;
-// 	 alert(user_id);
-// 	 alert(user_id.match(pattern));
-	 
-// 	 if(user_id.match(pattern)==null){
-// 		 alert("Please enter your registered Email \n ex) seoul@gmail.com");
-// 		 $("input[name='user_id']").focus();
-// 		 $("input[name='user_id']").val('');
-		 
-// 	 }
-//  	 else{
-//  		 alert("ok")
-//  	  	$("input[name='password']").focus();     	    
-//  	   } 
-// }); // 가입아이디 체크-end
-
-// });// 전체함수-end
-
-
-
-
-
-
-
-
 	$(function(){
 		$("button").click(function(){
 			if(($(this).attr('id'))=='login'){

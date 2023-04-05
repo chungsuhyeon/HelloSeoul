@@ -17,13 +17,13 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	function minEndDate(){
-		let startDate = $("input[name='planner_start']").val();
-		$("input[name='planner_end']").prop('min', startDate);
+		let startDate = $("input[name='tripStart']").val();
+		$("input[name='tripEnd']").prop('min', startDate);
 	}
 	
 	function maxStartDate(){
-		let endDate = $("input[name='planner_end']").val();
-		$("input[name='planner_start']").prop('max', endDate);
+		let endDate = $("input[name='tripEnd']").val();
+		$("input[name='tripStart']").prop('max', endDate);
 	}
 	
 	$(function(){
@@ -35,11 +35,11 @@
 				$("input#title").focus();			
 				return false;
 			}		
-			if($("input[name='planner_start']").val().length == 0 || $("input[name='planner_end']").val().length == 0){
+			if($("input[name='tripStart']").val().length == 0 || $("input[name='tripEnd']").val().length == 0){
 				alert("Please choose the date");
-				$("input[name='planner_start']").val('');
-				$("input[name='planner_end']").val('');
-				$("input[name='planner_start']").focus();	
+				$("input[name='tripStart']").val('');
+				$("input[name='tripEnd']").val('');
+				$("input[name='tripStart']").focus();	
 				return false;			
 			}						
 			$("form[name='mypageCreateDateFrm']").submit();
@@ -78,7 +78,7 @@
 		<div class='container-fluid bg-warning' style="display: inline-flex;">
 			<div class='col-4'></div>
 			<div class='col-4 mt-5'>
-				<form action="/web/PlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
+				<form action="/web/createPlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
 					<table class="table table-hover bg-light" style="width: 80%;">
 						<thead>
 							<tr class="table-primary">
@@ -93,7 +93,7 @@
 									<h4>Title : </h4>
 								</td>
 								<td>
-									<input type="text" class="form-control" placeholder="Input Title" id="title" name="planner_title">
+									<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
 								</td>
 							</tr>
 							<tr>
@@ -101,7 +101,7 @@
 									<h4>Start Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control" style="width: 100%;" name="planner_start" onchange="minEndDate()">
+									<input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()">
 								</td>
 							</tr>
 							<tr>
@@ -109,13 +109,13 @@
 									<h4>End Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control"  style="width: 100%;" name="planner_end" onchange="maxStartDate()">
+									<input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
 									<h4 style="text-align: center;">Planner memo</h4>
-									<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea>
+									<textarea style="width: 100%; height: 200px; resize: none;" name="memo"></textarea>
 								</td>
 							</tr>
 							<tr>

@@ -151,21 +151,21 @@ public class CommServiceImpl implements CommService{
 	@Override
 	public void boardInsert(ComBoard board, MultipartFile file) {
 		// TODO Auto-generated method stub
-		String fileRealName = file.getOriginalFilename(); //íŒŒì¼ëª…ì„ ì–»ì–´ë‚¼ ìˆ˜ ìˆëŠ” ë©”ì„œë“œ!
-		long size = file.getSize(); //íŒŒì¼ ì‚¬ì´ì¦ˆ
+		String fileRealName = file.getOriginalFilename(); //ÆÄÀÏ¸íÀ» ¾ò¾î³¾ ¼ö ÀÖ´Â ¸Ş¼­µå!
+		long size = file.getSize(); //ÆÄÀÏ »çÀÌÁî
 		System.out.println(file);
-		System.out.println("íŒŒì¼ëª… : "  + fileRealName);
-		System.out.println("ìš©ëŸ‰í¬ê¸°(byte) : " + size);
-		//ì„œë²„ì— ì €ì¥í•  íŒŒì¼ì´ë¦„ fileextensionìœ¼ë¡œ .jspì´ëŸ°ì‹ì˜  í™•ì¥ì ëª…ì„ êµ¬í•¨
+		System.out.println("ÆÄÀÏ¸í : "  + fileRealName);
+		System.out.println("¿ë·®Å©±â(byte) : " + size);
+		//¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏÀÌ¸§ fileextensionÀ¸·Î .jspÀÌ·±½ÄÀÇ  È®ÀåÀÚ ¸íÀ» ±¸ÇÔ
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 		
 		
 		/*
-		  íŒŒì¼ ì—…ë¡œë“œì‹œ íŒŒì¼ëª…ì´ ë™ì¼í•œ íŒŒì¼ì´ ì´ë¯¸ ì¡´ì¬í•  ìˆ˜ë„ ìˆê³  ì‚¬ìš©ìê°€ 
-		  ì—…ë¡œë“œ í•˜ëŠ” íŒŒì¼ëª…ì´ ì–¸ì–´ ì´ì™¸ì˜ ì–¸ì–´ë¡œ ë˜ì–´ìˆì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤. 
-		  íƒ€ì¸ì–´ë¥¼ ì§€ì›í•˜ì§€ ì•ŠëŠ” í™˜ê²½ì—ì„œëŠ” ì •ì‚° ë™ì‘ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.(ë¦¬ëˆ…ìŠ¤ê°€ ëŒ€í‘œì ì¸ ì˜ˆì‹œ)
-		  ê³ ìœ í•œ ëœë˜ ë¬¸ìë¥¼ í†µí•´ dbì™€ ì„œë²„ì— ì €ì¥í•  íŒŒì¼ëª…ì„ ìƒˆë¡­ê²Œ ë§Œë“¤ì–´ ì¤€ë‹¤.
+		  ÆÄÀÏ ¾÷·Îµå½Ã ÆÄÀÏ¸íÀÌ µ¿ÀÏÇÑ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÒ ¼öµµ ÀÖ°í »ç¿ëÀÚ°¡ 
+		  ¾÷·Îµå ÇÏ´Â ÆÄÀÏ¸íÀÌ ¾ğ¾î ÀÌ¿ÜÀÇ ¾ğ¾î·Î µÇ¾îÀÖÀ» ¼ö ÀÖ½À´Ï´Ù. 
+		  Å¸ÀÎ¾î¸¦ Áö¿øÇÏÁö ¾Ê´Â È¯°æ¿¡¼­´Â Á¤»ê µ¿ÀÛÀÌ µÇÁö ¾Ê½À´Ï´Ù.(¸®´ª½º°¡ ´ëÇ¥ÀûÀÎ ¿¹½Ã)
+		  °íÀ¯ÇÑ ·£´ø ¹®ÀÚ¸¦ ÅëÇØ db¿Í ¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏ¸íÀ» »õ·Ó°Ô ¸¸µé¾î ÁØ´Ù.
 		 */
 		
 		UUID uuid = UUID.randomUUID();
@@ -173,17 +173,17 @@ public class CommServiceImpl implements CommService{
 		String[] uuids = uuid.toString().split("-");
 		
 		String uniqueName = uuids[0];
-		System.out.println("ìƒì„±ëœ ê³ ìœ ë¬¸ìì—´" + uniqueName);
-		System.out.println("í™•ì¥ìëª…" + fileExtension);
+		System.out.println("»ı¼ºµÈ °íÀ¯¹®ÀÚ¿­" + uniqueName);
+		System.out.println("È®ÀåÀÚ¸í" + fileExtension);
 		
 		String filename=uniqueName+fileExtension;
 		board.setCom_filename(filename);
 		
-		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ì ìš© ì „
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid Àû¿ë Àü
 		
-		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ì ìš© í›„
+		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // Àû¿ë ÈÄ
 		try {
-			file.transferTo(saveFile); // ì‹¤ì œ íŒŒì¼ ì €ì¥ë©”ì„œë“œ(filewriter ì‘ì—…ì„ ì†ì‰½ê²Œ í•œë°©ì— ì²˜ë¦¬í•´ì¤€ë‹¤.)
+			file.transferTo(saveFile); // ½ÇÁ¦ ÆÄÀÏ ÀúÀå¸Ş¼­µå(filewriter ÀÛ¾÷À» ¼Õ½±°Ô ÇÑ¹æ¿¡ Ã³¸®ÇØÁØ´Ù.)
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

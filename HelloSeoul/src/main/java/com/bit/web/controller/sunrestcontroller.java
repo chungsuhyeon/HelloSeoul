@@ -38,20 +38,20 @@ public class sunrestcontroller {
 	}
 	
 	@PostMapping(value="insertJjim")
-	public String insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
+	public void insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
 		String user_id = (String) resq.getSession().getAttribute("user_id");
 		ctg.insertJjim(jjimpoint, user_id);
-		return "success";
 	}
 	
 	@PostMapping(value = "searchHot")
 	public List<MainDbBean> searchHotspot(String query) {
-		return ctg.searchHot(query);
+		return dao.searchHot(query);
 	}
 	
 	@PostMapping(value = "hotspotrecommend")
 	public List<MainDbBean> hotspotrecom(String sg){
-		return ctg.hotspotrecom(sg);
+		System.out.println(sg);
+		return dao.hotspotrecom(sg);
 	}
 	
 	@PostMapping(value = "userrecom")

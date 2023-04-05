@@ -40,18 +40,19 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> showDb() {
 		return this.getSqlSession().selectList("showDb");
 	}
-	//search loc
+	
 	public List<MainDbBean> searchLoc(HashMap<Object, Object> map){
 		return this.getSqlSession().selectList("searchLoc",map);
 	}
-	//jjim check
-	public List<Integer> checkJjimList(String user_id){
-		return this.getSqlSession().selectList("checkJjimList",user_id);
-	}
+	
 	public MainDbBean searchInsertJjim(int loc_pc) {
 		return this.getSqlSession().selectOne("searchInsertJjim",loc_pc);
 	}
-	//jjim insert
+	
+	public List<Integer> checkJjimList(String user_id){
+		return this.getSqlSession().selectList("checkJjimList",user_id);
+	}
+	
 	public void insertjjim(MypageJjimBean bean) {
 		this.getSqlSession().insert("insertjjim", bean);
 	}
@@ -60,8 +61,9 @@ public class CtgDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("searchHot",query);
 	}
 	
+	
+	
 	public List<MainDbBean> hotspotrecom(String loc_sg){
 		return this.getSqlSession().selectList("hotspotrecom", loc_sg);
 	}
-
 }
