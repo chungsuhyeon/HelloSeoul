@@ -39,7 +39,7 @@ public class MypageServiceImpl implements MypageService {
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
 		// DB 생일
-		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 		
 		// 오늘 날짜
 		LocalDate today = LocalDate.now();

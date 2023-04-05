@@ -90,6 +90,18 @@ public class CtgServiceImpl implements CtgService{
 			}
 		}
 	}
+
+	@Override
+	public List<MainDbBean> searchHot(String query) {
+		// TODO Auto-generated method stub
+		return dao.searchHot(query);
+	}
+
+	@Override
+	public List<MainDbBean> hotspotrecom(String sg) {
+		// TODO Auto-generated method stub
+		return dao.hotspotrecom(sg);
+	}
 	
 	
 	
