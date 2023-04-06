@@ -48,9 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select planner_seq.nextval from dual
 	</select>
 	
-	<insert id="plannerDataInsert" parameterType="java.util.HashMap">
+	<insert id="plannerDataInsert" parameterType="com.bit.web.vo.MypagePlannerBean">
 		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
-		values(#{no}, #{user_id}, #{title}, #{tripStart}, #{tripEnd}, #{memo})
+		values(#{planner_no}, #{user_id}, #{planner_title}, #{planner_start}, #{planner_end}, #{planner_info})
 	</insert>
 	
 	<select id="firstMainPlannerCreate" parameterType="Integer" resultType="java.util.HashMap">
@@ -81,6 +81,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from mainplanner
 		where planner_no = #{no}
 	</delete>
+	
+	<delete id="plannerAllDelete" parameterType="Integer">
+		delete from planner
+		where planner_no = #{no}
+	</delete>
+	
+	<select id="mypageplannerInfo" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
+		select planner_start, planner_end, planner_title, planner_info
+		from planner
+		where planner_no = #{no}
+	</select>
+	
+	<update id="mypageDateUpdate" parameterType="com.bit.web.vo.MypagePlannerBean">
+		update planner 
+		set planner_title = #{planner_title}, planner_start = #{planner_start}, planner_end = #{planner_end}, planner_info = #{planner_info}
+		where planner_no = #{planner_no}
+	</update>
 
 </mapper>
 

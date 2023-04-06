@@ -10,7 +10,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypagePlannerBean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,53 +35,58 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public HashMap<String, Object> userInfo(String id) {
-		// 媛쒖씤�젙蹂� �꽆湲곌린	
+		// 개인정보 넘기기	
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
+<<<<<<< HEAD
 		// DB �깮�씪
+		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+=======
+		// DB 생일
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
 		
-		// �삤�뒛 �궇吏�
+		// 오늘 날짜
 		LocalDate today = LocalDate.now();
 		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
 		
-		// �젙蹂� �꽆湲멸굅
+		// 정보 넘길거
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 援��쟻
+		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
 		
-		// �굹�씠怨꾩궛
-		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // �깮�씪 吏��궃 �궗�엺
+		// 나이계산
+		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
 			userInfo.put("USER_AGE", today.getYear() - birth.getYear());	
-		} else { // �깮�씪 �븞吏��궓
-			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // �깮�씪 �븞吏��궃 �궗�엺
+		} else { // 생일 안지남
+			if(birth.getDayOfMonth() > today.getDayOfMonth()) { // 생일 안지난 사람
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear() - 1);						
-			} else { // �깮�씪 吏��궓
+			} else { // 생일 지남
 				userInfo.put("USER_AGE", today.getYear() - birth.getYear());
 			} 
 		}
 						
-		// 愿�愿묐ぉ�쟻
+		// 관광목적
 		switch (user_pp) {
 		case 1:
-			userInfo.put("USER_PP", "travel"); // �뿬�뻾
+			userInfo.put("USER_PP", "travel"); // 여행
 			break;
 		case 2:
-			userInfo.put("USER_PP", "business trip"); // 異쒖옣
+			userInfo.put("USER_PP", "business trip"); // 출장
 			break;
 		case 3:
-			userInfo.put("USER_PP", "study"); // �쑀�븰
+			userInfo.put("USER_PP", "study"); // 유학
 			break;
 		case 4:
-			userInfo.put("USER_PP", "experience"); // 寃쏀뿕
+			userInfo.put("USER_PP", "experience"); // 경험
 			break;
 		default : 
 			userInfo.put("USER_PP", "etc");
 			break;
 		}
 		
-		// 愿�愿� 1�닚�쐞
+		// 관광 1순위
 		switch (user_first) {
 		case 1:
 			userInfo.put("USER_FIRST", "food");
@@ -118,31 +126,31 @@ public class MypageServiceImpl implements MypageService {
 		for(Object i : userJjimList) {
 			MypageJjimBean bean = (MypageJjimBean) i;	
 			
-			if(bean.getLoc_ctg1().equals("�쓬�떇�젏")) {
+			if(bean.getLoc_ctg1().equals("음식점")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("愿�愿묒�")){				
+			else if (bean.getLoc_ctg1().equals("관광지")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("�눥�븨")){				
+			else if (bean.getLoc_ctg1().equals("쇼핑")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("蹂쇨굅由�")){				
+			else if (bean.getLoc_ctg1().equals("볼거리")){				
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
 			}
-			else { // �떚耳볦씤 寃쎌슦	
+			else { // 티켓인 경우	
 				tab5 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab5 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab5 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
@@ -160,14 +168,36 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Object> mypageScheduleWishList(String id) {
-		return helloDao.getUserJjimList(id);
+	public void mypageJjimDelete(Object id, String[] list) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", id);
+		
+		// 삭제할 찜리스트의 장소코드
+		String str = "(";
+		for(int i=0; i<list.length; i++) {
+			str += list[i] + ",";
+			System.out.println(list[i]);
+		}
+		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str += ")";		
+		map.put("str", str);
+
+		helloDao.userJjimListDelete(map);
 	}
 
 	@Override
+	public MainDbBean getlocInfo(int loc_pc) {
+		return helloDao.getJjimInfo(loc_pc);
+	}
+
+	@Override
+	public List<Object> mypageScheduleWishList(String id) {
+		return helloDao.getUserJjimList(id);
+	}
+	
+	@Override
 	public HashMap<String, Object> mypagePlannerTabBar(int no) {
 		HashMap<String, Object> plannerInfo = helloDao.firstMainPlannerCreate(no);
-		
 		LocalDate start = LocalDate.parse(plannerInfo.get("PLANNER_START").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate end = LocalDate.parse(plannerInfo.get("PLANNER_END").toString().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		int diffDate = end.compareTo(start);
@@ -179,8 +209,60 @@ public class MypageServiceImpl implements MypageService {
 	public List<Object> mypagePlannerTabContent(int no) {
 		return helloDao.mainPlannerDataSelect(no);
 	}
+
+	@Override
+	public int mypagePlannerNext(Object id, String modi, MypagePlannerBean bean) {
+		// 새로운 플래너 생성을 위한 일정 생성
+		if(modi.equals("createPlanner")) {
+			int no = helloDao.getPlannerNo();
+			bean.setPlanner_no(no);
+			bean.setUser_id((String) id);
+			helloDao.plannerDataInsert(bean);
+			return no;
+		} else { // update
+			helloDao.mypageDateUpdate(bean);
+			return bean.getPlanner_no();
+		}
+	}
+
+	@Override
+	public List<Object> mypagePlannerScheduleAdd(String[] loc_pc) {
+		String str = "(";
+		for(int i=0; i<loc_pc.length; i++) {
+			str += loc_pc[i] + ",";
+		}
+		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
+		str += ")";
+		return helloDao.selectMainDbData(str);
+	}
+
+	@Override
+	public void mypageScheduleDelete(int no) {
+		helloDao.plannerScheduleDelete(no);
+	}
+	
+	@Override
+	public void mypagePlannerDelete(int no) {
+		helloDao.plannerAllDelete(no);
+	}
+	
+	@Override
+	public void mypageScheduleInsert(Object id, MypageMainPlannerBean bean) {
+		bean.setUser_id((String) id);
+		helloDao.plannerScheduleInsert(bean);
+	}
+
+	@Override
+	public MypagePlannerBean mypageDateInfo(int no) {
+		return helloDao.mypageplannerInfo(no);
+	}
 	
 	
+
+
+	
+	
+
 	
 	
 	
