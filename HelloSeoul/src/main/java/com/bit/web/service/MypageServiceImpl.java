@@ -36,7 +36,7 @@ public class MypageServiceImpl implements MypageService {
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
 		// DB �깮�씪
-		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
 		// �삤�뒛 �궇吏�
 		LocalDate today = LocalDate.now();
