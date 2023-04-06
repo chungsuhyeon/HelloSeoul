@@ -22,6 +22,9 @@ $(function(){
 	$(".postbar").click(function(){
 		$("form").submit();
 	});
+	$("button#cancelbt").click(function(){
+		location.replace("/web/boardSelect");
+	});
 });
 </script>
 <!--JS Section End -->
@@ -87,7 +90,7 @@ $(function(){
 			</form>
 			<div class='buttonbar mb-4 d-flex justify-content-evenly'>
 				<button type="button" class="postbar btn btn-success">Post</button>
-				<button type="button" class="cancelbar btn btn-danger">Cancel</button>
+				<button type="button" class="cancelbar btn btn-danger" id="cancelbt">Cancel</button>
 			</div>
 		</div>
 	</section>
