@@ -38,14 +38,9 @@ public class MypageServiceImpl implements MypageService {
 		// 개인정보 넘기기	
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
-<<<<<<< HEAD
 		// DB �깮�씪
 		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-=======
-		// DB 생일
-		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
-		
+
 		// 오늘 날짜
 		LocalDate today = LocalDate.now();
 		
