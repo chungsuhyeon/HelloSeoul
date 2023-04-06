@@ -69,7 +69,22 @@ li div > a{
           				<a class="nav-link" href="/web/musicalList">TICKET</a>
         			</li>
       			</ul>
+      			
       <div class="setbar d-flex">
+<!-- Google 번역 -->
+<div id="google_translate_element" class="hd_lang"></div>
+<script>
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({
+			pageLanguage: 'ko',
+			includedLanguages: 'ko,zh-CN,zh-TW,ja,vi,th,tl,km,my,mn,ru,en,fr,ar',
+			layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+			autoDisplay: false
+		}, 'google_translate_element');
+	}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- //Google 번역 -->
         	<button type="button" class="btn btn-dark" id="comm">Community</button>
        	<c:choose>
 	       	<c:when test="${user_id eq null}">

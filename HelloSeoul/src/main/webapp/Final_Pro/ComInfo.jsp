@@ -168,6 +168,10 @@ function check_id2(){
 					});
 				}
 			});
+		$("button#listbt").click(function(){
+			location.replace("/web/boardSelect");
+			
+		});
 	});
 </script>
 <!--JS Section End -->
@@ -242,7 +246,7 @@ function check_id2(){
 					</div>
 					<div class='settingbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
-						<button type="button" class="btn btn-primary">List</button>
+						<button type="button" class="btn btn-primary" id="listbt">List</button>
 					</div>
 					<div class='goodbad col-4'>
 						<button type="button" class="btn btn-success" id='good'>
