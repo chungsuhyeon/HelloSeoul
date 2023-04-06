@@ -56,7 +56,7 @@
             <children xsi:type="basic:PartSashContainer" xmi:id="_JsI6Z5ucEe2peMoBu-YIRQ" containerData="8200" selectedElement="_JsI6aJucEe2peMoBu-YIRQ" horizontal="true">
               <children xsi:type="basic:PartSashContainer" xmi:id="_JsI6aJucEe2peMoBu-YIRQ" containerData="7799" selectedElement="_JsI6aZucEe2peMoBu-YIRQ">
                 <children xsi:type="advanced:Placeholder" xmi:id="_JsI6aZucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.editorss" containerData="7000" ref="_Jr7fAJucEe2peMoBu-YIRQ"/>
-                <children xsi:type="basic:PartStack" xmi:id="_JsI6apucEe2peMoBu-YIRQ" elementId="bottomFolder" containerData="3000" selectedElement="_JsI6a5ucEe2peMoBu-YIRQ">
+                <children xsi:type="basic:PartStack" xmi:id="_JsI6apucEe2peMoBu-YIRQ" elementId="bottomFolder" containerData="3000" selectedElement="_JsI6bZucEe2peMoBu-YIRQ">
                   <children xsi:type="advanced:Placeholder" xmi:id="_JsI6a5ucEe2peMoBu-YIRQ" elementId="com.tomato.exerd.ui.views.domain" ref="_JsEo8ZucEe2peMoBu-YIRQ" closeable="true">
                     <tags>View</tags>
                     <tags>categoryTag:eXERD</tags>
@@ -140,8 +140,8 @@
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>active</tags>
-        <children xsi:type="basic:Part" xmi:id="_Nizp8JucEe2peMoBu-YIRQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="helloseoul0310.exerd(&#xc77d;&#xae30; &#xc804;&#xc6a9;)" iconURI="platform:/plugin/com.tomato.exerd.core/icon/common/erd_editor.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;com.tomato.exerd.editor.DiagramEditor&quot; name=&quot;helloseoul0310.exerd&quot; partName=&quot;helloseoul0310.exerd(&#xc77d;&#xae30; &#xc804;&#xc6a9;)&quot; title=&quot;helloseoul0310.exerd(&#xc77d;&#xae30; &#xc804;&#xc6a9;)&quot; tooltip=&quot;E:\HelloSeoul\&#xd504;&#xb85c;&#xc81d;&#xd2b8; &#xd30c;&#xc77c;\helloseoulDB\helloseoul0310.exerd&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.ide.FileStoreEditorInputFactory&quot; uri=&quot;file:/E:/HelloSeoul/&#xd504;&#xb85c;&#xc81d;&#xd2b8;%20&#xd30c;&#xc77c;/helloseoulDB/helloseoul0310.exerd&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_Nizp8JucEe2peMoBu-YIRQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="helloseoul0310.exerd" iconURI="platform:/plugin/com.tomato.exerd.core/icon/common/erd_editor.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;com.tomato.exerd.editor.DiagramEditor&quot; name=&quot;helloseoul0310.exerd&quot; partName=&quot;helloseoul0310.exerd&quot; title=&quot;helloseoul0310.exerd&quot; tooltip=&quot;E:\HelloSeoul\&#xd504;&#xb85c;&#xc81d;&#xd2b8; &#xd30c;&#xc77c;\helloseoulDB\helloseoul0310.exerd&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.ide.FileStoreEditorInputFactory&quot; uri=&quot;file:/E:/HelloSeoul/&#xd504;&#xb85c;&#xc81d;&#xd2b8;%20&#xd30c;&#xc77c;/helloseoulDB/helloseoul0310.exerd&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>com.tomato.exerd.editor.DiagramEditor</tags>
           <tags>removeOnHide</tags>
@@ -214,7 +214,7 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_J3VdwZucEe2peMoBu-YIRQ" elementId="com.tomato.exerd.ui.views.domain"/>
+      <toolbar xmi:id="_J3VdwZucEe2peMoBu-YIRQ" elementId="com.tomato.exerd.ui.views.domain" visible="false"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_JsEo8pucEe2peMoBu-YIRQ" elementId="com.tomato.exerd.validate.ui.ValidateView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="&#xac80;&#xd1a0;" iconURI="platform:/plugin/com.tomato.exerd.core/icon/common/valid.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="com.tomato.exerd.validate.ui.ValidateView"/>
@@ -225,8 +225,14 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_JsFQAJucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.console.ConsoleView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="&#xcf58;&#xc194;" iconURI="platform:/plugin/org.eclipse.ui.console/icons/full/cview16/console_view.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.internal.console.ConsoleView"/>
       <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ui.console"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:&#xc77c;&#xbc18;</tags>
+      <menus xmi:id="_1LXLEKW5Ee2dr8e7l7f9SA" elementId="org.eclipse.ui.console.ConsoleView">
+        <tags>ViewMenu</tags>
+        <tags>menuContribution:menu</tags>
+      </menus>
+      <toolbar xmi:id="_1LXLEaW5Ee2dr8e7l7f9SA" elementId="org.eclipse.ui.console.ConsoleView"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_JsITUJucEe2peMoBu-YIRQ" elementId="com.tomato.exerd.xscript.ScriptView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="XScript" iconURI="platform:/plugin/com.tomato.exerd.xscript/icons/script.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="com.tomato.exerd.xscript.ScriptView"/>
@@ -241,7 +247,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Jmkd4JucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Ctji4M3JEe20D6c26_3f6Q" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="&#xc778;&#xc1c4;" command="_IoiIp5ucEe2peMoBu-YIRQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_QBcSIKW5Ee2dr8e7l7f9SA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="&#xc778;&#xc1c4;" command="_IoiIp5ucEe2peMoBu-YIRQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Jmkd4ZucEe2peMoBu-YIRQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -266,7 +272,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_JmlE8pucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Ctji7c3JEe20D6c26_3f6Q" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="&#xd3b8;&#xc9d1;&#xae30; &#xc704;&#xce58; &#xace0;&#xc815;" type="Check" command="_IohhspucEe2peMoBu-YIRQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_QBeuYKW5Ee2dr8e7l7f9SA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="&#xd3b8;&#xc9d1;&#xae30; &#xc704;&#xce58; &#xace0;&#xc815;" type="Check" command="_IohhspucEe2peMoBu-YIRQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_JmlE85ucEe2peMoBu-YIRQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -2490,7 +2496,7 @@
   <addons xmi:id="_ImgIFJucEe2peMoBu-YIRQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_ImgIFZucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_ImruMJucEe2peMoBu-YIRQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_PbP00aW5Ee2dr8e7l7f9SA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_IobaoJucEe2peMoBu-YIRQ" elementId="org.eclipse.team.ui.category.team" name="&#xd300;" description="&#xd300;&#xacfc; &#xd568;&#xaed8; &#xc791;&#xc5c5;&#xd560; &#xb54c; &#xc801;&#xc6a9;&#xb418;&#xb294; &#xc870;&#xce58;&#xc785;&#xb2c8;&#xb2e4;."/>
   <categories xmi:id="_IobaoZucEe2peMoBu-YIRQ" elementId="org.eclipse.ui.category.views" name="&#xbcf4;&#xae30;" description="&#xbcf4;&#xae30;&#xb97c; &#xc5f4;&#xae30; &#xc704;&#xd55c; &#xba85;&#xb839;&#xc785;&#xb2c8;&#xb2e4;."/>
