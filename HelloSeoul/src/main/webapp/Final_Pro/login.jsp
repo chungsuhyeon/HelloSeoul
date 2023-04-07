@@ -56,6 +56,7 @@ h4{
 <section class='container'>
 	<div class='row d-flex justify-content-center'>
 		<div class='col-3 bg-primary rounded' style="margin-top: 200px;">
+		<form action="${pageContext.request.contextPath}/siteCheck" method="post">
 			<div class="loginBox row mt-1 mx-1">
 				<h4>ID</h4>
 				<input class="form-control form-control-lg" type="text" placeholder="ID" id="inputID" name="user_id" style="width: 300px;">
@@ -72,6 +73,7 @@ h4{
 				&nbsp;&nbsp;<p>|</p>&nbsp;&nbsp;
 				<a href="#">FindID</a>
 			</div>
+		</form>
 		</div>
 	</div>
 </section>
