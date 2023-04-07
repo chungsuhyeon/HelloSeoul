@@ -45,7 +45,7 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 		<c:forEach var='i' items="${top3}">
-		<div class='newcomm col-4 bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg');">
+		<div class='newcomm col-4 bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); height: 600px;">
 			<div class='newcomm-contents bg-image' id="top3list" style="background-image: url('/web/resources/test/${i.com_filename }');"></div>
 			<div class='newcomm-title'>
 				<h3>${i.com_title }</h3>

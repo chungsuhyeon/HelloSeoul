@@ -146,6 +146,7 @@ function ajaxpro(sel){
  				for(var x=0; x<r.length;x++){
  					if(r[x].loc_name==sel){
  						var loc = r[x];
+ 						console.log(loc);
  						}
  					}
  				//마커가 표시될 위치입니다
@@ -163,7 +164,7 @@ function ajaxpro(sel){
 									<tbody>
 										<tr>
 											<td rowspan="6" style="width: 300px;">
-											<img src='/web/resources/file_img/\${loc.loc_img}'>
+											<img src='\${loc.loc_img}'style='width: 100%; height: 100%;'>
 											</td>
 											<td class='table-light' style="width: 20%;">장소 이름</td>
 											<td>\${loc.loc_name}</td>
@@ -331,7 +332,7 @@ function ajaxpro2(jjimpoint){
 				</tbody>
 			</table>
 		</div>
-		<div class="col-3" style="margin-left: 10px;">
+		<div class="col-4">
 			<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>	
 			<script type="text/javascript">
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
