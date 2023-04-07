@@ -409,7 +409,7 @@
 	</header>
 	
 	<section>
-		<div class='container_fluid'>
+		<div class='container'>
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">

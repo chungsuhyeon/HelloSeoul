@@ -79,7 +79,7 @@
 	</header>
 	
 	<section>
-		<div class='container-fluid bg-warning' style="display: inline-flex;">
+		<div class='container' style="display: inline-flex;">
 			<div class='col-4'></div>
 			<div class='col-4 mt-5'>
 				<form action="/web/PlannerDate?modi=updatePlanner" name="mypageCreateDateFrm" method="post">

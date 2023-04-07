@@ -179,7 +179,7 @@
 	</header>
 	
 	<section class='section'>
-		<div class='container-fluid'>
+		<div class='container'>
 			<div class='menu col-12'>
 				<!-- 뒤로가기 & 플래너 수정 버튼 -->
 				<ol class='breadcrumb'>

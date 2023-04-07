@@ -15,18 +15,20 @@
 		<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="logo" src="/web/resources/final_style/img/Logo.png" style="width: 50%; height: 50%;"></a>
 		<p>Develop 2023</p>
 	</div>
-	<div class="footlink col-4">
+	<div class="footlink col-8">
 		<a href="#">Home</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Home</a>
+		<a href="#">Location Search</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Home</a>
+		<a href="#">K-Food Search</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Home</a>
+		<a href="#">Hotspot</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Home</a>
-	</div>
-	<div class="col-4 text-end">
+		<a href="#">Ticketing</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Community</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Mypage</a>
 	</div>
 </div>
 </footer>

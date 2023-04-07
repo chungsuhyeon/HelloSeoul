@@ -65,7 +65,7 @@
 	</header>
 	
 	<section>
-		<div class='container-fluid'>
+		<div class='container'>
 			<!-- User Info -->
 			<div>
 				<div>
