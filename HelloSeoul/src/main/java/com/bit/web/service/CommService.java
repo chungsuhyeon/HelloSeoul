@@ -45,4 +45,5 @@ public interface CommService {
 //	List<Object> selectBoard(Map<String, Object>map);
 //	List<Object> selectBoardtop3();
 	void selectBoard(ComBoard board,Model model,HttpServletRequest request);
+	String SelectPlannerTitle(int plno);
 }

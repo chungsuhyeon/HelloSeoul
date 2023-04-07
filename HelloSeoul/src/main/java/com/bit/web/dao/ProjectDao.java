@@ -138,6 +138,9 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer getTotalRow() {
 		return this.getSqlSession().selectOne("getTotalRow");
 	}
+	public String SelectPlannerTitle(int plno) {
+		return this.getSqlSession().selectOne("SelectPlannerTitle",plno);
+	}
 }
 
 

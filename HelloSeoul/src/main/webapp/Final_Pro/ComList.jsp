@@ -24,7 +24,7 @@ $(function(){
 			alert("login plz");
 		}
 		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
+			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&plno=0");
 		}
 	});
 	$("div#top3list").click(function(){
