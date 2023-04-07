@@ -27,17 +27,21 @@ $(function(){
 		dataType:'json',
 		success : function(r){
 			for(var i=0;i<r.length;i++){
-				$('.cardbar').append(`
-						<a href='/web/gotoHotspotinfo?pc=\${r[i].loc_pc}'>
-						<li style="float: left;">
-						<div class='card' style="width: 300px; margin-left: 2px; margin-right: 2px;">
-							<h3 class='card-header'>\${r[i].loc_name}</h3>
-							<div class='card-body'>
-								<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">						
-							</div>
+				$('.tobar').append(`
+						<div class="card mb-3 col-3">
+						<h4 class="card-header" style="overflow: hidden">\${r[i].loc_name}</h4>
+						<div class="card-body">
+							<a href="/web/gotoHotspotinfo?pc=\${r[i].loc_pc}"><img src="\${r[i].loc_img}" style="width: 100%; height: 200px;"></a>
 						</div>
-						</li>
-						</a>
+						<div class="card-body">
+					  		<p class="card-text"><a href="\${r[i].loc_info}">\${r[i].loc_info}</a></p>
+						</div>
+						<div class="card-body">
+							<hr class='hr'>
+					  		<a href="#" class="card-link">Jjim</a>
+					  		<a href="/web/gotoHotspotinfo?pc=\${i.loc_pc}" class="card-link">More</a>
+						</div>
+					</div>
 						`);
 				
 			}
@@ -50,6 +54,7 @@ $(function(){
 	});
 });
 </script>
+
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
@@ -124,12 +129,9 @@ $(function(){
 				<p>#tag,#tag,#tag,#tag,#tag,#tag,#tag,</p>
 			</div>
 			<hr class='hr hr-blurry'/>
-			<div class='tobar'>
-				<ul class='cardbar' style="list-style-type: none;">
-					<li style="float: left;">
-					<!-- ajax line -->
-					</li>
-				</ul>
+			<h4>주변 리스트</h4>
+			<div class='tobar d-inline-flex'>
+				
 			</div>
 		</div>
 	</section>

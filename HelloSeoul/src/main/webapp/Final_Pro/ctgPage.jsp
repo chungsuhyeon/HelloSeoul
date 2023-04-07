@@ -247,10 +247,10 @@ function ajaxpro2(jjimpoint){
 <header>
 <jsp:include page="./header.jsp"></jsp:include>
 </header>
-<section class='container-fluid'>
+<section class='container'>
 	<input type="hidden" id="userid" value="${user_id}"/>
 	<div class='row'>
-		<div class='col-2'>
+		<div class='col-3'>
 			<div class='searchbar1 col-12 d-inline-flex'>
 				<select class='form-select' id='locsg'>
 					<option value="choose">지역</option>
@@ -292,10 +292,10 @@ function ajaxpro2(jjimpoint){
 				</table>
 			</div>
 			<div class='jjimsubmit'>
-			<button class="btn btn-lg btn-success" type="button" style="width: 100%" id="jjimsubmit">찜 하기</button>
+			<button class="btn btn-lg btn-primary" type="button" style="width: 100%" id="jjimsubmit">찜 하기</button>
 			</div>
 		</div>
-		<div class="infobar col-6" >
+		<div class="infobar col-5" >
 			<table class='table' style="height: 100%;">
 				<tbody>
 					<tr>

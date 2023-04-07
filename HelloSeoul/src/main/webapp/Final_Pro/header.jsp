@@ -33,23 +33,23 @@ $(function(){
 .menuBox>a{
 	margin-left: 4px;
 	margin-right: 4px;
-	font-size: 2rem;
+	font-size: 20px;
 	text-decoration: underline;
 	color: #2c3e50;
 }
 </style>
 <!-- Style Section End -->
 </head>
-<header class='container-fluid'>
+<header class='container'>
 	<div class='row'>
-		<div class='logoBox col-3'>
+		<div class='logoBox col-3 mt-4'>
 			<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="logo" src="/web/resources/final_style/img/Logo.png" style="width: 100%;"></a>
 		</div>
 		<div class='menuBox col-6 text-center mt-4'>
 			<a href="/web/gotoctg">Location Search</a>
-			<a href="#">Image Search</a>
+			<a href="#">K-Food Search</a>
 			<a href="/web/gotohotspot">Hotspot</a>
-			<a href="#">Ticket</a>
+			<a href="#">Ticketing</a>
 		</div>
 		<div class='settingBox col-3 mt-3 text-end'>
 			<!-- Google 번역 -->

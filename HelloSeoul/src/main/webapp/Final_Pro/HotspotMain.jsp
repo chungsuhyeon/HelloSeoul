@@ -132,7 +132,7 @@ $(function(){
 				<ol class="breadcrumb bg-primary mt-4">
 	  				<li class="breadcrumb-item"><a href="#">LandMark</a></li>
 	  				<li class="breadcrumb-item"><a href="#">History</a></li>
-	  				<li class="breadcrumb-item active">Nature</li>
+	  				<li class="breadcrumb-item"><a href="#">Nature</a></li>
 	  				<li class="breadcrumb-item"><a href="#">Etc</a></li>
 				</ol>
 				</div>
@@ -141,29 +141,24 @@ $(function(){
 					<button type="button" class="btn btn-primary" id="searchbt">Search</button>
 				</div>
 			</div>
-			<div class='infobar' style="">
-				<ul class='infocard' style="list-style: none; width: 100%; height: 800px;">
-					<c:forEach var='i' items="${hotspot}">
-						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">
-						<li class='mb-4' style="float: left;">
-							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
-			  					<h3 class="card-header">${i.loc_name}</h3>
-			  					<div class='card-body'>
-									<img src="${i.loc_img}" style="object-fot:cover; width: 100%; height: 100%;">
-			  					</div>
-			  					<div class="card-body">
-				    				<p class="card-text">${i.loc_info}</p>
-				  				</div>
-				  				<div class="card-footer text-muted">
-			    				2 days ago
-			  					</div>
-							</div>						
-						</li>
-					</a>
-					</c:forEach>
-				</ul>
+			<div class='infobar row'>
+				<c:forEach var='i' items='${hotspot}'>
+					<div class="card mb-3 col-3">
+						<h4 class="card-header" style="overflow: hidden">${i.loc_name}</h4>
+						<div class="card-body">
+							<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}"><img src="${i.loc_img}" style="width: 100%; height: 200px;"></a>
+						</div>
+						<div class="card-body">
+					  		<p class="card-text"><a href="${i.loc_info}">${i.loc_info}</a></p>
+						</div>
+						<div class="card-body">
+							<hr class='hr'>
+					  		<a href="#" class="card-link">Jjim</a>
+					  		<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}" class="card-link">More</a>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
-			<button id="test">test</button>
 			<div class='pagingbar d-flex justify-content-center mt-4'>
 				<div class='paging'>
 					<ul class="pagination">

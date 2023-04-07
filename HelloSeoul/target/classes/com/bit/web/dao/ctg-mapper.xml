@@ -51,7 +51,7 @@ WHERE LOC_NAME = '%'||#{query}||'%'
 <select id="readyForHotspot" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
-WHERE LOC_CTG1 = 'tour'
+WHERE LOC_CTG1 = 'tour'AND <![CDATA[ROWNUM<9]]>
 </select>
 
 <select id="hotspotinfo" resultType="mainDB" parameterType="int">

@@ -3,16 +3,30 @@
 
 <!DOCTYPE html>
 <html>
-<footer class='container-fluid'>
+<style type="text/css">
+.footlink>a{
+	color: #2c3e50;
+}
+</style>
+<footer class='container'>
 <hr class="hr"/>
 <div class="row">
-	<div class="col-4">
+	<div class="col-4 d-flex">
+		<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="logo" src="/web/resources/final_style/img/Logo.png" style="width: 50%; height: 50%;"></a>
+		<p>Develop 2023</p>
 	</div>
-	<div class="col-4">
-		<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="logo" src="/web/resources/final_style/img/Logo.png" style="width: 100%;"></a>
+	<div class="footlink col-4">
+		<a href="#">Home</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Home</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Home</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Home</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="#">Home</a>
 	</div>
 	<div class="col-4 text-end">
-		<p>Develop 2023</p>
 	</div>
 </div>
 </footer>

@@ -42,6 +42,10 @@ $(function(){
 h4{
 	color: white;
 }
+.buttonBox2>a{
+	color: white;
+	text-decoration: none;
+}
 </style>
 <!-- Style Section End -->
 
@@ -51,7 +55,7 @@ h4{
 <jsp:include page="header.jsp"></jsp:include>
 <section class='container'>
 	<div class='row d-flex justify-content-center'>
-		<div class='col-3 bg-primary mt-5 rounded'>
+		<div class='col-3 bg-primary rounded' style="margin-top: 200px;">
 			<div class="loginBox row mt-1 mx-1">
 				<h4>ID</h4>
 				<input class="form-control form-control-lg" type="text" placeholder="ID" id="inputID" name="user_id" style="width: 300px;">
@@ -59,10 +63,14 @@ h4{
 				<input class="form-control form-control-lg" type="password" placeholder="Password" id="inputPassword" name="password" style="width: 300px;">
 			</div>
 			<hr class="hr">
-			<div class="buttonBox d-flex justify-content-around mb-2">
-				<button type="submit" class="btn btn-info" id="login">Login</button>
-				<button type="button" class="btn btn-success" id="join">Join</button>
-				<button type="button" class="btn btn-danger" id="findPw">FindID</a></button>
+			<div class="buttonBox d-flex justify-content-center mb-2">
+				<button type="submit" class="btn btn-info w-100" id="login">Login</button>
+			</div>
+			<hr class="hr">
+			<div class="buttonBox2 d-flex justify-content-center mb-2">
+				<a href="/web/Final_Pro/join.jsp">Join</a>
+				&nbsp;&nbsp;<p>|</p>&nbsp;&nbsp;
+				<a href="#">FindID</a>
 			</div>
 		</div>
 	</div>
