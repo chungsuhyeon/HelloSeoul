@@ -135,7 +135,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	</header>
 	<section>
-		<div class='container-fluid'>
+		<div class='container'>
 			<!-- tab -->
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
