@@ -40,6 +40,43 @@ $(function(){
 			alert("plz!");
 		}
 	});
+	
+	$('#test').click(function(){
+		$.ajax({
+			type: 'post',
+			url: '/web/paging',
+			data: {'page': 3},
+			dataType: 'json',
+			success: function(s){
+				$('.infocard a').remove();
+				for(var i=0; i<s.length;i++){
+					console.log(s[i]);
+					$('.infocard').append(`
+							<a href="/web/gotoHotspotinfo?pc=\${s[i].LOC_PC}">
+							<li class='mb-4' style="float: left; width:310px; height:380px;">
+								<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
+				  					<h3 class="card-header">\${s[i].LOC_NAME}</h3>
+				  					<div class='card-body'>
+										<img src="\${s[i].LOC_IMG}" style="object-fot:cover; width: 100%; height: 100%;">
+				  					</div>
+				  					<div class="card-body">
+					    				<p class="card-text">\${s[i].LOC_INFO}</p>
+					  				</div>
+					  				<div class="card-footer text-muted">
+				    				2 days ago
+				  					</div>
+								</div>						
+							</li>
+							</a>
+					`);
+
+				}
+			},
+			error: function(x){
+				alert("Error!");	
+			}
+		});
+	});
 });
 </script>
 <!--JS Section End -->
@@ -93,9 +130,10 @@ $(function(){
 			<div class='navbar'>
 				<div class='ctgbar'>
 				<ol class="breadcrumb bg-primary mt-4">
-	  				<li class="breadcrumb-item"><a href="#">Home</a></li>
-	  				<li class="breadcrumb-item"><a href="#">Library</a></li>
-	  				<li class="breadcrumb-item active">Data</li>
+	  				<li class="breadcrumb-item"><a href="#">LandMark</a></li>
+	  				<li class="breadcrumb-item"><a href="#">History</a></li>
+	  				<li class="breadcrumb-item active">Nature</li>
+	  				<li class="breadcrumb-item"><a href="#">Etc</a></li>
 				</ol>
 				</div>
 				<div class='searchbar d-flex'>
@@ -111,7 +149,7 @@ $(function(){
 							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
 			  					<h3 class="card-header">${i.loc_name}</h3>
 			  					<div class='card-body'>
-									<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">
+									<img src="${i.loc_img}" style="object-fot:cover; width: 100%; height: 100%;">
 			  					</div>
 			  					<div class="card-body">
 				    				<p class="card-text">${i.loc_info}</p>
@@ -125,6 +163,7 @@ $(function(){
 					</c:forEach>
 				</ul>
 			</div>
+			<button id="test">test</button>
 			<div class='pagingbar d-flex justify-content-center mt-4'>
 				<div class='paging'>
 					<ul class="pagination">

@@ -60,7 +60,9 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> searchHot(String query){
 		return this.getSqlSession().selectList("searchHot",query);
 	}
-	
+	public List<HashMap<String, Object>> hotspotPage(HashMap<Object, Integer> page){
+		return this.getSqlSession().selectList("hotspotPage", page);
+	}
 	
 	
 	public List<MainDbBean> hotspotrecom(String loc_sg){

@@ -22,6 +22,7 @@ public interface CtgService {
 	void insertJjim(List<Integer> jjimpoint, String user_id);
 	List<MainDbBean> searchHot(String query);
 	List<MainDbBean> hotspotrecom(String sg);
+	List<HashMap<String, Object>> HotspotPaging(int page);
 	
 	
 }
