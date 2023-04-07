@@ -62,5 +62,12 @@ public class sunrestcontroller {
 		}
 		return userid;
 	}
+	
+	@PostMapping(value = "paging")
+	public List<HashMap<String, Object>> pagingsys(int page) {
+		System.out.println(page);
+		System.out.println(ctg.HotspotPaging(page));
+		return ctg.HotspotPaging(page);
+	}
 
 }

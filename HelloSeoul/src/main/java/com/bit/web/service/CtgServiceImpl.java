@@ -54,6 +54,7 @@ public class CtgServiceImpl implements CtgService{
 	@Override
 	public List<MainDbBean> showLocinfo() {
 		// TODO Auto-generated method stub
+		//System.out.println(dao.showDb());
 		return dao.showDb();
 	}
 
@@ -102,6 +103,16 @@ public class CtgServiceImpl implements CtgService{
 		// TODO Auto-generated method stub
 		return dao.hotspotrecom(sg);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> HotspotPaging(int page) {
+		// TODO Auto-generated method stub
+		HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+		map.put("start", (page-1)*8);
+		map.put("end", page*8);
+		return dao.hotspotPage(map);
+	}
+	
 	
 	
 	

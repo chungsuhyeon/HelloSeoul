@@ -10,8 +10,7 @@ public class MainDbBean {
 	private String loc_ctg2;
 	private String loc_sg;
 	private String loc_addr;
-	private String loc_op;
-	private String loc_cl;
+	private String loc_time;
 	private String loc_tel;
 	private String loc_info;
 	private String loc_img;
