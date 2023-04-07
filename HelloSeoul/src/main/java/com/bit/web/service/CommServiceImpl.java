@@ -204,6 +204,11 @@ public class CommServiceImpl implements CommService{
 		model.addAttribute("top3",commdao.selecttop3());
 		model.addAttribute("board",commdao.selectBoard(map));
 	}
+	@Override
+	public String SelectPlannerTitle(int plno) {
+		// TODO Auto-generated method stub
+		return commdao.SelectPlannerTitle(plno);
+	}
 
 	
 	

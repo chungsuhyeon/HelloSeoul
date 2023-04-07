@@ -20,7 +20,7 @@ $(function(){
 			alert("로그인 후 이용 가능합니다.");
 		}
 		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
+			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&plno=0");
 		}
 	});
 	//Board Info
