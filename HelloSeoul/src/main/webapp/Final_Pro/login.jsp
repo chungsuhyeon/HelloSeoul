@@ -29,13 +29,16 @@
 	    	    }
 	    		$("form").submit();
 			}
-			else if(($(this).attr('id'))=='join'){
+		});
+		
+		$("span").click(function(){
+			if(($(this).attr('id'))=='join1'){
 				document.location.href ="/web/Final_Pro/join.jsp";
 			}
-			else if(($(this).attr('id'))=='findPw'){
+			else if(($(this).attr('id'))=='findPw2'){
 				document.location.href ="/web/Final_Pro/joinCheck.jsp";
 			}
-		});
+		})
 		
 		
 	});
@@ -50,8 +53,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style type="text/css">
+ div#a{text-align: center;       
+ }
+ span.b{text-decoration: underline; 
+ }
+ span.c{text-decoration: underline;
+ }
 
 </style>
+
+
 <!-- Style Section End -->
 
 
@@ -73,9 +84,11 @@
 	  						<input class="form-control form-control-lg" type="password" placeholder="Password" id="inputPassword" name="password">
 						</div>
 						<div class='buttonbar d-flex justify-content-around' style="display: inline-flex; margin-top: 10px; margin-bottom: 10px;">
-							<button type="submit" class="btn btn-primary" id="login">Login</button>
-							<button type="button" class="btn btn-success" id="join">Join</button>
-							<button type="button" class="btn btn-danger" id="findPw">Find Password</a></button>
+							<button type="submit" class="btn btn-primary" id="login" style="font-size:23px; width: 600px;">Login</button>
+						</div>
+						<div id="a">
+						 <span class="b" id="join1"> Join Page</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 <span class="c" id="findPw2" >Find PW</span>
 						</div>
 					</form>
 				</div>

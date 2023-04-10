@@ -29,8 +29,8 @@ public class JoinSeoulController {
 		@PostMapping(value = "ajaxFindID")
 		@ResponseBody
 		public String ajaxFindID(@RequestParam(value = "id", required = false, defaultValue = "blue@bit.com") String id) {
-			System.out.println(id);
-			System.out.println(dao.ajaxGetId(id));			
+			//System.out.println(id);
+			//System.out.println(dao.ajaxGetId(id));			
 			return joinService.ajaxGetId(id) ? String.valueOf(true) : String.valueOf(false);
 			
 		}
@@ -53,24 +53,23 @@ public class JoinSeoulController {
 // 회원가입정보 디비에 저장 		
 		@PostMapping(value = "joinMemberInsert")
 			public String joinMemberInsert(JoinSeoulBean bean) {
-				System.out.println(bean);
-				System.out.println(bean.getUser_nation().getClass().getName()); 
+				//System.out.println(bean);
+				//System.out.println(bean.getUser_nation().getClass().getName()); 
 				bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
 				dao.joinMemberInsert(bean);
-				System.out.println(bean);
-				// return "test";
+				//System.out.println(bean);				
 				return "Final_Pro/login";
 				}
 		
 // password 변경 업데이트		
 			@RequestMapping("joinPwUpdate")
-			public void joinPwUpdate(HttpServletRequest request) {
-				System.out.println(request);
+			public String joinPwUpdate(HttpServletRequest request) {					
+				//System.out.println(request);
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("user_id", (String) request.getParameter("user_id"));
 				map.put("user_pw", (String) request.getParameter("user_pw"));	
-				System.out.println(map.get("user_id"));
-				dao.pwUpdate(map);	
-							
+				//System.out.println(map.get("user_id"));
+				dao.joinPwUpdate(map);	
+				return "Final_Pro/login";			
 			}
 }
