@@ -163,7 +163,7 @@ function ajaxpro(sel){
 								`<table class='table'>
 									<tbody>
 										<tr>
-											<td rowspan="6" style="width: 300px;">
+											<td rowspan="6" style="width: 200px;">
 											<img src='\${loc.loc_img}'style='width: 100%; height: 100%;'>
 											</td>
 											<td class='table-light' style="width: 20%;">장소 이름</td>
@@ -235,6 +235,10 @@ function ajaxpro2(jjimpoint){
 	padding-left: 10px;
 }
 
+.info{
+	width: 20%;
+}
+
 .infobar img{
 	object-fot:cover;
  	width: 100%;
@@ -299,28 +303,28 @@ function ajaxpro2(jjimpoint){
 			<table class='table' style="height: 100%;">
 				<tbody>
 					<tr>
-						<td rowspan="6" style="width: 300px;">장소사진</td>
+						<td rowspan="6" style="width: 200px;">장소사진</td>
 						<td class='table-light' style="width: 20%;">장소명</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='table-light'>세부 카테고리</td>
+						<td class='info table-light'>세부 카테고리</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='table-light'>장소주소</td>
+						<td class='info table-light'>장소주소</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='table-light'>영업시간</td>
+						<td class='info table-light'>영업시간</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='table-light'>전화번호</td>
+						<td class='info table-light'>전화번호</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='table-light'>기타</td>
+						<td class='info table-light'>기타</td>
 						<td></td>
 					</tr>
 					<tr class='table-primary'>

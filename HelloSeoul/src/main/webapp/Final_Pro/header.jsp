@@ -35,7 +35,7 @@ $(function(){
 	margin-right: 4px;
 	font-size: 20px;
 	text-decoration: underline;
-	color: #2c3e50;
+	font-weight: bold;
 }
 </style>
 <!-- Style Section End -->
@@ -47,7 +47,7 @@ $(function(){
 		</div>
 		<div class='menuBox col-6 text-center mt-4'>
 			<a href="/web/gotoctg">Location Search</a>
-			<a href="#">K-Food Search</a>
+			<a href="/web/Final_Pro/FoodSearch.jsp">K-Food Search</a>
 			<a href="/web/gotohotspot">Hotspot</a>
 			<a href="#">Ticketing</a>
 		</div>
