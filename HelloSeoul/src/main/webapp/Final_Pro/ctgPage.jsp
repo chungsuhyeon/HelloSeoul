@@ -129,11 +129,11 @@ $(function(){
 				cnt += 1;
 				
 			}
+		});
 			if(cnt==0){
 				alert("please select");
 				return false;
 			}
-		});
 		ajaxpro2(jjimpoint);
 	});
 });//functionload
