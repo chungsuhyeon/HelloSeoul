@@ -148,7 +148,11 @@ function check_id2(){
 function check_id3(){
 	var plno=$("input#plno").val();
 	var user_id=$("input#user_id").val();
-	location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+	if(user_id==""){
+		alert("로그인해주시길바랍니다");
+	}else{
+		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+	}
 }
 </script>
 <script type="text/javascript">
@@ -393,7 +397,7 @@ function check_id3(){
 						<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
 						<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
 						</c:if>
-						<c:if test="${user_id ne i.user_id }">
+						<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
 							<button type="button" class="btn btn-primary" onclick="check_id3()">Share</button>
 						</c:if>
 						
