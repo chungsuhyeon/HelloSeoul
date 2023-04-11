@@ -115,7 +115,7 @@ $(function(){
 	});
 	
 	
-	//list jjim submit
+	//list jjim submit!
 	$('#jjimsubmit').click(function(){
 		if($('#userid').val()==null){
 			alert("Login Plz");

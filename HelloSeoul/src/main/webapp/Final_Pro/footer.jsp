@@ -16,19 +16,26 @@
 		<p>Develop 2023</p>
 	</div>
 	<div class="footlink col-8">
-		<a href="#">Home</a>
+		<a href="/web/Final_pro/index.jsp">Home</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Location Search</a>
+		<a href="/web/gotoctg">Location Search</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">K-Food Search</a>
+		<a href="/web/Final_Pro/FoodSearch.jsp">K-Food Search</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Hotspot</a>
+		<a href="/web/gotohotspo">Hotspot</a>
 		&nbsp;&nbsp;&nbsp;
 		<a href="#">Ticketing</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Community</a>
+		<a href="/web/boardSelect">Community</a>
 		&nbsp;&nbsp;&nbsp;
-		<a href="#">Mypage</a>
+		<c:choose>
+			<c:when test="${user_id eq null}">
+				<a href="/web/Final_Pro/join.jsp">Join</a>
+			</c:when>
+			<c:otherwise>
+				<a href="/web/myPageLoad">Mypage</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 </footer>

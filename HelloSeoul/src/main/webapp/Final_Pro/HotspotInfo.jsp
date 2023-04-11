@@ -28,13 +28,13 @@ $(function(){
 		success : function(r){
 			for(var i=0;i<r.length;i++){
 				$('.tobar').append(`
-						<div class="card mb-3 col-3">
+						<div class="card mb-3 col-3 mx-1">
 						<h4 class="card-header" style="overflow: hidden">\${r[i].loc_name}</h4>
 						<div class="card-body">
 							<a href="/web/gotoHotspotinfo?pc=\${r[i].loc_pc}"><img src="\${r[i].loc_img}" style="width: 100%; height: 200px;"></a>
 						</div>
 						<div class="card-body">
-					  		<p class="card-text"><a href="\${r[i].loc_info}">\${r[i].loc_info}</a></p>
+					  		<p class="card-text">\${r[i].loc_info}</p>
 						</div>
 						<div class="card-body">
 							<hr class='hr'>
@@ -74,29 +74,28 @@ $(function(){
 				<input type="hidden" id="sg" value="${info.loc_sg}">
 				<p>${info.loc_ctg2}</p>
 				<p>${info.loc_name}</p>
-				<p>Img Icon</p>
 			</div>
 			<hr class='hr-blurry'/>
 			<div class='infobar'>
 				<div class='infoimg d-flex justify-content-center'>
-					<img src="${info.loc_img}" style="object-fot:cover; width: 1000px; height: 800px;">
+					<img src="${info.loc_img}" style="object-fot:cover; width: 800px; height: 500px;">
 				</div>
 				<div class='infodetail'>
-					<table>
+					<table class='table'>
 						<tr>
-							<th>GU</th>
+							<th class='table-primary'>Gu</th>
 							<td>${info.loc_sg}</td>
 						</tr>
 						<tr>
-							<th>Address</th>
+							<th class='table-primary'>Addr</th>
 							<td>${info.loc_addr}</td>
 						</tr>
 						<tr>
-							<th>Tel</th>
+							<th class='table-primary'>Tel</th>
 							<td>${info.loc_tel}</td>
 						</tr> 
 						<tr>
-							<th>Link</th>
+							<th class='table-primary'>Info</th>
 							<td>${info.loc_info}</td>
 						</tr>
 					</table>
@@ -125,12 +124,18 @@ $(function(){
 				</script>
 			</div>
 			<hr class='hr hr-blurry'/>
-			<div class='tagbar'>
-				<p>#tag,#tag,#tag,#tag,#tag,#tag,#tag,</p>
+			<div class='tagbar px-1 d-flex'>
+				<button class='btn btn-outline-primary'>#Tag</button>
+				<button class='btn btn-outline-primary'>#Tag</button>
+				<button class='btn btn-outline-primary'>#Tag</button>
+				<button class='btn btn-outline-primary'>#Tag</button>
+				<button class='btn btn-outline-primary'>#Tag</button>
 			</div>
 			<hr class='hr hr-blurry'/>
+			<div class='text-center'>
 			<h4>주변 리스트</h4>
-			<div class='tobar d-inline-flex'>
+			</div>
+			<div class='tobar d-inline-flex justify-content-center'>
 				
 			</div>
 		</div>
