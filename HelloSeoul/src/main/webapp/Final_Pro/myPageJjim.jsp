@@ -173,60 +173,52 @@
 <!-- Style Section End -->
 
 </head>
-<body class='bg-light'>
-	<header>
-		<jsp:include page="header.jsp"></jsp:include>
-	</header>
-	
-	<section class='section'>
-		<div class='container'>
-			<div class='menu col-12'>
-				<!-- 뒤로가기 & 플래너 수정 버튼 -->
-				<ol class='breadcrumb'>
-					<li class='breadcrumb-item'><a href='/web/myPageLoad'>My Page</a></li>
-					<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>Planner Create</a></li>
-				</ol>
-			</div>
-			<div class='main col-12' style="display: inline-flex;">	
-				<div class='tabbar col-4'>
-					<!-- tab head -->
-					<ul class='nav nav-tabs bg-primary' role='tablist'>
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link active' data-bs-toggle='tab' href='#food' aria-selected='true' role='tab'>Food</a>
-						</li>
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#tour' aria-selected='false' role='tab'>Tour</a>
-						</li>					
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#shopping' aria-selected='false' role='tab'>Shopping</a>
-						</li>					
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#entertainment' aria-selected='false' role='tab'>Entertainment</a>
-						</li>					
-					</ul>
-					<!-- tab contents -->
-						<div id='myTabContent border border-info-1' class='tab-content'>
-						</div>
-						
-						<div class='setbt'>
-							<button class="create_planner_button" onclick="delete_jjim_list()">Wish Delete</button>
-						</div>
-				</div>
-				<!-- 상세정보 -->
-				<div class='detailbar col-4'>
+<body>
+<jsp:include page="header.jsp"></jsp:include>
+<section class='container'>
+	<div class='menu col-12'>
+		<!-- 뒤로가기 & 플래너 수정 버튼 -->
+		<ol class='breadcrumb bg-light'>
+			<li class='breadcrumb-item'><a href='/web/myPageLoad'>My Page</a></li>
+			<li class='breadcrumb-item'><a href='/web/Final_Pro/myPageCreate.jsp'>Planner Create</a></li>
+		</ol>
+	</div>
+	<div class='main col-12 d-inline-flex' style="height: 800px;">	
+		<div class='tabbar col-4'>
+			<!-- tab head -->
+			<ul class='nav nav-tabs' role='tablist'>
+				<li class='nav-item' role='presentaion'>
+					<a class='nav-link active' data-bs-toggle='tab' href='#food' aria-selected='true' role='tab'>Food</a>
+				</li>
+				<li class='nav-item' role='presentaion'>
+					<a class='nav-link' data-bs-toggle='tab' href='#tour' aria-selected='false' role='tab'>Tour</a>
+				</li>					
+				<li class='nav-item' role='presentaion'>
+					<a class='nav-link' data-bs-toggle='tab' href='#shopping' aria-selected='false' role='tab'>Shop</a>
+				</li>					
+				<li class='nav-item' role='presentaion'>
+					<a class='nav-link' data-bs-toggle='tab' href='#entertainment' aria-selected='false' role='tab'>Enter</a>
+				</li>					
+			</ul>
+			<!-- tab contents -->
+				<div id='myTabContent border border-info-1' class='tab-content' style="height: 90%;">
 				</div>
 				
-				<!-- 지도 -->
-				<div class='mapbar col-4'>
-					<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>
+				<div class='setbt d-flex justify-content-center'>
+					<button class="create_planner_button btn btn-primary" onclick="delete_jjim_list()">Wish Delete</button>
 				</div>
-				
-			</div>
 		</div>
-	</section>
-	
-	<footer>
-		<jsp:include page="./footer.jsp"></jsp:include>
-	</footer>
+		<!-- 상세정보 -->
+		<div class='detailbar col-4'>
+		</div>
+		
+		<!-- 지도 -->
+		<div class='mapbar col-4'>
+			<div class='div_map' style="width: 100%; height: 100%;" id="map"></div>
+		</div>
+		
+	</div>
+</section>
+<jsp:include page="./footer.jsp"></jsp:include>
 </body>
 </html>
