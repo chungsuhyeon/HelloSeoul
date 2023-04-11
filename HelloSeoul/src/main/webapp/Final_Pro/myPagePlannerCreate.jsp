@@ -27,7 +27,6 @@
 		const no = urlParams.get('planner_no');
 		
 		
-		
 		// 일정에 따른 tab 구현
 		$.ajax({
 			url: '/web/ajaxMypagePlannerTabBar',
@@ -212,23 +211,7 @@
 					);
 				}); // for문	
 				
-				$("input#planner_shour").blur(function(){
-					if($(this).val() < 0 || $(this).val() >= 24){
-						alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
-						$(this).val("");
-						$(this).focus();
-						return false;
-					}
-				});
-				
-				$("input#planner_smin").blur(function(){
-					if($(this).val() < 0 || $(this).val() >= 60){
-						alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
-						$(this).val("");
-						$(this).focus();						
-						return false;
-					}
-				});
+				time_constraints();
 				
 				// 지도에 순서대로 마커 뿌리기 (보류)
 				
@@ -314,6 +297,26 @@
 	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 	    
 	    return marker;
+	}
+	
+	function time_constraints(){
+		$("input#planner_shour").blur(function(){
+			if($(this).val() < 0 || $(this).val() >= 24){
+				alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
+				$(this).val("");
+				$(this).focus();
+				return false;
+			}
+		});
+		
+		$("input#planner_smin").blur(function(){
+			if($(this).val() < 0 || $(this).val() >= 60){
+				alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
+				$(this).val("");
+				$(this).focus();						
+				return false;
+			}
+		});
 	}
 	
 </script>
@@ -435,7 +438,7 @@
 							console.log(day_info);
 							
 							$(result).each(function(index, list){
-								console.log(list);
+// 								console.log(list);
 								$("#"+list.PLANNER_DATE + " table tbody").append(
 										`<tr>
 											<td style="width: 5%;">
@@ -468,23 +471,7 @@
 								);
 							}); // for문	
 							
-							$("input#planner_shour").blur(function(){
-								if($(this).val() < 0 || $(this).val() >= 24){
-									alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
-									$(this).val("");
-									$(this).focus();
-									return false;
-								}
-							});
-							
-							$("input#planner_smin").blur(function(){
-								if($(this).val() < 0 || $(this).val() >= 60){
-									alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
-									$(this).val("");
-									$(this).focus();						
-									return false;
-								}
-							});
+							time_constraints();
 							
 							// 지도에 순서대로 마커 뿌리기 (보류)
 							
