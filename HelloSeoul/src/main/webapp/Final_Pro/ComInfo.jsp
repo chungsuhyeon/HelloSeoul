@@ -19,6 +19,10 @@ $('document').ready(function(){
 	const no = $("#plno").val();
 	console.log($("#com_ctg").val());
 	// 일정에 따른 tab 구현
+	
+	if(no!=0){
+		console.log("check");
+		console.log(no);
 	$.ajax({
 		url: '/web/ajaxMypagePlannerTabBar',
 		type: 'post',
@@ -72,7 +76,7 @@ $('document').ready(function(){
 				);
 				start.setDate(start.getDate() + 1);
 			} // 날짜 tab for문 끝
-			
+	
 			$.ajax({
 				url: '/web/ajaxMypagePlannerTabContent',
 				type: 'post',
@@ -108,7 +112,7 @@ $('document').ready(function(){
 			alert("error : " + error);
 		}
 	}); // ajax
-
+	}
 }); // $('document').ready
 function check_id(){
 	var no=$("input#com_no").val();
