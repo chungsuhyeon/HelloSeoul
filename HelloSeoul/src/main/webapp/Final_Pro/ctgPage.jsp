@@ -117,7 +117,7 @@ $(function(){
 	
 	//list jjim submit!
 	$('#jjimsubmit').click(function(){
-		if($('#userid').val()==null){
+		if($('#userid').val()=="nodata"){
 			alert("Login Plz");
 			return false;
 		}
@@ -252,7 +252,7 @@ function ajaxpro2(jjimpoint){
 <jsp:include page="./header.jsp"></jsp:include>
 </header>
 <section class='container'>
-	<input type="hidden" id="userid" value="${user_id}"/>
+	<input type="hidden" id="userid" value="${(user_id eq null)?'nodata':user_id}"/>
 	<div class='row'>
 		<div class='col-3'>
 			<div class='searchbar1 col-12 d-inline-flex'>
