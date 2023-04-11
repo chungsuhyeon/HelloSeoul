@@ -140,7 +140,7 @@ public class projectcontroller {
 	@RequestMapping(value="SharePlanner")
 	public String SharePlanner(int plno,Model model,MypagePlannerBean bean,String user_id) {
 		commService.createSharePlanner(bean, plno, user_id);
-		return "redirect:/making/shareplanner.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
+		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
 		
 		
 	}

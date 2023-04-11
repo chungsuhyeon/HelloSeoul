@@ -235,6 +235,7 @@ public class CommServiceImpl implements CommService{
 		bean.setPlanner_title((String)(map.get("PLANNER_TITLE")));
 		bean.setPlanner_info((String)(map.get("PLANNER_INFO")));
 		bean.setPlanner_no(HSdao.getPlannerNo());
+//		System.out.println(bean);
 		HSdao.plannerDataInsert(bean);
 	}
 	@Override
