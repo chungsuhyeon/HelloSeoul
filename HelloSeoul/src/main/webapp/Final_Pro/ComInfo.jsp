@@ -285,36 +285,12 @@ function check_id3(){
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-.tablebar tr > th{
-	width: 5%; 
-	}
-.infobar{
-	font-size: 20px;
-	}
-.titlebar{
- 	border: solid;
-	}
-.contentsbar > div{
-	border: solid;
-	}
-.settingbar{
-	border: solid;
-	}
-#memberbar{
-	font-size: 15px;
-	}
-.photobar > img{
-	object-fot:cover;
- 	width: 100%;
- 	height: 100%;
-	}
+
 </style>
 <!-- Style Section End -->
 </head>
 <body>
-	<header>
-		<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	</header>
+<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	<section class='section d-flex justify-content-center bg-info'>
 		<div class='col-6 mt-4 mb-4'>
 			<div class='infobar bg-light'>
@@ -442,9 +418,7 @@ function check_id3(){
  				
 			</div>				
 		</div>
-	</section>
-	<footer>
-		<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
-	</footer>
+</section>
+<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
 </body>
 </html>

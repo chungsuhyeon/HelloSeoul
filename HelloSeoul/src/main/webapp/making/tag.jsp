@@ -39,7 +39,7 @@ $(function(){
 <!-- Style Section End -->
 </head>
 <body>
-<jsp:include page="./header.jsp"></jsp:include>
+<%-- <jsp:include page="./header.jsp"></jsp:include> --%>
 <section class='container'>
 	<div class='row'>
 		<div class='hotboard col-6'>
@@ -152,6 +152,6 @@ $(function(){
 		</div>
 	</div>
 </section>
-<jsp:include page="./footer.jsp"></jsp:include>
+<%-- <jsp:include page="./footer.jsp"></jsp:include> --%>
 </body>
 </html>
