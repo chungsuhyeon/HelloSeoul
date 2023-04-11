@@ -71,17 +71,104 @@ $(function(){
 </div>
 <hr class='hr'/>
 <div class='row'>
-	<div class='col'>
-		<h1>Clender</h1>
+	<div class='col-6'>
+		<div class='col-12 d-inline-flex justify-content-center'>
+			<button class='btn btn-primary'>Prev</button>
+			<h2>Month</h2>
+			<button class='btn btn-primary'>Next</button>
+		</div>
+		<div>
+			<table class='table'>
+				<thead>
+					<tr class='table-primary'>
+						<th>Sun</th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wen</th>
+						<th>Tur</th>
+						<th>Fri</th>
+						<th>Sat</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class='col'>
-		<h1>Coin</h1>
-		<h1>Weather</h1>
+	<div class='col-6'>
+		<div class='row'>
+			<div class='col-6'>
+				<table class='table'>
+					<thead>
+						<tr>
+							<th>Nation</th>
+							<th>KRW</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Korea</td>
+							<td>1000</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class='col-6'>
+				<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+  					<div class="card-header">Weather</div>
+  					<div class="card-body">
+    					<h4 class="card-title">Primary card title</h4>
+    					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
-<hr class='hr'/>
-<div class='row'>
-<h1>End</h1>
 </div>
 </section>
 <jsp:include page="footer.jsp"></jsp:include>

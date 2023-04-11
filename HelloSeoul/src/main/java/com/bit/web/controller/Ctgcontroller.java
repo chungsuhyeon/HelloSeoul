@@ -1,5 +1,13 @@
 package com.bit.web.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit.web.dao.CtgDao;
+import com.bit.web.pys.JsonParsing;
 import com.bit.web.service.CtgService;
 import com.bit.web.service.CtgServiceImpl;
 
@@ -46,6 +55,15 @@ public class Ctgcontroller {
 		return "Final_Pro/HotspotInfo";
 	}
 	
+	@GetMapping(value="testings")
+	public String flaskcon(String url) throws IOException, Exception {
+		JsonParsing x = new JsonParsing();
+		InputStream is = new URL(url).openStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is,Charset.forName("UTF-8")));
+		System.out.println(x.jsonReadAll(br));
+		
+		return "success";
+	}
 	
 
 }
