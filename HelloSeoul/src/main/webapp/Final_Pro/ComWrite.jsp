@@ -43,8 +43,8 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	<section class='section d-flex justify-content-center bg-info'>
-		<div class='tablebar col-6 mt-4 mb-4 bg-light' style="border-radius: 25px;">
+	<section class='container d-flex justify-content-center'>
+		<div class='tablebar col-8 mt-4 mb-4 bg-light' style="border-radius: 25px;">
 			<form action="/web/boardInsert" method="post" enctype="multipart/form-data">
 				<table class='table'>
 					<tbody>
