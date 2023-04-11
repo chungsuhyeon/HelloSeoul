@@ -10,16 +10,13 @@
 <!-- Icon Error Begin-->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
-
-<title>Hello, Seoul!</title>
-
+<title>Hello, Seoul</title>
 <!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
 <script type="text/javascript">
 $(function(){
-		
+
 });
 </script>
 <!--JS Section End -->
@@ -30,46 +27,38 @@ $(function(){
 
 </style>
 <!-- Style Section End -->
-
-
 </head>
 <body>
-
-						<div class='moneytb'>
-					<table class='table table-hover'>
-						<thead>
-							<tr>
-								<th>Nation</th>
-								<th>currency</th>
-								<th>KRW</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class='populationtb'>
-					<table class='table'>
-						<thead>
-							<tr>
-								<th>Nation</th>
-								<th>currency</th>
-								<th>KRW</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>America</td>
-							<td>$</td>
-							<td>1000</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>	
+<jsp:include page="header.jsp"></jsp:include>
+<section class='container'>
+	<div class='row'>
+		<div class='col-6'>
+			<div class='photo h-75'>
+				<h1>img</h1>
+			</div>
+			<div class="form-group h-25">
+      			<label for="formFile" class="form-label mt-4">Input Food Image</label>
+      			<input class="form-control" type="file" id="formFile">
+    		</div>
+		</div>
+		<div class='col-6'>
+			<table class='table'>
+				<thead>
+					<tr class='table-primary'>
+						<th>Loc Name</th>
+						<th>Loc Gu</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>xxps</td>
+						<td>xxps</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

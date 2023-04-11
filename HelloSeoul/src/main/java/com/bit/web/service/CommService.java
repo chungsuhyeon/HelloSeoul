@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.ReplyBoard;
 import com.bit.web.vo.gbboard;
 
@@ -45,4 +46,10 @@ public interface CommService {
 //	List<Object> selectBoard(Map<String, Object>map);
 //	List<Object> selectBoardtop3();
 	void selectBoard(ComBoard board,Model model,HttpServletRequest request);
+	String SelectPlannerTitle(int plno);
+	
+	
+	void createSharePlanner(MypagePlannerBean bean,int plno,String user_id);
+	
+	List<Object> selectSharePlanner(int no);
 }

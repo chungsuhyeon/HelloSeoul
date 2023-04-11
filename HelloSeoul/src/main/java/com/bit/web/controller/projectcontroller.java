@@ -32,6 +32,7 @@ import com.bit.web.dao.ProjectDao;
 import com.bit.web.dao.TicketDao;
 import com.bit.web.service.CommService;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
 import com.bit.web.vo.SeatBoard;
@@ -52,6 +53,7 @@ public class projectcontroller {
 	
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
+//		System.out.println(plno);
 		commService.selectBoard(board, model, request);
 		return "Final_Pro/ComList";
 	}
@@ -124,15 +126,31 @@ public class projectcontroller {
 		commService.badAction(com_no, user_id, board, map);
 		return commService.selectGBboard(com_no);
 	}
-	
-
-	
-
-
 	@RequestMapping(value="boardInsert")
-	public String boardInsert(ComBoard board,@RequestParam(value="file")MultipartFile file) {
+	public String boardInsert(ComBoard board,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		commService.boardInsert(board, file);
 		return "redirect:/boardSelect";
+	}
+	@RequestMapping(value="PlannerShare")
+	public String PlannerShare(int plno,Model model) {
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
+		
+		return "Final_Pro/ComWrite";
+	}
+	@RequestMapping(value="SharePlanner")
+	public String SharePlanner(int plno,Model model,MypagePlannerBean bean,String user_id) {
+		commService.createSharePlanner(bean, plno, user_id);
+		return "redirect:/making/shareplanner.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
+		
+		
+	}
+	@RequestMapping(value="ajaxSharePlanner")
+	@ResponseBody
+	public List<Object> ajaxSharePlanner(int no) {
+		System.out.println(no);
+		commService.selectSharePlanner(no);
+		return commService.selectSharePlanner(no);
+		
 	}
 	
 }

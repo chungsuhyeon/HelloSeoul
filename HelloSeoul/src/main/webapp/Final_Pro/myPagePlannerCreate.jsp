@@ -23,9 +23,10 @@
 	
 	// 플래너 생성 로드시
 	$('document').ready(function(){
-		
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('planner_no');
+		
+		
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -34,7 +35,7 @@
 			data: {no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function(result){
+			success: function(result){												
 				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
@@ -62,10 +63,10 @@
 						// tabContent
 						$("div.tab-content").append(
 								`<div class='tab-pane fade active show' id='Day\${i}' role='tabpanel'>
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
-								</div>`		
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
+								</div>`						
 						);
 					} else {
 						$("ul[name='dayTabbar']").append(
@@ -75,65 +76,15 @@
 						);
 						$("div.tab-content").append(
 								`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
-									<table class='table table-hover'>
-										<tbody></tbody>
-									</table>
+										<table class='table table-hover'>
+											<tbody></tbody>
+										</table>
 								</div>`						
 						);
 					}
 					// 여행 시작 날짜에서 하루씩 더하기
 					start.setDate(start.getDate() + 1); // 더하면서 start가 바뀌기 때문에 i가 아니라 1을 더해야함
 				}
-
-				$.ajax({
-					url: '/web/ajaxMypagePlannerTabContent',
-					type: 'post',
-					data: {no:no},
-					dataType: 'json',
-					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-					success: function(result){
-						console.log(result);
-						$(result).each(function(idx, list){
-							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
-							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
-														
-							$("div#" + list['planner_date'] + " table tbody").append(
-									`<tr class='table-light' name="old">
-										<td style="width: 5%;">
-											<input type="checkbox" name="planner_select_location" value="\${list["loc_pc"]}">
-										</td>
-										<td>
-											<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
-												<div class='timeseting' style="display: inline-flex; width: 40%">
-													<input type="number" class="form-control" placeholder="HH" name="planner_shour" value="\${list["planner_shour"]}" id="planner_shour" min='0' max='23' required>
-													<span>&nbsp; : &nbsp;</span>
-													<input type="number" class="form-control" placeholder="mm" name="planner_smin" value="\${list["planner_smin"]}" id="planner_smin" min='0' max='59' required>
-												</div>
-												<div class='loctextline' style='width: 100%; margin-left: 20px;'>
-													<span>\${list["loc_name"]}</span>
-													<input type="hidden" name='planner_no' value="\${no}">
-													<input type="hidden" name='loc_name' value="\${list["loc_name"]}">
-													<br>
-													<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
-													<input type="hidden" name="loc_pc" value="\${list["loc_pc"]}">
-													<input type="hidden" name='loc_sg' value="\${list["loc_sg"]}">
-													<input type="hidden" name='loc_ctg1' value="\${list["loc_ctg1"]}">
-													<input type="hidden" name='loc_ctg2' value="\${list["loc_ctg2"]}">
-													<input type="hidden" name="loc_x" value="\${list["loc_x"]}">
-													<input type="hidden" name="loc_y" value="\${list["loc_y"]}">
-													<input type="hidden" name="planner_date" value="\${list["planner_date"]}">
-												</div>
-											</form>
-										</td>
-									</tr>`								
-							);							
-						}); // $(result).each
-					},
-					error: function(){
-						alert("error : " + error);
-					}
-				}); // ajax taa-content
-					
 			},
 			error: function(){
 				alert("error : " + error);
@@ -227,7 +178,7 @@
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
 				let day_info = $(activeTab).attr('href');
-				
+				console.log(activeTab);
 				$(result).each(function(index, list){
 					$(day_info + " table tbody").append(
 							`<tr>
@@ -307,30 +258,15 @@
 	
 	// 생성한 플래너 저장
 	function storePlanner(){
-		const urlParams = new URL(location.href).searchParams;
-		const no = urlParams.get('planner_no');
 		
 		const inputTimeMin = document.getElementsByClassName("form-control");
-		// 모든 input 태그에 대해 반복하며 제약조건을 확인합니다
-		for (let i = 0; i < inputTimeMin.length; i++) {
-			if (!inputTimeMin[i].checkValidity()) {
-				alert("Please enter the schedule time");
-				return false;
-			}
-		}
-		$.ajax({
-			type:"POST",
-			url:"/web/deletePlannerSchedule",
-			data: {no:no},
-			dataType: 'text',
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			async:false,
-			success: function(result){
-			},
-			error: function(xhr, status, error) {
-				console.log("error : " + error);
+		// 모든 input 태그(시간, 분)에 대해 반복하며 제약조건을 확인
+		  for (let i = 0; i < inputTimeMin.length; i++) {
+		    if (!inputTimeMin[i].checkValidity()) {
+		      alert("Please enter the schedule time");
+		      return false;
 		    }
-		}); // ajax
+		  }
 		
 		var forms = document.getElementsByName("mypageMainPlannerFrm");
 		
@@ -352,6 +288,8 @@
 			}); // ajax
 		}); // $(forms).each
 		
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('planner_no');
 		// show 페이지로 이동
 		document.location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		
@@ -405,17 +343,18 @@
 </head>
 <body class='body'>
 	<header>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	</header>
 	
 	<section>
 		<div class='container'>
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
+			<input type="hidden" id="plno" value="${param.plno }">
 				<ol class="breadcrumb">
   					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageShow.jsp?no=${param.planner_no}">Back</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageLoad">Mypage</a></li>
 				</ol>
 			</div>
 			
@@ -435,6 +374,9 @@
 						<!-- tab contents -->
 						
 						<div id='myTabContent border border-info-1' class='tab-content'>
+						<!-- 날짜 -->
+						
+						<!--  -->
 						</div>	
 						
 						<div class='settingbt'>
@@ -474,13 +416,91 @@
 			
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
-					</script>				
+						
+					</script>	
+					<script type="text/javascript">
+					var plno=$("input#plno").val();
+					$('document').ready(function(){
+// 					const plno=urlParams.get("plno");
+					//공유된 플래너 표시
+					$.ajax({
+						url: '/web/ajaxSharePlanner',
+						type: 'post',
+						data: {no:plno},
+						dataType: 'json',
+						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+						success: function(result){
+							let activeTab = document.querySelector('ul.nav li a.active'); // object
+							let day_info = $(activeTab).attr('href');
+							console.log(day_info);
+							
+							$(result).each(function(index, list){
+								console.log(list);
+								$("#"+list.PLANNER_DATE + " table tbody").append(
+										`<tr>
+											<td style="width: 5%;">
+												<input type="checkbox" name="planner_select_location" value="\${list.LOC_PC}">
+											</td>
+											<td>
+												<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
+													<div class='timeseting' style="display: inline-flex; width: 40%">
+														<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' value="\${list.PLANNER_SHOUR}"required>
+														<span>&nbsp; : &nbsp;</span>
+														<input type="number" class="form-control" placeholder="mm" name="planner_smin" id="planner_smin" min='0' max='59' value="\${list.PLANNER_SMIN}" required>
+													</div>
+													<div class='loctextline' style='width: 100%; margin-left: 20px;'>
+														<span>\${list.LOC_NAME}</span>
+														<input type="hidden" name='planner_no' value="\${plno}">
+														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
+														<br>
+														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
+														<input type="hidden" name="loc_pc" value="\${list.LOC_PC}">
+														<input type="hidden" name='loc_sg' value="\${list.LOC_SG}">
+														<input type="hidden" name='loc_ctg1' value="\${list.LOC_CTG1}">
+														<input type="hidden" name='loc_ctg2' value="\${list.LOC_CTG2}">
+														<input type="hidden" name="loc_x" value="\${list.LOC_X}">
+														<input type="hidden" name="loc_y" value="\${list.LOC_Y}">
+
+													</div>
+												</form>
+											</td>
+										</tr>`
+								);
+							}); // for문	
+							
+							$("input#planner_shour").blur(function(){
+								if($(this).val() < 0 || $(this).val() >= 24){
+									alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
+									$(this).val("");
+									$(this).focus();
+									return false;
+								}
+							});
+							
+							$("input#planner_smin").blur(function(){
+								if($(this).val() < 0 || $(this).val() >= 60){
+									alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
+									$(this).val("");
+									$(this).focus();						
+									return false;
+								}
+							});
+							
+							// 지도에 순서대로 마커 뿌리기 (보류)
+							
+						},
+						error:function(){
+							console.log("error");
+						}
+					});
+					});
+					</script>			
 				</div>
 			</div>
 	</section>
 	
 	<footer>
-		<jsp:include page="./footer.jsp"></jsp:include>
+		<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
 	</footer>	
 </body>
 </html>
