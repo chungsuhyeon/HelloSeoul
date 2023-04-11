@@ -32,6 +32,7 @@ import com.bit.web.dao.ProjectDao;
 import com.bit.web.dao.TicketDao;
 import com.bit.web.service.CommService;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
 import com.bit.web.vo.SeatBoard;
@@ -135,6 +136,21 @@ public class projectcontroller {
 		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
 		
 		return "Final_Pro/ComWrite";
+	}
+	@RequestMapping(value="SharePlanner")
+	public String SharePlanner(int plno,Model model,MypagePlannerBean bean,String user_id) {
+		commService.createSharePlanner(bean, plno, user_id);
+		return "redirect:/making/shareplanner.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
+		
+		
+	}
+	@RequestMapping(value="ajaxSharePlanner")
+	@ResponseBody
+	public List<Object> ajaxSharePlanner(int no) {
+		System.out.println(no);
+		commService.selectSharePlanner(no);
+		return commService.selectSharePlanner(no);
+		
 	}
 	
 }

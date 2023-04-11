@@ -49,7 +49,7 @@ $(function(){
 			<a href="/web/gotoctg">Location Search</a>
 			<a href="#">K-Food Search</a>
 			<a href="/web/gotohotspot">Hotspot</a>
-			<a href="#">Ticketing</a>
+			<a href="/web/musicalList">Ticketing</a>
 		</div>
 		<div class='settingBox col-3 mt-3 text-end'>
 			<!-- Google 번역 -->

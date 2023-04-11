@@ -145,6 +145,11 @@ function check_id2(){
 		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
 	}
 }
+function check_id3(){
+	var plno=$("input#plno").val();
+	var user_id=$("input#user_id").val();
+	location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+}
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -315,6 +320,7 @@ function check_id2(){
 						<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 						<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
 						<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
+						<input type="hidden" id='plno' name='plno' value='${i.plno}' >
 						
 						<span>
 							<c:choose>
@@ -387,6 +393,10 @@ function check_id2(){
 						<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
 						<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
 						</c:if>
+						<c:if test="${user_id ne i.user_id }">
+							<button type="button" class="btn btn-primary" onclick="check_id3()">Share</button>
+						</c:if>
+						
 						<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
 						<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
 					</div>

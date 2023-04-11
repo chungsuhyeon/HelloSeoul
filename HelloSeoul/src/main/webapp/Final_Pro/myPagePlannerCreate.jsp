@@ -23,9 +23,10 @@
 	
 	// 플래너 생성 로드시
 	$('document').ready(function(){
-		
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('planner_no');
+		
+		
 		
 		// 일정에 따른 tab 구현
 		$.ajax({
@@ -177,7 +178,7 @@
 			success: function(result){
 				let activeTab = document.querySelector('ul.nav li a.active'); // object
 				let day_info = $(activeTab).attr('href');
-				
+				console.log(activeTab);
 				$(result).each(function(index, list){
 					$(day_info + " table tbody").append(
 							`<tr>
@@ -342,13 +343,14 @@
 </head>
 <body class='body'>
 	<header>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
 	</header>
 	
 	<section>
 		<div class='container'>
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
+			<input type="hidden" id="plno" value="${param.plno }">
 				<ol class="breadcrumb">
   					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
@@ -372,6 +374,9 @@
 						<!-- tab contents -->
 						
 						<div id='myTabContent border border-info-1' class='tab-content'>
+						<!-- 날짜 -->
+						
+						<!--  -->
 						</div>	
 						
 						<div class='settingbt'>
@@ -411,13 +416,91 @@
 			
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
-					</script>				
+						
+					</script>	
+					<script type="text/javascript">
+					var plno=$("input#plno").val();
+					$('document').ready(function(){
+// 					const plno=urlParams.get("plno");
+					//공유된 플래너 표시
+					$.ajax({
+						url: '/web/ajaxSharePlanner',
+						type: 'post',
+						data: {no:plno},
+						dataType: 'json',
+						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+						success: function(result){
+							let activeTab = document.querySelector('ul.nav li a.active'); // object
+							let day_info = $(activeTab).attr('href');
+							console.log(day_info);
+							
+							$(result).each(function(index, list){
+								console.log(list);
+								$("#"+list.PLANNER_DATE + " table tbody").append(
+										`<tr>
+											<td style="width: 5%;">
+												<input type="checkbox" name="planner_select_location" value="\${list.LOC_PC}">
+											</td>
+											<td>
+												<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
+													<div class='timeseting' style="display: inline-flex; width: 40%">
+														<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' value="\${list.PLANNER_SHOUR}"required>
+														<span>&nbsp; : &nbsp;</span>
+														<input type="number" class="form-control" placeholder="mm" name="planner_smin" id="planner_smin" min='0' max='59' value="\${list.PLANNER_SMIN}" required>
+													</div>
+													<div class='loctextline' style='width: 100%; margin-left: 20px;'>
+														<span>\${list.LOC_NAME}</span>
+														<input type="hidden" name='planner_no' value="\${plno}">
+														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
+														<br>
+														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
+														<input type="hidden" name="loc_pc" value="\${list.LOC_PC}">
+														<input type="hidden" name='loc_sg' value="\${list.LOC_SG}">
+														<input type="hidden" name='loc_ctg1' value="\${list.LOC_CTG1}">
+														<input type="hidden" name='loc_ctg2' value="\${list.LOC_CTG2}">
+														<input type="hidden" name="loc_x" value="\${list.LOC_X}">
+														<input type="hidden" name="loc_y" value="\${list.LOC_Y}">
+
+													</div>
+												</form>
+											</td>
+										</tr>`
+								);
+							}); // for문	
+							
+							$("input#planner_shour").blur(function(){
+								if($(this).val() < 0 || $(this).val() >= 24){
+									alert("Please write in 24 hour increments"); // 24시간 단위로 작성해주세요.
+									$(this).val("");
+									$(this).focus();
+									return false;
+								}
+							});
+							
+							$("input#planner_smin").blur(function(){
+								if($(this).val() < 0 || $(this).val() >= 60){
+									alert("Please write in 60 minute increments."); // 60분 단위로 작성해주세요.
+									$(this).val("");
+									$(this).focus();						
+									return false;
+								}
+							});
+							
+							// 지도에 순서대로 마커 뿌리기 (보류)
+							
+						},
+						error:function(){
+							console.log("error");
+						}
+					});
+					});
+					</script>			
 				</div>
 			</div>
 	</section>
 	
 	<footer>
-		<jsp:include page="./footer.jsp"></jsp:include>
+		<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
 	</footer>	
 </body>
 </html>
