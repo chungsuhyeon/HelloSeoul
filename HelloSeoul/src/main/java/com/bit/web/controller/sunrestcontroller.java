@@ -69,5 +69,11 @@ public class sunrestcontroller {
 		System.out.println(ctg.HotspotPaging(page));
 		return ctg.HotspotPaging(page);
 	}
+	
+	@PostMapping(value="aiLearning")
+	public void leariningresult(String inurl) {
+		//StringBuffer url = readFromUrl(inurl);
+	}
+	
 
 }
