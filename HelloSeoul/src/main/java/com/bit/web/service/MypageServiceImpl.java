@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
@@ -24,10 +25,10 @@ public class MypageServiceImpl implements MypageService {
 	private HelloSeoulDao helloDao;
 
 	@Override
-	public String loginPass(String id, String pw) {
+	public JoinSeoulBean loginPass(String id, String pw) {
 		String dbPass = helloDao.getDbUserPW(id);
 		if(dbPass!=null && dbPass.equals(pw)) {
-			return helloDao.getDbUserNick(id);
+			return helloDao.getDbUserInfo(id);
 		} else {
 			return null;			
 		}

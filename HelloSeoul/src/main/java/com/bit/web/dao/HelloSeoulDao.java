@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
@@ -25,8 +26,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("getDbUserPW", id);
 	}
 	
-	public String getDbUserNick(String id) {
-		return this.getSqlSession().selectOne("getDbUserNick", id);
+	public JoinSeoulBean getDbUserInfo(String id) {
+		return this.getSqlSession().selectOne("getDbUserInfo", id);
 	}
 	
 	// 회원정보 (마이페이지 메인에 회원정보 출력하기 위함)

@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where user_id = #{value}
 	</select>
 	
-	<select id="getDbUserNick" parameterType="String" resultType="String">
-		select user_nick
+	<select id="getDbUserInfo" parameterType="String" resultType="com.bit.web.vo.JoinSeoulBean">
+		select user_nick, user_first
 		from userboard
 		where user_id = #{value}
 	</select>

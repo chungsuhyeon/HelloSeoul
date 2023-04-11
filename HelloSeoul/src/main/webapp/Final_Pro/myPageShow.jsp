@@ -143,6 +143,7 @@
 					<li class='breadcrumb-item'><a href="/web/Final_Pro/myPagePlannerModify.jsp?planner_no=${param.no}">Planner Modify</a></li>
 					<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
 					<li class='breadcrumb-item'><a href='/web/PlannerShare?plno=${param.no}&type=Planner'>Planner Share</a></li>
+					<li class='breadcrumb-item'><a href='?no=${param.no}&type=team'>Team Share</a></li>
 				</ol>
 			</div>
 			

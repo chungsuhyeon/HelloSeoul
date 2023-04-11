@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.service.MypageService;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
@@ -27,12 +28,13 @@ public class HelloSeoulController {
 	// login & session store
 	@RequestMapping("siteCheck")
 	public String loginProcess(HttpServletRequest request, String user_id, String password) {
-		String nickName = contactService.loginPass(user_id, password);
+		JoinSeoulBean userInfo = contactService.loginPass(user_id, password);
 						
-		if(nickName != null) {
+		if(userInfo != null) {
 			// login success
 			request.getSession().setAttribute("user_id", user_id);
-			request.getSession().setAttribute("user_nickName", nickName);
+			request.getSession().setAttribute("user_nickName", userInfo.getUser_nick());
+			request.getSession().setAttribute("user_first", userInfo.getUser_first());
 			request.getSession().setMaxInactiveInterval(60*60);
 			return "Final_Pro/index";
 		} else {
@@ -106,7 +108,7 @@ public class HelloSeoulController {
 	// 메인 플래너 생성 페이지 로드
 	@PostMapping(value = "ajaxMypagePlannerTabBar")
 	@ResponseBody
-	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {		
+	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {
 		return contactService.mypagePlannerTabBar(no);
 	}
 	
