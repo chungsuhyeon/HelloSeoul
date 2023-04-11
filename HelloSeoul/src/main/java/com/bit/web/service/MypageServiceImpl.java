@@ -244,7 +244,11 @@ public class MypageServiceImpl implements MypageService {
 	public MypagePlannerBean mypageDateInfo(int no) {
 		return helloDao.mypageplannerInfo(no);
 	}
-	
+
+	@Override
+	public List<String> shareNickCheck(String nick) {
+		return helloDao.nickSearch(nick);
+	}
 	
 	
 	

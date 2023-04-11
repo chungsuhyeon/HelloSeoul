@@ -98,6 +98,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set planner_title = #{planner_title}, planner_start = #{planner_start}, planner_end = #{planner_end}, planner_info = #{planner_info}
 		where planner_no = #{planner_no}
 	</update>
+	
+	<select id="nickSearch" parameterType="String" resultType="String">
+		select user_nick
+		from userboard
+		where user_nick like '%'||#{value}||'%'
+	</select>
 
 </mapper>
 

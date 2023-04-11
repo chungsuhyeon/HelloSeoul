@@ -100,4 +100,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().update("mypageDateUpdate", bean);
 	}
 	
+	// 닉네임 검색
+	public List<String> nickSearch(String nick) {
+		return this.getSqlSession().selectList("nickSearch", nick);
+	}
+	
 }

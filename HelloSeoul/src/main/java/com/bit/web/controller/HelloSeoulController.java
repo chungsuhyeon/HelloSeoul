@@ -156,6 +156,12 @@ public class HelloSeoulController {
 		mav.setViewName("Final_Pro/myPageModify");
 		return mav;
 	}
+	
+	@PostMapping(value = "ajaxNickCheck")
+	@ResponseBody
+	public List<String> shareNickCheck(@RequestParam(value="nick")String nick){
+		return contactService.shareNickCheck(nick);
+	}
 
 		
 }
