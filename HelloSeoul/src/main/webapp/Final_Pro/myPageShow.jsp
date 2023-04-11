@@ -103,7 +103,7 @@
 										<td>
 											<span>\${list["loc_name"]}</span>
 											<br>
-											<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+											<span style="font-size: 12px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
 										</td>
 									</tr>`
 							);							
@@ -138,21 +138,22 @@
 			success: function(result){
 				console.log(result);
 				$(result).each(function(idx, list){
-					list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
-					list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
+					console.log(list)
+// 					list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
+// 					list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
 					
-					$("div#" + list['planner_date'] + " table tbody").append(
-							`<tr class='table-light'>
-								<td>
-									<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
-								</td>
-								<td>
-									<span>\${list["loc_name"]}</span>
-									<br>
-									<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
-								</td>
-							</tr>`
-					);							
+// 					$("div#" + list['planner_date'] + " table tbody").append(
+// 							`<tr class='table-light'>
+// 								<td>
+// 									<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
+// 								</td>
+// 								<td>
+// 									<span>\${list["loc_name"]}</span>
+// 									<br>
+// 									<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+// 								</td>
+// 							</tr>`
+// 					);							
 				}); // $(result).each
 			},
 			error: function(){
