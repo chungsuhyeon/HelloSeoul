@@ -23,6 +23,6 @@ public interface CtgService {
 	List<MainDbBean> searchHot(String query);
 	List<MainDbBean> hotspotrecom(String sg);
 	List<HashMap<String, Object>> HotspotPaging(int page);
-	
+	//StringBuffer readFromUrl(String url_addr);
 	
 }

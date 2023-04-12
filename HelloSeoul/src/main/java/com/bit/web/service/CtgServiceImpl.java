@@ -1,5 +1,6 @@
 package com.bit.web.service;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 
@@ -112,19 +113,6 @@ public class CtgServiceImpl implements CtgService{
 		map.put("end", page*8);
 		return dao.hotspotPage(map);
 	}
-	
-	
-	
-	
-	//rest controller service end
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
+	//rest controller service end

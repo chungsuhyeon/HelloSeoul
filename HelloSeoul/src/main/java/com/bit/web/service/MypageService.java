@@ -3,12 +3,13 @@ package com.bit.web.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
 
 public interface MypageService {
-	String loginPass(String id, String pw);
+	JoinSeoulBean loginPass(String id, String pw);
 	
 	HashMap<String, Object> userInfo(String id);
 	
@@ -37,5 +38,7 @@ public interface MypageService {
 	void mypageScheduleInsert(Object id, MypageMainPlannerBean bean);
 	
 	MypagePlannerBean mypageDateInfo(int no);
+	
+	List<String> shareNickCheck(String nick);
 	
 }

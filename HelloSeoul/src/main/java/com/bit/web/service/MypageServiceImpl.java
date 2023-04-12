@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.HelloSeoulDao;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.MypageMainPlannerBean;
@@ -24,10 +25,10 @@ public class MypageServiceImpl implements MypageService {
 	private HelloSeoulDao helloDao;
 
 	@Override
-	public String loginPass(String id, String pw) {
+	public JoinSeoulBean loginPass(String id, String pw) {
 		String dbPass = helloDao.getDbUserPW(id);
 		if(dbPass!=null && dbPass.equals(pw)) {
-			return helloDao.getDbUserNick(id);
+			return helloDao.getDbUserInfo(id);
 		} else {
 			return null;			
 		}
@@ -123,25 +124,25 @@ public class MypageServiceImpl implements MypageService {
 			if(bean.getLoc_ctg1().equals("food")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab1 += "<br><span style='font-size: 12px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("tour")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab2 += "<br><span style='font-size: 12px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
 			else if (bean.getLoc_ctg1().equals("shopping")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab3 += "<br><span style='font-size: 12px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
 			else { // 티켓인 경우	entertainment
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab4 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab4 += "<br><span style='font-size: 12px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
 			}
 		}		
@@ -243,7 +244,11 @@ public class MypageServiceImpl implements MypageService {
 	public MypagePlannerBean mypageDateInfo(int no) {
 		return helloDao.mypageplannerInfo(no);
 	}
-	
+
+	@Override
+	public List<String> shareNickCheck(String nick) {
+		return helloDao.nickSearch(nick);
+	}
 	
 	
 	

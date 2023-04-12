@@ -19,6 +19,10 @@ $('document').ready(function(){
 	const no = $("#plno").val();
 	console.log($("#com_ctg").val());
 	// 일정에 따른 tab 구현
+	
+	if(no!=0){
+		console.log("check");
+		console.log(no);
 	$.ajax({
 		url: '/web/ajaxMypagePlannerTabBar',
 		type: 'post',
@@ -72,7 +76,7 @@ $('document').ready(function(){
 				);
 				start.setDate(start.getDate() + 1);
 			} // 날짜 tab for문 끝
-			
+	
 			$.ajax({
 				url: '/web/ajaxMypagePlannerTabContent',
 				type: 'post',
@@ -108,7 +112,7 @@ $('document').ready(function(){
 			alert("error : " + error);
 		}
 	}); // ajax
-
+	}
 }); // $('document').ready
 function check_id(){
 	var no=$("input#com_no").val();
@@ -145,9 +149,54 @@ function check_id2(){
 		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
 	}
 }
+function check_id3(){
+	var plno=$("input#plno").val();
+	var user_id=$("input#user_id").val();
+	if(user_id==""){
+		alert("로그인해주시길바랍니다");
+	}else{
+		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+	}
+}
+//팝업 띄우기
+function openPop() {
+	var user_id=$("input#user_id").val();
+	if(user_id==""){
+		alert("로그인 해주시길 바랍니다.");
+	}
+	else{	
+		
+		console.log(user_id);	
+   		document.getElementById("plannerSharePopUp").style.display = "block";
+	}
+}
+function ReportOn(){
+	var no=$("input#com_no").val();
+	var user_id=$("input#user_id").val();
+	var obj_length = document.getElementsByName("report").length;
+	var check_length=document.querySelectorAll("input[type='checkbox']:checked").length;
+	var rrList=[];
+	if(check_length==0){
+		alert('한개 이상을 골라주세요');
+		return false;
+	}else{
+		for (var i=0; i<obj_length; i++) {
+            if (document.getElementsByName("report")[i].checked == true) {
+                console.log(document.getElementsByName("report")[i].value);
+                rrList.push(document.getElementsByName("report")[i].value);
+            }
+        }
+        location.replace("/web/reportAction?rr="+rrList+"&com_no="+no+"&user_id="+user_id);
+	}
+}
 </script>
 <script type="text/javascript">
 	$(function() {
+	
+		$("button#popupClose").click(function(){
+	         document.getElementById("plannerSharePopUp").style.display = "none";
+	      }); 
+	
 		$("textarea#reply_contents").focus(function() {
 			$("textarea#reply_contents").val("");
 		});
@@ -270,167 +319,184 @@ function check_id2(){
 			location.replace("/web/boardSelect");
 			
 		});
+		
 	});
 </script>
 <!--JS Section End -->
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-.tablebar tr > th{
-	width: 5%; 
-	}
-.infobar{
-	font-size: 20px;
-	}
-.titlebar{
- 	border: solid;
-	}
-.contentsbar > div{
-	border: solid;
-	}
-.settingbar{
-	border: solid;
-	}
-#memberbar{
-	font-size: 15px;
-	}
-.photobar > img{
-	object-fot:cover;
- 	width: 100%;
- 	height: 100%;
-	}
+
 </style>
 <!-- Style Section End -->
 </head>
 <body>
-	<header>
-		<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
-	</header>
-	<section class='section d-flex justify-content-center bg-info'>
-		<div class='col-6 mt-4 mb-4'>
-			<div class='infobar bg-light'>
-				<c:forEach items="${info}" var="i">
-					<div class='titlebar'>
-						<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
-						<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
-						<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
-						<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
-						
-						<span>
+<jsp:include page="../Final_Pro/header.jsp"></jsp:include>
+<section class='container'>
+	<div class='row d-flex justify-content-center'>
+		<div class='col-10'>
+			<c:forEach var='i' items="${info}">
+			<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
+			<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
+			<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
+			<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
+			<input type="hidden" id='plno' name='plno' value='${i.plno}' >
+			<table class='table'>
+				<thead>
+					<tr class='table-primary'>
+						<th colspan="2">
 							<c:choose>
-								<c:when test="${i.com_ctg eq 1}">[ctg1qwdqw]</c:when>
-								<c:when test="${i.com_ctg eq 2}">[ctg12312355dw]</c:when>
-								<c:otherwise>[ctg1123dscdsd]</c:otherwise>
+								<c:when test="${i.com_ctg eq 1}">[PlannerShare]</c:when>
+								<c:when test="${i.com_ctg eq 2}">[Review]</c:when>
+								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose>
 							${i.com_title}
-						</span>
-						<br>
-						<span>
-							<img alt="user" src="/web/resources/final_style/img/icon/comuser.png"> ${i.user_nick}
-							<img alt="reple" src="/web/resources/final_style/img/icon/reple.png"> ${i.reply}
-							<img alt="hit" src="/web/resources/final_style/img/icon/hit.png"> ${i.com_hit}
-							<img alt="regdate" src="/web/resources/final_style/img/icon/regdate.png"> ${i.com_regdate}
-							<img alt="comgood" src="/web/resources/final_style/img/icon/comgood.png">
+						</th>
+					</tr>
+					<tr>
+						<th colspan="2">
+							<img class='mx-1' alt="user" src="/web/resources/final_style/img/icon/comuser.png">${i.user_nick}
+							<img class='mx-1' alt="reple" src="/web/resources/final_style/img/icon/reple.png">${i.reply}
+							<img class='mx-1' alt="hit" src="/web/resources/final_style/img/icon/hit.png">${i.com_hit}
+							<img class='mx-1' alt="regdate" src="/web/resources/final_style/img/icon/regdate.png">${i.com_regdate}
+							<img class='mx-1' alt="comgood" src="/web/resources/final_style/img/icon/comgood.png">
 							<span id='top-good'>${i.good}</span>
-							<img alt="combad" src="/web/resources/final_style/img/icon/combad.png">
+							<img class='mx-1' alt="combad" src="/web/resources/final_style/img/icon/combad.png">
 							<span id='top-bad'>${i.bad}</span>
-						</span>
-					</div>
-					<div class='contentsbar' style="display: inline-flex; width: 100%;">
-						<div class='textbar col-6'>
-							${i.com_cont}
-						</div>
-						<div class='photobar col-6' >
-						<c:if test="${i.com_ctg==1 }">
-						<!-- planner -->
-						<input type="hidden" id="plno" value="${i.plno }">
-								<div class='col-12'>
-				<div class='col-12' style="display: inline-flex;" id="planTitle"></div>
-			</div>
-			
-			<div class='data col-12' style="display: inline-flex;">
-				<!-- tab head -->
-				<div class='tabbar col-12'>
-					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar" style="width:100%;">
-					</ul>
-					
-					<!-- tab contents -->
-					<div id='myTabContent border border-info-1' class='tab-content'>
-					</div>
-				</div>
-				</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<c:choose>
+							<c:when test="${i.com_ctg==1 }">
+								<td>
+									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+								</td>
+								<td style="border-left-width : 1px;">
+									<input type="hidden" id="plno" value="${i.plno }">
+									<div class='col-12'>
+										<div class='col-12' style="display: inline-flex;" id="planTitle"></div>
+									</div>
+									<div class='data col-12' style="display: inline-flex;">
+										<!-- tab head -->
+										<div class='tabbar col-12'>
+											<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar" style="width:100%;">
+											</ul>
+										<!-- tab contents -->
+										<div id='myTabContent border border-info-1' class='tab-content'>
+										</div>
+									</div>
+									</div>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td class='text-center'>
+									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
+					<tr>
+						<td>${i.com_cont}</td>
+					</tr>
+					<tr>
+						<td class='text-center' colspan="2">
+							<button type="button" class="btn btn-success" id='good'>
+								<img alt="like" src="/web/resources/final_style/img/icon/like.png">
+								Good ${i.good}
+							</button>
+							<button type="button" class="btn btn-warning" id='bad'>
+								<img alt="dislike" src="/web/resources/final_style/img/icon/dislike.png">
+								Bad ${i.bad}
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td class='text-end' colspan="2">
+							<c:if test="${user_id ne i.user_id }">
+								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
-						<div class='photobar col-12'>
-							<img alt="test" src="/web/resources/test/${i.com_filename }">
-							</div>
-						
-							
-						</div>
-					</div>
-					<div class='settingbar col-12' style="display: inline-flex;">
-					<div class='backbar col-4'>
-						<button type="button" class="btn btn-primary" id="listbt">List</button>
-					</div>
-					<div class='goodbad col-4'>
-						<button type="button" class="btn btn-success" id='good'>
-							<img alt="like" src="/web/resources/final_style/img/icon/like.png">
-							Good ${i.good}
-						</button>
-						<button type="button" class="btn btn-warning" id='bad'>
-							<img alt="dislike" src="/web/resources/final_style/img/icon/dislike.png">
-							Bad ${i.bad}
-						</button>
-					</div>
-					<div class='settingbar col-4' style="display: inline-flex;">
-						<button type="button" class="btn btn-danger">Report</button>
-						<c:if test="${user_id eq i.user_id}">
-						<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
-						<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
-						</c:if>
-						<img alt="reple" src="/web/resources/final_style/img/icon/replebt.png">
-						<img alt="scrap" src="/web/resources/final_style/img/icon/scrapbt.png">
-					</div>
-				</div>
-			</c:forEach>	
-			</div>
-			<div class='replebar mt-4 bg-light'>
-				<div class='replein col-12 mt-4' style="display: inline-flex;">
-					<div class='col-10'>
-						<textarea style="width: 95%; height: 100px; margin-left: 10px; margin-right: 10px;" id="reply_contents" name="reply_contents"></textarea>
-						<span id="replybyte">0</span>
-					</div>
-					<div class='col-2'>
-						<button type="button" class="btn btn-primary" style="width: 100%; height: 100%;" id="reply_Submit">Apply</button>
-					</div>
-				</div>
-				<div class='col-12' style="text-align: center;">All Reple</div>
-				<div class='replybody col-12'>
-					<c:forEach items="${reply}" var="i">
-					<div class='replyboard col-10' style="margin-left: 10px;"> 
-						<input type="hidden" value="${i.rep_no}" id="rep_no">
-						<input type="hidden" value="${i.user_id }" id="rep_user_id">
-						<div class='replecontents'>					
-							<span>${i.user_nick}|${i.rep_regdate}</span>
-							<br>
-							<span>${i.rep_cont}</span>
-						</div>
-						<div class='repleabar'>
-							<a href='#'>reple</a>|
-							<a href='/web/replyMo'>modi</a>|
-							<a href='/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}' onclick="confirm('정말로 삭제하겠습니까?')">
-							delete
-							</a>|
-							<a href='#'>report</a>
-						</div>
-	 				</div>
- 					</c:forEach>
-				</div>
- 				
-			</div>				
+							<c:if test="${user_id eq i.user_id}">
+								<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
+								<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
+							</c:if>
+							<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
+								<button type="button" class="btn btn-primary" onclick="check_id2()">Share</button>
+							</c:if>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</c:forEach>
 		</div>
-	</section>
-	<footer>
-		<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
-	</footer>
+	</div>
+	<div class='row d-flex justify-content-center'>
+		<div class='col-10'>
+			<div class='replein row'>
+				<div class='col-10'>
+					<textarea style="width: 95%; height: 100px; margin-left: 10px; margin-right: 10px;" id="reply_contents" name="reply_contents"></textarea>
+					<span id="replybyte">0</span>
+				</div>
+				<div class='col-2'>
+					<button type="button" class="btn btn-primary" style="width: 100%; height: 100%;" id="reply_Submit">Apply</button>
+				</div>
+			</div>
+			<div class='row text-center'>
+			<p>All Reply</p>
+			</div>
+			<div class='replybody row'>
+				<c:forEach items="${reply}" var="i">
+				<div class='replyboard col-10' style="margin-left: 10px;"> 
+					<input type="hidden" value="${i.rep_no}" id="rep_no">
+					<input type="hidden" value="${i.user_id }" id="rep_user_id">
+					<div class='replecontents'>					
+						<span>${i.user_nick}|${i.rep_regdate}</span>
+						<br>
+						<span>${i.rep_cont}</span>
+					</div>
+					<div class='repleabar'>
+						<a href='#'>reple</a>|
+						<a href='/web/replyMo'>modi</a>|
+						<a href='/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}' onclick="confirm('정말로 삭제하겠습니까?')">
+						delete
+						</a>|
+						<a href='#'>report</a>
+					</div>
+				</div>
+				</c:forEach>
+			</div>			
+		</div>
+	</div>
+</section>
+<!-- 팝업창 -->   
+         <div class="modal" id="plannerSharePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title">Report reason</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="popupClose">
+                        <span aria-hidden="true"></span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <input type="checkbox" id="ck1" name="report" value="1"> 부적절한<br>
+                     <input type="checkbox" id="ck2" name="report" value="2"> 부적절한<br>
+                     <input type="checkbox" id="ck3" name="report" value="3"> 부적절한<br>
+                     <input type="checkbox" id="ck4" name="report" value="4"> 부적절한<br>
+                     <input type="checkbox" id="ck5" name="report" value="5"> 부적절한<br>
+                     <h5>자세한 신고 사유를 적어주세요.</h5>
+                     <textarea rows="7px" cols="40px"></textarea>
+                     
+                  </div>
+                  <div class="modal-footer">
+<!--                      <button type="button" class="btn btn-primary">Save changes</button> -->
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="reportbtn" onclick="ReportOn()">report</button>
+                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+<jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
 </body>
 </html>

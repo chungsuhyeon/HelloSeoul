@@ -1,157 +1,441 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Icon Error Begin-->
+
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<!-- Icon Error End-->
-<title>Community List</title>
-<!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
-	//Board Write
-	$('.write').click(function(){
-		if($("input#user_id").val()==""){
-			alert("로그인 후 이용 가능합니다.");
-		}
-		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&plno=0");
-		}
-	});
-	//Board Info
-	$("div#top3list").click(function(){
-		var no=$(this).text();
-		document.location.href="/web/infoSelect?no="+no;
+	$("button#submitPost").click(function(){
+		$("form").submit();
 	});
 });
-</script>
-<!--JS Section End -->
-<!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
-<style type="text/css">
 
+</script> 
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Start Simple Web1</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="/web/resources/comcss/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="/web/resources/comcss/css/clean-blog.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic'
+	rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+p {
+	margin: 10px;
+}
+
+.pagination {
+	display: block;
+	text-align: center;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.pagination>li>a {
+	color: #404040;
+	float: none;
+}
+
+.pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:focus
+	{
+	z-index: 3;
+	color: #fff;
+	cursor: default;
+	background-color: #404040;
+	border-color: #404040;
+}
+
+.pagination>li>a:hover, .pagination>li>a:focus {
+	z-index: 3;
+	color: black;
+	cursor: default;
+	background-color: white;
+	border-color: #404040;
+}
+
+.glyphicon {
+	margin-left: 10px
+}
+
+.board-category {
+	font-size: 12px;
+	color: #404040;
+	margin: 5px;
+	margin-left: 20px
+}
+
+.board-field {
+	margin-bottom: 30px
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.4285;
+	text-align: right;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.btn-primary {
+	background-color: #3b3b3b;
+	border-color: #282828;
+	background-color: #3b3b3b;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+	.btn-primary.active, .open .dropdown-toggle.btn-primary {
+	background-color: #282828;
+	border-color: #080808;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+	.btn-primary.active, .open>.dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: gray;
+	border-color: gray;
+}
+
+.btn-sm, .btn-group-sm>.btn {
+	text-align: center;
+	padding: 13px 13px;
+	font-size: 14px;
+	line-height: 1.5;
+	/*     border-radius: 3px; */
+	border-top: 35px;
+	padding: 13px 13px;
+}
+
+#write-field {
+	margin-left:50px;
+	margin-right:50px;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+#write-field table {
+	width: 100%;
+	border: 0;
+	border-spacing: 0;
+}
+
+#write-field td {
+	padding: 8px 0 8px 0;
+}
+
+#write-field .td1 {
+	width: 80px;
+	min-height: 30px;
+	font-weight: bold;
+	color: #666;
+	font-size:15px;
+	vertical-align: middle;
+}
+
+#write-field .td1.vtop {
+	vertical-align: top;
+	padding-top: 10px
+}
+
+#write-field .td2 input[type="text"], input[type="password"] {
+	border: solid 1px;
+	height: 28px;
+	padding: 3px;
+	display: inline-block;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+#write-field .input-title {
+	
+	float: left;
+	color: #666;
+	font-size:15px;
+	font-weight: bold;
+	line-height: 30px;
+	vertical-align: middle;
+	width: 70px;
+	margin: 4px 10px 6px 0;
+}
+
+#write-field .input-forms {
+	
+	margin: 4px 0 4px 0;
+	overflow: hidden;
+}
+
+#write-field .input-name {
+	height: 28px;
+}
+
+#write-field .input-pwd {
+	height: 28px;
+}
+
+#write-field .td2 .more {
+	width: 85%;
+}
+
+#write-field .td2 select {
+	border: solid 1px;
+	min-width: 155px;
+	max-width: 250px;
+	height: 28px;
+	padding: 2px;
+	margin: 0;
+}#write-field .td3 select {
+	border: solid 1px;
+	min-width: 155px;
+	max-width: 250px;
+	height: 28px;
+	padding: 2px;
+	margin: 0;
+}
+#write-field .td2 textarea {
+	border: solid 1px;
+}
+
+#write-field .td2 .guide {
+	font-size: 90%;
+	font-family: dotum;
+	color: #999;
+	padding: 3px 0 10px 0;
+}
+
+#write-field .td2 .guide img {
+	position: relative;
+	top: -1px;
+}
+
+#write-field .td2 .check-label {
+	color: #666;
+}
+
+#write-field .td2 .after {
+	padding: 10px 0 0 0;
+	color: #999;
+	font-family: dotum;
+}
+
+#write-field .td2 .after input {
+	position: relative;
+	top: 1px;
+}
+
+#write-field .editbox {
+	padding: 15px 0 15px 0;
+}
+
+#write-field .iconbox {
+	border-left: #e0e0e0 solid 1px;
+	border-top: #e0e0e0 solid 1px;
+	border-right: #e0e0e0 solid 1px;
+	background: #f9f9f9;
+	padding: 6px 0 8px 7px;
+}
+
+#write-field .iconbox a {
+	padding: 0 3px 0 3px;
+	font-family: dotum;
+	color: #333;
+}
+
+#write-field .iconbox a:hover {
+	color: #7899C7;
+}
+
+#write-field .iconbox a img {
+	position: relative;
+	top: -1px;
+	margin-right: 3px;
+}
+
+#write-field .iconbox .split {
+	padding: 0 2px 0 2px;
+	margin-bottom: -1px;
+}
+
+#write-field .bottombox {
+	text-align: center;
+	padding: 20px 0 20px 0;
+	margin: 15px 0 0 0;
+	border-top: #efefef solid 1px;
+}
+
+#write-field .bottombox .btngray {
+	font-weight: bold;
+	width: 60px;
+	height: 25px;
+}
+
+#write-field .bottombox .btnblue {
+	font-weight: bold;
+	width: 80px;
+	height: 25px;
+}
 </style>
-<!-- Style Section End -->
 </head>
 <body>
-<jsp:include page="./header.jsp"></jsp:include>
-<section class='container'>
-	<div class='row'>
-		<div class='hotboard col-6'>
-		<c:forEach var='i' items="${top3}">
-		
-			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  				<div class="carousel-inner">
-    				<div class="carousel-item active">
-      					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-    				<div class="carousel-item">
-      					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-    				<div class="carousel-item">
-      					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-  			</div>
-  			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    			<span class="visually-hidden">Previous</span>
-  			</button>
-	  		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-	    		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    		<span class="visually-hidden">Next</span>
-	  		</button>
+
+	<jsp:include page="header.jsp"></jsp:include>
+
+
+	<!-- Page Header -->
+	<!-- Set your background image for this header on the line below. -->
+	<c:forEach items="${info }" var="i">
+	<form action="/web/boardUpdate?no=${i.com_no }" method="post" style="margin-top: 50px">
+	<div id="write-field">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<table>
+				<tr>
+				
+					<td class="td1">카테고리</td>
+					<td class="td2"><select name="com_ctg" class="form-control"
+						style="display: inline-block;"   value="${i.com_ctg }">
+							<option value="${i.com_ctg }">&nbsp;
+							<c:choose>
+						<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
+						<c:when test="${i.com_ctg eq 2}">후기</c:when>
+						<c:otherwise>동행모집</c:otherwise>
+						</c:choose>
+						</option>
+							<option value="">----------------------</option>
+							<option value="1">정보공유</option>
+							<option value="2">후기</option>	
+							<option value="3">동행모집</option>
+							
+					</select>
+					<td>
+					<input type="hidden" value="${i.com_hit }" name="com_hit">  
+					<input type="hidden" value="${user_id }" name="user_id"> 
+					<input type="hidden" value="${i.com_regdate }" name="com_regdate">
+					 </td>
+					
+				</tr>
+
+				<tr>
+					<td class="td2" colspan="2">
+						<div class="row row-xs-bskr">
+							<div class="col-md-6 col-sm-6 col-xs-bskr">
+								<div class="input-title">작성자명</div>
+								<div class="input-forms">
+									<input size="20" readonly="readonly" type="text" name="user_nick" value="${i.user_nick }"
+										class="form-control input-sm input-name bskr-font user" />
+								</div>
+							</div>
+						
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td class="td1">제목</td>
+					<td class="td2" valign="middle"><input type="text"
+						name="com_title" value="${i.com_title }"
+						class="form-control input-sm bskr-font subject" /></td>
+				</tr>
+
+
+			</table>
+			<div class="form-group">
+				<table>
+					<tr>
+						<td class="td1"></td>
+						<td class="td2" ><textarea class="form-control col-sm-5" 
+								rows="20" id="com_cont" name="com_cont" value="${i.com_cont }">${i.com_cont }</textarea></td>
+					</tr>
+					<tr>
+					<td class="td1"></td>
+						<td class="td2"><input type="file" id="filename" name="com_filename" value="">${i.com_filename }</td>
+					</tr>
+				</table>
 			</div>
-		
-		
-		</c:forEach>	
-		</div>
-		<div class='boardlist col-6'>
-			<div class='row'>
-				<div class='col-6'>
-				Board List
-				</div>
-				<div class='col-6 text-end'>
-					<button class='btn btn-primary'>Write</button>
-				</div>
-			</div>
-			<div class='row'>
-				<div class='col-12'>
-					<table class='table'>
-						<thead>
-							<tr class='table-primary'>
-								<th>No</th>
-								<th>Category</th>
-								<th>Title</th>
-								<th>Nick Name</th>
-								<th>RegDate</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${board}" var='i'>
-    						<tr>
-      							<td>${i.COM_NO}</td>
-      							<td>${i.COM_CTG }</td>
-      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
-      							<td>${i.USER_NICK}</td>
-      							<td>${i.COM_REGDATE}</td>
-    						</tr>
-  							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class='row'>
-				<div class='paging col-12 d-flex justify-content-center'>
-					<ul class="pagination pagination-sm">
-  					<c:choose>
-  					<c:when test="${pageBean.currentBlock==1}">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-    				</c:when>
-    				<c:otherwise>
-    					<li class="page-item">
-      						<a class="page-link" href="/web/boardSelect?page=${pageBean.startPage-1}">&laquo;</a>
-    					</li>
-    				</c:otherwise>
-    				</c:choose>
-    				<c:forEach var="i" begin="${pageBean.startPage}" end="${pageBean.endPage}">
-    				<c:choose>
-    				<c:when test="${pageBean.currentPage==i}">
-    					<li class="page-item active">
-      						<a class="page-link" href="#">${i}</a>
-    					</li>
-    				</c:when>
-    				<c:otherwise>
-    					<li class="page-item">
-      						<a class="page-link" href="/web/boardSelect?page=${i}">${i}</a>
-    					</li>
-    				</c:otherwise>
-    				</c:choose>
-    				</c:forEach>
-					<c:choose>
-  					<c:when test="${pageBean.totalPage==pageBean.endPage }">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&raquo;</a>
-      					</li>
-    				</c:when>
-    				<c:otherwise>
-    					<li class="page-item">
-      						<a class="page-link" href="/web/boardSelect?page=${pageBean.endPage+1 }">&raquo;</a>
-      					</li>
-    				</c:otherwise>
-    				</c:choose>		
-  					</ul>
-				</div>
+		</c:forEach>
+			<div class="bottombox">
+				<input id="canclePost" type="button" value="" class="btn btn-default btn-sm"
+					><a href="/web/boardSelect">취소</a></input>&nbsp;
+				<button  id="submitPost"  class="btn btn-primary btn-sm">
+					<i class="glyphicon glyphicon-ok"></i> 확인
+				</button>
 			</div>
 		</div>
 	</div>
-</section>
-<jsp:include page="./footer.jsp"></jsp:include>
+	
+	</form>
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<ul class="list-inline text-center">
+						<li><a href="#"> <span class="fa-stack fa-lg"> <i
+									class="fa fa-circle fa-stack-2x"></i> <i
+									class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a href="#"> <span class="fa-stack fa-lg"> <i
+									class="fa fa-circle fa-stack-2x"></i> <i
+									class="fa fa-home fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a href="#"> <span class="fa-stack fa-lg"> <i
+									class="fa fa-circle fa-stack-2x"></i> <i
+									class="fa fa-github fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+					</ul>
+					<p class="copyright text-muted">Copyright &copy;2016 SIST. All
+						rights reserved | code by milib</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- jQuery -->
+	
+
 </body>
+
 </html>
