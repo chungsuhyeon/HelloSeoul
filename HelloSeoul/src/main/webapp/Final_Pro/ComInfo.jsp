@@ -158,9 +158,45 @@ function check_id3(){
 		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
 	}
 }
+//팝업 띄우기
+function openPop() {
+	var user_id=$("input#user_id").val();
+	if(user_id==""){
+		alert("로그인 해주시길 바랍니다.");
+	}
+	else{	
+		
+		console.log(user_id);	
+   		document.getElementById("plannerSharePopUp").style.display = "block";
+	}
+}
+function ReportOn(){
+	var no=$("input#com_no").val();
+	var user_id=$("input#user_id").val();
+	var obj_length = document.getElementsByName("report").length;
+	var check_length=document.querySelectorAll("input[type='checkbox']:checked").length;
+	var rrList=[];
+	if(check_length==0){
+		alert('한개 이상을 골라주세요');
+		return false;
+	}else{
+		for (var i=0; i<obj_length; i++) {
+            if (document.getElementsByName("report")[i].checked == true) {
+                console.log(document.getElementsByName("report")[i].value);
+                rrList.push(document.getElementsByName("report")[i].value);
+            }
+        }
+        location.replace("/web/reportAction?rr="+rrList+"&com_no="+no+"&user_id="+user_id);
+	}
+}
 </script>
 <script type="text/javascript">
 	$(function() {
+	
+		$("button#popupClose").click(function(){
+	         document.getElementById("plannerSharePopUp").style.display = "none";
+	      }); 
+	
 		$("textarea#reply_contents").focus(function() {
 			$("textarea#reply_contents").val("");
 		});
@@ -283,6 +319,7 @@ function check_id3(){
 			location.replace("/web/boardSelect");
 			
 		});
+		
 	});
 </script>
 <!--JS Section End -->
@@ -309,9 +346,9 @@ function check_id3(){
 					<tr class='table-primary'>
 						<th colspan="2">
 							<c:choose>
-								<c:when test="${i.com_ctg eq 1}">[Review]</c:when>
-								<c:when test="${i.com_ctg eq 2}">[PlannerShare]</c:when>
-								<c:otherwise>[Free]</c:otherwise>
+								<c:when test="${i.com_ctg eq 1}">[PlannerShare]</c:when>
+								<c:when test="${i.com_ctg eq 2}">[Review]</c:when>
+								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose>
 							${i.com_title}
 						</th>
@@ -334,7 +371,7 @@ function check_id3(){
 						<c:choose>
 							<c:when test="${i.com_ctg==1 }">
 								<td>
-									<img style="width: 500px; height: 500px;" src="/web/resources/final_style/img/mainIdex/mainimg01.jpg">
+									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
 								</td>
 								<td style="border-left-width : 1px;">
 									<input type="hidden" id="plno" value="${i.plno }">
@@ -355,8 +392,7 @@ function check_id3(){
 							</c:when>
 							<c:otherwise>
 								<td class='text-center'>
-									<img style="width: 500px; height: 500px;" src="/web/resources/final_style/img/mainIdex/mainimg01.jpg">
-	<%-- 							<img alt="test" src="/web/resources/test/${i.com_filename }"> --%>
+									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
 								</td>
 							</c:otherwise>
 						</c:choose>
@@ -378,13 +414,15 @@ function check_id3(){
 					</tr>
 					<tr>
 						<td class='text-end' colspan="2">
-							<button type="button" class="btn btn-danger">Report</button>
+							<c:if test="${user_id ne i.user_id }">
+								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
+							</c:if>
 							<c:if test="${user_id eq i.user_id}">
-							<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
-							<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
+								<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
+								<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
 							</c:if>
 							<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
-							<button type="button" class="btn btn-primary" onclick="check_id2()">Share</button>
+								<button type="button" class="btn btn-primary" onclick="check_id2()">Share</button>
 							</c:if>
 						</td>
 					</tr>
@@ -431,6 +469,34 @@ function check_id3(){
 		</div>
 	</div>
 </section>
+<!-- 팝업창 -->   
+         <div class="modal" id="plannerSharePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title">Report reason</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="popupClose">
+                        <span aria-hidden="true"></span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <input type="checkbox" id="ck1" name="report" value="1"> 부적절한<br>
+                     <input type="checkbox" id="ck2" name="report" value="2"> 부적절한<br>
+                     <input type="checkbox" id="ck3" name="report" value="3"> 부적절한<br>
+                     <input type="checkbox" id="ck4" name="report" value="4"> 부적절한<br>
+                     <input type="checkbox" id="ck5" name="report" value="5"> 부적절한<br>
+                     <h5>자세한 신고 사유를 적어주세요.</h5>
+                     <textarea rows="7px" cols="40px"></textarea>
+                     
+                  </div>
+                  <div class="modal-footer">
+<!--                      <button type="button" class="btn btn-primary">Save changes</button> -->
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="reportbtn" onclick="ReportOn()">report</button>
+                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
+                  </div>
+               </div>
+            </div>
+         </div>
 <jsp:include page="../Final_Pro/footer.jsp"></jsp:include>
 </body>
 </html>

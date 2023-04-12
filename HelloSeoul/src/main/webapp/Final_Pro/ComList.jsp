@@ -46,19 +46,23 @@ $(function(){
 		<div class='hotboard col-6'>
 			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
   				<div class="carousel-inner">
-  					<c:forEach var='i' items="${top3}">
-    				<div class="carousel-item active" data-bs-interval="2000">
-      					<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" class="d-block w-100" alt="...">
+  					<c:forEach var='i' items="${top3}" varStatus="status">
+  					<c:if test="${status.index==0 }">
+  					    				<div class="carousel-item active" data-bs-interval="2000">
+      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
       					<div class="carousel-caption d-none d-md-block">
-					        <h5>First slide label</h5>
-					        <p>Some representative placeholder content for the first slide.</p>
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
       					</div>
     				</div>
+    			</c:if>
+    				
     				<div class="carousel-item" data-bs-interval="2000">
-      					<img src="/web/resources/final_style/img/mainIdex/mainimg02.jpg" class="d-block w-100" alt="...">
-    				</div>
-    				<div class="carousel-item" data-bs-interval="2000">
-      					<img src="/web/resources/final_style/img/mainIdex/mainimg03.jpg" class="d-block w-100" alt="...">
+      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+      					<div class="carousel-caption d-none d-md-block">
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
+      					</div>
     				</div>
     				</c:forEach>
   				</div>
@@ -130,7 +134,11 @@ $(function(){
 							<c:forEach items="${board}" var='i'>
     						<tr>
       							<td>${i.COM_NO}</td>
-      							<td>${i.COM_CTG }</td>
+      							<td><c:choose>
+								<c:when test="${i.COM_CTG eq 1}">[PlannerShare]</c:when>
+								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
+								<c:otherwise>[together travel]</c:otherwise>
+							</c:choose></td>
       							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
       							<td>${i.USER_NICK}</td>
       							<td>${i.COM_REGDATE}</td>

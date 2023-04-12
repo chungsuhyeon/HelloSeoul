@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -27,6 +28,7 @@ import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.spark.sql.fieldTypes.api.java.Timestamp;
 
@@ -243,6 +245,19 @@ public class CommServiceImpl implements CommService{
 		// TODO Auto-generated method stub
 		return commdao.selectSharePlanner(no);
 	}
+	@Override
+	public void insertReport(List<Integer> rr, int com_no, String user_id,ReportBoard bean) {
+	
+		// TODO Auto-generated method stub
+		for (Integer integer : rr) {
+			bean.setCom_no(com_no);
+			bean.setReport_reason(integer);
+			bean.setUser_id(user_id);
+			commdao.insertReport(bean);
+		}		
+		commdao.reportUpdate(com_no);
+	}
+	
 
 	
 	
