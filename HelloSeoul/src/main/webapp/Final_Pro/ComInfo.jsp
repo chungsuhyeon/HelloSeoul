@@ -114,61 +114,32 @@ $('document').ready(function(){
 	}); // ajax
 	}
 }); // $('document').ready
-function check_id(){
+function modifyAction(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
-	if(
-			$("input#user_id").val()==""
-			
-			){
-		alert("login plz");
-	}else if(
-			($("input#user_id").val())!=($("input#boarduser_id").val())
-			){
-		alert("id가 맞지않습니다");
-	}
-	else{
-		location.replace("/web/modifyAction?no="+no+"&user_id="+user_id);
-	}
+	var plno=$("input#plno").val();
+	location.replace("/web/modifyAction?no="+no+"&user_id="+user_id+"&plno="+plno);
+	
 }
-function check_id2(){
+function deleteAction(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
-	if(
-			$("input#user_id").val()==""
-			
-			){
-		alert("login plz");
-	}else if(
-			($("input#user_id").val())!=($("input#boarduser_id").val())
-			){
-		alert("id가 맞지않습니다.");
-	}
-	else{
-		confirm('정말로 삭제하시겠습니까?');
-		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
-	}
+	confirm('정말로 삭제하시겠습니까?');
+	location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
+
 }
-function check_id3(){
+function sharePlannerAction(){
 	var plno=$("input#plno").val();
 	var user_id=$("input#user_id").val();
-	if(user_id==""){
-		alert("로그인해주시길바랍니다");
-	}else{
-		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
-	}
+	location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+	
 }
 //팝업 띄우기
 function openPop() {
 	var user_id=$("input#user_id").val();
-	if(user_id==""){
-		alert("로그인 해주시길 바랍니다.");
-	}
-	else{	
-		
-		console.log(user_id);	
-   		document.getElementById("plannerSharePopUp").style.display = "block";
-	}
+	console.log(user_id);	
+   	document.getElementById("plannerSharePopUp").style.display = "block";
+	
 }
 function ReportOn(){
 	var no=$("input#com_no").val();
@@ -418,11 +389,11 @@ function ReportOn(){
 								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
 							<c:if test="${user_id eq i.user_id}">
-								<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
-								<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
+								<button type="button" class="btn btn-primary" onclick="modifyAction()">Modify</button>
+								<button type="button" class="btn btn-primary" onclick="deleteAction()">Delete</button>
 							</c:if>
 							<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
-								<button type="button" class="btn btn-primary" onclick="check_id2()">Share</button>
+								<button type="button" class="btn btn-primary" onclick="sharePlannerAction()">Share</button>
 							</c:if>
 						</td>
 					</tr>

@@ -22,7 +22,7 @@ public interface CommService {
 	
 	void deleteBoard(int no);
 	
-	List<Object> updateBoard(ComBoard board);
+	List<Object> updateBoard(ComBoard board,MultipartFile file);
 	
 	void replyInsert(String reply,ReplyBoard reboard,int no,String id);
 	

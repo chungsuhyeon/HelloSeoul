@@ -53,17 +53,17 @@ $(function(){
 							<th>Catergory</th>
 							<td>
 								<select class='form-select' name="com_ctg" style="width: 30%;">
-									<option value="${i.com_ctg}">
 									<c:choose>
-										<c:when test="${i.com_ctg eq 1}">정보공유</c:when>
-										<c:when test="${i.com_ctg eq 2}">후기</c:when>
-										<c:otherwise>동행모집</c:otherwise>
-									</c:choose>
-									</option>
+									<c:when test="${i.com_ctg eq 1 }">
+									<option value="1">플래너공유</option>
+									</c:when>
+									<c:otherwise>
+									<option value="">&nbsp;+ 선택해주세요</option>
 									<option value="">----------------------</option>
-									<option value="1">정보공유</option>
 									<option value="2">후기</option>	
 									<option value="3">동행모집</option>
+									</c:otherwise>
+									</c:choose>
 								</select>
 							</td>
 							<td>
@@ -96,8 +96,14 @@ $(function(){
 							<th>File</th>
 							<td>
 								 <input class="form-control" type="file" id="com_filename" name='file' >
-								 <input type="hidden" id="plno" name="plno"value="${i.com_filename}"/>
+								 <input type="hidden" id="plno" name="plno" value="${param.plno }"/>
 							</td>
+						</tr>
+						<tr>
+							<c:if test="${i.com_ctg eq 1}">
+							<th>Planner Title</th>
+							<td>${Pltt}</td>
+							</c:if>
 						</tr>
 					</tbody>
 				</table>

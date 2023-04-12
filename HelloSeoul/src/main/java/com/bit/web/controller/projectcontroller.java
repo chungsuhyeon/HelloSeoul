@@ -80,9 +80,10 @@ public class projectcontroller {
 			
 	}
 	@RequestMapping(value="modifyAction")
-	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id) {
+	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id,int plno) {
 		if(commService.checkId(no, id)) {
-		
+//			System.out.println(plno);
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
 		model.addAttribute("info",dao.selectInfoBoard(no));
 		return "Final_Pro/Commodify";
 		}else{
@@ -92,9 +93,10 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value="boardUpdate")
-	public String boardUpdate(int no,ComBoard board,Model model) {
+	public String boardUpdate(int no,ComBoard board,Model model,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		board.setCom_no(no);
-		commService.updateBoard(board);
+		System.out.println(board);
+		commService.updateBoard(board,file);
 		
 		return "redirect:/boardSelect";
 	}

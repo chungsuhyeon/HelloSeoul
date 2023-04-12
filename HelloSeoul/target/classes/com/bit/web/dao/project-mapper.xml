@@ -37,7 +37,7 @@ where rw between #{start} and #{end}]]>
 	</delete>
 	<update id="updateBoard" parameterType="com.bit.web.vo.ComBoard" >
 	update communityboard set com_no=#{com_no},user_id=#{user_id},com_ctg=#{com_ctg},com_title=#{com_title},com_cont=#{com_cont},com_filename=#{com_filename}
-	,com_hit=#{com_hit},com_regdate=sysdate,user_nick=#{user_nick}
+	,com_hit=#{com_hit},com_regdate=sysdate,user_nick=#{user_nick},plno=#{plno}
 	 where com_no=#{com_no}
 	</update>
 	<select id="selectId" resultType="String" parameterType="String">
@@ -145,6 +145,9 @@ where rw between #{start} and #{end}]]>
 	<update id="reportUpdate" parameterType="Integer">
 	update communityboard set report=report+1 where com_no=#{com_no}
 	</update>
+	<delete id="reportDelete" parameterType="Integer">
+	delete reportboard where com_no=#{no}
+	</delete>
 </mapper>
 
 

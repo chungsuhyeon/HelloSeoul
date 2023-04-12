@@ -154,6 +154,9 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public void reportUpdate(int com_no) {
 		this.getSqlSession().update("reportUpdate",com_no);
 	}
+	public void reportDelete(int no) {
+		this.getSqlSession().delete("reportDelete",no);
+	}
 	
 }
 
