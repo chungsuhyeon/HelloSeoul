@@ -139,6 +139,12 @@ where rw between #{start} and #{end}]]>
 	select loc_pc,loc_name,loc_ctg1,loc_ctg2,loc_sg,loc_X,loc_y,planner_date,planner_shour,planner_smin from mainplanner where planner_no=#{no}
 	
 	</select>
+	<insert id="insertReport" parameterType="com.bit.web.vo.ReportBoard">
+	insert into reportboard values(#{com_no},#{report_reason},#{user_id})
+	</insert>
+	<update id="reportUpdate" parameterType="Integer">
+	update communityboard set report=report+1 where com_no=#{com_no}
+	</update>
 </mapper>
 
 
