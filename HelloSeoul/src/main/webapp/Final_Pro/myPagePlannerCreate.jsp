@@ -104,7 +104,7 @@
 									<td>
 										<a href='#' id='local_name' name='loc_name'>\${list['loc_name']}</a>
 										<br>
-										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
+										<span style="font-size: 12px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
 									</td>
 								</tr>`
 					);

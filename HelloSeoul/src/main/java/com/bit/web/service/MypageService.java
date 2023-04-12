@@ -39,4 +39,6 @@ public interface MypageService {
 	
 	MypagePlannerBean mypageDateInfo(int no);
 	
+	List<String> shareNickCheck(String nick);
+	
 }
