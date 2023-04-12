@@ -21,21 +21,16 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 	
 //email 중복체크
 		public String ajaxGetId(String id) {
-			//System.out.println(id);
-			//System.out.println(this.getSqlSession().selectOne("ajaxGetId",id));
 			return this.getSqlSession().selectOne("ajaxGetId",id);
 		}
 		
 //Nick name 중복체크
 		public String getNick(String nickname) {
-			//System.out.println(nickname);
-			//System.out.println(this.getSqlSession().selectOne("getNick",nickname));
 			return this.getSqlSession().selectOne("getNick",nickname);
 		}
 
 // 대륙선택하면 국가명 보여줌	
 		public List<Object> selectcontinent(String id){
-			//System.out.println(id);
 			return this.getSqlSession().selectList("selectcontinent", id);	
 	}
 // 국가번호정보를 디비에 국가명으로 저장되게 		
@@ -44,8 +39,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		 }
 			
 // 회원가입 정보 디비입력	
-		public void joinMemberInsert(JoinSeoulBean bean) {
-			//System.out.println(bean);
+		public void joinMemberInsert(JoinSeoulBean bean) {		
 			this.getSqlSession().insert("joinMemberInsert",bean);
 		}
 		
@@ -53,8 +47,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		public void joinPwUpdate(HashMap<String, String>map) {
 			//System.out.println("Da"+map);
 			this.getSqlSession().update("joinPwUpdate",map);
-		}
-			
+		}			
 }			
 	
 	

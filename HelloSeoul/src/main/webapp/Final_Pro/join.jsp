@@ -26,7 +26,7 @@ $(function(){
 				   $("input[name='user_id2']").focus();
 			   }else{				   
 				   $("input[name='user_id2']").attr("readonly",true);
-				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
+// 				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
 				 
 		 		  }			   
 	 		  }); // email 등록-end
@@ -36,7 +36,7 @@ $(function(){
 	           $("button#check").click(function(){ 	        	   
  	        	   let user_id =$("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val(); 	        	 
  	        	   var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; ///^[0-9a-zA-Z]/: 이메일 주소의 첫 글자는 숫자나 알파벳으로 시작, /i : 대소문자 구분X
- 	        	   //alert(user_id.match(pattern));	 		       
+ 	        	   alert(user_id.match(pattern));	 		       
 	        	   if(user_id.match(pattern)==null){
 	        		   alert("Please enter in the correct format \n ex)seoul@gmail.com");
 	        		   $("input[name='user_id1']").val('');
@@ -71,10 +71,10 @@ $(function(){
     // nickname 형식 및 중복체크 
 		           $("button#userNick").click(function(){	         		     
 			       let user_nick =$("input[name='user_nick']").val();	
-			       //alert(user_nick);
-	 		       var pattern_nick = /^[a-zA-Z]{2,15}$/i; 	 		           
+			       alert(user_nick);
+	 		       var pattern_nick = /^[a-zA-Z]{4,100}$/i; 	 		           
 			       if(user_nick.match(pattern_nick)==null){
-			    	   alert("Please enter 15 characters or less");
+			    	   alert("Please enter 4 characters or more");
 			    	   $("input[name='user_nick']").focus();
 	        		   $("input[name='user_nick']").val('');
 			       }
@@ -106,8 +106,8 @@ $(function(){
 
  // password 네자이상 
   			 $("input[name='user_pw2']").focus(function(){  	  					 
- 	  			        if($("input[name='user_pw']").val().length<3){
- 	  			        	alert("Please set it to 3 characters or more");	 
+ 	  			        if($("input[name='user_pw']").val().length<4){
+ 	  			        	alert("Please set it to 4 characters or more");	 
                             $("input[name='user_pw']").val('');
                             $("input[name='user_pw']").focus(); 		          
                            } 
@@ -185,9 +185,9 @@ $(function(){
 				    	   $("input[name='user_birth']").focus();
 				    	   exit;
 				       }
-				       if($("select[name='user_gender']").val()=="0"){ //성별
+				       if($("input[name='user_gender']").val()=="0"){ //성별
 				    	   alert("Please enter your Gender");
-				    	   $("select[name='user_gender']").focus();
+				    	   $("input[name='user_gender']").focus();
 				    	   exit;
 				       }
 				       if($("select[name='user_pp']").val()=="0"){  //여행목적
@@ -208,6 +208,7 @@ $(function(){
 				   }); //가입정보 저장, 공백체크 -end
 				
 
+				   
       });// 전체함수-end
 </script>
 <!--JS Section End -->
@@ -251,7 +252,7 @@ $(function(){
 			  				    <input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault">
 			  				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 			  				         <select class="form-select" name="user_id3" id="inputDefault">
-						                 <option selected="selected" value="direct">Direct input</option>
+						                 <option selected="selected" value="direct">select</option>
 										 <option value="naver.com">naver.com</option>
 										 <option value="daum.net">daum.net</option>
 										 <option value="bit.com">bit.com</option>
@@ -355,7 +356,7 @@ $(function(){
   					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save" style="width: 300px;"> Join Up</button>
   					    </div>	
   					    <br>
-  					    			
+  					</div>    			
                 </form>
 		</div>
 	</section>

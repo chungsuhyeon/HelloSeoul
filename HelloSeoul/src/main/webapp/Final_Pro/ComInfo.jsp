@@ -12,6 +12,104 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
+
+$('document').ready(function(){
+// 	if($("#com_ctg").val()=1){
+	const urlParams = new URL(location.href).searchParams;
+	const no = $("#plno").val();
+	console.log($("#com_ctg").val());
+	// 일정에 따른 tab 구현
+	$.ajax({
+		url: '/web/ajaxMypagePlannerTabBar',
+		type: 'post',
+		data: {no:no},
+		dataType: 'json',
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		success: function(result){												
+			// 타이틀 input
+			$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
+			
+			// 날짜 tab				
+			var start = new Date(result.PLANNER_START);
+
+			for(var i=0; i<result.numDate; i++){
+				var year = start.getFullYear().toString();
+				var mon = (start.getMonth() + 1).toString();
+				var day = start.getDate().toString();
+				
+				mon = mon.length == 1 ? "0" + mon : mon;
+				day = day.length == 1 ? "0" + day : day;
+				
+				// 최종 날짜 변수
+				var show_date = year + "-" + mon + "-" + day;
+				
+				if(!i){
+					$("ul[name='dayTabbar']").append(
+							`<li class='nav-item' role='presentaion'>
+								<a class='nav-link active' data-bs-toggle='tab' href='#Day\${i}' aria-selected='true' role='tab'>\${show_date}</a>
+							</li>`
+					);
+					$("div.tab-content").append(
+							`<div class='tab-pane fade active show' id='Day\${i}' role='tabpanel'>
+								<table class='table table-hover'>
+									<tbody></tbody>
+								</table>
+							</div>`						
+					);
+				} else {
+					$("ul[name='dayTabbar']").append(
+							`<li class='nav-item' role='presentaion'>
+								<a class='nav-link' data-bs-toggle='tab' href='#Day\${i}' aria-selected='false' role='tab'>\${show_date}</a>
+							</li>`
+					);
+				}
+				$("div.tab-content").append(
+						`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
+							<table class='table table-hover'>
+								<tbody></tbody>
+							</table>
+						</div>`						
+				);
+				start.setDate(start.getDate() + 1);
+			} // 날짜 tab for문 끝
+			
+			$.ajax({
+				url: '/web/ajaxMypagePlannerTabContent',
+				type: 'post',
+				data: {no:no},
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function(result){
+					$(result).each(function(idx, list){
+						list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
+						list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
+						
+						$("div#" + list['planner_date'] + " table tbody").append(
+								`<tr class='table-light'>
+									<td>
+										<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
+									</td>
+									<td>
+										<span>\${list["loc_name"]}</span>
+										<br>
+										<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+									</td>
+								</tr>`
+						);							
+					}); // $(result).each
+				},
+				error: function(){
+					alert("error : " + error);
+				}
+			}); // ajax taa-content
+			
+		},
+		error: function(){
+			alert("error : " + error);
+		}
+	}); // ajax
+
+}); // $('document').ready
 function check_id(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
@@ -168,6 +266,10 @@ function check_id2(){
 					});
 				}
 			});
+		$("button#listbt").click(function(){
+			location.replace("/web/boardSelect");
+			
+		});
 	});
 </script>
 <!--JS Section End -->
@@ -212,6 +314,8 @@ function check_id2(){
 						<input type="hidden" id='com_no' name='com_no' value='${i.com_no}'>
 						<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 						<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
+						<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
+						
 						<span>
 							<c:choose>
 								<c:when test="${i.com_ctg eq 1}">[ctg1qwdqw]</c:when>
@@ -236,13 +340,36 @@ function check_id2(){
 						<div class='textbar col-6'>
 							${i.com_cont}
 						</div>
-						<div class='photobar col-6'>
+						<div class='photobar col-6' >
+						<c:if test="${i.com_ctg==1 }">
+						<!-- planner -->
+						<input type="hidden" id="plno" value="${i.plno }">
+								<div class='col-12'>
+				<div class='col-12' style="display: inline-flex;" id="planTitle"></div>
+			</div>
+			
+			<div class='data col-12' style="display: inline-flex;">
+				<!-- tab head -->
+				<div class='tabbar col-12'>
+					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar" style="width:100%;">
+					</ul>
+					
+					<!-- tab contents -->
+					<div id='myTabContent border border-info-1' class='tab-content'>
+					</div>
+				</div>
+				</div>
+							</c:if>
+						<div class='photobar col-12'>
 							<img alt="test" src="/web/resources/test/${i.com_filename }">
+							</div>
+						
+							
 						</div>
 					</div>
 					<div class='settingbar col-12' style="display: inline-flex;">
 					<div class='backbar col-4'>
-						<button type="button" class="btn btn-primary">List</button>
+						<button type="button" class="btn btn-primary" id="listbt">List</button>
 					</div>
 					<div class='goodbad col-4'>
 						<button type="button" class="btn btn-success" id='good'>

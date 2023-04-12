@@ -39,7 +39,7 @@ public class MypageServiceImpl implements MypageService {
 		HashMap<String, Object> userDBInfo = helloDao.getUserInfo(id);
 		
 		// DB 생일
-		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		LocalDate birth = LocalDate.parse((String)userDBInfo.get("USER_BIRTH"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
 		// 오늘 날짜
 		LocalDate today = LocalDate.now();
@@ -116,48 +116,40 @@ public class MypageServiceImpl implements MypageService {
 		String tab2 = "";
 		String tab3 = "";
 		String tab4 = "";
-		String tab5 = "";
 		
 		for(Object i : userJjimList) {
 			MypageJjimBean bean = (MypageJjimBean) i;	
 			
-			if(bean.getLoc_ctg1().equals("음식점")) {
+			if(bean.getLoc_ctg1().equals("food")) {
 				tab1 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab1 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab1 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab1 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("관광지")){				
+			else if (bean.getLoc_ctg1().equals("tour")){				
 				tab2 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab2 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab2 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab2 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("쇼핑")){				
+			else if (bean.getLoc_ctg1().equals("shopping")){				
 				tab3 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab3 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
 				tab3 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab3 += "</span></td></tr>";
 			}
-			else if (bean.getLoc_ctg1().equals("볼거리")){				
+			else { // 티켓인 경우	entertainment
 				tab4 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
 				tab4 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab4 += "<br><span style='font-size: 8px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
+				tab4 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
 				tab4 += "</span></td></tr>";
-			}
-			else { // 티켓인 경우	
-				tab5 += "<tr class='table-light'><td><input type='checkbox' name='select_location' value=" + bean.getLoc_pc() + "></td>";
-				tab5 += "<td><a href='#' id='local_name'>" + bean.getLoc_name() + "</a>";
-				tab5 += "<br><span style='font-size: 5px'> " + bean.getLoc_sg() + " > " + bean.getLoc_ctg1()  + " > " + bean.getLoc_ctg2();
-				tab5 += "</span></td></tr>";
 			}
 		}		
 
 		finalStr += "<div class='tab-pane fade active show' id='food' role='tabpanel'><table class='table table-hover'><tbody>" + tab1 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='hotspot' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='things_to_see' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
-		finalStr += "<div class='tab-pane fade' id='ticket' role='tabpanel'><table class='table table-hover'><tbody>" + tab5 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='tour' role='tabpanel'><table class='table table-hover'><tbody>" + tab3 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='shopping' role='tabpanel'><table class='table table-hover'><tbody>" + tab2 + "</tbody></table></div>";
+		finalStr += "<div class='tab-pane fade' id='entertainment' role='tabpanel'><table class='table table-hover'><tbody>" + tab4 + "</tbody></table></div>";
 		
 		return finalStr;
 	}
@@ -251,19 +243,6 @@ public class MypageServiceImpl implements MypageService {
 	public MypagePlannerBean mypageDateInfo(int no) {
 		return helloDao.mypageplannerInfo(no);
 	}
-	
-	
-
-
-	
-	
-
-	
-	
-	
-	
-	
-	
 	
 	
 	

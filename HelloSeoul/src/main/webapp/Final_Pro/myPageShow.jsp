@@ -21,7 +21,6 @@
 		
 	});
 	
-	
 	// 플래너 생성 로드시
 	$('document').ready(function(){
 		
@@ -120,7 +119,6 @@
 		}); // ajax
 	}); // $('document').ready
 	
-	
 </script>
 <!--JS Section End -->
 
@@ -131,20 +129,20 @@
 </style>
 <!-- Style Section End -->
 
-
 </head>
 <body>
 	<header>
 	<jsp:include page="header.jsp"></jsp:include>
 	</header>
 	<section>
-		<div class='container-fluid'>
+		<div class='container'>
 			<!-- tab -->
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='/web/myPageLoad'>Mypage</a></li>
-					<li class='breadcrumb-item'><a href='/web/allPageLoad?no=${param.no}&modi=updatePlanner'>Planner Modify</a></li>
-					<li class='breadcrumb-item'><a href='#'>Planner Delete</a></li>
+					<li class='breadcrumb-item'><a href="/web/Final_Pro/myPagePlannerModify.jsp?planner_no=${param.no}">Planner Modify</a></li>
+					<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
+					<li class='breadcrumb-item'><a href='/web/PlannerShare?plno=${param.no}&type=Planner'>Planner Share</a></li>
 				</ol>
 			</div>
 			

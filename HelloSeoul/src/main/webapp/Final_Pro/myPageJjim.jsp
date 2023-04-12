@@ -179,7 +179,7 @@
 	</header>
 	
 	<section class='section'>
-		<div class='container-fluid'>
+		<div class='container'>
 			<div class='menu col-12'>
 				<!-- 뒤로가기 & 플래너 수정 버튼 -->
 				<ol class='breadcrumb'>
@@ -195,16 +195,13 @@
 							<a class='nav-link active' data-bs-toggle='tab' href='#food' aria-selected='true' role='tab'>Food</a>
 						</li>
 						<li class='nav-item' role='presentaion'>
+							<a class='nav-link' data-bs-toggle='tab' href='#tour' aria-selected='false' role='tab'>Tour</a>
+						</li>					
+						<li class='nav-item' role='presentaion'>
 							<a class='nav-link' data-bs-toggle='tab' href='#shopping' aria-selected='false' role='tab'>Shopping</a>
 						</li>					
 						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#hotspot' aria-selected='false' role='tab'>HotSpot</a>
-						</li>					
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#things_to_see' aria-selected='false' role='tab'>Ticket</a>
-						</li>					
-						<li class='nav-item' role='presentaion'>
-							<a class='nav-link' data-bs-toggle='tab' href='#ticket' aria-selected='false' role='tab'>Test</a>
+							<a class='nav-link' data-bs-toggle='tab' href='#entertainment' aria-selected='false' role='tab'>Entertainment</a>
 						</li>					
 					</ul>
 					<!-- tab contents -->

@@ -21,6 +21,7 @@ SELECT * FROM SIGUNGU
 <select id="readyForCategory" parameterType="String" resultType="java.util.HashMap">
 SELECT LOC_PC,LOC_NAME
 FROM MAINDB
+WHERE <![CDATA[ROWNUM<20]]>
 </select>
 
 
@@ -50,7 +51,7 @@ WHERE LOC_NAME = '%'||#{query}||'%'
 <select id="readyForHotspot" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
-WHERE LOC_CTG1 = 'tour'
+WHERE LOC_CTG1 = 'tour'AND <![CDATA[ROWNUM<9]]>
 </select>
 
 <select id="hotspotinfo" resultType="mainDB" parameterType="int">
@@ -67,6 +68,16 @@ FROM MAINDB
 WHERE LOC_SG = #{loc_sg}
 ORDER BY DBMS_RANDOM.VALUE)
 WHERE <![CDATA[ROWNUM<5]]> 
+</select>
+
+<select id="hotspotPage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+SELECT LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM (
+SELECT ROWNUM RM,LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM MAINDB
+WHERE LOC_CTG1 = 'tour'
+)
+WHERE <![CDATA[RM>=#{start}]]> AND <![CDATA[RM<#{end}]]>
 </select>
 
 </mapper>

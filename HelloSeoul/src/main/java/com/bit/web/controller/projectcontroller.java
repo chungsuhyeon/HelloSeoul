@@ -52,6 +52,7 @@ public class projectcontroller {
 	
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
+//		System.out.println(plno);
 		commService.selectBoard(board, model, request);
 		return "Final_Pro/ComList";
 	}
@@ -124,15 +125,16 @@ public class projectcontroller {
 		commService.badAction(com_no, user_id, board, map);
 		return commService.selectGBboard(com_no);
 	}
-	
-
-	
-
-
 	@RequestMapping(value="boardInsert")
-	public String boardInsert(ComBoard board,@RequestParam(value="file")MultipartFile file) {
+	public String boardInsert(ComBoard board,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		commService.boardInsert(board, file);
 		return "redirect:/boardSelect";
+	}
+	@RequestMapping(value="PlannerShare")
+	public String PlannerShare(int plno,Model model) {
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
+		
+		return "Final_Pro/ComWrite";
 	}
 	
 }

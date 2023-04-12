@@ -22,6 +22,10 @@ $(function(){
 	$(".postbar").click(function(){
 		$("form").submit();
 	});
+	$("button#cancelbt").click(function(){
+		
+		location.replace("/web/boardSelect");
+	});
 });
 </script>
 <!--JS Section End -->
@@ -48,11 +52,16 @@ $(function(){
 							<th>Catergory</th>
 							<td>
 								<select class='form-select' name="com_ctg" style="width: 30%;">
+								<c:if test="${param.type eq 'write'}">
 									<option value="">&nbsp;+ 선택해주세요</option>
 									<option value="">----------------------</option>
-									<option value="1">정보공유</option>
+									
 									<option value="2">후기</option>	
 									<option value="3">동행모집</option>
+									</c:if>
+									<c:if test="${param.type eq 'Planner'}">
+									<option value="1">플래너공유</option>
+									</c:if>
 								</select>
 							</td>
 							<td> <input type="hidden" value="${user_id }" name="user_id">  </td>
@@ -73,13 +82,26 @@ $(function(){
 							<th>Contents</th>
 							<td>
 								<textarea class="form-control" id="com_cont" name='com_cont' rows="20" style="resize: none;"></textarea>
+								
 							</td>
 						</tr>
+						
 						<tr>
+						
 							<th>File</th>
 							<td>
 								 <input class="form-control" type="file" id="com_filename" name='file' >
+								 <input type="hidden" id="plno" name="plno" 
+								 value="${param.plno }"
+								 
+								 />
 							</td>
+							</tr>
+						<tr>
+							<c:if test="${param.type eq 'Planner'}">
+							<th>Planner Title</th>
+							<td>${Pltt}</td>
+							</c:if>
 						</tr>
 	
 					</tbody>
@@ -87,7 +109,7 @@ $(function(){
 			</form>
 			<div class='buttonbar mb-4 d-flex justify-content-evenly'>
 				<button type="button" class="postbar btn btn-success">Post</button>
-				<button type="button" class="cancelbar btn btn-danger">Cancel</button>
+				<button type="button" class="cancelbar btn btn-danger" id="cancelbt">Cancel</button>
 			</div>
 		</div>
 	</section>

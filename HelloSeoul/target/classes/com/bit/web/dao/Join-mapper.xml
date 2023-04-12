@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--email 중복체크 -->
 		<select id="ajaxGetId" parameterType="String" resultType="String">
-		   select * from userboard
-		   where user_id=#{value}
+		   select user_id from userboard
+		   where user_id = #{value}
 		</select>
 	
 	
