@@ -20,16 +20,13 @@
 $(function(){
 	// email 등록
 		   $("select[name='user_id3']").change(function(){
-			   if($(this).val()=='direct'){
-				   //$("input[name='user_id2']").attr("disabled",false);
-				   //$("input[name='user_id2']").attr("readonly",false);
+			   if($(this).val()=='direct'){				   
 				   $("input[name='user_id2']").removeAttr("readonly");
 				   $("input[name='user_id2']").val('');
 				   $("input[name='user_id2']").focus();
-			   }else{
-				   //$("input[name='user_id2']").attr("disabled",true);
+			   }else{				   
 				   $("input[name='user_id2']").attr("readonly",true);
-				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
+// 				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
 				 
 		 		  }			   
 	 		  }); // email 등록-end
@@ -39,7 +36,7 @@ $(function(){
 	           $("button#check").click(function(){ 	        	   
  	        	   let user_id =$("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val(); 	        	 
  	        	   var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; ///^[0-9a-zA-Z]/: 이메일 주소의 첫 글자는 숫자나 알파벳으로 시작, /i : 대소문자 구분X
- 	        	   //alert(user_id.match(pattern));	 		       
+ 	        	   alert(user_id.match(pattern));	 		       
 	        	   if(user_id.match(pattern)==null){
 	        		   alert("Please enter in the correct format \n ex)seoul@gmail.com");
 	        		   $("input[name='user_id1']").val('');
@@ -54,7 +51,7 @@ $(function(){
 	     				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 	     				   dataType:'text',
 	     				   success:function(result){
-	     					  // console.log(result);
+	     					   //console.log(result);
 	     					  if(result=='true'){
 	     						  $("span#sid").html("<br><font color='red'>Disavailable</font>");
 	     						  $("input[name='user_id1']").val('');
@@ -75,9 +72,9 @@ $(function(){
 		           $("button#userNick").click(function(){	         		     
 			       let user_nick =$("input[name='user_nick']").val();	
 			       alert(user_nick);
-	 		       var pattern_nick = /^[a-zA-Z]{2,6}$/i; 	 		           
+	 		       var pattern_nick = /^[a-zA-Z]{4,100}$/i; 	 		           
 			       if(user_nick.match(pattern_nick)==null){
-			    	   alert("6글자이하로");
+			    	   alert("Please enter 4 characters or more");
 			    	   $("input[name='user_nick']").focus();
 	        		   $("input[name='user_nick']").val('');
 			       }
@@ -91,11 +88,11 @@ $(function(){
 		 				   success:function(data){
 		 					  //console.log(data);
 		 					  if(data=='true'){
-		 						  $("span#nick").html("<br><font color='red'>Disavailable★</font>");
+		 						  $("span#nick").html("<br><font color='red'>Disavailable</font>");
 		 						  $("input#user_nick").val('');
 		 						  $("input#user_nick").focus();
 		 					 }else{
-		 						 $("span#nick").html("<br><font color='white'>Available★</font>")
+		 						 $("span#nick").html("<br><font color='white'>Available</font>")
 		 					 }
 		 				   },
 		 				   error:function(){
@@ -105,27 +102,21 @@ $(function(){
 	 	        	  }
  	  	          }); // nickname 형식 및 중복체크-end    
 		       
-		       
-  			        
-  	// password 네자이상 
-				 $("input[name='user_pw']").blur(function(){ 
-	  					 // console.log('blur'); 
-	  			        if($("input[name='user_pw']").val().length>=4){
-	  			        	
-	  			        }else{ 
-	  			        	alert("Please set it to 4 characters or more");	 
-                            $("input[name='user_pw']").val('');	         	
- 	  			        	setTimeout(function(){
- 	  			        		$("input[name='user_pw']").focus();
- 	  			             }, 1);
-	  			        } 
-	  			   });// password 네자이상 -end
-	       
- 	                	
+			        
 
-  	//password 입력값1,2같은지 확인 
-	  			   $("input[name='user_pw2']").blur(function(){ //포커스가 다른곳으로 가면 콘솔창에서 blur가 나온다 
-	  					 // console.log('blur'); 
+ // password 네자이상 
+  			 $("input[name='user_pw2']").focus(function(){  	  					 
+ 	  			        if($("input[name='user_pw']").val().length<4){
+ 	  			        	alert("Please set it to 4 characters or more");	 
+                            $("input[name='user_pw']").val('');
+                            $("input[name='user_pw']").focus(); 		          
+                           } 
+ 	  			   });// password 네자이상 -end 
+ 	  			   
+
+  	//password 입력값 동일여부 확인  
+	  			   $("input[name='user_pw2']").blur(function(){ 
+	  					 
 	  			        
 	  			        if($("input[name='user_pw']").val()==$("input[name='user_pw2']").val()){	
 	  			        	$("input[name='user_pw']").val();
@@ -137,7 +128,7 @@ $(function(){
  	  			             }, 1);
 	  			        	alert("Please Check Password");
 	  			        } 
-	  			   });	//password 입력값1,2같은지 확인 
+	  			   });	//password 입력값 동일여부 확인  
 	       
 	     
 	       
@@ -175,7 +166,7 @@ $(function(){
     
 
    // 가입정보 저장, 공백체크  	   
-				   $("button#save").click(function(){ //값 유무 확인		   
+				   $("button#save").click(function(){ //값 유무 확인					   
 					   $("input[name='user_id']").val($("input[name='user_id1']").val()+'@'+$("input[name='user_id2']").val());
 				   
 				       if($("input[name='user_nick']").val()==""){ //닉네임 
@@ -194,9 +185,9 @@ $(function(){
 				    	   $("input[name='user_birth']").focus();
 				    	   exit;
 				       }
-				       if($("select[name='user_gender']").val()=="0"){ //성별
+				       if($("input[name='user_gender']").val()=="0"){ //성별
 				    	   alert("Please enter your Gender");
-				    	   $("select[name='user_gender']").focus();
+				    	   $("input[name='user_gender']").focus();
 				    	   exit;
 				       }
 				       if($("select[name='user_pp']").val()=="0"){  //여행목적
@@ -212,10 +203,12 @@ $(function(){
 				    	   
 
 				       $("form[name='joinFrm']").submit(); 
+				       alert("success");
 				   
 				   }); //가입정보 저장, 공백체크 -end
 				
 
+				   
       });// 전체함수-end
 </script>
 <!--JS Section End -->
@@ -259,14 +252,14 @@ $(function(){
 			  				    <input type="text" class="form-control" placeholder="gmail.com" name="user_id2" id="inputDefault">
 			  				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 			  				         <select class="form-select" name="user_id3" id="inputDefault">
-						                 <option selected="selected" value="direct">Direct input</option>
+						                 <option selected="selected" value="direct">select</option>
 										 <option value="naver.com">naver.com</option>
 										 <option value="daum.net">daum.net</option>
 										 <option value="bit.com">bit.com</option>
 										 <option value="gmail.com">gmail.com</option>  
 										 <option value="yahoo.com">yahoo.com</option> 	
 										 <option value="aol.com">aol.com</option>
-										 
+								    </select>	 
 								<input type="hidden" class="form-control" name="user_id" id="inputDefault">	&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="d-grid gap-2">
   										<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="check" type="button">Email-Check<span id="sid"></span></button>
@@ -320,7 +313,7 @@ $(function(){
 	  					</div>  					
 
   					<label class="col-form-label mt-4" for="inputDefault">Birth</label>
-  						<input style="width: 450px;" name="user_birth" type="date" class="form-control"  >
+  						<input style="width: 400px;" name="user_birth" type="date" class="form-control"  >
   					<!-- <fieldset class="form-group"> -->
   					
   					<label class="col-form-label mt-4" for="inputDefault">Gender</label>
@@ -358,10 +351,12 @@ $(function(){
 			  				</div>
 	  					</div>				
 	  					
-	  					
+	  					<br>
 	  			    	<div class="find-btn" >	  					            						     
-  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save" style="width: 300px;"> join up</button>
-  					    </div>					
+  					              <button class="btn btn-lg btn-primary mt-2" type="button" id="save" style="width: 300px;"> Join Up</button>
+  					    </div>	
+  					    <br>
+  					</div>    			
                 </form>
 		</div>
 	</section>
