@@ -53,17 +53,16 @@ $(function(){
 							<th>Catergory</th>
 							<td>
 								<select class='form-select' name="com_ctg" style="width: 30%;">
-									<c:choose>
-									<c:when test="${i.com_ctg eq 1 }">
-									<option value="1">플래너공유</option>
-									</c:when>
-									<c:otherwise>
-									<option value="">&nbsp;+ 선택해주세요</option>
-									<option value="">----------------------</option>
-									<option value="2">후기</option>	
-									<option value="3">동행모집</option>
-									</c:otherwise>
-									</c:choose>
+									<c:if test="${i.com_ctg eq 1 }">
+										<option value="1">플래너공유</option>
+									</c:if>
+									<c:if test="${i.com_ctg ne 1 }">
+										<c:if test="${i.com_ctg eq 2 }"><option value="2">후기</option></c:if>
+										<c:if test="${i.com_ctg eq 3 }"><option value="3">동행모집</option></c:if>
+										<option value="">----------------------</option>
+										<option value="2">후기</option>
+										<option value="3">동행모집</option>
+									</c:if>
 								</select>
 							</td>
 							<td>

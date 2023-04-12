@@ -451,11 +451,11 @@ function ReportOn(){
                      </button>
                   </div>
                   <div class="modal-body">
-                     <input type="checkbox" id="ck1" name="report" value="1"> 부적절한<br>
-                     <input type="checkbox" id="ck2" name="report" value="2"> 부적절한<br>
-                     <input type="checkbox" id="ck3" name="report" value="3"> 부적절한<br>
-                     <input type="checkbox" id="ck4" name="report" value="4"> 부적절한<br>
-                     <input type="checkbox" id="ck5" name="report" value="5"> 부적절한<br>
+                     <input type="checkbox" id="ck1" name="report" value="1"> 욕설<br>
+                     <input type="checkbox" id="ck2" name="report" value="2"> 광고<br>
+                     <input type="checkbox" id="ck3" name="report" value="3"> 불건전한 게시물<br>
+                     <input type="checkbox" id="ck4" name="report" value="4"> 도배<br>
+                     <input type="checkbox" id="ck5" name="report" value="5"> 집가고싶다<br>
                      <h5>자세한 신고 사유를 적어주세요.</h5>
                      <textarea rows="7px" cols="40px"></textarea>
                      
