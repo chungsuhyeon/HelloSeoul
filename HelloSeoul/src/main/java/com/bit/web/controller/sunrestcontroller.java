@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
@@ -63,17 +64,18 @@ public class sunrestcontroller {
 		return userid;
 	}
 	
-	@PostMapping(value = "paging")
-	public List<HashMap<String, Object>> pagingsys(int page) {
-		System.out.println(page);
-		System.out.println(ctg.HotspotPaging(page));
-		return ctg.HotspotPaging(page);
+	@PostMapping(value="pagingAction")
+	public List<HashMap<String, Object>> showHotList(int page, String ctg1){
+		System.out.println(page+":"+ctg1);
+		return ctg.hotspotshow(page,ctg1);
 	}
 	
-	@PostMapping(value="aiLearning")
-	public void leariningresult(String inurl) {
-		//StringBuffer url = readFromUrl(inurl);
+	@PostMapping(value="collectUser")
+	public List<JoinSeoulBean> adminCallUser(){
+		
+		return ctg.collectUsers();
 	}
+
 	
 
 }

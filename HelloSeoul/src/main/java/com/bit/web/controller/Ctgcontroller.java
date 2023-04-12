@@ -45,6 +45,8 @@ public class Ctgcontroller {
 	
 	@GetMapping(value = "gotohotspot")
 	public String gotoHotspot(Model model) {
+//		model.addAttribute("page",ctg.HotspotPagings(p));
+//		model.addAttribute("user_first",ff);
 		model.addAttribute("hotspot", ctg.readyForHot());
 		return "Final_Pro/HotspotMain";
 	}
@@ -63,6 +65,12 @@ public class Ctgcontroller {
 		System.out.println(x.jsonReadAll(br));
 		
 		return "success";
+	}
+	
+	@GetMapping(value = "Admin")
+	public String gotoAdminPage(String ID, int pw) {
+		
+		return "Final_Pro/AdminPage";
 	}
 	
 
