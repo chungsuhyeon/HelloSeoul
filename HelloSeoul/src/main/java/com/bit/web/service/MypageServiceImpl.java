@@ -209,7 +209,6 @@ public class MypageServiceImpl implements MypageService {
 			bean.setPlanner_no(no);
 			bean.setUser_id(id);
 			bean.setUpdate_user(nick);
-			System.out.println(bean);
 			helloDao.plannerDataInsert(bean);
 			return no;
 		} else { // update
