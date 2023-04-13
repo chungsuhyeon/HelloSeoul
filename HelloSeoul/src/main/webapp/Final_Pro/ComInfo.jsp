@@ -16,7 +16,7 @@
 $('document').ready(function(){
 // 	if($("#com_ctg").val()=1){
 	const urlParams = new URL(location.href).searchParams;
-	const no = $("#plno").val();
+	const no = $("#planner_no").val();
 	console.log($("#com_ctg").val());
 	// 일정에 따른 tab 구현
 	
@@ -117,8 +117,8 @@ $('document').ready(function(){
 function modifyAction(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
-	var plno=$("input#plno").val();
-	location.replace("/web/modifyAction?no="+no+"&user_id="+user_id+"&plno="+plno);
+	var planner_no=$("input#planner_no").val();
+	location.replace("/web/modifyAction?no="+no+"&user_id="+user_id+"&planner_no="+planner_no);
 	
 }
 function deleteAction(){
@@ -129,12 +129,12 @@ function deleteAction(){
 
 }
 function sharePlannerAction(){
-	var plno=$("input#plno").val();
+	var planner_no=$("input#planner_no").val();
 	var user_id=$("input#user_id").val();
 	if(user_id==""){
 		alert("로그인해주시길 바랍니다.")
 	}else{
-		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+		location.replace("/web/SharePlanner?planner_no="+planner_no+"&user_id="+user_id);
 	}
 }
 //팝업 띄우기
@@ -314,7 +314,7 @@ function ReportOn(){
 			<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 			<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
 			<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
-			<input type="hidden" id='plno' name='plno' value='${i.plno}' >
+			<input type="hidden" id='planner_no' name='planner_no' value='${i.planner_no}' >
 			<table class='table'>
 				<thead>
 					<tr class='table-primary'>
@@ -348,7 +348,7 @@ function ReportOn(){
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
 								</td>
 								<td style="border-left-width : 1px;">
-									<input type="hidden" id="plno" value="${i.plno }">
+									<input type="hidden" id="planner_no" value="${i.planner_no }">
 									<div class='col-12'>
 										<div class='col-12' style="display: inline-flex;" id="planTitle"></div>
 									</div>

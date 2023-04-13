@@ -139,11 +139,11 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer getTotalRow() {
 		return this.getSqlSession().selectOne("getTotalRow");
 	}
-	public String SelectPlannerTitle(int plno) {
-		return this.getSqlSession().selectOne("SelectPlannerTitle",plno);
+	public String SelectPlannerTitle(int planner_no) {
+		return this.getSqlSession().selectOne("SelectPlannerTitle",planner_no);
 	}
-	public HashMap<String, Object> SharePlanner(int plno) {
-		return this.getSqlSession().selectOne("SharePlanner",plno);
+	public HashMap<String, Object> SharePlanner(int planner_no) {
+		return this.getSqlSession().selectOne("SharePlanner",planner_no);
 	}
 	public List<Object>selectSharePlanner(int no){
 		return this.getSqlSession().selectList("selectSharePlanner",no);

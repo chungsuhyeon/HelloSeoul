@@ -242,6 +242,7 @@ public class CommServiceImpl implements CommService{
 			e.printStackTrace();
 		}
 		board.setCom_no(commdao.selectBoradNo());	
+		System.out.println(board);
 		commdao.boardInsert(board);
 	}
 	@Override
@@ -258,15 +259,15 @@ public class CommServiceImpl implements CommService{
 		model.addAttribute("board",commdao.selectBoard(map));
 	}
 	@Override
-	public String SelectPlannerTitle(int plno) {
+	public String SelectPlannerTitle(int planner_no) {
 		// TODO Auto-generated method stub
-		return commdao.SelectPlannerTitle(plno);
+		return commdao.SelectPlannerTitle(planner_no);
 	}
 	
 	@Override
-	public void createSharePlanner(MypagePlannerBean bean, int plno, String user_id) {
+	public void createSharePlanner(MypagePlannerBean bean, int planner_no, String user_id) {
 		// TODO Auto-generated method stub
-		HashMap<String, Object>map=commdao.SharePlanner(plno);
+		HashMap<String, Object>map=commdao.SharePlanner(planner_no);
 		Object startTime=map.get("PLANNER_START");
 		String start=new SimpleDateFormat("yyyy/MM/dd").format(startTime);
 		Object endTime=map.get("PLANNER_END");
