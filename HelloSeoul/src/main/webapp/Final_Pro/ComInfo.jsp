@@ -131,8 +131,11 @@ function deleteAction(){
 function sharePlannerAction(){
 	var plno=$("input#plno").val();
 	var user_id=$("input#user_id").val();
-	location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
-	
+	if(user_id==""){
+		alert("로그인해주시길 바랍니다.")
+	}else{
+		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+	}
 }
 //팝업 띄우기
 function openPop() {
@@ -385,7 +388,7 @@ function ReportOn(){
 					</tr>
 					<tr>
 						<td class='text-end' colspan="2">
-							<c:if test="${user_id ne i.user_id }">
+							<c:if test="${user_id ne i.user_id && user_id ne null}">
 								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
 							<c:if test="${user_id eq i.user_id}">
