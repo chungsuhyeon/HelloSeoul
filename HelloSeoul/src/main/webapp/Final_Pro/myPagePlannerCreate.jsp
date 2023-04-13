@@ -333,12 +333,8 @@
 	
   	input.form-control{
   		height: 50px !important;
-/*   		width: 100px !important; */
   	}
  	
-/* 	tr.table-light { */
-/* 		height: 50px !important; */
-/* 	} */
 </style>
 <!-- Style Section End -->
 
@@ -424,7 +420,6 @@
 					<script type="text/javascript">
 					var plno=$("input#plno").val();
 					$('document').ready(function(){
-// 					const plno=urlParams.get("plno");
 					//공유된 플래너 표시
 					$.ajax({
 						url: '/web/ajaxSharePlanner',

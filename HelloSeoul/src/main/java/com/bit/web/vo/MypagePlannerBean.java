@@ -14,4 +14,6 @@ public class MypagePlannerBean {
 	private String planner_end;
 	private String planner_title;
 	private String planner_info;
+	private String planner_regdate;
+	private String update_user;
 }

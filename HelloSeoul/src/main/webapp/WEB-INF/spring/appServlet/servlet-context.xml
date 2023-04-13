@@ -20,7 +20,7 @@
 		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.0.53:1521:orcl" />
 		<beans:property name="username" value="seoul"></beans:property>
-		<beans:property name="password" value="1234"></beans:property>
+		<beans:property name="password" value="123"></beans:property>
 	</beans:bean>
 
 	<!-- log4jdbc -->

@@ -79,6 +79,8 @@ public class CommServiceImpl implements CommService{
 				String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 				
 				
+				System.out.println(uploadFolder);
+				
 				/*
 				  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
 				  업로드 하는 파일명이 언어 이외의 언어로 되어있을 수 있습니다. 
@@ -210,7 +212,7 @@ public class CommServiceImpl implements CommService{
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 		String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
-		
+
 		
 		/*
 		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
