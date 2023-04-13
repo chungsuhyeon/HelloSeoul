@@ -26,7 +26,6 @@
 		const urlParams = new URL(location.href).searchParams;
 		const no = urlParams.get('planner_no');
 		
-		
 		// 일정에 따른 tab 구현
 		$.ajax({
 			url: '/web/ajaxMypagePlannerTabBar',
