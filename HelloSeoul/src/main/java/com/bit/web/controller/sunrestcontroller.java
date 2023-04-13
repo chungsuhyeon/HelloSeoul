@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
@@ -38,10 +39,9 @@ public class sunrestcontroller {
 	}
 	
 	@PostMapping(value="insertJjim")
-	public String insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
+	public void insertJjim(@RequestParam(value="jjimpoint[]") List<Integer> jjimpoint, HttpServletRequest resq) {
 		String user_id = (String) resq.getSession().getAttribute("user_id");
 		ctg.insertJjim(jjimpoint, user_id);
-		return "success";
 	}
 	
 	@PostMapping(value = "searchHot")
@@ -51,6 +51,7 @@ public class sunrestcontroller {
 	
 	@PostMapping(value = "hotspotrecommend")
 	public List<MainDbBean> hotspotrecom(String sg){
+		System.out.println(sg);
 		return ctg.hotspotrecom(sg);
 	}
 	
@@ -62,5 +63,19 @@ public class sunrestcontroller {
 		}
 		return userid;
 	}
+	
+	@PostMapping(value="pagingAction")
+	public List<HashMap<String, Object>> showHotList(int page, String ctg1){
+		System.out.println(page+":"+ctg1);
+		return ctg.hotspotshow(page,ctg1);
+	}
+	
+	@PostMapping(value="collectUser")
+	public List<JoinSeoulBean> adminCallUser(){
+		
+		return ctg.collectUsers();
+	}
+
+	
 
 }

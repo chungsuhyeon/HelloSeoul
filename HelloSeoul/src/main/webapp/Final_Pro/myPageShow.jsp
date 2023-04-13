@@ -18,7 +18,9 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
+		$("button#popupClose").click(function(){
+			document.getElementById("plannerSharePopUp").style.display = "none";
+		}); // $("#popupClose").click
 	});
 	
 	// 플래너 생성 로드시
@@ -101,7 +103,7 @@
 										<td>
 											<span>\${list["loc_name"]}</span>
 											<br>
-											<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+											<span style="font-size: 12px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
 										</td>
 									</tr>`
 							);							
@@ -110,7 +112,7 @@
 					error: function(){
 						alert("error : " + error);
 					}
-				}); // ajax taa-content
+				}); // ajax tab-content
 				
 			},
 			error: function(){
@@ -118,6 +120,47 @@
 			}
 		}); // ajax
 	}); // $('document').ready
+	
+	//팝업 띄우기
+	function openPop() {
+		document.getElementById("plannerSharePopUp").style.display = "block";
+	}
+	
+	// 닉네임 검색
+	function checkNick() {
+		var nick = $("input#nickname").val();
+		$.ajax({
+			url: '/web/ajaxNickCheck',
+			type: 'post',
+			data: {nick:nick},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				console.log(result);
+				$(result).each(function(idx, list){
+					console.log(list)
+// 					list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
+// 					list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
+					
+// 					$("div#" + list['planner_date'] + " table tbody").append(
+// 							`<tr class='table-light'>
+// 								<td>
+// 									<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
+// 								</td>
+// 								<td>
+// 									<span>\${list["loc_name"]}</span>
+// 									<br>
+// 									<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
+// 								</td>
+// 							</tr>`
+// 					);							
+				}); // $(result).each
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
+	}
 	
 </script>
 <!--JS Section End -->
@@ -135,13 +178,16 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	</header>
 	<section>
-		<div class='container-fluid'>
+		<div class='container'>
 			<!-- tab -->
 			<div class='menu col-12'>
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='/web/myPageLoad'>Mypage</a></li>
 					<li class='breadcrumb-item'><a href="/web/Final_Pro/myPagePlannerModify.jsp?planner_no=${param.no}">Planner Modify</a></li>
 					<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
+					<li class='breadcrumb-item'><a href='/web/PlannerShare?plno=${param.no}&type=Planner'>Planner Share</a></li>
+<!-- 					<li class='breadcrumb-item'><a href='#plannerSharePopUp'>Team Share</a></li> -->
+					<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>
 				</ol>
 			</div>
 			
@@ -179,6 +225,28 @@
 				
 			</div>
 		</div>		
+		
+		<!-- 팝업창 -->	
+		<div class="modal" id="plannerSharePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.5);">
+			<div class="modal-dialog" role="document" style="position: absolute; top: calc(50vh - 300px); left: calc(50vw - 200px);">
+				<div class="modal-content" style="height:350px; width:400px;">
+					<div class="modal-header">
+						<h5 class="modal-title">Nickname search to share planner</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="popupClose">
+							<span aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Nickname</span><br>
+						<input type="text" id="nickname" oninput="checkNick()">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</section>
 	<footer>
 		<jsp:include page="./footer.jsp"></jsp:include>

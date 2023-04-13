@@ -1,32 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <!-- Icon Error Begin-->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- Icon Error End-->
-
-<title>Hello, Seoul!</title>
-
+<title>Community List</title>
 <!--JS Section Begin -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
 <script type="text/javascript">
 $(function(){
+	//Board Write
 	$('.write').click(function(){
 		if($("input#user_id").val()==""){
-			alert("login plz");
+			alert("로그인 후 이용 가능합니다.");
 		}
 		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp");
+			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&plno=0");
 		}
 	});
+	//Board Info
 	$("div#top3list").click(function(){
 		var no=$(this).text();
 		document.location.href="/web/infoSelect?no="+no;
@@ -34,157 +31,170 @@ $(function(){
 });
 </script>
 <!--JS Section End -->
-
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-@
+
 </style>
 <!-- Style Section End -->
-
-
 </head>
 <body>
-
 <jsp:include page="./header.jsp"></jsp:include>
-	<section class='section bg-light'>
-
-		<div class='newcomm container-fluid bg-image' style="background-image: url('/web/resources/final_style/img/comm/listbackground.jpg'); padding: 30px; padding-top: 50px;">
-		<c:forEach var="i" items="${top3 }">
-			<div class='newcomm' style="display: inline-flex; position: relative;">
-					<div ></div>
-				<div id="top3list"  class='newcomm-contents bg-image' style="background-image:url('/web/resources/test/${i.com_filename }'); width:500px; height:600px; margin: 50px;">
-			 	${i.com_no }
-					<!-- 커뮤니티 글 첨부 파일 이미지 태그 -->
-				<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;">
-				</div>
-				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px">
-					<!-- 커뮤니티 글 제목 태그 -->
-					<h3>${i.com_title }</h3>
-				</div>
+<section class='container'>
+	<div class='row'>
+		<div>Hot Reviews</div>
+		<div class='hotboard col-6'>
+			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
+  				<div class="carousel-inner">
+  					<c:forEach var='i' items="${top3}" varStatus="status">
+  					<c:if test="${status.index==0 }">
+  					    				<div class="carousel-item active" data-bs-interval="2000">
+      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+      					<div class="carousel-caption d-none d-md-block">
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
+      					</div>
+    				</div>
+    			</c:if>
+    				
+    				<div class="carousel-item" data-bs-interval="2000">
+      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+      					<div class="carousel-caption d-none d-md-block">
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
+      					</div>
+    				</div>
+    				</c:forEach>
+  				</div>
+  				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    				<span class="visually-hidden">Previous</span>
+  				</button>
+	  			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+	    			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    			<span class="visually-hidden">Next</span>
+	  			</button>
 			</div>
-			</c:forEach>
-<!-- 			<div class='newcomm' style="display: inline-flex; position: relative;"> -->
-<!-- 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;"> -->
-<!-- 					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;"> -->
-<!-- 				</div> -->
-<!-- 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px"> -->
-<!-- 					<h3>Title Test line ...!!!!!</h3> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class='newcomm' style="display: inline-flex; position: relative;"> -->
-<!-- 				<div class='newcomm-contents bg-image' style="background-image:url('/web/resources/final_style/img/no_name.jpg'); width:500px; height:600px; margin: 50px;"> -->
-<!-- 					<img alt="" src="/web/resources/final_style/img/comm/newcomm.png" style="width:550px; height: 700px; margin-top: -50px; margin-left: -20px;"> -->
-<!-- 				</div> -->
-<!-- 				<div class='newcomm-title' style="position: absolute; margin-top: 580px; margin-left: 80px"> -->
-<!-- 					<h3>Title Test line ...!!!!!</h3> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-		</div>
-		<div class='tagtbbar container-fluid' style="display: inline-flex; padding-top: 20px;">
-			<div class='col-4'>
-				<div class='tagline bg-dark' style="border: solid; width:80%; border-radius: 20px; padding: 10px;">
-					<div class='col-12' style="text-align: center;">Real-Time Hot Tag</div>
-					<div class='tagbox'>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
-					<button type="button" class="btn btn-outline-success" style="margin:  5px;">Success</button>					
+			<div class='col-12'>
+				<div>Planner Share</div>
+				<div class='sharebox d-inline-flex'>
+					<div class="card text-white bg-primary mt-1 mx-1">
+	  					<div class="card-header">Planner Title</div>
+	  					<div class="card-body">
+	    					<table class='table'>
+	    						<tbody>
+	    							<tr class='table-light'>
+	    								<th>Nick Name</th>
+	    								<td>Jason</td>
+	    							</tr>
+	    							<tr class='table-light'>
+	    								<th>Date</th>
+	    								<td>2023-04-10</td>
+	    							</tr>
+	    							<tr class='table-light'>
+	    								<th>Memo</th>
+	    								<td>Test</td>
+	    							</tr>
+	    						</tbody>
+	    					</table>
+	  					</div>
+					</div>
+					<div class="card text-white bg-primary mt-1 mx-1" style="max-width: 20rem;">
+	  					<div class="card-header">Header</div>
+	  					<div class="card-body">
+	    					<h4 class="card-title">Primary card title</h4>
+	    					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	  					</div>
 					</div>
 				</div>
 			</div>
-			<div class='col-8'>
-				<input type="hidden" value="${user_id }" id="user_id"name="user_id"/>
-				<div class='col-12' style="display: inline-flex; margin-bottom: 10px;">
-				<h2>Community List</h2>
-				<button type="button" class="write btn btn-primary" style="float: right; margin-left: auto;">Write</button>	
+		</div>
+		<div class='boardlist col-6'>
+			<div class='row'>
+				<div class='col-6'>
+				Board List
 				</div>
-				<table class="table table-hover" style="border: solid;">
-					<thead>
-    					<tr class="table-primary">
-      						<th>ComNo</th>
-      						<th>Category</th>
-      						<th>Title</th>
-      						<th>Nick</th>
-      						<th>RegDate</th>
-    					</tr>
-	  				</thead>
-  					<tbody>
-  						<c:forEach items="${board}" var='i'>
-    						<tr class="table-info">
+				<div class='col-6 text-end'>
+					<button class='write btn btn-primary'>Write</button>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-12'>
+					<table class='table'>
+						<thead>
+							<tr class='table-primary'>
+								<th>No</th>
+								<th>Category</th>
+								<th class='w-50'>Title</th>
+								<th class='w-25'>Nick Name</th>
+								<th>RegDate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${board}" var='i'>
+    						<tr>
       							<td>${i.COM_NO}</td>
-      							<td>${i.COM_CTG }</td>
+      							<td><c:choose>
+								<c:when test="${i.COM_CTG eq 1}">[PlannerShare]</c:when>
+								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
+								<c:otherwise>[together travel]</c:otherwise>
+							</c:choose></td>
       							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
       							<td>${i.USER_NICK}</td>
       							<td>${i.COM_REGDATE}</td>
     						</tr>
-  						</c:forEach>
-  					</tbody>
-  				</table>
-  				<div class='d-flex justify-content-center'>
-  					<ul class="pagination pagination-sm">
+  							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='paging col-12 d-flex justify-content-center'>
+					<ul class="pagination pagination-sm">
   					<c:choose>
-  						<c:when test="${pageBean.currentBlock==1 }">
-    						<li class="page-item disabled">
-      							<a class="page-link" href="#">&laquo;</a>
-    						</li>
-    					</c:when>
-    					<c:otherwise>
-    						<li class="page-item">
-      							<a class="page-link" href="/web/boardSelect?page=${pageBean.startPage-1 }">&laquo;</a>
-    						</li>
-    					</c:otherwise>
+  					<c:when test="${pageBean.currentBlock==1}">
+    					<li class="page-item disabled">
+      						<a class="page-link" href="#">&laquo;</a>
+    					</li>
+    				</c:when>
+    				<c:otherwise>
+    					<li class="page-item">
+      						<a class="page-link" href="/web/boardSelect?page=${pageBean.startPage-1}">&laquo;</a>
+    					</li>
+    				</c:otherwise>
     				</c:choose>
-    					<c:forEach var="i" begin="${pageBean.startPage}" end="${pageBean.endPage }">
-    						<c:choose>
-    							<c:when test="${pageBean.currentPage==i }">
-    								<li class="page-item active">
-      									<a class="page-link" href="#">${i }</a>
-    								</li>
-    							</c:when>
-    							
-    							<c:otherwise>
-    								<li class="page-item">
-      									<a class="page-link" href="/web/boardSelect?page=${i }">${i }</a>
-    								</li>
-    							</c:otherwise>
-    						</c:choose>
-    					
-    					
-    					</c:forEach>
-   					
+    				<c:forEach var="i" begin="${pageBean.startPage}" end="${pageBean.endPage}">
+    				<c:choose>
+    				<c:when test="${pageBean.currentPage==i}">
+    					<li class="page-item active">
+      						<a class="page-link" href="#">${i}</a>
+    					</li>
+    				</c:when>
+    				<c:otherwise>
+    					<li class="page-item">
+      						<a class="page-link" href="/web/boardSelect?page=${i}">${i}</a>
+    					</li>
+    				</c:otherwise>
+    				</c:choose>
+    				</c:forEach>
 					<c:choose>
-  						<c:when test="${pageBean.totalPage==pageBean.endPage }">
-    						<li class="page-item disabled">
-      							<a class="page-link" href="#">&raquo;</a>
-      							
-    						</li>
-    					</c:when>
-    					<c:otherwise>
-    						<li class="page-item">
-      							<a class="page-link" href="/web/boardSelect?page=${pageBean.endPage+1 }">&raquo;</a>
-      							
-    						</li>
-    					</c:otherwise>
-    				</c:choose>
-    					
+  					<c:when test="${pageBean.totalPage==pageBean.endPage }">
+    					<li class="page-item disabled">
+      						<a class="page-link" href="#">&raquo;</a>
+      					</li>
+    				</c:when>
+    				<c:otherwise>
+    					<li class="page-item">
+      						<a class="page-link" href="/web/boardSelect?page=${pageBean.endPage+1 }">&raquo;</a>
+      					</li>
+    				</c:otherwise>
+    				</c:choose>		
   					</ul>
 				</div>
 			</div>
 		</div>
-	</section>
-	<footer>
-	<jsp:include page="./footer.jsp"></jsp:include>
-	</footer>
+	</div>
+</section>
+<jsp:include page="./footer.jsp"></jsp:include>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.bit.web.service;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.CtgDao;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.PageBean;
 
 
 @Service
@@ -54,6 +57,7 @@ public class CtgServiceImpl implements CtgService{
 	@Override
 	public List<MainDbBean> showLocinfo() {
 		// TODO Auto-generated method stub
+		//System.out.println(dao.showDb());
 		return dao.showDb();
 	}
 
@@ -102,20 +106,28 @@ public class CtgServiceImpl implements CtgService{
 		// TODO Auto-generated method stub
 		return dao.hotspotrecom(sg);
 	}
-	
-	
-	
-	
-	
-	//rest controller service end
-	
-	
-	
-	
+
+	@Override
+	public List<HashMap<String, Object>> hotspotshow(int page, String ctg1) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ctg1", ctg1);
+		map.put("start", (page-1)*8);
+		map.put("end", page*8);
+		dao.hotspotPage(map);
+		return null;
+	}
+
+	@Override
+	public List<JoinSeoulBean> collectUsers() {
+		// TODO Auto-generated method stub
+		return dao.collectUserByAdmin();
+	}
 	
 	
 	
 	
 	
 
+
 }
+	//rest controller service end

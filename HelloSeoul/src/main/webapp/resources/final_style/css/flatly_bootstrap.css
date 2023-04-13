@@ -96,7 +96,7 @@
 
 /* customline */
 section{
-	min-height: calc(100vh - (122px + 100px));
+	min-height: calc(100vh - (122px + 122px));
 }
 
 body {

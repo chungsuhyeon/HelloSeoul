@@ -2,11 +2,18 @@ package com.bit.web.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +22,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.web.controller.PaginAction;
+import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.dao.ProjectDao;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.gbboard;
+import com.mongodb.spark.sql.fieldTypes.api.java.Timestamp;
 
 import lombok.RequiredArgsConstructor;
 @Service
@@ -27,6 +38,8 @@ import lombok.RequiredArgsConstructor;
 public class CommServiceImpl implements CommService{
 	@Autowired
 	ProjectDao commdao;
+	@Autowired
+	HelloSeoulDao HSdao;
 	@Autowired
 	private PaginAction pageAction;
 	@Override
@@ -48,13 +61,51 @@ public class CommServiceImpl implements CommService{
 	public void deleteBoard(int no) {
 		commdao.deleteReply(no);
 		commdao.deleteGBboard(no);
+		commdao.reportDelete(no);
 		commdao.deleteBoard(no);
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public List<Object> updateBoard(ComBoard board) {
-		
+	public List<Object> updateBoard(ComBoard board,MultipartFile file) {
+		// TODO Auto-generated method stub
+				String fileRealName = file.getOriginalFilename(); //ÆÄÀÏ¸íÀ» ¾ò¾î³¾ ¼ö ÀÖ´Â ¸Ş¼­µå!
+				long size = file.getSize(); //ÆÄÀÏ »çÀÌÁî
+				System.out.println(file);
+				System.out.println("ÆÄÀÏ¸í : "  + fileRealName);
+				System.out.println("¿ë·®Å©±â(byte) : " + size);
+				//¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏÀÌ¸§ fileextensionÀ¸·Î .jspÀÌ·±½ÄÀÇ  È®ÀåÀÚ ¸íÀ» ±¸ÇÔ
+				String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
+				String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+				
+				
+				/*
+				  ÆÄÀÏ ¾÷·Îµå½Ã ÆÄÀÏ¸íÀÌ µ¿ÀÏÇÑ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÒ ¼öµµ ÀÖ°í »ç¿ëÀÚ°¡ 
+				  ¾÷·Îµå ÇÏ´Â ÆÄÀÏ¸íÀÌ ¾ğ¾î ÀÌ¿ÜÀÇ ¾ğ¾î·Î µÇ¾îÀÖÀ» ¼ö ÀÖ½À´Ï´Ù. 
+				  Å¸ÀÎ¾î¸¦ Áö¿øÇÏÁö ¾Ê´Â È¯°æ¿¡¼­´Â Á¤»ê µ¿ÀÛÀÌ µÇÁö ¾Ê½À´Ï´Ù.(¸®´ª½º°¡ ´ëÇ¥ÀûÀÎ ¿¹½Ã)
+				  °íÀ¯ÇÑ ·£´ø ¹®ÀÚ¸¦ ÅëÇØ db¿Í ¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏ¸íÀ» »õ·Ó°Ô ¸¸µé¾î ÁØ´Ù.
+				 */
+				
+				UUID uuid = UUID.randomUUID();
+				System.out.println(uuid.toString());
+				String[] uuids = uuid.toString().split("-");
+				String uniqueName = uuids[0];
+				System.out.println("»ı¼ºµÈ °íÀ¯¹®ÀÚ¿­" + uniqueName);
+				System.out.println("È®ÀåÀÚ¸í" + fileExtension);
+				
+				String filename=uniqueName+fileExtension;
+				board.setCom_filename(filename);
+				
+				// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid Àû¿ë Àü
+				
+				File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // Àû¿ë ÈÄ
+				try {
+					file.transferTo(saveFile); // ½ÇÁ¦ ÆÄÀÏ ÀúÀå¸Ş¼­µå(filewriter ÀÛ¾÷À» ¼Õ½±°Ô ÇÑ¹æ¿¡ Ã³¸®ÇØÁØ´Ù.)
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		// TODO Auto-generated method stub
 		return commdao.updateBoard(board);
 	}
@@ -151,39 +202,38 @@ public class CommServiceImpl implements CommService{
 	@Override
 	public void boardInsert(ComBoard board, MultipartFile file) {
 		// TODO Auto-generated method stub
-		String fileRealName = file.getOriginalFilename(); //íŒŒì¼ëª…ì„ ì–»ì–´ë‚¼ ìˆ˜ ìˆëŠ” ë©”ì„œë“œ!
-		long size = file.getSize(); //íŒŒì¼ ì‚¬ì´ì¦ˆ
+		String fileRealName = file.getOriginalFilename(); //ÆÄÀÏ¸íÀ» ¾ò¾î³¾ ¼ö ÀÖ´Â ¸Ş¼­µå!
+		long size = file.getSize(); //ÆÄÀÏ »çÀÌÁî
 		System.out.println(file);
-		System.out.println("íŒŒì¼ëª… : "  + fileRealName);
-		System.out.println("ìš©ëŸ‰í¬ê¸°(byte) : " + size);
-		//ì„œë²„ì— ì €ì¥í•  íŒŒì¼ì´ë¦„ fileextensionìœ¼ë¡œ .jspì´ëŸ°ì‹ì˜  í™•ì¥ì ëª…ì„ êµ¬í•¨
+		System.out.println("ÆÄÀÏ¸í : "  + fileRealName);
+		System.out.println("¿ë·®Å©±â(byte) : " + size);
+		//¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏÀÌ¸§ fileextensionÀ¸·Î .jspÀÌ·±½ÄÀÇ  È®ÀåÀÚ ¸íÀ» ±¸ÇÔ
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "E:\\workspring\\finalFinalFinalproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+		String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 		
 		
 		/*
-		  íŒŒì¼ ì—…ë¡œë“œì‹œ íŒŒì¼ëª…ì´ ë™ì¼í•œ íŒŒì¼ì´ ì´ë¯¸ ì¡´ì¬í•  ìˆ˜ë„ ìˆê³  ì‚¬ìš©ìê°€ 
-		  ì—…ë¡œë“œ í•˜ëŠ” íŒŒì¼ëª…ì´ ì–¸ì–´ ì´ì™¸ì˜ ì–¸ì–´ë¡œ ë˜ì–´ìˆì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤. 
-		  íƒ€ì¸ì–´ë¥¼ ì§€ì›í•˜ì§€ ì•ŠëŠ” í™˜ê²½ì—ì„œëŠ” ì •ì‚° ë™ì‘ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.(ë¦¬ëˆ…ìŠ¤ê°€ ëŒ€í‘œì ì¸ ì˜ˆì‹œ)
-		  ê³ ìœ í•œ ëœë˜ ë¬¸ìë¥¼ í†µí•´ dbì™€ ì„œë²„ì— ì €ì¥í•  íŒŒì¼ëª…ì„ ìƒˆë¡­ê²Œ ë§Œë“¤ì–´ ì¤€ë‹¤.
+		  ÆÄÀÏ ¾÷·Îµå½Ã ÆÄÀÏ¸íÀÌ µ¿ÀÏÇÑ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÒ ¼öµµ ÀÖ°í »ç¿ëÀÚ°¡ 
+		  ¾÷·Îµå ÇÏ´Â ÆÄÀÏ¸íÀÌ ¾ğ¾î ÀÌ¿ÜÀÇ ¾ğ¾î·Î µÇ¾îÀÖÀ» ¼ö ÀÖ½À´Ï´Ù. 
+		  Å¸ÀÎ¾î¸¦ Áö¿øÇÏÁö ¾Ê´Â È¯°æ¿¡¼­´Â Á¤»ê µ¿ÀÛÀÌ µÇÁö ¾Ê½À´Ï´Ù.(¸®´ª½º°¡ ´ëÇ¥ÀûÀÎ ¿¹½Ã)
+		  °íÀ¯ÇÑ ·£´ø ¹®ÀÚ¸¦ ÅëÇØ db¿Í ¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏ¸íÀ» »õ·Ó°Ô ¸¸µé¾î ÁØ´Ù.
 		 */
 		
 		UUID uuid = UUID.randomUUID();
 		System.out.println(uuid.toString());
 		String[] uuids = uuid.toString().split("-");
-		
 		String uniqueName = uuids[0];
-		System.out.println("ìƒì„±ëœ ê³ ìœ ë¬¸ìì—´" + uniqueName);
-		System.out.println("í™•ì¥ìëª…" + fileExtension);
+		System.out.println("»ı¼ºµÈ °íÀ¯¹®ÀÚ¿­" + uniqueName);
+		System.out.println("È®ÀåÀÚ¸í" + fileExtension);
 		
 		String filename=uniqueName+fileExtension;
 		board.setCom_filename(filename);
 		
-		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ì ìš© ì „
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid Àû¿ë Àü
 		
-		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ì ìš© í›„
+		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // Àû¿ë ÈÄ
 		try {
-			file.transferTo(saveFile); // ì‹¤ì œ íŒŒì¼ ì €ì¥ë©”ì„œë“œ(filewriter ì‘ì—…ì„ ì†ì‰½ê²Œ í•œë°©ì— ì²˜ë¦¬í•´ì¤€ë‹¤.)
+			file.transferTo(saveFile); // ½ÇÁ¦ ÆÄÀÏ ÀúÀå¸Ş¼­µå(filewriter ÀÛ¾÷À» ¼Õ½±°Ô ÇÑ¹æ¿¡ Ã³¸®ÇØÁØ´Ù.)
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -205,6 +255,47 @@ public class CommServiceImpl implements CommService{
 		model.addAttribute("top3",commdao.selecttop3());
 		model.addAttribute("board",commdao.selectBoard(map));
 	}
+	@Override
+	public String SelectPlannerTitle(int plno) {
+		// TODO Auto-generated method stub
+		return commdao.SelectPlannerTitle(plno);
+	}
+	
+	@Override
+	public void createSharePlanner(MypagePlannerBean bean, int plno, String user_id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object>map=commdao.SharePlanner(plno);
+		Object startTime=map.get("PLANNER_START");
+		String start=new SimpleDateFormat("yyyy/MM/dd").format(startTime);
+		Object endTime=map.get("PLANNER_END");
+		String end=new SimpleDateFormat("yyyy/MM/dd").format(endTime);
+		bean.setPlanner_start(start);
+		bean.setPlanner_end(end);
+		bean.setUser_id(user_id);
+		bean.setPlanner_title((String)(map.get("PLANNER_TITLE")));
+		bean.setPlanner_info((String)(map.get("PLANNER_INFO")));
+		bean.setPlanner_no(HSdao.getPlannerNo());
+//		System.out.println(bean);
+		HSdao.plannerDataInsert(bean);
+	}
+	@Override
+	public List<Object> selectSharePlanner(int no) {
+		// TODO Auto-generated method stub
+		return commdao.selectSharePlanner(no);
+	}
+	@Override
+	public void insertReport(List<Integer> rr, int com_no, String user_id,ReportBoard bean) {
+	
+		// TODO Auto-generated method stub
+		for (Integer integer : rr) {
+			bean.setCom_no(com_no);
+			bean.setReport_reason(integer);
+			bean.setUser_id(user_id);
+			commdao.insertReport(bean);
+		}		
+		commdao.reportUpdate(com_no);
+	}
+	
 
 	
 	

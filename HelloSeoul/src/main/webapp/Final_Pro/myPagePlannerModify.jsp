@@ -154,7 +154,7 @@
 									<td>
 										<a href='#' id='local_name' name='loc_name'>\${list['loc_name']}</a>
 										<br>
-										<span style="font-size: 5px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
+										<span style="font-size: 12px">\${list['loc_sg']} > \${list['loc_ctg1']} > \${list['loc_ctg2']} </span>
 									</td>
 								</tr>`
 					);
@@ -409,7 +409,7 @@
 	</header>
 	
 	<section>
-		<div class='container_fluid'>
+		<div class='container'>
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">

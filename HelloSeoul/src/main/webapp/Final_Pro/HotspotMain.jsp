@@ -40,6 +40,60 @@ $(function(){
 			alert("plz!");
 		}
 	});
+	
+	$('#test').click(function(){
+		$.ajax({
+			type: 'post',
+			url: '/web/paging',
+			data: {'page': 3},
+			dataType: 'json',
+			success: function(s){
+				$('.infocard a').remove();
+				for(var i=0; i<s.length;i++){
+					console.log(s[i]);
+					$('.infocard').append(`
+							<a href="/web/gotoHotspotinfo?pc=\${s[i].LOC_PC}">
+							<li class='mb-4' style="float: left; width:310px; height:380px;">
+								<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
+				  					<h3 class="card-header">\${s[i].LOC_NAME}</h3>
+				  					<div class='card-body'>
+										<img src="\${s[i].LOC_IMG}" style="object-fot:cover; width: 100%; height: 100%;">
+				  					</div>
+				  					<div class="card-body">
+					    				<p class="card-text">\${s[i].LOC_INFO}</p>
+					  				</div>
+					  				<div class="card-footer text-muted">
+				    				2 days ago
+				  					</div>
+								</div>						
+							</li>
+							</a>
+					`);
+
+				}
+			},
+			error: function(x){
+				alert("Error!");	
+			}
+		});
+	});
+	
+	$('#page').click(function(){
+		$.ajax({
+			type : 'post',
+			url : '/web/pagingAction',
+			data : {'page':1, 'ctg1':'tour'},
+			dataType :'text',
+			success : function(res){
+				alert(res);
+			},
+			error : function(er){
+				alert("Error!");
+			}
+			
+		});
+		
+	});
 });
 </script>
 <!--JS Section End -->
@@ -93,9 +147,10 @@ $(function(){
 			<div class='navbar'>
 				<div class='ctgbar'>
 				<ol class="breadcrumb bg-primary mt-4">
-	  				<li class="breadcrumb-item"><a href="#">Home</a></li>
-	  				<li class="breadcrumb-item"><a href="#">Library</a></li>
-	  				<li class="breadcrumb-item active">Data</li>
+	  				<li class="breadcrumb-item"><a href="#" id="landmark">LandMark</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="history">History</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="nature">Nature</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="etc">Etc</a></li>
 				</ol>
 				</div>
 				<div class='searchbar d-flex'>
@@ -103,54 +158,58 @@ $(function(){
 					<button type="button" class="btn btn-primary" id="searchbt">Search</button>
 				</div>
 			</div>
-			<div class='infobar' style="">
-				<ul class='infocard' style="list-style: none; width: 100%; height: 800px;">
-					<c:forEach var='i' items="${hotspot}">
-						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">
-						<li class='mb-4' style="float: left;">
-							<div class="card" style="width: 300px; margin-left: 5px; margin-right: 5px;">
-			  					<h3 class="card-header">${i.loc_name}</h3>
-			  					<div class='card-body'>
-									<img src="/web/resources/final_style/img/mainIdex/mainimg01.jpg" style="object-fot:cover; width: 100%; height: 100%;">
-			  					</div>
-			  					<div class="card-body">
-				    				<p class="card-text">${i.loc_info}</p>
-				  				</div>
-				  				<div class="card-footer text-muted">
-			    				2 days ago
-			  					</div>
-							</div>						
-						</li>
-					</a>
-					</c:forEach>
-				</ul>
+			<div class='infobox'>
+				<div class='infobar d-flex justify-content-center'>
+				<c:forEach var="i" items="${hotspot}" begin="0" end="3">
+					<div class="card col-3 bg-light mb-3 mx-1" style="max-width: 20rem;">
+	  					<div class="card-header text-center">${i.loc_name}</div>
+	  					<div class="card-body d-flex justify-content-center">
+	    					<img src="${i.loc_img}" style="width: 240px; height: 200px;">
+	  					</div>
+	  					<div class="card-footer">
+    						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">More</a>    						
+  						</div>
+					</div>
+				</c:forEach>
+				</div>
+				<div class='infobar d-flex justify-content-center'>
+				<c:forEach var="i" items="${hotspot}" begin="4" end="7">
+					<div class="card col-3 bg-light mb-3 mx-1" style="max-width: 20rem;">
+	  					<div class="card-header text-center">${i.loc_name}</div>
+	  					<div class="card-body d-flex justify-content-center">
+	    					<img src="${i.loc_img}" style="width: 240px; height: 200px;">
+	  					</div>
+	  					<div class="card-footer">
+    						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">More</a>    						
+  						</div>
+					</div>
+				</c:forEach>
+				</div>
 			</div>
 			<div class='pagingbar d-flex justify-content-center mt-4'>
-				<div class='paging'>
-					<ul class="pagination">
-					    <li class="page-item disabled">
-					      <a class="page-link" href="#">&laquo;</a>
-					    </li>
-					    <li class="page-item active">
-					      <a class="page-link" href="#">1</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">2</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">3</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">4</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">5</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">&raquo;</a>
-					    </li>
-		  			</ul>
-				</div>			
+				<ul class="pagination">
+					<li class="page-item disabled">
+					  <a class="page-link" href="#">&laquo;</a>
+					</li>
+					<li class="page-item active">
+					  <a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">5</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">&raquo;</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</section>

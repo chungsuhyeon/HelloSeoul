@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.util.Hash;
@@ -138,6 +139,25 @@ public class ProjectDao extends SqlSessionDaoSupport{
 	public Integer getTotalRow() {
 		return this.getSqlSession().selectOne("getTotalRow");
 	}
+	public String SelectPlannerTitle(int plno) {
+		return this.getSqlSession().selectOne("SelectPlannerTitle",plno);
+	}
+	public HashMap<String, Object> SharePlanner(int plno) {
+		return this.getSqlSession().selectOne("SharePlanner",plno);
+	}
+	public List<Object>selectSharePlanner(int no){
+		return this.getSqlSession().selectList("selectSharePlanner",no);
+	}
+	public void insertReport(ReportBoard bean) {
+		this.getSqlSession().insert("insertReport",bean);
+	}
+	public void reportUpdate(int com_no) {
+		this.getSqlSession().update("reportUpdate",com_no);
+	}
+	public void reportDelete(int no) {
+		this.getSqlSession().delete("reportDelete",no);
+	}
+	
 }
 
 

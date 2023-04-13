@@ -21,13 +21,10 @@ $(function(){
 	// email 등록
 		   $("select[name='user_id3']").change(function(){
 			   if($(this).val()=='direct'){
-				   //$("input[name='user_id2']").attr("disabled",false);
-				   //$("input[name='user_id2']").attr("readonly",false);
 				   $("input[name='user_id2']").removeAttr("readonly");
 				   $("input[name='user_id2']").val('');
 				   $("input[name='user_id2']").focus();
-			   }else{
-				   //$("input[name='user_id2']").attr("disabled",true);
+			   }else{				  
 				   $("input[name='user_id2']").attr("readonly",true);
 				   $("input[name='user_id2']").val( $("select[name='user_id3']").val());
 				 
@@ -115,11 +112,8 @@ $(function(){
 		    	  $("select[name='user_pw']").focus();
 		    	   exit;
 		       } 
-		       $("form[name='joinpw']").submit(); 		       
-
-				if(($(this).attr('id'))=='user_pw'){  //페이지 이동 
-					document.location.href ="/web/Final_Pro/login.jsp";
-				}
+		     $("form[name='joinpw']").submit(); 
+		     alert("Change is complete");
 
 	      });
 	  			   
@@ -161,9 +155,9 @@ $(function(){
   					<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Email</label>
 	  				    	<div>
 		  				    	<div class="form-group" style="display: inline-flex;">
-			  						<input style="width: 400px;" type="text" class="form-control" placeholder="Please enter your registered Email" name="user_id"  id="user_id">&nbsp;&nbsp;&nbsp;&nbsp;
+			  						<input style="width: 300px;" type="text" class="form-control" placeholder="Please enter your registered Email" name="user_id"  id="user_id">&nbsp;&nbsp;&nbsp;&nbsp;
 					  					<div class="d-grid gap-2">
-					  						<button style="height:35px;width: 150px;" class="btn btn-lg btn-primary mt-2" id="user_id" type="button">Email-Check<span id="user_id"></span></button>
+					  						<button style="height:35px;width: 180px;" class="btn btn-lg btn-primary mt-2" id="user_id" type="button">Email-Check<span id="user_id"></span></button>
 					  					</div>			  					
 			  			    	</div>
 	  				    	</div>
@@ -173,13 +167,13 @@ $(function(){
 	  				<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Password</label>
   						<div>
   						    <div class="form-group" style="display: inline-flex;">
-  						  	  <input style="width: 400px;" type="password" name="user_pw" placeholder="Password" class="form-control" id="user_pw">
+  						  	  <input style="width: 300px;" type="password" name="user_pw" placeholder="Password" class="form-control" id="user_pw">
   						    </div>
   						</div>
   					<label class="col-form-label mt-4" for="inputDefault">&nbsp;&nbsp;Confirm password</label>
   						  <div>
   						      <div class="form-group" style="display: inline-flex;">
-  						  	     <input style="width: 400px;" type="password"  placeholder="Confirm password"  name="user_pw2"   class="form-control" id="inputDefault">&nbsp;&nbsp;&nbsp;&nbsp; 
+  						  	     <input style="width: 300px;" type="password"  placeholder="Confirm password"  name="user_pw2"   class="form-control" id="inputDefault">&nbsp;&nbsp;&nbsp;&nbsp; 
   						  	   	   	<div class="form-group" style="display: inline-flex;">			  					
 					  					<button style="height:35px;width: 180px;" class="btn btn-lg btn-primary mt-2" id="user_pw" type="button">Password Reset<span id="user_pw"></span></button>
 					  				 </div>  						  

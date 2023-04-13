@@ -21,6 +21,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,10 @@ import com.bit.web.dao.ProjectDao;
 import com.bit.web.dao.TicketDao;
 import com.bit.web.service.CommService;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.util.JSON;
@@ -52,6 +55,7 @@ public class projectcontroller {
 	
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
+//		System.out.println(plno);
 		commService.selectBoard(board, model, request);
 		return "Final_Pro/ComList";
 	}
@@ -76,9 +80,10 @@ public class projectcontroller {
 			
 	}
 	@RequestMapping(value="modifyAction")
-	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id) {
+	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id,int plno) {
 		if(commService.checkId(no, id)) {
-		
+//			System.out.println(plno);
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
 		model.addAttribute("info",dao.selectInfoBoard(no));
 		return "Final_Pro/Commodify";
 		}else{
@@ -88,9 +93,10 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value="boardUpdate")
-	public String boardUpdate(int no,ComBoard board,Model model) {
+	public String boardUpdate(int no,ComBoard board,Model model,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		board.setCom_no(no);
-		commService.updateBoard(board);
+		System.out.println(board);
+		commService.updateBoard(board,file);
 		
 		return "redirect:/boardSelect";
 	}
@@ -124,15 +130,36 @@ public class projectcontroller {
 		commService.badAction(com_no, user_id, board, map);
 		return commService.selectGBboard(com_no);
 	}
-	
-
-	
-
-
 	@RequestMapping(value="boardInsert")
-	public String boardInsert(ComBoard board,@RequestParam(value="file")MultipartFile file) {
+	public String boardInsert(ComBoard board,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		commService.boardInsert(board, file);
 		return "redirect:/boardSelect";
+	}
+	@RequestMapping(value="PlannerShare")
+	public String PlannerShare(int plno,Model model) {
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
+		
+		return "Final_Pro/ComWrite";
+	}
+	@RequestMapping(value="SharePlanner")
+	public String SharePlanner(int plno,Model model,MypagePlannerBean bean,String user_id) {
+		commService.createSharePlanner(bean, plno, user_id);
+		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
+		
+		
+	}
+	@RequestMapping(value="ajaxSharePlanner")
+	@ResponseBody
+	public List<Object> ajaxSharePlanner(int no) {
+		System.out.println(no);
+		commService.selectSharePlanner(no);
+		return commService.selectSharePlanner(no);
+		
+	}
+	@RequestMapping(value="reportAction")
+	public String reportAction(@RequestParam(value="rr")List<Integer>rr,int com_no,String user_id,ReportBoard bean) {
+		commService.insertReport(rr, com_no, user_id, bean);
+		return "redirect:/infoSelect?no="+com_no;
 	}
 	
 }

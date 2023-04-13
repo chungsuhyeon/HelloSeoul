@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
@@ -40,18 +41,19 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> showDb() {
 		return this.getSqlSession().selectList("showDb");
 	}
-	//search loc
+	
 	public List<MainDbBean> searchLoc(HashMap<Object, Object> map){
 		return this.getSqlSession().selectList("searchLoc",map);
 	}
-	//jjim check
-	public List<Integer> checkJjimList(String user_id){
-		return this.getSqlSession().selectList("checkJjimList",user_id);
-	}
+	
 	public MainDbBean searchInsertJjim(int loc_pc) {
 		return this.getSqlSession().selectOne("searchInsertJjim",loc_pc);
 	}
-	//jjim insert
+	
+	public List<Integer> checkJjimList(String user_id){
+		return this.getSqlSession().selectList("checkJjimList",user_id);
+	}
+	
 	public void insertjjim(MypageJjimBean bean) {
 		this.getSqlSession().insert("insertjjim", bean);
 	}
@@ -59,9 +61,20 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> searchHot(String query){
 		return this.getSqlSession().selectList("searchHot",query);
 	}
+	public List<HashMap<String, Object>> hotspotPage(HashMap<String, Object> page){
+		return this.getSqlSession().selectList("hotspotPage", page);
+	}
+	
 	
 	public List<MainDbBean> hotspotrecom(String loc_sg){
 		return this.getSqlSession().selectList("hotspotrecom", loc_sg);
 	}
-
+	
+	public int totalpage() {
+		return this.getSqlSession().selectOne("totalpage");
+	}
+	
+	public List<JoinSeoulBean> collectUserByAdmin(){
+		return this.getSqlSession().selectList("collectUserByAdmin");
+	}
 }

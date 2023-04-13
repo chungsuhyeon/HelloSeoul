@@ -29,71 +29,49 @@
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/bootstrap.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-	.contdivbox{
-		display: flex;
-	}
-	
-	.contdivbox>div{
-		margin : 10px;
-		border:solid;
-		float:left;
-		display:flex;
-	}
-	
-	table{
-		width: 445px !important;
-		height : 350px !important;
-	}
-	
-	th,td{
-		font-size: 20px !important;
-	}
+.contentsbox table{
+	height: 300px;
+	width: 400px;
+}
 </style>
 <!-- Style Section End -->
 
 </head>
 <body>
-	<header>
-		<jsp:include page="header.jsp"></jsp:include>
-	</header>
-	
-	<section>
-		<div class='container-fluid'>
-			<!-- User Info -->
-			<div>
-				<div>
-					<h2>${user_nickName}</h2>
-				</div>
-				<div>
-					<h4>
-						Nationality : ${userInfo.USER_NATION}
-						&nbsp;&nbsp;&nbsp;
-						Age : ${userInfo.USER_AGE}
-						&nbsp;&nbsp;&nbsp;
-						Tourism purpose : ${userInfo.USER_PP}
-						&nbsp;&nbsp;&nbsp;
-						1st place in tourism : ${userInfo.USER_FIRST}
-					</h4>
-				</div>
-			</div>
-			<!-- Nav Bar -->
-			<div>
-				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageJjim.jsp">Wish</a></li>
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Planner Create</a></li>
-				</ol>
-			</div>
-			<!-- Contents Div Box -->
-			<div class='contdivbox'>
+<jsp:include page="header.jsp"></jsp:include>
+<section>
+	<div class='container'>
+		<!-- User Info -->
+		<div class='userinfobox d-flex row'>
+			<table class='table'>
+				<thead>
+					<tr class='table-primary'>
+						<th colspan="4"><h2>${user_nickName}</h2></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class='table-primary text-center'>
+						<td>Nationality : ${userInfo.USER_NATION}</td>
+						<td>Age : ${userInfo.USER_AGE}</td>
+						<td>Tourism purpose : ${userInfo.USER_PP}</td>
+						<td>1st place in tourism : ${userInfo.USER_FIRST}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Nav Bar -->
+		<div class='navbox'>
+			<ol class="breadcrumb bg-light">
+  				<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageJjim.jsp">Wish</a></li>
+  				<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Planner Create</a></li>
+			</ol>
+		</div>
+			<!-- Contents Box -->
+			<div class='contentsbox d-inline-flex'>
 				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
-					<div name="${i.PLANNER_NO}">
+					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
 	<!--   						<thead> -->
 	<!--     						<tr> -->
@@ -101,7 +79,7 @@
 	<!--       							<td>planner_title</td> -->
 	<!--     						</tr> -->
 	<!--   						</thead> -->
-	  						<tbody>
+	  						<tbody class='table-light text-center'>
 	  							<tr>
 	      							<th>Planner Title</th>
 	      							<td>${i.PLANNER_TITLE}</td>
@@ -120,14 +98,14 @@
 	    						</tr>
 	    					</tbody>
 	    				</table>
-					</div>
+					</div>			
 				</c:forEach>			
 			</div>
-			
+			<hr class='hr'>
 			<!-- Paging Button -->
-			<div class='pagingbox'>
+			<div class='pagingbox d-flex justify-content-center my-4'>
 				<div>
-  					<ul class="pagination pagination-lg" style="margin-left: 720px;">
+  					<ul class="pagination pagination-lg">
     					<li class="page-item disabled">
       						<a class="page-link" href="#">&laquo;</a>
     					</li>
