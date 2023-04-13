@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="./OnlyInclude/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -379,7 +379,7 @@
 						href='/web/contentImg?no=${i.no}'
 						title='${i.title}'><dl>
 								<dt>
-									${i.ranking}위<span class='dash'>-</span>
+									${i.ranking}<span class='dash'>-</span>
 								</dt>
 								<dd>
 									<img
