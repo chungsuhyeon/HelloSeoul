@@ -265,7 +265,7 @@ public class CommServiceImpl implements CommService{
 	}
 	
 	@Override
-	public void createSharePlanner(MypagePlannerBean bean, int planner_no, String user_id) {
+	public void createSharePlanner(MypagePlannerBean bean, int planner_no, String user_id,String user_nick) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object>map=commdao.SharePlanner(planner_no);
 		Object startTime=map.get("PLANNER_START");
@@ -279,6 +279,7 @@ public class CommServiceImpl implements CommService{
 		bean.setPlanner_info((String)(map.get("PLANNER_INFO")));
 		bean.setPlanner_no(HSdao.getPlannerNo());
 //		System.out.println(bean);
+		bean.setUpdate_user(user_nick);
 		HSdao.plannerDataInsert(bean);
 	}
 	@Override

@@ -142,9 +142,11 @@ public class projectcontroller {
 		return "Final_Pro/ComWrite";
 	}
 	@RequestMapping(value="SharePlanner")
-	public String SharePlanner(int planner_no,Model model,MypagePlannerBean bean,String user_id) {
-		commService.createSharePlanner(bean, planner_no, user_id);
-		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&planner_no="+planner_no;
+	public String SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
+		String user_nick = (String)request.getSession().getAttribute("user_nickName");
+		commService.createSharePlanner(bean, planner_no, user_id,user_nick);
+		
+		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+planner_no;
 		
 		
 	}

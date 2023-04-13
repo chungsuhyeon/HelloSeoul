@@ -50,7 +50,7 @@ public interface CommService {
 	String SelectPlannerTitle(int planner_no);
 	
 	
-	void createSharePlanner(MypagePlannerBean bean,int planner_no,String user_id);
+	void createSharePlanner(MypagePlannerBean bean,int planner_no,String user_id,String user_nick);
 	
 	List<Object> selectSharePlanner(int no);
 	void insertReport(List<Integer>rr,int com_no,String user_id,ReportBoard bean);

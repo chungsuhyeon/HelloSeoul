@@ -418,13 +418,13 @@
 						
 					</script>	
 					<script type="text/javascript">
-					var plno=$("input#plno").val();
+					var planner_no=$("input#plno").val();
 					$('document').ready(function(){
 					//공유된 플래너 표시
 					$.ajax({
 						url: '/web/ajaxSharePlanner',
 						type: 'post',
-						data: {no:plno},
+						data: {no:planner_no},
 						dataType: 'json',
 						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 						success: function(result){
@@ -448,7 +448,7 @@
 													</div>
 													<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 														<span>\${list.LOC_NAME}</span>
-														<input type="hidden" name='planner_no' value="\${plno}">
+														<input type="hidden" name='planner_no' value="\${planner_no}">
 														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
 														<br>
 														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
