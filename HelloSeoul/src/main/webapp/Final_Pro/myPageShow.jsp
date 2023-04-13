@@ -18,8 +18,12 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
+		// 팝업창 닫기
 		$("button#popupClose").click(function(){
 			document.getElementById("plannerSharePopUp").style.display = "none";
+			document.getElementById('shareNick').replaceChildren();
+			document.getElementById('nickTable').replaceChildren();
+			$("input#nickname").val("");
 		}); // $("#popupClose").click
 	});
 	
@@ -36,7 +40,9 @@
 			data: {no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function(result){												
+			success: function(result){										
+				
+				console.log(result);
 				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
@@ -114,6 +120,14 @@
 					}
 				}); // ajax tab-content
 				
+				if('${user_id}' == result.USER_ID){
+					$("ol.breadcrumb").append(
+						`<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
+						<li class='breadcrumb-item'><a href='/web/PlannerShare?plno=${param.no}&type=Planner'>Planner Share</a></li>
+						<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>`		
+					);
+				}
+				
 			},
 			error: function(){
 				alert("error : " + error);
@@ -123,41 +137,113 @@
 	
 	//팝업 띄우기
 	function openPop() {
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		$.ajax({
+			url: '/web/ajaxAlreadyShareUser',
+			type: 'post',
+			data: {no:no},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				$(result).each(function(idx, list){					
+					$("div#shareNick").append(
+						`<div class='nickbox bg-primary rounded d-flex' id="shareUserNick">
+							<div class='w-80 ps-1' style="overflow: hidden; text-overflow: ellipsis; color: white; padding-top: 3px;">
+								\${list}
+							</div>
+							<div class='w-20'>
+								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${list}" style="padding: 8px 5px;"></button>
+							</div>
+						</div>`
+					);
+				}); // $(result).each
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
 		document.getElementById("plannerSharePopUp").style.display = "block";
 	}
 	
 	// 닉네임 검색
 	function checkNick() {
 		var nick = $("input#nickname").val();
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		
 		$.ajax({
 			url: '/web/ajaxNickCheck',
 			type: 'post',
-			data: {nick:nick},
+			data: {nick:nick, no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
-				console.log(result);
+				$("table#nickTable tr").remove();
 				$(result).each(function(idx, list){
-					console.log(list)
-// 					list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
-// 					list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
-					
-// 					$("div#" + list['planner_date'] + " table tbody").append(
-// 							`<tr class='table-light'>
-// 								<td>
-// 									<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
-// 								</td>
-// 								<td>
-// 									<span>\${list["loc_name"]}</span>
-// 									<br>
-// 									<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
-// 								</td>
-// 							</tr>`
-// 					);							
+					$("table#nickTable").append(
+						`<tr>
+							<td class="nickcheck">\${list}</td>
+							<td class="nickcheck" align="right"><button type="button" class="btn btn-dark" onclick="shareUserAdd(this)" name="\${list}" style="padding: 4px 10px;">Add</button></td>
+						</tr>`
+					);
 				}); // $(result).each
 			},
 			error: function(){
 				alert("error : " + error);
+			}
+		}); // ajax
+	}
+	
+	// Add 버튼 클릭시 추가했다는 div 생성
+	function shareUserAdd(obj) {
+		var shareNick = obj.name;
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		$.ajax({
+			url: '/web/ajaxShareNickAdd',
+			type: 'post',
+			data: {shareNick:shareNick, no:no},
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				if(result){
+					$("div#shareNick").append(
+						`<div class='nickbox bg-primary rounded d-flex' id="shareUserNick">
+							<div class='w-80 ps-1' style="overflow: hidden; text-overflow: ellipsis; color: white; padding-top: 3px;">
+								\${shareNick}
+							</div>
+							<div class='w-20'>
+								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${shareNick}" style="padding: 8px 5px;"></button>
+							</div>
+						</div>`
+					);
+				} else {
+					alert("This user is already sharing");
+				}
+			},
+			error: function(){
+				alert("error : " + error);
+			}
+		}); // ajax
+	}
+	
+	function shareUserDelete(obj){
+		var shareNick = obj.name;
+		const urlParams = new URL(location.href).searchParams;
+		const no = urlParams.get('no');
+		$.ajax({
+			url: '/web/ajaxShareNickDelete',
+			type: 'post',
+			data: {shareNick:shareNick, no:no},
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(result){
+				$(obj).parent().parent().remove(); // div 제거
+			},
+			error: function(request, error){
+				alert("error : " + error);
+// 				alert("code : " + request.status);
+// 				alert("message : " + request.responseText);
 			}
 		}); // ajax
 	}
@@ -168,6 +254,17 @@
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
+	td.nickcheck {
+		border-top: 1px solid #DEE2E6;
+    	padding: 10px;
+    	height: 10px;
+	}
+
+	div#shareNick > div {
+		float: left;
+		margin-left: 2px;
+		width: 20%;
+	}
 
 </style>
 <!-- Style Section End -->
@@ -184,10 +281,6 @@
 				<ol class='breadcrumb'>
 					<li class='breadcrumb-item'><a href='/web/myPageLoad'>Mypage</a></li>
 					<li class='breadcrumb-item'><a href="/web/Final_Pro/myPagePlannerModify.jsp?planner_no=${param.no}">Planner Modify</a></li>
-					<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
-					<li class='breadcrumb-item'><a href='/web/PlannerShare?plno=${param.no}&type=Planner'>Planner Share</a></li>
-<!-- 					<li class='breadcrumb-item'><a href='#plannerSharePopUp'>Team Share</a></li> -->
-					<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>
 				</ol>
 			</div>
 			
@@ -227,18 +320,25 @@
 		</div>		
 		
 		<!-- 팝업창 -->	
-		<div class="modal" id="plannerSharePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.5);">
+		<div class="modal" id="plannerSharePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.7);">
 			<div class="modal-dialog" role="document" style="position: absolute; top: calc(50vh - 300px); left: calc(50vw - 200px);">
-				<div class="modal-content" style="height:350px; width:400px;">
+				<div class="modal-content" style="height:400px; width:400px;">
 					<div class="modal-header">
 						<h5 class="modal-title">Nickname search to share planner</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="popupClose">
 							<span aria-hidden="true"></span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="padding: 10px; width: 100%; height:260px;">
 						<span>Nickname</span><br>
-						<input type="text" id="nickname" oninput="checkNick()">
+						<input type="text" id="nickname" oninput="checkNick()" style="width: 100%">
+						
+						<div id="shareNick" style="margin-top:5px; height:15%; width:100%; overflow:hidden;">
+						</div>
+						
+						<div style="width:100%; height:60%; overflow: auto;">
+							<table id="nickTable" style="width: 100%; margin-top: 10px; white-space:nowrap;"></table>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
