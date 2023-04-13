@@ -25,6 +25,7 @@ $(function(){
 	   	    	return false;
 	   	    }
 	   		$("form").submit();
+	   		
 		}
 		else if(($(this).attr('id'))=='join'){
 			document.location.href ="/web/Final_Pro/join.jsp";
@@ -71,7 +72,7 @@ h4{
 			<div class="buttonBox2 d-flex justify-content-center mb-2">
 				<a href="/web/Final_Pro/join.jsp">Join</a>
 				&nbsp;&nbsp;<p>|</p>&nbsp;&nbsp;
-				<a href="#">FindID</a>
+				<a href="/web/Final_Pro/joinCheck.jsp">FindID</a>
 			</div>
 		</form>
 		</div>

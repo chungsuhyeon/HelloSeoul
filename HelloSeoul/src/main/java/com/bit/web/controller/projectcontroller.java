@@ -21,6 +21,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import com.bit.web.vo.ComBoard;
 import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.SeatBoard;
 import com.bit.web.vo.gbboard;
 import com.mongodb.util.JSON;
@@ -78,9 +80,10 @@ public class projectcontroller {
 			
 	}
 	@RequestMapping(value="modifyAction")
-	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id) {
+	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id,int plno) {
 		if(commService.checkId(no, id)) {
-		
+//			System.out.println(plno);
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
 		model.addAttribute("info",dao.selectInfoBoard(no));
 		return "Final_Pro/Commodify";
 		}else{
@@ -90,9 +93,10 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value="boardUpdate")
-	public String boardUpdate(int no,ComBoard board,Model model) {
+	public String boardUpdate(int no,ComBoard board,Model model,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		board.setCom_no(no);
-		commService.updateBoard(board);
+		System.out.println(board);
+		commService.updateBoard(board,file);
 		
 		return "redirect:/boardSelect";
 	}
@@ -151,6 +155,11 @@ public class projectcontroller {
 		commService.selectSharePlanner(no);
 		return commService.selectSharePlanner(no);
 		
+	}
+	@RequestMapping(value="reportAction")
+	public String reportAction(@RequestParam(value="rr")List<Integer>rr,int com_no,String user_id,ReportBoard bean) {
+		commService.insertReport(rr, com_no, user_id, bean);
+		return "redirect:/infoSelect?no="+com_no;
 	}
 	
 }

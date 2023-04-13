@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.web.dao.CtgDao;
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
+import com.bit.web.vo.PageBean;
 
 
 @Service
@@ -106,13 +108,26 @@ public class CtgServiceImpl implements CtgService{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> HotspotPaging(int page) {
-		// TODO Auto-generated method stub
-		HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+	public List<HashMap<String, Object>> hotspotshow(int page, String ctg1) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ctg1", ctg1);
 		map.put("start", (page-1)*8);
 		map.put("end", page*8);
-		return dao.hotspotPage(map);
+		dao.hotspotPage(map);
+		return null;
 	}
+
+	@Override
+	public List<JoinSeoulBean> collectUsers() {
+		// TODO Auto-generated method stub
+		return dao.collectUserByAdmin();
+	}
+	
+	
+	
+	
+	
+
 
 }
 	//rest controller service end

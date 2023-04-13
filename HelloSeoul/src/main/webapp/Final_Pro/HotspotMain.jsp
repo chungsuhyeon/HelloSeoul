@@ -77,6 +77,23 @@ $(function(){
 			}
 		});
 	});
+	
+	$('#page').click(function(){
+		$.ajax({
+			type : 'post',
+			url : '/web/pagingAction',
+			data : {'page':1, 'ctg1':'tour'},
+			dataType :'text',
+			success : function(res){
+				alert(res);
+			},
+			error : function(er){
+				alert("Error!");
+			}
+			
+		});
+		
+	});
 });
 </script>
 <!--JS Section End -->
@@ -130,10 +147,10 @@ $(function(){
 			<div class='navbar'>
 				<div class='ctgbar'>
 				<ol class="breadcrumb bg-primary mt-4">
-	  				<li class="breadcrumb-item"><a href="#">LandMark</a></li>
-	  				<li class="breadcrumb-item"><a href="#">History</a></li>
-	  				<li class="breadcrumb-item"><a href="#">Nature</a></li>
-	  				<li class="breadcrumb-item"><a href="#">Etc</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="landmark">LandMark</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="history">History</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="nature">Nature</a></li>
+	  				<li class="breadcrumb-item"><a href="#" id="etc">Etc</a></li>
 				</ol>
 				</div>
 				<div class='searchbar d-flex'>
@@ -141,50 +158,58 @@ $(function(){
 					<button type="button" class="btn btn-primary" id="searchbt">Search</button>
 				</div>
 			</div>
-			<div class='infobar row'>
-				<c:forEach var='i' items='${hotspot}'>
-					<div class="card mb-3 col-3">
-						<h4 class="card-header" style="overflow: hidden">${i.loc_name}</h4>
-						<div class="card-body">
-							<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}"><img src="${i.loc_img}" style="width: 100%; height: 200px;"></a>
-						</div>
-						<div class="card-body">
-					  		<p class="card-text"><a href="${i.loc_info}">${i.loc_info}</a></p>
-						</div>
-						<div class="card-body">
-							<hr class='hr'>
-					  		<a href="#" class="card-link">Jjim</a>
-					  		<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}" class="card-link">More</a>
-						</div>
+			<div class='infobox'>
+				<div class='infobar d-flex justify-content-center'>
+				<c:forEach var="i" items="${hotspot}" begin="0" end="3">
+					<div class="card col-3 bg-light mb-3 mx-1" style="max-width: 20rem;">
+	  					<div class="card-header text-center">${i.loc_name}</div>
+	  					<div class="card-body d-flex justify-content-center">
+	    					<img src="${i.loc_img}" style="width: 240px; height: 200px;">
+	  					</div>
+	  					<div class="card-footer">
+    						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">More</a>    						
+  						</div>
 					</div>
 				</c:forEach>
+				</div>
+				<div class='infobar d-flex justify-content-center'>
+				<c:forEach var="i" items="${hotspot}" begin="4" end="7">
+					<div class="card col-3 bg-light mb-3 mx-1" style="max-width: 20rem;">
+	  					<div class="card-header text-center">${i.loc_name}</div>
+	  					<div class="card-body d-flex justify-content-center">
+	    					<img src="${i.loc_img}" style="width: 240px; height: 200px;">
+	  					</div>
+	  					<div class="card-footer">
+    						<a href="/web/gotoHotspotinfo?pc=${i.loc_pc}">More</a>    						
+  						</div>
+					</div>
+				</c:forEach>
+				</div>
 			</div>
 			<div class='pagingbar d-flex justify-content-center mt-4'>
-				<div class='paging'>
-					<ul class="pagination">
-					    <li class="page-item disabled">
-					      <a class="page-link" href="#">&laquo;</a>
-					    </li>
-					    <li class="page-item active">
-					      <a class="page-link" href="#">1</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">2</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">3</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">4</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">5</a>
-					    </li>
-					    <li class="page-item">
-					      <a class="page-link" href="#">&raquo;</a>
-					    </li>
-		  			</ul>
-				</div>			
+				<ul class="pagination">
+					<li class="page-item disabled">
+					  <a class="page-link" href="#">&laquo;</a>
+					</li>
+					<li class="page-item active">
+					  <a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">5</a>
+					</li>
+					<li class="page-item">
+					  <a class="page-link" href="#">&raquo;</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</section>

@@ -226,7 +226,7 @@ function ajaxpro2(jjimpoint){
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
 .ctglist td:nth-child(1){
-	padding-left: 10% !important;
+	padding-left: 5% !important;
 }
 .infobar tr td{
 	/* border : solid; */
@@ -273,8 +273,8 @@ function ajaxpro2(jjimpoint){
 				</select>
 			</div>
 			<div class='searchbar2 col-12 d-inline-flex'>
-				<input type="text" class="form-control" placeholder="장소 이름" id="query">
-				<button type="button" class="searchbt btn btn-primary">검색</button>			
+				<input type="text" class="form-control w-75" placeholder="장소 이름" id="query">
+				<button type="button" class="searchbt btn btn-primary w-25">검색</button>			
 			</div>
 			<div class='ctglist overflow-scroll' style="height: 600px;">
 				<table class='table table-hover'>
@@ -308,7 +308,7 @@ function ajaxpro2(jjimpoint){
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>세부 카테고리</td>
+						<td class='info table-light'>카테고리</td>
 						<td></td>
 					</tr>
 					<tr>

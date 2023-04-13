@@ -33,8 +33,8 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 		<div class='col-6'>
-			<div class='photo h-75'>
-				<h1>img</h1>
+			<div class='photo h-75 border-primary'>
+				<h1>이미지가 없습니다.</h1>
 			</div>
 			<div class="form-group h-25">
       			<label for="formFile" class="form-label mt-4">Input Food Image</label>
