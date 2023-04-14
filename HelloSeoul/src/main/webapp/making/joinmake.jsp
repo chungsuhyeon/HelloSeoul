@@ -209,7 +209,7 @@ $(function(){
 <%-- <jsp:include page="header.jsp"></jsp:include> --%>
 <section class='container d-flex justify-content-center'>
 <form action="/web/joinMemberInsert" name="joinFrm" method="post">
-	<table class="table w-50" style="table-layout: fixed; margin: 0 auto;">
+	<table class="table">
 			<thead>
 				<tr>
 					<th>JOIN</th>
