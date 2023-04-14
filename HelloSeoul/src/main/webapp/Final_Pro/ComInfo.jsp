@@ -16,7 +16,7 @@
 $('document').ready(function(){
 // 	if($("#com_ctg").val()=1){
 	const urlParams = new URL(location.href).searchParams;
-	const no = $("#plno").val();
+	const no = $("#planner_no").val();
 	console.log($("#com_ctg").val());
 	// 일정에 따른 tab 구현
 	
@@ -114,61 +114,35 @@ $('document').ready(function(){
 	}); // ajax
 	}
 }); // $('document').ready
-function check_id(){
+function modifyAction(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
-	if(
-			$("input#user_id").val()==""
-			
-			){
-		alert("login plz");
-	}else if(
-			($("input#user_id").val())!=($("input#boarduser_id").val())
-			){
-		alert("id가 맞지않습니다");
-	}
-	else{
-		location.replace("/web/modifyAction?no="+no+"&user_id="+user_id);
-	}
+	var planner_no=$("input#planner_no").val();
+	location.replace("/web/modifyAction?no="+no+"&user_id="+user_id+"&planner_no="+planner_no);
+	
 }
-function check_id2(){
+function deleteAction(){
 	var no=$("input#com_no").val();
 	var user_id=$("input#user_id").val();
-	if(
-			$("input#user_id").val()==""
-			
-			){
-		alert("login plz");
-	}else if(
-			($("input#user_id").val())!=($("input#boarduser_id").val())
-			){
-		alert("id가 맞지않습니다.");
-	}
-	else{
-		confirm('정말로 삭제하시겠습니까?');
-		location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
-	}
+	confirm('정말로 삭제하시겠습니까?');
+	location.replace("/web/deleteCom?no="+no+"&user_id="+user_id);
+
 }
-function check_id3(){
-	var plno=$("input#plno").val();
+function sharePlannerAction(){
+	var planner_no=$("input#planner_no").val();
 	var user_id=$("input#user_id").val();
 	if(user_id==""){
-		alert("로그인해주시길바랍니다");
+		alert("로그인해주시길 바랍니다.")
 	}else{
-		location.replace("/web/SharePlanner?plno="+plno+"&user_id="+user_id);
+		location.replace("/web/SharePlanner?planner_no="+planner_no+"&user_id="+user_id);
 	}
 }
 //팝업 띄우기
 function openPop() {
 	var user_id=$("input#user_id").val();
-	if(user_id==""){
-		alert("로그인 해주시길 바랍니다.");
-	}
-	else{	
-		
-		console.log(user_id);	
-   		document.getElementById("plannerSharePopUp").style.display = "block";
-	}
+	console.log(user_id);	
+   	document.getElementById("plannerSharePopUp").style.display = "block";
+	
 }
 function ReportOn(){
 	var no=$("input#com_no").val();
@@ -340,7 +314,7 @@ function ReportOn(){
 			<input type="hidden" id='user_id' name='user_id' value='${user_id}'>
 			<input type="hidden" id='boarduser_id' name='boarduser_id' value='${i.user_id}' >
 			<input type="hidden" id='com_ctg' name='com_ctg' value='${i.com_ctg}' >
-			<input type="hidden" id='plno' name='plno' value='${i.plno}' >
+			<input type="hidden" id='planner_no' name='planner_no' value='${i.planner_no}' >
 			<table class='table'>
 				<thead>
 					<tr class='table-primary'>
@@ -374,7 +348,7 @@ function ReportOn(){
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
 								</td>
 								<td style="border-left-width : 1px;">
-									<input type="hidden" id="plno" value="${i.plno }">
+									<input type="hidden" id="planner_no" value="${i.planner_no }">
 									<div class='col-12'>
 										<div class='col-12' style="display: inline-flex;" id="planTitle"></div>
 									</div>
@@ -414,15 +388,15 @@ function ReportOn(){
 					</tr>
 					<tr>
 						<td class='text-end' colspan="2">
-							<c:if test="${user_id ne i.user_id }">
+							<c:if test="${user_id ne i.user_id && user_id ne null}">
 								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
 							<c:if test="${user_id eq i.user_id}">
-								<button type="button" class="btn btn-primary" onclick="check_id()">Modify</button>
-								<button type="button" class="btn btn-primary" onclick="check_id2()">Delete</button>
+								<button type="button" class="btn btn-primary" onclick="modifyAction()">Modify</button>
+								<button type="button" class="btn btn-primary" onclick="deleteAction()">Delete</button>
 							</c:if>
 							<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
-								<button type="button" class="btn btn-primary" onclick="check_id2()">Share</button>
+								<button type="button" class="btn btn-primary" onclick="sharePlannerAction()">Share</button>
 							</c:if>
 						</td>
 					</tr>
@@ -480,11 +454,11 @@ function ReportOn(){
                      </button>
                   </div>
                   <div class="modal-body">
-                     <input type="checkbox" id="ck1" name="report" value="1"> 부적절한<br>
-                     <input type="checkbox" id="ck2" name="report" value="2"> 부적절한<br>
-                     <input type="checkbox" id="ck3" name="report" value="3"> 부적절한<br>
-                     <input type="checkbox" id="ck4" name="report" value="4"> 부적절한<br>
-                     <input type="checkbox" id="ck5" name="report" value="5"> 부적절한<br>
+                     <input type="checkbox" id="ck1" name="report" value="1"> 욕설<br>
+                     <input type="checkbox" id="ck2" name="report" value="2"> 광고<br>
+                     <input type="checkbox" id="ck3" name="report" value="3"> 불건전한 게시물<br>
+                     <input type="checkbox" id="ck4" name="report" value="4"> 도배<br>
+                     <input type="checkbox" id="ck5" name="report" value="5"> 집가고싶다<br>
                      <h5>자세한 신고 사유를 적어주세요.</h5>
                      <textarea rows="7px" cols="40px"></textarea>
                      

@@ -32,7 +32,7 @@
 			if($("input#title").val().length == 0) {
 				alert("Please enter the title");
 				$("input#title").val('');
-				$("input#title").focus();			
+				$("input#title").focus();
 				return false;
 			}		
 			if($("input[name='planner_start']").val().length == 0 || $("input[name='planner_end']").val().length == 0){
@@ -46,7 +46,7 @@
 		}); // $("button#btn_submit").click
 		
 		$("button#btn_cancle").click(function(){
-				document.location.href ="myPageMain.jsp";
+				document.location.href ="/web/myPageLoad";
 		}); // $("button#btn_cancle").click
 		
 	}); // function

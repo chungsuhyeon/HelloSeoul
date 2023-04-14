@@ -69,6 +69,20 @@ $(function(){
 			}
 		});
 	});
+	
+	$('#test').click(function(){
+		$.ajax({
+			type:'post',
+			url:'/web/pagingtest',
+			dataType:'text',
+			success:function(result){
+				alert(result);
+			},
+			error : function(er){
+				alert("error!");
+			}
+		});
+	});
 		
 });
 </script>
@@ -82,6 +96,7 @@ $(function(){
 </head>
 <body>
 <section class='container-fluid bg-primary' style="height: 969px;">
+	<button id='test'>Button</button>
 	<div class='row'>
 		<div class='menubox col-12'>
 			<table class='table text-center'>

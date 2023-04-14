@@ -20,7 +20,6 @@
 	$(function(){
 		$(".loadMyPlanner").click(function(){
 			var no = $(this).parent().attr('name');
-// 			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
 			location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		}); // $(".loadMyPlanner").click
 				
@@ -31,10 +30,10 @@
 <!-- Style Section Begin -->
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-.contentsbox table{
-	height: 300px;
-	width: 400px;
-}
+	.contentsbox table{
+		height: 300px;
+		width: 400px;
+	}
 </style>
 <!-- Style Section End -->
 
@@ -73,12 +72,6 @@
 				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
 					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
-	<!--   						<thead> -->
-	<!--     						<tr> -->
-	<!--       							<th>Planner Title</th> -->
-	<!--       							<td>planner_title</td> -->
-	<!--     						</tr> -->
-	<!--   						</thead> -->
 	  						<tbody class='table-light text-center'>
 	  							<tr>
 	      							<th>Planner Title</th>
@@ -95,6 +88,10 @@
 	    						<tr>
 	      							<th>Planner Memo</th>
 	      							<td>${i.PLANNER_INFO}</td>
+	    						</tr>
+	    						<tr>
+	      							<th>Last Update</th>
+	      							<td>${i.UPDATE_USER} / ${fn:substring(i.PLANNER_REGDATE, 0, 16)}</td>
 	    						</tr>
 	    					</tbody>
 	    				</table>

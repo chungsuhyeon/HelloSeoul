@@ -104,8 +104,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Object> userPlanner(String id) {
-		return helloDao.getUserPlanner(id);
+	public List<Object> userPlanner(String id, String user_nick) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("nick", user_nick);
+		return helloDao.getUserPlanner(map);
 	}
 
 	@Override
@@ -199,15 +202,18 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public int mypagePlannerNext(Object id, String modi, MypagePlannerBean bean) {
+	public int mypagePlannerNext(String id, String nick, String modi, MypagePlannerBean bean) {
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
 			int no = helloDao.getPlannerNo();
 			bean.setPlanner_no(no);
-			bean.setUser_id((String) id);
+			bean.setUser_id(id);
+			bean.setUpdate_user(nick);
+			System.out.println(bean);
 			helloDao.plannerDataInsert(bean);
 			return no;
 		} else { // update
+			bean.setUpdate_user(nick);
 			helloDao.mypageDateUpdate(bean);
 			return bean.getPlanner_no();
 		}
@@ -230,8 +236,21 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
+	public void mypagePlannerShareAllDelete(int no) {
+		helloDao.plannerShareAllDelete(no);
+	}
+	
+	@Override
 	public void mypagePlannerDelete(int no) {
 		helloDao.plannerAllDelete(no);
+	}
+	
+	@Override
+	public void mypagePlannerUpdateDate(int no, Object nick) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("nick", nick);
+		helloDao.plannerUpdateDate(map);
 	}
 	
 	@Override
@@ -246,9 +265,46 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<String> shareNickCheck(String nick) {
-		return helloDao.nickSearch(nick);
+	public List<String> shareNickCheck(String user_nick, String nick, int no) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_nick", user_nick);
+		map.put("nick", nick);
+		map.put("no", no);
+		return helloDao.nickSearch(map);
 	}
+
+	@Override
+	public Boolean shareNickAddCheck(String nick, int no) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("nick", nick);
+		map.put("no", no);
+
+		if(helloDao.shareNickSelete(map) != null) { // 닉이 있을때 false 반환
+			return false;
+		} else {
+			helloDao.shareNickInsert(map);
+			return true;
+		}
+	}
+
+	@Override
+	public List<String> alreadyShareUserList(int no) {
+		return helloDao.alreadyShareUser(no);
+	}
+
+	@Override
+	public void shareNickDelete(String nick, int no) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("nick", nick);
+		map.put("no", no);
+		helloDao.shareNickDelete(map);
+	}
+
+
+
+
+
+	
 	
 	
 	

@@ -36,8 +36,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원이 생성했던 플래너 load
-	public List<Object> getUserPlanner(String id){
-		return this.getSqlSession().selectList("getUserPlanner", id);
+	public List<Object> getUserPlanner(HashMap<String, String> map){
+		return this.getSqlSession().selectList("getUserPlanner", map);
 	}
 	
 	// 회원의 찜 리스트 검색
@@ -79,6 +79,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("selectMainDbData", codeList);
 	}
 	
+	public void plannerUpdateDate(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerUpdateDate", map);
+	}
+	
 	// 생성한 일정 insert
 	public void plannerScheduleInsert(MypageMainPlannerBean bean) {
 		this.getSqlSession().insert("plannerScheduleInsert", bean);
@@ -86,6 +90,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	
 	public void plannerScheduleDelete(int no) {
 		this.getSqlSession().delete("plannerScheduleDelete", no);
+	}
+	
+	public void plannerShareAllDelete(int no) {
+		this.getSqlSession().delete("plannerShareAllDelete", no);
 	}
 	
 	public void plannerAllDelete(int no) {
@@ -100,9 +108,29 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().update("mypageDateUpdate", bean);
 	}
 	
-	// 닉네임 검색
-	public List<String> nickSearch(String nick) {
-		return this.getSqlSession().selectList("nickSearch", nick);
+	// 전체 사용자 닉네임 검색
+	public List<String> nickSearch(HashMap<String, Object> map) {
+		return this.getSqlSession().selectList("nickSearch", map);
+	}
+	
+	// share table에 닉네임이 존재하는지 검색
+	public String shareNickSelete(HashMap<String, Object> map) {
+		return this.getSqlSession().selectOne("shareNickSelete", map);
+	}
+	
+	// share table에 닉네임 추가
+	public void shareNickInsert(HashMap<String, Object> map) {
+		this.getSqlSession().insert("shareNickInsert", map);
+	}
+	
+	// 이미 플래너 공유중인 사용자 리스트
+	public List<String> alreadyShareUser(int no){
+		return this.getSqlSession().selectList("alreadyShareUser", no);
+	}
+	
+	// 플래너 공유 취소(선택 사용자 삭제)
+	public void shareNickDelete(HashMap<String, Object> map) {
+		this.getSqlSession().delete("shareNickDelete", map);
 	}
 	
 }

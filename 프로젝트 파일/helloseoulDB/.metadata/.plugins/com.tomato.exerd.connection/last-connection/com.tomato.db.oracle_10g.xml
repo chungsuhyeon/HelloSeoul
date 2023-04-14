@@ -13,7 +13,7 @@
       <port>1521</port>
       <user>seoul</user>
       <sId>orcl</sId>
-      <password>1234</password>
+      <password>123</password>
       <host>localhost</host>
       <internal_logon>normal</internal_logon>
     </properties>

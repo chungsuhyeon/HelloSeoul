@@ -55,7 +55,7 @@ public class projectcontroller {
 	
 	@GetMapping(value="boardSelect")
 	public String boardSelect(ComBoard board,Model model,HttpServletRequest request) {
-//		System.out.println(plno);
+//		System.out.println(planner_no);
 		commService.selectBoard(board, model, request);
 		return "Final_Pro/ComList";
 	}
@@ -80,9 +80,10 @@ public class projectcontroller {
 			
 	}
 	@RequestMapping(value="modifyAction")
-	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id) {
+	public String modifyAction(int no,Model model,@RequestParam(value="user_id")String id,int planner_no) {
 		if(commService.checkId(no, id)) {
-		
+//			System.out.println(planner_no);
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(planner_no));
 		model.addAttribute("info",dao.selectInfoBoard(no));
 		return "Final_Pro/Commodify";
 		}else{
@@ -92,9 +93,10 @@ public class projectcontroller {
 		
 	}
 	@RequestMapping(value="boardUpdate")
-	public String boardUpdate(int no,ComBoard board,Model model) {
+	public String boardUpdate(int no,ComBoard board,Model model,@RequestParam(value="file",required = false,defaultValue = "noimg.jsp")MultipartFile file) {
 		board.setCom_no(no);
-		commService.updateBoard(board);
+		System.out.println(board);
+		commService.updateBoard(board,file);
 		
 		return "redirect:/boardSelect";
 	}
@@ -134,15 +136,17 @@ public class projectcontroller {
 		return "redirect:/boardSelect";
 	}
 	@RequestMapping(value="PlannerShare")
-	public String PlannerShare(int plno,Model model) {
-		model.addAttribute("Pltt",commService.SelectPlannerTitle(plno));
+	public String PlannerShare(int planner_no,Model model) {
+		model.addAttribute("Pltt",commService.SelectPlannerTitle(planner_no));
 		
 		return "Final_Pro/ComWrite";
 	}
 	@RequestMapping(value="SharePlanner")
-	public String SharePlanner(int plno,Model model,MypagePlannerBean bean,String user_id) {
-		commService.createSharePlanner(bean, plno, user_id);
-		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+plno;
+	public String SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
+		String user_nick = (String)request.getSession().getAttribute("user_nickName");
+		commService.createSharePlanner(bean, planner_no, user_id,user_nick);
+		
+		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+planner_no;
 		
 		
 	}

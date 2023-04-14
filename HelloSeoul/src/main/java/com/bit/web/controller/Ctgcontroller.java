@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.web.alpha.JsonParsing;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
 import com.bit.web.service.CtgServiceImpl;
@@ -62,7 +61,7 @@ public class Ctgcontroller {
 //		JsonParsing x = new JsonParsing();
 		InputStream is = new URL(url).openStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,Charset.forName("UTF-8")));
-		System.out.println(x.jsonReadAll(br));
+//		System.out.println(x.jsonReadAll(br));
 		
 		return "success";
 	}

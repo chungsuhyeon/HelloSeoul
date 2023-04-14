@@ -54,10 +54,11 @@ public class HelloSeoulController {
 	@RequestMapping("myPageLoad")
 	public ModelAndView userInfoAll(HttpServletRequest request) {
 		String user_id = (String)request.getSession().getAttribute("user_id");
+		String user_nick = (String)request.getSession().getAttribute("user_nickName");
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("userInfo", contactService.userInfo(user_id));
-		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id));
+		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick));
 		mav.setViewName("Final_Pro/myPageMain");
 		
 		return mav;
@@ -81,19 +82,22 @@ public class HelloSeoulController {
 	// 찜 화면에서 장소명 클릭시 상세정보 뿌리기
 	@PostMapping(value = "ajaxMypageJjimInfo")
 	@ResponseBody
-	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, @RequestParam(value = "loc_code")int loc_code){
+	public MainDbBean mypageJjimInfoSelect(HttpServletRequest request, int loc_code){
 		return contactService.getlocInfo(loc_code);
 	}
 	
 	// 플래너 일정 생성 / 수정
 	@PostMapping(value = "PlannerDate")
 	public String plannerCreateController(HttpServletRequest request, @RequestParam(value = "modi")String modi, MypagePlannerBean bean) {
+		String id = (String)request.getSession().getAttribute("user_id");
+		String nick = (String)request.getSession().getAttribute("user_nickName");
+		
 		ModelAndView mav = new ModelAndView();
 		// 새로운 플래너 생성을 위한 일정 생성
 		if(modi.equals("createPlanner")) {
-			return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no=" + contactService.mypagePlannerNext(request.getSession().getAttribute("user_id"), modi, bean);
+			return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no=" + contactService.mypagePlannerNext(id, nick, modi, bean);
 		} else { // modi = updatePlanner(플래너 일정 수정)
-			contactService.mypagePlannerNext("user_id", modi, bean);			
+			contactService.mypagePlannerNext(id, nick, modi, bean);			
 			return "redirect:/Final_Pro/myPagePlannerModify.jsp?planner_no="+bean.getPlanner_no();
 		}
 	}
@@ -108,14 +112,14 @@ public class HelloSeoulController {
 	// 메인 플래너 생성 페이지 로드
 	@PostMapping(value = "ajaxMypagePlannerTabBar")
 	@ResponseBody
-	public HashMap<String, Object> ajaxPlannerTabBarSelect(@RequestParam(value = "no") int no) {
+	public HashMap<String, Object> ajaxPlannerTabBarSelect(int no) {
 		return contactService.mypagePlannerTabBar(no);
 	}
 	
 	// 생성한 플래너의 일정
 	@PostMapping(value = "ajaxMypagePlannerTabContent")
 	@ResponseBody
-	public List<Object> ajaxPlannerTabContentSelect(@RequestParam(value = "no") int no){
+	public List<Object> ajaxPlannerTabContentSelect(int no){
 		return contactService.mypagePlannerTabContent(no);
 	}
 	
@@ -137,13 +141,15 @@ public class HelloSeoulController {
 	public String mypagePlannerDataAllDelete(@RequestParam(value = "no") int no) {
 		contactService.mypageScheduleDelete(no);
 		contactService.mypagePlannerDelete(no);
+		contactService.mypagePlannerDelete(no);
 		return "redirect:/myPageLoad";
 	}
 	
 	// 작성한 플래너 insert
 	@PostMapping(value = "mainPlannerData")
 	@ResponseBody
-	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {	
+	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {
+		contactService.mypagePlannerUpdateDate(bean.getPlanner_no(), request.getSession().getAttribute("user_nickName"));
 		contactService.mypageScheduleInsert(request.getSession().getAttribute("user_id"), bean);
 		return "success";
 	}
@@ -157,10 +163,33 @@ public class HelloSeoulController {
 		return mav;
 	}
 	
+	// 특정 문자열을 포함하는 전체 닉네임 리스트
 	@PostMapping(value = "ajaxNickCheck")
 	@ResponseBody
-	public List<String> shareNickCheck(@RequestParam(value="nick")String nick){
-		return contactService.shareNickCheck(nick);
+	public List<String> shareNickCheck(HttpServletRequest request, String nick, int no){
+		return contactService.shareNickCheck((String) request.getSession().getAttribute("user_nickName"), nick, no);
+	}
+	
+	// 플래너 공유에 사용자 추가
+	@PostMapping(value = "ajaxShareNickAdd")
+	@ResponseBody
+	public boolean shareNickAddData(String shareNick, int no) {
+		return contactService.shareNickAddCheck(shareNick, no);
+	}
+	
+	// 이미 플래너를 공유받고 있는 사용자 리스트
+	@PostMapping(value = "ajaxAlreadyShareUser")
+	@ResponseBody
+	public List<String> alreadyShareUserList(int no){
+		return contactService.alreadyShareUserList(no);
+	}
+	
+	// planner 공유하고 있는 사용자 제거
+	@PostMapping(value = "ajaxShareNickDelete")
+	@ResponseBody
+	public String alreadyShareUserDelete(String shareNick, int no){
+		contactService.shareNickDelete(shareNick, no);
+		return "success";
 	}
 
 		

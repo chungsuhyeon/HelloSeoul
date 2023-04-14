@@ -19,6 +19,6 @@ public class ComBoard {
 	private int bad;
 	private int reply;
 	private int report;
-	private int plno;
+	private int planner_no;
 //	private MultipartFile file;
 }
