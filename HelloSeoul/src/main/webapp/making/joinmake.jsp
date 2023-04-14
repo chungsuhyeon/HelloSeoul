@@ -209,10 +209,10 @@ $(function(){
 <%-- <jsp:include page="header.jsp"></jsp:include> --%>
 <section class='container d-flex justify-content-center'>
 <form action="/web/joinMemberInsert" name="joinFrm" method="post">
-	<table class="table w-50" style="table-layout: fixed; margin: 0 auto;">
+	<table class="table w-50 bg-light" style="table-layout: fixed; margin: 0 auto;">
 			<thead>
 				<tr>
-					<th>JOIN</th>
+					<th><h2>JOIN</h2></th>
 				</tr>
 			</thead>
 		<tbody>
@@ -312,7 +312,7 @@ $(function(){
 					<label for="user_purpose" class="form-label mt-1">Purpose</label>
 						<div class="col-auto">
 							<select class="form-select w-50" name="user_pp">							
-								  <option selected="selected" value="0">direct inpute</option>
+								  <option selected="selected" value="0">Select</option>
 								  <option value="1">travel</option>
 								  <option value="2">business trip</option>
 								  <option value="3">study</option>
@@ -326,7 +326,7 @@ $(function(){
 					<label for="user_priority" class="form-label mt-1">Priority</label>
 						<div class="col-auto">
 							<select class="form-select w-50" name="user_first" id="inputDefault">							
-								  <option selected="selected" value="0">direct inputy</option>
+								  <option selected="selected" value="0">Select</option>
 								  <option value="1">food</option>
 								  <option value="2">tour</option>	
 								  <option value="3">entertainment</option>
