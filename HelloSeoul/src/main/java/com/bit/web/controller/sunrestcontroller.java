@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bit.web.alpha.AlphaService;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
 import com.bit.web.vo.JoinSeoulBean;
@@ -20,6 +21,7 @@ import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
 
+import oracle.jdbc.proxy.annotation.Post;
 import scala.collection.generic.BitOperations.Int;
 
 @RestController
@@ -74,6 +76,34 @@ public class sunrestcontroller {
 	public List<JoinSeoulBean> adminCallUser(){
 		
 		return ctg.collectUsers();
+	}
+	
+	@PostMapping(value="collectBoard")
+	public List<JoinSeoulBean> adminCallBoard(){
+		
+		return null;
+	}
+	
+	@PostMapping(value="collectPlanner")
+	public List<JoinSeoulBean> adminCallPlanner(){
+		
+		return null;
+	}
+	
+	@PostMapping(value="collectMainDb")
+	public List<JoinSeoulBean> adminCallMaindb(){
+		
+		return null;
+	}
+	
+	@PostMapping(value = "pagingtest")
+	public String testPaging() {
+		AlphaService as = new AlphaService();
+		
+		as.makePageBean(4, 100);
+		System.out.println(as.callBean());
+		
+		return "?";
 	}
 
 	
