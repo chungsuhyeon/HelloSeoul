@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -103,6 +104,11 @@ public class sunrestcontroller {
 		as.makePageBean(4, 100);
 		System.out.println(as.callBean());
 		
+		return "?";
+	}
+	
+	@PostMapping(value="jsonParsing")
+	public String testingJson(String filename) {
 		return "?";
 	}
 
