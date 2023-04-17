@@ -118,15 +118,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section> <!-- /#breadcrumb -->
       <main id="content">
         <div class="novaContent container" id="novaContent">
-          <div class="row"><div class="col-md-18 main-col-content">	 
-
+          <div class="row"><div class="col-md-18 main-col-content">
     <div id="midcolumn">
 	  <h2>Archived Eclipse Projects</h2>
-      <p> You are seeing this because the project you were looking for has been archived.  When projects are archived their data(downloads,source and website), is collected into a single tar.gz file.</p>  
+      <p> You are seeing this because the project you were looking for has been archived.  When projects are archived their data(downloads,source and website), is collected into a single tar.gz file.</p>
       <p><h4>Please note: Some projects did not have all of the above data.</h4></p>
       <p><h4>Please note: The source files (if available) included in these files are direct copies of the available CVS/SVN data.  You will need to load them into a local CVS/SVN repository to access the history.</h4></p>
       <p><h4>Please note: Some of these archives are larger than 3GB</h4></p>
-      
+
       <div id="homeitem">
         </br>
         <p><a href="http://archive.eclipse.org/archived_projects/3p.tgz">3p</a> project.  Archived: November 2021</p>
@@ -194,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="http://archive.eclipse.org/archived_projects/jcrm.tgz" alt="JCRM archive" >JCRM</a> project. Archived: July 2013.</p>
         <p><a href="http://archive.eclipse.org/archived_projects/jet.tgz" alt="JET archive" >JET</a> project. Archived: May 2020.</p>
         <p><a href="http://archive.eclipse.org/archived_projects/js4emf.tgz" alt="Js4emf archive" >Js4emf</a> project. Archived: January 2015.</p>
-        <p><a href="http://archive.eclipse.org/archived_projects/kiso-project.tar.gz">Koi</a> project.  Archived: July 2021</p>
+        <p><a href="http://archive.eclipse.org/archived_projects/kiso-project.tar.gz">Kiso</a> project.  Archived: July 2021</p>
         <p><a href="http://archive.eclipse.org/archived_projects/koi-project.tar.gz">Koi</a> project.  Archived: April 2006</p>
         <p><a href="http://archive.eclipse.org/archived_projects/koneki.tgz">Koneki</a> project.  Archived: September 2015</p>
         <p><a href="http://archive.eclipse.org/archived_projects/kepler.tgz">Kepler</a> project.  Archived: July 2008</p>
@@ -248,9 +247,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="http://archive.eclipse.org/archived_projects/sketch.tgz" alt="Sketch archive" >Sketch</a> project. Archived: January 2014.</p>
         <p><a href="http://archive.eclipse.org/archived_projects/soc.tgz">SOC</a> project.  Archived: January 2011</p>
         <p><a href="http://archive.eclipse.org/archived_projects/spaces.tgz">Spaces</a> project.  Archived: January 2011</p>
-        <p><a href="http://archive.eclipse.org/archived_projects/scalamodules.tgz">Scalamodules</a> project.  Archived: July 2010</p> 
-        <p><a href="http://archive.eclipse.org/archived_projects/smarthome.tgz">Smarthome</a> project.  Archived: May 2020</p> 
-        <p><a href="http://archive.eclipse.org/archived_projects/smila.tgz">SMILA</a> project.  Archived: July 2022</p> 
+        <p><a href="http://archive.eclipse.org/archived_projects/scalamodules.tgz">Scalamodules</a> project.  Archived: July 2010</p>
+        <p><a href="http://archive.eclipse.org/archived_projects/smarthome.tgz">Smarthome</a> project.  Archived: May 2020</p>
+        <p><a href="http://archive.eclipse.org/archived_projects/smila.tgz">SMILA</a> project.  Archived: July 2022</p>
         <p><a href="http://archive.eclipse.org/archived_projects/stellation-project.tar.gz">Stellation</a> project.  Archived: June 2005 </p>
         <p><a href="http://archive.eclipse.org/archived_projects/stardust.tgz">Stardust</a> project.  Archived: November 2017 </p>
         <p><a href="http://archive.eclipse.org/archived_projects/stp.tgz">STP</a> project.  Archived: September 2012 </p>
@@ -274,10 +273,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="http://archive.eclipse.org/archived_projects/woolsey.tgz">Woolsey</a> project.  Archived: December 2012 </p>
         <p><a href="http://archive.eclipse.org/archived_projects/wtp.datatools.tgz">WTP Datatools</a> project.  Archived: February 2013 </p>
         <p><a href="http://archive.eclipse.org/archived_projects/wtp.incubator.tgz">WTP Incubator</a> project.  Archived: November 2021 </p>
-        <p><a href="http://archive.eclipse.org/archived_projects/xtend.tgz">Xtend</a> project.  Archived: June 2013 </p>          	  
+        <p><a href="http://archive.eclipse.org/archived_projects/xtend.tgz">Xtend</a> project.  Archived: June 2013 </p>
 	  </div>
 	</div>
-	
+
 </div><div class="col-md-6 main-col-sidebar-nav">  <!-- nav -->
   <aside class="main-sidebar-default-margin" id="main-sidebar">
     
