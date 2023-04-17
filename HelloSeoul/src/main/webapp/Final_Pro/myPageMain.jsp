@@ -69,7 +69,7 @@
 		</div>
 			<!-- Contents Box -->
 			<div class='contentsbox d-inline-flex'>
-				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
+				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="2">
 					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
 	  						<tbody class='table-light text-center'>
