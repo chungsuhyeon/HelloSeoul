@@ -61,13 +61,53 @@ public class CommServiceImpl implements CommService{
 	public void deleteBoard(int no) {
 		commdao.deleteReply(no);
 		commdao.deleteGBboard(no);
+		commdao.reportDelete(no);
 		commdao.deleteBoard(no);
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public List<Object> updateBoard(ComBoard board) {
-		
+	public List<Object> updateBoard(ComBoard board,MultipartFile file) {
+		// TODO Auto-generated method stub
+				String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드!
+				long size = file.getSize(); //파일 사이즈
+				System.out.println(file);
+				System.out.println("파일명 : "  + fileRealName);
+				System.out.println("용량크기(byte) : " + size);
+				//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
+				String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
+				String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+				
+				
+				System.out.println(uploadFolder);
+				
+				/*
+				  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
+				  업로드 하는 파일명이 언어 이외의 언어로 되어있을 수 있습니다. 
+				  타인어를 지원하지 않는 환경에서는 정산 동작이 되지 않습니다.(리눅스가 대표적인 예시)
+				  고유한 랜던 문자를 통해 db와 서버에 저장할 파일명을 새롭게 만들어 준다.
+				 */
+				
+				UUID uuid = UUID.randomUUID();
+				System.out.println(uuid.toString());
+				String[] uuids = uuid.toString().split("-");
+				String uniqueName = uuids[0];
+				System.out.println("생성된 고유문자열" + uniqueName);
+				System.out.println("확장자명" + fileExtension);
+				
+				String filename=uniqueName+fileExtension;
+				board.setCom_filename(filename);
+				
+				// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+				
+				File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // 적용 후
+				try {
+					file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		// TODO Auto-generated method stub
 		return commdao.updateBoard(board);
 	}
@@ -172,7 +212,7 @@ public class CommServiceImpl implements CommService{
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 		String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
-		
+
 		
 		/*
 		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
@@ -202,6 +242,7 @@ public class CommServiceImpl implements CommService{
 			e.printStackTrace();
 		}
 		board.setCom_no(commdao.selectBoradNo());	
+		System.out.println(board);
 		commdao.boardInsert(board);
 	}
 	@Override
@@ -218,15 +259,15 @@ public class CommServiceImpl implements CommService{
 		model.addAttribute("board",commdao.selectBoard(map));
 	}
 	@Override
-	public String SelectPlannerTitle(int plno) {
+	public String SelectPlannerTitle(int planner_no) {
 		// TODO Auto-generated method stub
-		return commdao.SelectPlannerTitle(plno);
+		return commdao.SelectPlannerTitle(planner_no);
 	}
 	
 	@Override
-	public void createSharePlanner(MypagePlannerBean bean, int plno, String user_id) {
+	public void createSharePlanner(MypagePlannerBean bean, int planner_no, String user_id,String user_nick) {
 		// TODO Auto-generated method stub
-		HashMap<String, Object>map=commdao.SharePlanner(plno);
+		HashMap<String, Object>map=commdao.SharePlanner(planner_no);
 		Object startTime=map.get("PLANNER_START");
 		String start=new SimpleDateFormat("yyyy/MM/dd").format(startTime);
 		Object endTime=map.get("PLANNER_END");
@@ -238,6 +279,7 @@ public class CommServiceImpl implements CommService{
 		bean.setPlanner_info((String)(map.get("PLANNER_INFO")));
 		bean.setPlanner_no(HSdao.getPlannerNo());
 //		System.out.println(bean);
+		bean.setUpdate_user(user_nick);
 		HSdao.plannerDataInsert(bean);
 	}
 	@Override

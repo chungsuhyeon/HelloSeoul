@@ -34,6 +34,7 @@ public class joinServiceImpl implements joinService{
 	// 대륙선택 후 해당 국가 리스트로
 	@Override
 	public List<Object> ajaxcontinent(String id) {
+		System.out.println(id);
 		return dao.selectcontinent(id);
 	}
 	

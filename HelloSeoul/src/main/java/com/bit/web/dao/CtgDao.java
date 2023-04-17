@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageJjimBean;
@@ -60,12 +61,20 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> searchHot(String query){
 		return this.getSqlSession().selectList("searchHot",query);
 	}
-	public List<HashMap<String, Object>> hotspotPage(HashMap<Object, Integer> page){
+	public List<HashMap<String, Object>> hotspotPage(HashMap<String, Object> page){
 		return this.getSqlSession().selectList("hotspotPage", page);
 	}
 	
 	
 	public List<MainDbBean> hotspotrecom(String loc_sg){
 		return this.getSqlSession().selectList("hotspotrecom", loc_sg);
+	}
+	
+	public int totalpage() {
+		return this.getSqlSession().selectOne("totalpage");
+	}
+	
+	public List<JoinSeoulBean> collectUserByAdmin(){
+		return this.getSqlSession().selectList("collectUserByAdmin");
 	}
 }

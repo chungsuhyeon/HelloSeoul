@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +17,12 @@
 $(function(){
 	//Board Write
 	$('.write').click(function(){
+		var nul=null;
 		if($("input#user_id").val()==""){
 			alert("로그인 후 이용 가능합니다.");
 		}
 		else if($("input#user_id").val()!=""){
-			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&plno=0");
+			location.replace("/web/Final_Pro/ComWrite.jsp?type=write&planner_no=0");
 		}
 	});
 	//Board Info
@@ -125,7 +127,7 @@ $(function(){
 							<tr class='table-primary'>
 								<th>No</th>
 								<th>Category</th>
-								<th class='w-50'>Title</th>
+								<th class='w-25'>Title</th>
 								<th class='w-25'>Nick Name</th>
 								<th>RegDate</th>
 							</tr>
@@ -141,7 +143,7 @@ $(function(){
 							</c:choose></td>
       							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
       							<td>${i.USER_NICK}</td>
-      							<td>${i.COM_REGDATE}</td>
+      							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
   							</c:forEach>
 						</tbody>

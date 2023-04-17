@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.PageBean;
 
 public interface CtgService {
 	
@@ -22,7 +24,7 @@ public interface CtgService {
 	void insertJjim(List<Integer> jjimpoint, String user_id);
 	List<MainDbBean> searchHot(String query);
 	List<MainDbBean> hotspotrecom(String sg);
-	List<HashMap<String, Object>> HotspotPaging(int page);
-	//StringBuffer readFromUrl(String url_addr);
+	List<HashMap<String, Object>> hotspotshow(int page,String ctg1);
+	List<JoinSeoulBean> collectUsers();
 	
 }

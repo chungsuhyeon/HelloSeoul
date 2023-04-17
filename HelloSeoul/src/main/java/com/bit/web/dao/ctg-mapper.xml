@@ -75,10 +75,20 @@ SELECT LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
 FROM (
 SELECT ROWNUM RM,LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
 FROM MAINDB
-WHERE LOC_CTG1 = 'tour'
+WHERE LOC_CTG1 = #{ctg1}
 )
 WHERE <![CDATA[RM>=#{start}]]> AND <![CDATA[RM<#{end}]]>
 </select>
+
+
+<select id="collectUserByAdmin" resultType="com.bit.web.vo.JoinSeoulBean">
+SELECT USER_ID,USER_NICK,USER_NATION,USER_BIRTH,USER_GENDER,USER_PP,USER_FIRST
+FROM USERBOARD
+</select>
+<!-- <select id="totalpage" resultType="int"> -->
+<!-- SELECT COUNT(*) -->
+<!-- FROM MAINDB -->
+<!-- </select> -->
 
 </mapper>
 

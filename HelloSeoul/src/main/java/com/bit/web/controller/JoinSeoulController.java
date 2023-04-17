@@ -51,7 +51,7 @@ public class JoinSeoulController {
 // 회원가입정보 디비에 저장 		
 		@PostMapping(value = "joinMemberInsert")
 			public String joinMemberInsert(JoinSeoulBean bean) {				
-				bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
+				//bean.setUser_nation(dao.getJoinnation(bean.getUser_nation()));
 				dao.joinMemberInsert(bean);								
 				return "Final_Pro/login";
 				}

@@ -22,7 +22,7 @@ public interface CommService {
 	
 	void deleteBoard(int no);
 	
-	List<Object> updateBoard(ComBoard board);
+	List<Object> updateBoard(ComBoard board,MultipartFile file);
 	
 	void replyInsert(String reply,ReplyBoard reboard,int no,String id);
 	
@@ -47,10 +47,10 @@ public interface CommService {
 //	List<Object> selectBoard(Map<String, Object>map);
 //	List<Object> selectBoardtop3();
 	void selectBoard(ComBoard board,Model model,HttpServletRequest request);
-	String SelectPlannerTitle(int plno);
+	String SelectPlannerTitle(int planner_no);
 	
 	
-	void createSharePlanner(MypagePlannerBean bean,int plno,String user_id);
+	void createSharePlanner(MypagePlannerBean bean,int planner_no,String user_id,String user_nick);
 	
 	List<Object> selectSharePlanner(int no);
 	void insertReport(List<Integer>rr,int com_no,String user_id,ReportBoard bean);

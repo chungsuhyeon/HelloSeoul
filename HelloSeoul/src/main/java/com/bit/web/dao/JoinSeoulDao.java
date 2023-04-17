@@ -33,13 +33,21 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		public List<Object> selectcontinent(String id){
 			return this.getSqlSession().selectList("selectcontinent", id);	
 	}
-// 국가번호정보를 디비에 국가명으로 저장되게 		
-		public String getJoinnation(String user_nation) {
-			return this.getSqlSession().selectOne("getJoinnation",user_nation);
-		 }
+//// 국가번호정보를 디비에 국가명으로 저장되게 		
+//		public String getJoinnation(String user_nation) {
+//			return this.getSqlSession().selectOne("getJoinnation",user_nation);
+//		 }
+		
+		
 			
+// 국가번호정보를 디비에 국가명으로 저장되게 		
+		public String getJoinnation(int country_no) {
+			return this.getSqlSession().selectOne("getJoinnation",country_no);
+		 }
+		
 // 회원가입 정보 디비입력	
-		public void joinMemberInsert(JoinSeoulBean bean) {		
+		public void joinMemberInsert(JoinSeoulBean bean) {	
+			System.out.println(bean);
 			this.getSqlSession().insert("joinMemberInsert",bean);
 		}
 		

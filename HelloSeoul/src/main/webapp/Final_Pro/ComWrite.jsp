@@ -91,8 +91,8 @@ $(function(){
 							<th>File</th>
 							<td>
 								 <input class="form-control" type="file" id="com_filename" name='file' >
-								 <input type="hidden" id="plno" name="plno" 
-								 value="${param.plno }"
+								 <input type="hidden" id="planner_no" name="planner_no" 
+								 value="${param.planner_no }"
 								 
 								 />
 							</td>
