@@ -30,11 +30,7 @@
 		$("button#deletePopupClose").click(function(){
 			document.getElementById("plannerDeletePopUp").style.display = "none";
 		}); // $("#popupClose").click
-		
-		$("a#deleteplannerA").click(function(){
-			document.getElementById("plannerDeletePopUp").style.display = "block";
-		});
-		
+				
 		$("button#deletePlannerYes").click(function(){
 			const urlParams = new URL(location.href).searchParams;
 			const no = urlParams.get('no');
@@ -137,7 +133,7 @@
 				
 				if('${user_id}' == result.USER_ID){
 					$("ol.breadcrumb").append(
-						`<li class='breadcrumb-item'><a href='#' id="deleteplannerA">Planner Delete</a></li>
+						`<li class='breadcrumb-item'><a href='javascript:openDeletePlannerPopup()'>Planner Delete</a></li>
 						<li class='breadcrumb-item'><a href='/web/PlannerShare?planner_no=${param.no}&type=Planner'>Planner Share</a></li>
 						<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>`		
 					);
@@ -262,6 +258,10 @@
 		}); // ajax
 	}
 	
+	function openDeletePlannerPopup(){
+		document.getElementById("plannerDeletePopUp").style.display = "block";
+	}
+	
 </script>
 <!--JS Section End -->
 
@@ -374,7 +374,7 @@
 					</div>
 					<div class="modal-body" style="padding: 10px; width: 100%; height:50%;">
 						<p>If you delete the planner, users who shared it will not be able to see the planner.
-							Planners shared with the community will also be deleted.</p>
+							<br>Planners shared with the community will also be deleted.</p>
 						<p>Are you sure you want to delete the planner anyway?</p>
 					</div>
 					<div class="modal-footer">

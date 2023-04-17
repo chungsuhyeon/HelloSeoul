@@ -50,12 +50,11 @@ public class MypageServiceImpl implements MypageService {
 		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
-		
-		
+		int user_nation = Integer.parseInt(String.valueOf(userDBInfo.get("COUNTRY_NO")));
 		
 		// 정보 넘길거
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		userInfo.put("USER_NATION", helloDao.getCountryName(userDBInfo.get("COUNTRY_NO"))); // 국적
+		userInfo.put("USER_NATION", helloDao.getCountryName(user_nation)); // 국적
 		
 		// 나이계산
 		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
