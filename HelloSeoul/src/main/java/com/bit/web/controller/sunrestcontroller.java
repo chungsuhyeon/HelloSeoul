@@ -1,16 +1,28 @@
 package com.bit.web.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.alpha.AlphaService;
@@ -23,6 +35,8 @@ import com.bit.web.vo.MypageJjimBean;
 
 import oracle.jdbc.proxy.annotation.Post;
 import scala.collection.generic.BitOperations.Int;
+import scala.util.parsing.json.JSONObject;
+import twitter4j.internal.org.json.JSONException;
 
 @RestController
 public class sunrestcontroller {
@@ -104,6 +118,62 @@ public class sunrestcontroller {
 		System.out.println(as.callBean());
 		
 		return "?";
+	}
+	
+	@PostMapping(value="jsonParsing")
+	public Object testingJson(@RequestParam(value = "file") MultipartFile formData) throws IOException{
+		String fileRealName = formData.getOriginalFilename();
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
+		String uploadFolder = "\\\\192.168.0.16\\searchImg";
+		
+		UUID uuid = UUID.randomUUID();
+		String[] uuids = uuid.toString().split("-");
+		String uniqueName = uuids[0];
+		String filename=uniqueName+fileExtension;
+		File saveFile = new File(uploadFolder+"\\"+filename);  // 적용 후
+		try {
+			formData.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//pthon connect
+		URL url = new URL("http://192.168.0.16/hello/"+filename);
+		String line;
+		StringBuilder sb = new StringBuilder();
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json; charset=UTF-8");
+		
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+		    rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		} else {
+		    rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+		}
+		while ((line = rd.readLine()) != null) {
+		    sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+		String text = sb.toString();
+		return text;
+		
+	}
+	
+	@PostMapping(value ="RecommandFood")
+	public List<HashMap<String, Object>> recFood(String foodName) {
+		return ctg.recommandFood(foodName);
+	}
+	
+	@PostMapping(value = "oneJjim")
+	public String oneJjims(int pc, HttpServletRequest resq) {
+		String id = (String)(resq.getSession().getAttribute("user_id"));
+		ctg.insertOneJjim(pc, id);
+		System.out.println("!");
+		return "success";
 	}
 
 	

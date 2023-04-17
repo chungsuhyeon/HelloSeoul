@@ -122,6 +122,31 @@ public class CtgServiceImpl implements CtgService{
 		// TODO Auto-generated method stub
 		return dao.collectUserByAdmin();
 	}
+
+	@Override
+	public List<HashMap<String, Object>> recommandFood(String foodname) {
+		// TODO Auto-generated method stub
+		return dao.recommanFood(foodname);
+	}
+
+	@Override
+	public void insertOneJjim(int pc, String id) {
+		// TODO Auto-generated method stub
+		MainDbBean bean = new MainDbBean();
+		bean = dao.searchInsertJjim(pc);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", id);
+		map.put("loc_pc", bean.getLoc_pc());
+		map.put("loc_name", bean.getLoc_name());
+		map.put("loc_ctg1", bean.getLoc_ctg1());
+		map.put("loc_ctg2", bean.getLoc_ctg2());
+		map.put("loc_sg", bean.getLoc_sg());
+		dao.upOneJjim(map);
+		
+		
+	}
+	
+	
 	
 	
 	

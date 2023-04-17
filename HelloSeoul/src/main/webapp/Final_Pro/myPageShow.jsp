@@ -255,7 +255,7 @@
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
 	td.nickcheck {
-		border-top: 1px solid #DEE2E6;
+		border-top: 1px solid #DEE2E6;d
     	padding: 10px;
     	height: 10px;
 	}
