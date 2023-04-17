@@ -132,7 +132,7 @@ $(function(){
   // 국적선택(대륙선택 후 국가선택)    
 				     $("select#continent").change(function(){
 				    	 let user_continent = $("select[name='continent']").val() 
-				    	 alert(user_continent);
+				    	 //alert(user_continent);
 				      	   $.ajax({
 				    	    	  url:'/web/ajaxcontinent',
 				    	    	  type:'POST',

@@ -47,7 +47,7 @@ public class JoinSeoulDao extends SqlSessionDaoSupport {
 		
 // 회원가입 정보 디비입력	
 		public void joinMemberInsert(JoinSeoulBean bean) {	
-			System.out.println(bean);
+			//System.out.println(bean);
 			this.getSqlSession().insert("joinMemberInsert",bean);
 		}
 		
