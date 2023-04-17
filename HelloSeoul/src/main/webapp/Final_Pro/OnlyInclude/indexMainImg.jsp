@@ -90,7 +90,7 @@
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/web/resources/final_style/img/homeImg/tour/경복궁1080.jpg" class="d-block w-100" alt="...">
+      <img src="/web/resources/final_style/img/homeImg/tour/경북궁1080.jpg" class="d-block w-100" alt="...">
       <a href="/web/gotoHotspotinfo?pc=204">
       <div class="carousel-caption d-none d-md-block">
         <h5>싸다 김밥 강남 우성점</h5>
