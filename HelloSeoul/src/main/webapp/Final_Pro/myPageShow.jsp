@@ -303,7 +303,7 @@
 				<div class='col-6' style="display: inline-flex;" id="planTitle"></div>
 			</div>
 			
-			<div class='data col-12' style="display: inline-flex;">
+			<div class='data col-12' style="display: inline-flex; height: 600px;">
 				<!-- tab head -->
 				<div class='tabbar col-6'>
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
