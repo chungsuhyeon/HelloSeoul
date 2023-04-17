@@ -132,7 +132,7 @@ $(function(){
   // 국적선택(대륙선택 후 국가선택)    
 				     $("select#continent").change(function(){
 				    	 let user_continent = $("select[name='continent']").val() 
-				    	 alert(user_continent);
+				    	 //alert(user_continent);
 				      	   $.ajax({
 				    	    	  url:'/web/ajaxcontinent',
 				    	    	  type:'POST',
@@ -211,7 +211,7 @@ $(function(){
 <!-- Style Section End -->
 </head>
 <body>
-<%-- <jsp:include page="header.jsp"></jsp:include> --%>
+<jsp:include page="header.jsp"></jsp:include>
 <section class='container d-flex justify-content-center'>
 <form action="/web/joinMemberInsert" name="joinFrm" method="post">
 	<table class="table">
@@ -351,6 +351,6 @@ $(function(){
 	</table>
 </form>
 </section>
-<%-- <jsp:include page="footer.jsp"></jsp:include> --%>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
