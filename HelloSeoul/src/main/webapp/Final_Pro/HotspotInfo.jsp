@@ -19,7 +19,36 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <script type="text/javascript">
+function insertJ(){
+	$.ajax({
+		type:'POST',
+		url:'/web/oneJjim',
+		data : {'pc':$('#pcs').val()},
+		success:function(res){
+			alert(res);	
+		},
+		error:function(x){
+			alert("error!")
+		}
+	});
+
+};
 $(function(){
+	$('.jjim').click(function(){
+		$.ajax({
+			type:'POST',
+			url:'/web/oneJjim',
+			data : {'pc':$('#pca').val()},
+			success:function(res){
+				alert(res);	
+			},
+			error:function(x){
+				alert("error!")
+			}
+		});
+	});
+	
+	
 	$.ajax({
 		type:'post',
 		url:'/web/hotspotrecommend',
@@ -38,8 +67,9 @@ $(function(){
 						</div>
 						<div class="card-body">
 							<hr class='hr'>
-					  		<a href="#" class="card-link">Jjim</a>
-					  		<a href="/web/gotoHotspotinfo?pc=\${i.loc_pc}" class="card-link">More</a>
+							<input type="hidden" id="pcs" value="\${r[i].loc_pc}">
+					  		<a onclick="insertJ()" class="card-link">Jjim</a>
+					  		<a href="/web/gotoHotspotinfo?pc=\${r[i].loc_pc}" class="card-link">More</a>
 						</div>
 					</div>
 						`);
@@ -71,6 +101,7 @@ $(function(){
 	<section class='container'>
 		<div class='ctgbar'>
 			<div class='titlebar' style="text-align: center;">
+				<input type="hidden" id='pca' value="${info.loc_pc}">
 				<input type="hidden" id="sg" value="${info.loc_sg}">
 				<p>${info.loc_ctg2}</p>
 				<p>${info.loc_name}</p>
@@ -125,11 +156,15 @@ $(function(){
 			</div>
 			<hr class='hr hr-blurry'/>
 			<div class='tagbar px-1 d-flex'>
+				<button class='btn btn-outline-primary'>#${info.loc_tag}</button>
 				<button class='btn btn-outline-primary'>#Tag</button>
 				<button class='btn btn-outline-primary'>#Tag</button>
 				<button class='btn btn-outline-primary'>#Tag</button>
 				<button class='btn btn-outline-primary'>#Tag</button>
-				<button class='btn btn-outline-primary'>#Tag</button>
+			</div>
+			<hr class='hr'/>
+			<div class='jjimbar d-flex text-end'>
+				<button class="jjim btn btn-danger">JJim</button>
 			</div>
 			<hr class='hr hr-blurry'/>
 			<div class='text-center'>

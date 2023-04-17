@@ -15,7 +15,19 @@
 <script type="text/javascript">
 $(function(){
 	$('.test').click(function(){
-		var url = "/web/testings?url=http://127.0.0.1:80/hello/"+$('#toss').val();
+		$.ajax({
+			type:'post',
+			url:'/web/jsonParsing',
+			data : {'filename':$('#toss').val()},
+			dataType : 'json',
+			success : function(x){
+				console.log(x);
+			},
+			error : function(er){
+				alert("!!!");
+			}
+			
+		});
 
 	});
 });

@@ -77,4 +77,12 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<JoinSeoulBean> collectUserByAdmin(){
 		return this.getSqlSession().selectList("collectUserByAdmin");
 	}
+	
+	public List<HashMap<String, Object>> recommanFood(String foodname){
+		return this.getSqlSession().selectList("recommanFood",foodname);
+	}
+	
+	public void upOneJjim(HashMap<String, Object> map) {
+		this.getSqlSession().insert("upOneJjim",map);
+	}
 }
