@@ -413,9 +413,9 @@
 			<!-- 뒤로가기 & 플래너 수정 버튼 -->
 			<div class='col-12'>
 				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 <!--   					수정일 때는 이전페이지로 이동 / 생성일 때는 메인페이지로 이동하게 -->
   					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageShow.jsp?no=${param.planner_no}">Back</a></li>
+  					<li class="breadcrumb-item"><a href="/web/myPageDateReset?no=${param.planner_no}">Date Reset</a></li>
 				</ol>
 			</div>
 			
