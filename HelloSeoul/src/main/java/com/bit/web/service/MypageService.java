@@ -33,13 +33,11 @@ public interface MypageService {
 	
 	void mypageScheduleDelete(int no);
 	
-	void mypagePlannerShareAllDelete(int no);
-	
 	void mypagePlannerDelete(int no);
 	
 	void mypagePlannerUpdateDate(int no, Object nick);
 	
-	void mypageScheduleInsert(Object id, MypageMainPlannerBean bean);
+	void mypageScheduleInsert(MypageMainPlannerBean bean);
 	
 	MypagePlannerBean mypageDateInfo(int no);
 	

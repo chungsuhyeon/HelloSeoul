@@ -30,6 +30,10 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("getDbUserInfo", id);
 	}
 	
+	public String getCountryName(int no) {
+		return this.getSqlSession().selectOne("getCountryName", no);
+	}
+	
 	// 회원정보 (마이페이지 메인에 회원정보 출력하기 위함)
 	public HashMap<String, Object> getUserInfo(String id){
 		return this.getSqlSession().selectOne("getUserInfo", id);		
@@ -92,12 +96,13 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().delete("plannerScheduleDelete", no);
 	}
 	
-	public void plannerShareAllDelete(int no) {
-		this.getSqlSession().delete("plannerShareAllDelete", no);
-	}
 	
 	public void plannerAllDelete(int no) {
 		this.getSqlSession().delete("plannerAllDelete", no);
+	}
+	
+	public List<Integer> plannerShareCommunity(int no) {
+		return this.getSqlSession().selectList("plannerShareCommunity", no);
 	}
 	
 	public MypagePlannerBean mypageplannerInfo(int no) {

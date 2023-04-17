@@ -139,9 +139,8 @@ public class HelloSeoulController {
 	
 	@RequestMapping(value = "mypagePlannerDelete")
 	public String mypagePlannerDataAllDelete(@RequestParam(value = "no") int no) {
-		contactService.mypageScheduleDelete(no);
-		contactService.mypagePlannerDelete(no);
-		contactService.mypagePlannerDelete(no);
+		contactService.mypageScheduleDelete(no); // 일정 테이블에서 일정 제거
+		contactService.mypagePlannerDelete(no); // 해당 플래너 삭제
 		return "redirect:/myPageLoad";
 	}
 	
@@ -150,7 +149,7 @@ public class HelloSeoulController {
 	@ResponseBody
 	public String formMainPlannerAdd(HttpServletRequest request, MypageMainPlannerBean bean) {
 		contactService.mypagePlannerUpdateDate(bean.getPlanner_no(), request.getSession().getAttribute("user_nickName"));
-		contactService.mypageScheduleInsert(request.getSession().getAttribute("user_id"), bean);
+		contactService.mypageScheduleInsert(bean);
 		return "success";
 	}
 	
