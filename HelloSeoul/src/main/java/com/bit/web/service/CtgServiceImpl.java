@@ -1,8 +1,15 @@
 package com.bit.web.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -145,6 +152,34 @@ public class CtgServiceImpl implements CtgService{
 		
 		
 	}
+
+	@Override
+	public String jsonParsingCoin() throws IOException{
+		// TODO Auto-generated method stub		
+		//pthon connect
+		URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate=20230410&data=AP01");
+		String line;
+		StringBuilder sb = new StringBuilder();
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json; charset=UTF-8");
+		
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+		    rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		} else {
+		    rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+		}
+		while ((line = rd.readLine()) != null) {
+		    sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+		String text = sb.toString();
+		return text;
+	}
+	
+	
 	
 	
 	

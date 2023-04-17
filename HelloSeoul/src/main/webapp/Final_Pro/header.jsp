@@ -49,7 +49,7 @@ $(function(){
 			<a href="/web/gotoctg">Location Search</a>
 			<a href="/web/Final_Pro/FoodSearch.jsp">K-Food Search</a>
 			<a href="/web/gotohotspot">Hotspot</a>
-			<a href="/web/musicalList">Ticketing</a>
+			
 		</div>
 		<div class='settingBox col-3 mt-3 text-end'>
 			<div class="btn-group" role="group" aria-label="settingLabel">

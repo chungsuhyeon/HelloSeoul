@@ -201,7 +201,7 @@
 				</li>					
 			</ul>
 			<!-- tab contents -->
-				<div id='myTabContent border border-info-1' class='tab-content' style="height: 90%;">
+				<div id='myTabContent border border-info-1' class='tab-content' style="height:90%;">
 				</div>
 				
 				<div class='setbt d-flex justify-content-center'>

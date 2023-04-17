@@ -82,34 +82,7 @@ $(function(){
 			<div class='col-12'>
 				<div>Planner Share</div>
 				<div class='sharebox d-inline-flex'>
-					<div class="card text-white bg-primary mt-1 mx-1">
-	  					<div class="card-header">Planner Title</div>
-	  					<div class="card-body">
-	    					<table class='table'>
-	    						<tbody>
-	    							<tr class='table-light'>
-	    								<th>Nick Name</th>
-	    								<td>Jason</td>
-	    							</tr>
-	    							<tr class='table-light'>
-	    								<th>Date</th>
-	    								<td>2023-04-10</td>
-	    							</tr>
-	    							<tr class='table-light'>
-	    								<th>Memo</th>
-	    								<td>Test</td>
-	    							</tr>
-	    						</tbody>
-	    					</table>
-	  					</div>
-					</div>
-					<div class="card text-white bg-primary mt-1 mx-1" style="max-width: 20rem;">
-	  					<div class="card-header">Header</div>
-	  					<div class="card-body">
-	    					<h4 class="card-title">Primary card title</h4>
-	    					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	  					</div>
-					</div>
+				
 				</div>
 			</div>
 		</div>

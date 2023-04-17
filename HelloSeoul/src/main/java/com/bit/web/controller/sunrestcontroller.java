@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -174,6 +175,11 @@ public class sunrestcontroller {
 		ctg.insertOneJjim(pc, id);
 		System.out.println("!");
 		return "success";
+	}
+	
+	@PostMapping(value="coin")
+	public String todayCoin() throws IOException{
+		return ctg.jsonParsingCoin();
 	}
 
 	

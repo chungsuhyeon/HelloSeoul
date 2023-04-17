@@ -18,7 +18,40 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
-		
+		$.ajax({
+			type:"POST",
+			url:'/web/coin',
+			dataType:'json',
+			success: function(r){
+				console.log(r);
+				$('.coin').append(`
+						<table class='table text-center'>
+						<thead>
+							<tr class='table-primary'>
+								<th>Nation</th>
+								<th>Exchange Rate</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+						`);
+				for(var x=0;x<r.length;x++){
+					if(r[x].cur_unit != 'KRW'){
+						$('.table tbody').append(`
+								<tr>
+									<td>\${r[x].cur_unit}(\${r[x].cur_nm})</td>
+									<td>\${r[x].ttb}</td>
+								</tr>
+								`);						
+					}
+				}
+			},
+			error: function(x){
+				alert("error");
+			}
+			
+		});
 });
 </script>
 <!--JS Section End -->
@@ -45,21 +78,8 @@ $(function(){
 	</div>
 	<div class='col-6'>
 		<div class='row'>
-			<div class='col-12'>
-				<table class='table'>
-					<thead>
-						<tr>
-							<th>Nation</th>
-							<th>KRW</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Korea</td>
-							<td>1000</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class='coin col-12' style="overflow-x:hidden; ovaerflow-y:scroll; height: 410px;">
+
 			</div>
 		</div>
 	</div>
