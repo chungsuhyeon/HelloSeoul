@@ -15,15 +15,8 @@
 <script type="text/javascript">
 $(function(){
 	$('.test').click(function(){
-		document.location.href="/web/testings?url=http://127.0.0.1:80/hello/"+$('#toss').val();
-		//해당 링크의 값을 읽어오는 작업
-// 		const locationURL = "http://127.0.0.1:80/hello/takenphoto.jpg";
-// 		const searchParams = new URL(locationURL).searchParams;
-// 		console.log(searchParams.getAll());
-// 		for (const param of searchParams) {
-// 			  console.log(param);
-// 			}
-		
+		var url = "/web/testings?url=http://127.0.0.1:80/hello/"+$('#toss').val();
+
 	});
 });
 </script>
