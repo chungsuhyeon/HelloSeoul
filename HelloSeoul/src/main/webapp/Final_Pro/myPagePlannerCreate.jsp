@@ -427,13 +427,8 @@
 						data: {no:planner_no},
 						dataType: 'json',
 						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-						success: function(result){
-							let activeTab = document.querySelector('ul.nav li a.active'); // object
-							let day_info = $(activeTab).attr('href');
-							console.log(day_info);
-							
+						success: function(result){						
 							$(result).each(function(index, list){
-// 								console.log(list);
 								$("#"+list.PLANNER_DATE + " table tbody").append(
 										`<tr>
 											<td style="width: 5%;">
