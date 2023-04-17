@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -332,7 +333,7 @@ function ReportOn(){
 							<img class='mx-1' alt="user" src="/web/resources/final_style/img/icon/comuser.png">${i.user_nick}
 							<img class='mx-1' alt="reple" src="/web/resources/final_style/img/icon/reple.png">${i.reply}
 							<img class='mx-1' alt="hit" src="/web/resources/final_style/img/icon/hit.png">${i.com_hit}
-							<img class='mx-1' alt="regdate" src="/web/resources/final_style/img/icon/regdate.png">${i.com_regdate}
+							<img class='mx-1' alt="regdate" src="/web/resources/final_style/img/icon/regdate.png">${fn:substringBefore(i.com_regdate, ' ')}
 							<img class='mx-1' alt="comgood" src="/web/resources/final_style/img/icon/comgood.png">
 							<span id='top-good'>${i.good}</span>
 							<img class='mx-1' alt="combad" src="/web/resources/final_style/img/icon/combad.png">

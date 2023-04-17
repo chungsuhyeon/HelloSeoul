@@ -84,7 +84,7 @@ $(function(){
 		 				   contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 		 				   dataType:'text',
 		 				   success:function(data){
-		 					  console.log(data);
+// 		 					  console.log(data);
 		 					  if(data=='true'){	
 		 						  alert("Disavailable");		 						  
 		 						  $("input#user_nick").val('');
@@ -132,6 +132,7 @@ $(function(){
   // 국적선택(대륙선택 후 국가선택)    
 				     $("select#continent").change(function(){
 				    	 let user_continent = $("select[name='continent']").val() 
+				    	 alert(user_continent);
 				      	   $.ajax({
 				    	    	  url:'/web/ajaxcontinent',
 				    	    	  type:'POST',
@@ -141,11 +142,11 @@ $(function(){
 				    	    	  success:function(result){  
 
 				   	    		  $(result).each(function(idx, list){
-				    	    			  console.log(list['COUNTRY_NAME']);
-				    	    			  console.log(list['COUNTRY_NO']);
+// 				    	    			  console.log(list['COUNTRY_NAME']);
+// 				    	    			  console.log(list['COUNTRY_NO']);
 				    	    			  var myNationName = list['COUNTRY_NAME'];
 				       	    		      var myNationNo = list['COUNTRY_NO'];       	    	         	    		        	        
-				      	    	        	 $("select#user_nation").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
+				      	    	          $("select#country_no").append('<option value='+ myNationNo+'>'+ myNationName+ '</option>');
 				   	    		  });
 				    	    	  },//success
 				    	    	  error:function(){
@@ -153,7 +154,11 @@ $(function(){
 					   			  }	//error
 				    	    	 
 				    	         });//ajax      
-				          });//function     
+				          });//function   
+				          
+				   $("select#country_no").blur(function(){
+					  console.log($("select#country_no").val()); 
+				   });
     
 
    // 가입정보 저장, 공백체크  	   
@@ -166,7 +171,7 @@ $(function(){
 				    	   exit;
 				       }				   
 				   
-				       if($("select[name='user_nation']").val()==null){ //국적 
+				       if($("select[name='country_no']").val()==null){ //국적 
 				    	   alert("Please enter your Nationality");
 				    	  $("select[name='continent']").focus();
 				    	   exit;
@@ -209,7 +214,7 @@ $(function(){
 <%-- <jsp:include page="header.jsp"></jsp:include> --%>
 <section class='container d-flex justify-content-center'>
 <form action="/web/joinMemberInsert" name="joinFrm" method="post">
-	<table class="table w-50 bg-light" style="table-layout: fixed; margin: 0 auto;">
+	<table class="table">
 			<thead>
 				<tr>
 					<th><h2>JOIN</h2></th>
@@ -267,7 +272,7 @@ $(function(){
 			</tr>
 			<tr>
 				<td>
-					<label for="user_nation" class="form-label mt-1">Nation</label>
+					<label for="country_no" class="form-label mt-1">Nation</label>
 						<div class="col-auto d-flex">
 							<select class="form-select w-25" name="continent" id="continent">
 								     <option selected="selected">select</option>
@@ -278,7 +283,7 @@ $(function(){
 									 <option value="South America">South America</option>
 									 <option value="Oceania">Oceania</option>
 							</select>
-							<select class="form-select w-25 mx-4" name="user_nation" id="user_nation" >
+							<select class="form-select w-25 mx-4" name="country_no" id="country_no" >
 	 						</select>
 						</div>
 				</td>
