@@ -1,19 +1,14 @@
 package com.bit.web.vo;
 
 public class JoinSeoulBean {
-	  
-	   private String user_id;
-	   private String user_nick;
-	   private String user_pw;
-	 //  private String user_name;
-	   private String user_nation;
-	 //  private String user_tel;
-	   private String user_birth;
-       private int user_gender;
-       private int user_pp;	
-       private int user_first;
-       
-       
+	private String user_id;
+	private String user_nick;
+	private String user_pw;
+	private int country_no;
+	private String user_birth;
+	private int user_gender;
+	private int user_pp;
+	private int user_first;
 	public String getUser_id() {
 		return user_id;
 	}
@@ -32,24 +27,12 @@ public class JoinSeoulBean {
 	public void setUser_pw(String user_pw) {
 		this.user_pw = user_pw;
 	}
-//	public String getUser_name() {
-//		return user_name;
-//	}
-//	public void setUser_name(String user_name) {
-//		this.user_name = user_name;
-//	}
-	public String getUser_nation() {
-		return user_nation;
+	public int getCountry_no() {
+		return country_no;
 	}
-	public void setUser_nation(String user_nation) {
-		this.user_nation = user_nation;
+	public void setCountry_no(int country_no) {
+		this.country_no = country_no;
 	}
-//	public String getUser_tel() {
-//		return user_tel;
-//	}
-//	public void setUser_tel(String user_tel) {
-//		this.user_tel = user_tel;
-//	}
 	public String getUser_birth() {
 		return user_birth;
 	}
@@ -78,19 +61,10 @@ public class JoinSeoulBean {
 	@Override
 	public String toString() {
 		return "JoinSeoulBean [user_id=" + user_id + ", user_nick=" + user_nick + ", user_pw=" + user_pw
-				+ ", user_nation=" + user_nation + ", user_birth=" + user_birth + ", user_gender=" + user_gender + ", user_pp=" + user_pp				
-				+ ", user_first=" + user_first + "]";
+				+ ", country_no=" + country_no + ", user_birth=" + user_birth + ", user_gender=" + user_gender
+				+ ", user_pp=" + user_pp + ", user_first=" + user_first + "]";
 	}
- 
-//	public String toString() {
-//		return "JoinSeoulBean [user_id=" + user_id + ", user_nick=" + user_nick + ", user_pw=" + user_pw
-//				+ ", user_name=" + user_name + ", user_nation=" + user_nation + ", user_tel=" + user_tel
-//				+ ", user_birth=" + user_birth + ", user_gender=" + user_gender + ", user_pp=" + user_pp
-//				+ ", user_first=" + user_first + "]";
-//	}   
-       
-       
-       
-       
+	
+	
 }
 

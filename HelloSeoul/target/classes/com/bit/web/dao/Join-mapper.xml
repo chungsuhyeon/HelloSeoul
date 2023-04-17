@@ -37,8 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 가입정보 DB저장 -->
 	 	<insert id="joinMemberInsert" parameterType="com.bit.web.vo.JoinSeoulBean">
 	        INSERT INTO 
-	 		userboard(user_id,user_nick,user_pw,user_nation,user_birth,user_gender,user_pp,user_first)
-	 		values(#{user_id},#{user_nick},#{user_pw},#{user_nation},#{user_birth},#{user_gender},#{user_pp},#{user_first})
+	 		userboard(user_id,user_nick,user_pw,country_no,user_birth,user_gender,user_pp,user_first)
+	 		values(#{user_id},#{user_nick},#{user_pw},#{country_no},#{user_birth},#{user_gender},#{user_pp},#{user_first})
 	   </insert>
 	   
 	   
