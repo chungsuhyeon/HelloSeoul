@@ -16,8 +16,9 @@
 <script type="text/javascript">
 $(function(){
 	//Board Write
-	$('.write').click(function(){
-		var nul=null;
+	$('button#write').click(function(){
+// 		console.log("good");
+// 		var nul=null;
 		if($("input#user_id").val()==""){
 			alert("로그인 후 이용 가능합니다.");
 		}
@@ -44,6 +45,7 @@ $(function(){
 <jsp:include page="./header.jsp"></jsp:include>
 <section class='container'>
 	<div class='row'>
+	<input type="hidden" id="user_id" value=${user_id }>
 		<div>Hot Reviews</div>
 		<div class='hotboard col-6'>
 			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
@@ -117,7 +119,7 @@ $(function(){
 				Board List
 				</div>
 				<div class='col-6 text-end'>
-					<button class='write btn btn-primary'>Write</button>
+					<button class='write btn btn-primary' id="write">Write</button>
 				</div>
 			</div>
 			<div class='row'>
