@@ -125,7 +125,7 @@ public class sunrestcontroller {
 		String fileRealName = formData.getOriginalFilename();
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 		String uploadFolder = "\\\\192.168.0.16\\searchImg";
-		String localuploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\final_style\\img\\foodtest";
+		
 		UUID uuid = UUID.randomUUID();
 		String[] uuids = uuid.toString().split("-");
 		String uniqueName = uuids[0];
