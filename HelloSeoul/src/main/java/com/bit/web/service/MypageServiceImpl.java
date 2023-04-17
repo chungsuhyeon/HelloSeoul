@@ -23,6 +23,9 @@ import lombok.RequiredArgsConstructor;
 public class MypageServiceImpl implements MypageService {
 	@Resource(name = "helloSeoulDao")
 	private HelloSeoulDao helloDao;
+	
+	@Resource
+	private CommService commService;
 
 	@Override
 	public JoinSeoulBean loginPass(String id, String pw) {
@@ -47,10 +50,11 @@ public class MypageServiceImpl implements MypageService {
 		
 		int user_pp = Integer.parseInt(String.valueOf(userDBInfo.get("USER_PP")));
 		int user_first = Integer.parseInt(String.valueOf(userDBInfo.get("USER_FIRST")));
+		int user_nation = Integer.parseInt(String.valueOf(userDBInfo.get("COUNTRY_NO")));
 		
 		// 정보 넘길거
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();	
-		userInfo.put("USER_NATION", userDBInfo.get("USER_NATION")); // 국적
+		HashMap<String, Object> userInfo = new HashMap<String, Object>();
+		userInfo.put("USER_NATION", helloDao.getCountryName(user_nation)); // 국적
 		
 		// 나이계산
 		if( (today.getMonthValue() - birth.getMonthValue()) > 0) { // 생일 지난 사람
@@ -235,13 +239,14 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public void mypagePlannerShareAllDelete(int no) {
-		helloDao.plannerShareAllDelete(no);
-	}
-	
-	@Override
 	public void mypagePlannerDelete(int no) {
 		helloDao.plannerAllDelete(no);
+		// 커뮤니티 공유한 플래너 삭제
+		if(helloDao.plannerShareCommunity(no).size() != 0) {
+			for(int num : helloDao.plannerShareCommunity(no)) {
+				commService.deleteBoard(num);
+			}
+		} 
 	}
 	
 	@Override
@@ -253,8 +258,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public void mypageScheduleInsert(Object id, MypageMainPlannerBean bean) {
-		bean.setUser_id((String) id);
+	public void mypageScheduleInsert(MypageMainPlannerBean bean) {
 		helloDao.plannerScheduleInsert(bean);
 	}
 

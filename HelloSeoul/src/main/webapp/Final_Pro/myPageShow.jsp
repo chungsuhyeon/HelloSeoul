@@ -25,6 +25,19 @@
 			document.getElementById('nickTable').replaceChildren();
 			$("input#nickname").val("");
 		}); // $("#popupClose").click
+		
+		// 팝업창 닫기
+		$("button#deletePopupClose").click(function(){
+			document.getElementById("plannerDeletePopUp").style.display = "none";
+		}); // $("#popupClose").click
+				
+		$("button#deletePlannerYes").click(function(){
+			const urlParams = new URL(location.href).searchParams;
+			const no = urlParams.get('no');
+			document.getElementById("plannerDeletePopUp").style.display = "none";
+			document.location.href = "/web/mypagePlannerDelete?no=" + no;
+		});
+		
 	});
 	
 	// 플래너 생성 로드시
@@ -40,9 +53,7 @@
 			data: {no:no},
 			dataType: 'json',
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function(result){										
-				
-				console.log(result);
+			success: function(result){
 				// 타이틀 input
 				$("div#planTitle").append(`<h3>Title : \${result.PLANNER_TITLE}</h3>`);
 				
@@ -96,8 +107,8 @@
 					data: {no:no},
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-					success: function(result){
-						$(result).each(function(idx, list){
+					success: function(re){
+						$(re).each(function(idx, list){
 							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
 							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
 							
@@ -122,12 +133,11 @@
 				
 				if('${user_id}' == result.USER_ID){
 					$("ol.breadcrumb").append(
-						`<li class='breadcrumb-item'><a href='/web/mypagePlannerDelete?no=${param.no}'>Planner Delete</a></li>
+						`<li class='breadcrumb-item'><a href='javascript:openDeletePlannerPopup()'>Planner Delete</a></li>
 						<li class='breadcrumb-item'><a href='/web/PlannerShare?planner_no=${param.no}&type=Planner'>Planner Share</a></li>
 						<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>`		
 					);
 				}
-				
 			},
 			error: function(){
 				alert("error : " + error);
@@ -248,6 +258,10 @@
 		}); // ajax
 	}
 	
+	function openDeletePlannerPopup(){
+		document.getElementById("plannerDeletePopUp").style.display = "block";
+	}
+	
 </script>
 <!--JS Section End -->
 
@@ -341,11 +355,36 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
+		<!-- 플래너 삭제 팝업창 -->	
+		<div class="modal" id="plannerDeletePopUp" style="position: fixed; top:0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.7);">
+			<div class="modal-dialog" role="document" style="position: absolute; top: calc(50vh - 300px); left: calc(50vw - 200px);">
+				<div class="modal-content" style="height:400px; width:400px;">
+					<div class="modal-header">
+						<h5 class="modal-title">Delete Planner</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="deletePopupClose">
+							<span aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="modal-body" style="padding: 10px; width: 100%; height:50%;">
+						<p>If you delete the planner, users who shared it will not be able to see the planner.
+							<br>Planners shared with the community will also be deleted.</p>
+						<p>Are you sure you want to delete the planner anyway?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="deletePlannerYes">Delete</button>
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="deletePopupClose">Cancel</button>						
+					</div>
+				</div>
+			</div>
+		</div> 
+		
 		
 	</section>
 	<footer>
