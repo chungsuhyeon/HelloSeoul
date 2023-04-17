@@ -22,6 +22,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where user_id = #{value}
 	</select>
 	
+	<select id="getCountryName" parameterType="Integer" resultType="String">
+		select country_name
+		from nation
+		where country_no = #{contryNo}
+	</select>
+	
 	<select id="getUserPlanner" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
 		from planner
@@ -32,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
-		select * 
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg
 		from jjim 
 		where user_id = #{value}
 	</select>
@@ -43,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="getJjimInfo" parameterType="Integer" resultType="mainDb">
-		select * 
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_addr, loc_time, loc_tel, loc_info, loc_img, loc_x, loc_y, loc_tag
 		from maindb 
 		where loc_pc = #{value}
 	</select>
@@ -64,10 +70,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="mainPlannerDataSelect" parameterType="Integer" resultType="mypageMainPlanner">
-		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin
-		from mainplanner
-		where planner_no = #{no}
-		order by planner_date, planner_shour, planner_smin
+		select mp.loc_pc, db.loc_name, db.loc_ctg1, db.loc_ctg2, db.loc_sg, db.loc_x, db.loc_y, mp.planner_date, mp.planner_shour, mp.planner_smin
+		from mainplanner mp, maindb db
+		where mp.loc_pc = db.loc_pc and planner_no = #{no}
+		order by mp.planner_date, mp.planner_shour, mp.planner_smin
 	</select>
 	
 	<select id="selectMainDbData" parameterType="String" resultType="mainDb">
@@ -83,8 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="plannerScheduleInsert" parameterType="mypageMainPlanner">
-		insert into mainplanner(planner_no, user_id, loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin)
-		values(#{planner_no}, #{user_id}, #{loc_pc}, #{loc_name}, #{loc_ctg1}, #{loc_ctg2}, #{loc_sg}, #{loc_x}, #{loc_y}, #{planner_date}, #{planner_shour}, #{planner_smin})
+		insert into mainplanner(planner_no, loc_pc, planner_date, planner_shour, planner_smin)
+		values(#{planner_no}, #{loc_pc}, #{planner_date}, #{planner_shour}, #{planner_smin})
 	</insert>
 	
 	<delete id="plannerScheduleDelete" parameterType="Integer">
@@ -92,15 +98,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where planner_no = #{no}
 	</delete>
 	
-	<delete id="plannerShareAllDelete" parameterType="Integer">
-		delete from plannershare
-		where planner_no = #{no}
-	</delete>
-	
 	<delete id="plannerAllDelete" parameterType="Integer">
 		delete from planner
 		where planner_no = #{no}
 	</delete>
+	
+	<select id="plannerShareCommunity" parameterType="Integer" resultType="Integer">
+		select com_no
+		from communityboard
+		where planner_no = #{no}
+	</select>
 	
 	<select id="mypageplannerInfo" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
 		select planner_start, planner_end, planner_title, planner_info
