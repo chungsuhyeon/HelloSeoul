@@ -1,5 +1,6 @@
 package com.bit.web.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,4 +29,5 @@ public interface CtgService {
 	List<JoinSeoulBean> collectUsers();
 	List<HashMap<String, Object>> recommandFood(String foodname);
 	void insertOneJjim(int pc, String id);
+	String jsonParsingCoin()throws IOException;
 }
