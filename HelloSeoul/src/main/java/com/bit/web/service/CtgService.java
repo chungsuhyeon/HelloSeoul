@@ -26,5 +26,6 @@ public interface CtgService {
 	List<MainDbBean> hotspotrecom(String sg);
 	List<HashMap<String, Object>> hotspotshow(int page,String ctg1);
 	List<JoinSeoulBean> collectUsers();
-	
+	List<HashMap<String, Object>> recommandFood(String foodname);
+	void insertOneJjim(int pc, String id);
 }

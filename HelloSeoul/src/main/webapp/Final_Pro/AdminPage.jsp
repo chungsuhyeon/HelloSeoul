@@ -95,85 +95,15 @@ $(function(){
 <!-- Style Section End -->
 </head>
 <body>
-<section class='container-fluid bg-primary' style="height: 969px;">
-	<button id='test'>Button</button>
+<section class='container-fluid bg-dark'>
 	<div class='row'>
-		<div class='menubox col-12'>
-			<table class='table text-center'>
-				<thead>
-					<tr>
-						<th>
-							<button type="button" class='btn btn-lg btn-danger'>All Statistics</button>
-						</th>
-						<th>
-							<button type="button" class='btn btn-lg btn-danger' id="user">User Management</button>
-						</th>
-						<th>
-							<button type="button" class='btn btn-lg btn-danger'>Board Management</button>
-						</th>
-						<th>
-							<button type="button" class='btn btn-lg btn-danger'>Data Management</button>
-						</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='statisticsbox bg-light col-12'>
-			<div class='circlechartbox row'>
-				<div class='col-4'>
-				<h1>TotalUserCount</h1>
-				</div>
-				<div class='col-4'>
-				<h1>CommunityCount</h1>
-				</div>				
-				<div class='col-4'>
-				<h1>PlannerCount</h1>
-				</div>				
-			</div>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='userbox bg-light col-12'>
-			<div class='userlist'>
-				<table class='table'>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>NickName</th>
-							<th>Nation</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>aa</td>
-							<td>aa</td>
-							<td>aa</td>
-						</tr>						
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='reportlist bg-light col-12'>
-			<table class='table'>
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>NickName</th>
-						<th>Nation</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>aa</td>
-						<td>aa</td>
-						<td>aa</td>
-					</tr>						
-				</tbody>
-			</table>
+		<div class='col-1'>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
+			<button type="button" class='btn btn-outline-primary'>Test</button>
 		</div>
 	</div>
 </section>
