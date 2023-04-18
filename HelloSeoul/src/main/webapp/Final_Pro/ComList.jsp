@@ -110,14 +110,8 @@ $(function(){
 								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
 								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose></td>
-<<<<<<< HEAD
       							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}[${i.REPLY }]</a></td>
-      							<td>${i.USER_NICK}</td>
-=======
-      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
       							<td class='text-center'>${i.USER_NICK}</td>
->>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
-      							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
   							</c:forEach>
 						</tbody>
