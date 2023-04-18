@@ -52,7 +52,7 @@ $(function(){
   				<div class="carousel-inner">
   					<c:forEach var='i' items="${top3}" varStatus="status">
   					<c:if test="${status.index==0 }">
-  					    				<div class="carousel-item active" data-bs-interval="2000">
+  					    				<div class="carousel-item active" data-bs-interval="5000">
       					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
@@ -61,7 +61,7 @@ $(function(){
     				</div>
     			</c:if>
     				
-    				<div class="carousel-item" data-bs-interval="2000">
+    				<div class="carousel-item" data-bs-interval="5000">
       					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
