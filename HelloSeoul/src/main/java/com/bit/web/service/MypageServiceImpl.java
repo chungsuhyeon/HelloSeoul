@@ -33,7 +33,7 @@ public class MypageServiceImpl implements MypageService {
 		if(dbPass!=null && dbPass.equals(pw)) {
 			return helloDao.getDbUserInfo(id);
 		} else {
-			return null;			
+			return null;
 		}
 	}
 

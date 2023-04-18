@@ -224,7 +224,7 @@
 								\${shareNick}
 							</div>
 							<div class='w-20'>
-								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${shareNick}" style="padding: 8px 5px;"></button>
+								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${shareNick}" style="padding: 8px 5px;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Tooltip on bottom"></button>
 							</div>
 						</div>`
 					);
@@ -278,7 +278,27 @@
 		float: left;
 		margin-left: 2px;
 		width: 20%;
+		height: 33px;
 	}
+	
+/* 	div.nickbox > span { */
+/* 		visibility: hidden; */
+/* 		width: 120px; */
+/* 		background-color: black; */
+/* 		color: #fff; */
+/* 		text-align: center; */
+/* 		border-radius: 6px; */
+/* 		padding: 5px 0; */
+/* 		position: absolute; */
+/* 		z-index: 1; */
+/* 		bottom: 100%; */
+/* 		left: 50%; */
+/* 		margin-left: -60px; */
+/* 	} */
+	
+/* 	div.nickbox:hover span { */
+/* 		visibility: visible; */
+/* 	} */
 
 </style>
 <!-- Style Section End -->
@@ -347,15 +367,15 @@
 						<span>Nickname</span><br>
 						<input type="text" id="nickname" oninput="checkNick()" style="width: 100%">
 						
-						<div id="shareNick" style="margin-top:5px; height:15%; width:100%; overflow:hidden;">
+						<div id="shareNick" style="margin-top:5px; height:20%; width:100%; overflow:overlay; white-space:nowrap; display: flex; flex-direction: row;">
 						</div>
 						
-						<div style="width:100%; height:60%; overflow: auto;">
+						<div style="width:100%; height:57%; overflow: auto;">
 							<table id="nickTable" style="width: 100%; margin-top: 10px; white-space:nowrap;"></table>
 						</div>
 					</div>
 					<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="popupClose">Close</button>
 					</div>
 				</div>
 			</div>
