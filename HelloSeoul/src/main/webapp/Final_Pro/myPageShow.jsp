@@ -224,7 +224,7 @@
 								\${shareNick}
 							</div>
 							<div class='w-20'>
-								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${shareNick}" style="padding: 8px 5px;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Tooltip on bottom"></button>
+								<button type="button" onclick="shareUserDelete(this)" class='btn btn-close btn-close-white' name="\${shareNick}" style="padding: 8px 5px;"></button>
 							</div>
 						</div>`
 					);
