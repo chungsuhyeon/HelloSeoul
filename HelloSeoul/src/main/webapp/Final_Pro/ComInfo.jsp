@@ -431,12 +431,9 @@ function ReportOn(){
 						<span>${i.rep_cont}</span>
 					</div>
 					<div class='repleabar'>
-						<a href='#'>reple</a>|
-						<a href='/web/replyMo'>modi</a>|
 						<a href='/web/deleteReplyMain?no=${i.rep_no }&boardno=${i.com_no}&user_id=${user_id}' onclick="confirm('정말로 삭제하겠습니까?')">
 						delete
-						</a>|
-						<a href='#'>report</a>
+						</a>
 					</div>
 				</div>
 				</c:forEach>
