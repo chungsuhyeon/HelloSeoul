@@ -99,10 +99,15 @@
 					
 					var htmlInner = `<table class='table table-hover'><tbody><tr class='table-light'>`;
 					
-					if((result.loc_img).includes("http")){
-						htmlInner += `<td><img src="\${result.loc_img}" width="100%" height="300"></td></tr>`;
-					} else {
-						htmlInner += `<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td></tr>`;								
+					try {
+						if((result.loc_img).includes("http")){
+							htmlInner += `<td><img src="\${result.loc_img}" width="100%" height="300"></td></tr>`;
+						} else {
+							htmlInner += `<td><img src="/web/resources/file_img/\${result.loc_img}" width="100%" height="300"></td></tr>`;								
+						}
+					} catch (error) {
+						console.error(error);
+						htmlInner += `<td><img src="/web/resources/file_img/noImg.jpg" width="100%" height="300"></td></tr>`;
 					}
 					
 					htmlInner += `<tr class='table-light'>
@@ -201,7 +206,7 @@
 				</li>					
 			</ul>
 			<!-- tab contents -->
-				<div id='myTabContent border border-info-1' class='tab-content' style="height: 90%;">
+				<div id='myTabContent border border-info-1' class='tab-content' style="height:90%;">
 				</div>
 				
 				<div class='setbt d-flex justify-content-center'>

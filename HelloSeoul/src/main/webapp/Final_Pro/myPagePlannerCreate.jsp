@@ -378,8 +378,8 @@
 						</div>	
 						
 						<div class='settingbt'>
-							<button onclick="deletePlan()">일정 제거</button>
-							<button onclick="storePlanner()">플래너 저장</button>
+							<button class='btn btn-primary' onclick="deletePlan()">일정 제거</button>
+							<button class='btn btn-primary' onclick="storePlanner()">플래너 저장</button>
 						</div>			
 				
 				</div>
@@ -399,7 +399,7 @@
 						</table>
 					</div>
 					<div class='jjimbt'>
-						<button onclick="updatePlan()">일정에 추가</button>
+						<button class='btn btn-primary' onclick="updatePlan()">일정에 추가</button>
 					</div>
 				</div>
 				<div class='mapbar col-4'>

@@ -21,6 +21,7 @@ $(function(){
 		const preview = document.querySelector('.photo');
 		const imageSrc = URL.createObjectURL(fileDOM.files[0]);
 		$('.photo img').attr('src',imageSrc);
+		$('.photo h1').remove();
 
 
 	});
@@ -39,7 +40,6 @@ $(function(){
             contentType: false,
             dataType : 'json',
             success: function(res) {
-            	$('.photo h1').remove();
             	$('.photo h2').remove();
             	$('.photo').append(`
         				<h2>FoodName : \${res.foodname}</h2>
