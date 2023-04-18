@@ -110,8 +110,11 @@ $(function(){
 								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
 								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose></td>
+
       							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}[${i.REPLY }]</a></td>
       							<td class='text-center'>${i.USER_NICK}</td>
+
+      							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
   							</c:forEach>
 						</tbody>
