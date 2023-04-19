@@ -146,9 +146,7 @@ $(function(){
 					<c:if test="${user_id eq 'Admin'}">
 						<button class='write btn btn-light' id="admin">Admin</button>
 					</c:if>
-				<div class='col-6 text-end'>
-					<button class='write btn btn-primary' id="write">Write</button>
-				</div>
+			
 			</div>
 			<div class='row'>
 				<div class='tbb col-12'>
@@ -156,10 +154,10 @@ $(function(){
 						<thead>
 							<tr class='table-primary'>
 								<th>No</th>
-								<th>Category</th>
-								<th class='w-25'>Title</th>
-								<th class='w-25'>Nick Name</th>
-								<th>RegDate</th>
+								<th style="width: 22%">Category</th>
+								<th style="width: 35%">Title</th>
+								<th style="width: 18%">Nick Name</th>
+								<th class="w-20">RegDate</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -175,7 +173,7 @@ $(function(){
       							<td><a href="/web/infoSelect?no=${i.COM_NO}" style="text-decoration: none;color:black;">${i.COM_TITLE}
       							<c:if test="${i.REPLY>0 }"> <span style="color: red;">&nbsp;[${i.REPLY }]</span></c:if>
       							</a></td>
-      							<td class='text-center'>${i.USER_NICK}</td>
+      							<td class='text-left'>${i.USER_NICK}</td>
 
       							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
@@ -183,7 +181,10 @@ $(function(){
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div><div class='col-6'></div>
+				<div class='col-6 text-end'>
+					<button class='write btn btn-primary' id="write" style="margin-right: 30px;margin-bottom: 10px;">Write</button>
+				</div>
 			<div class='row'>
 				<div class='paging col-12 d-flex justify-content-center'>
 					<ul class="pagination pagination-sm">
