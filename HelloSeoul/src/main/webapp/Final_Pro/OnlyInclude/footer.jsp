@@ -24,6 +24,8 @@
 		&nbsp;&nbsp;&nbsp;
 		<a href="/web/gotohotspo">Hotspot</a>
 		&nbsp;&nbsp;&nbsp;
+		<a href="#">Ticketing</a>
+		&nbsp;&nbsp;&nbsp;
 		<a href="/web/boardSelect">Community</a>
 		&nbsp;&nbsp;&nbsp;
 		<c:choose>

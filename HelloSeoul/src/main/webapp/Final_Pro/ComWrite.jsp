@@ -20,15 +20,7 @@
 <script type="text/javascript">
 $(function(){
 	$(".postbar").click(function(){
-		var com_ctg=$("select#com_ctg").val();
-		var com_filename=$("input#com_filename").val();
-		var com_title=$("input#com_title").val();
-		var com_cont=$("textarea#com_cont").val();
-		if(com_ctg!=""&&com_filename!=""&&com_title!=""&&com_cont!=""){
-			$("form").submit();
-		}else{
-			alert("전부 입력해주세요");
-		}	
+		$("form").submit();
 	});
 	$("button#cancelbt").click(function(){
 		
@@ -59,7 +51,7 @@ $(function(){
 						<tr>
 							<th>Catergory</th>
 							<td>
-								<select class='form-select' id="com_ctg" name="com_ctg" style="width: 30%;">
+								<select class='form-select' name="com_ctg" style="width: 30%;">
 								<c:if test="${param.type eq 'write'}">
 									<option value="">&nbsp;+ 선택해주세요</option>
 									<option value="">----------------------</option>
@@ -83,7 +75,7 @@ $(function(){
 						<tr>
 							<th>Title</th>
 							<td>
-								<input class='form-control' type="text" id="com_title"name="com_title" value=""/>
+								<input class='form-control' type="text" name="com_title" value=""/>
 							</td>
 						</tr>
 						<tr>
