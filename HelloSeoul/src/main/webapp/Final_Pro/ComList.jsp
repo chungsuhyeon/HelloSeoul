@@ -46,8 +46,8 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 	<input type="hidden" id="user_id" value=${user_id }>
-		<div>New Reviews</div>
-		<div class='hotboard col-6 align-self-center'>
+		<div>Hot Reviews</div>
+		<div class='hotboard col-6'>
 			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
   				<div class="carousel-inner">
   					<c:forEach var='i' items="${top3}" varStatus="status">
@@ -79,13 +79,19 @@ $(function(){
 	    			<span class="visually-hidden">Next</span>
 	  			</button>
 			</div>
+			<div class='col-12'>
+				<div>Planner Share</div>
+				<div class='sharebox d-inline-flex'>
+				
+				</div>
+			</div>
 		</div>
-		<div class='boardlist col-6 align-self-center'>
+		<div class='boardlist col-6'>
 			<div class='row'>
 				<div class='col-6'>
 				Board List
 				</div>
-				<div class='col-6 text-end mb-1'>
+				<div class='col-6 text-end'>
 					<button class='write btn btn-primary' id="write">Write</button>
 				</div>
 			</div>
@@ -93,11 +99,11 @@ $(function(){
 				<div class='col-12'>
 					<table class='table'>
 						<thead>
-							<tr class='table-primary text-center'>
+							<tr class='table-primary'>
 								<th>No</th>
 								<th>Category</th>
-								<th style="width: 30%;">Title</th>
-								<th class='w-25'>Nick</th>
+								<th class='w-25'>Title</th>
+								<th class='w-25'>Nick Name</th>
 								<th>RegDate</th>
 							</tr>
 						</thead>
@@ -110,12 +116,17 @@ $(function(){
 								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
 								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose></td>
+<<<<<<< HEAD
 
       							<td><a href="/web/infoSelect?no=${i.COM_NO}" style="text-decoration: none;color:black;">${i.COM_TITLE}
       							<c:if test="${i.REPLY>0 }"> <span style="color: red;">&nbsp;[${i.REPLY }]</span></c:if>
       							</a></td>
       							<td class='text-center'>${i.USER_NICK}</td>
 
+=======
+      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
+      							<td>${i.USER_NICK}</td>
+>>>>>>> branch 'subMain' of https://github.com/chungsuhyeon/HelloSeoul.git
       							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
   							</c:forEach>

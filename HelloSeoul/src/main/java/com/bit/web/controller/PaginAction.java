@@ -15,7 +15,7 @@ public class PaginAction {
 	@Autowired
 	private ProjectDao dao;
 	public PageBean paging(HttpServletRequest request) {
-		int pageScale=10;  //페이지에 나오는 글 갯수
+		int pageScale=5;  //페이지에 나오는 글 갯수
 		int totalRow=dao.getTotalRow(); //글의 총 갯수 
 		int totalPage=totalRow%pageScale==0?totalRow/pageScale:(totalRow/pageScale)+1; //총 페이지의 숫자
 		if(totalRow==0)totalPage=1;	
