@@ -111,7 +111,9 @@ $(function(){
 								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose></td>
 
-      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}[${i.REPLY }]</a></td>
+      							<td><a href="/web/infoSelect?no=${i.COM_NO}" style="text-decoration: none;color:black;">${i.COM_TITLE}
+      							<c:if test="${i.REPLY>0 }"> <span style="color: red;">&nbsp;[${i.REPLY }]</span></c:if>
+      							</a></td>
       							<td class='text-center'>${i.USER_NICK}</td>
 
       							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
