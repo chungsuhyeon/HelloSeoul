@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bit.web.alpha.PagingAlgo;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
 import com.bit.web.service.CtgServiceImpl;
+import com.bit.web.vo.MultiPageBean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,10 +46,11 @@ public class Ctgcontroller {
 	}
 	
 	@GetMapping(value = "gotohotspot")
-	public String gotoHotspot(Model model) {
+	public String gotoHotspot(Model model, HttpServletRequest resq) {
 //		model.addAttribute("page",ctg.HotspotPagings(p));
 //		model.addAttribute("user_first",ff);
 		model.addAttribute("hotspot", ctg.readyForHot());
+		resq.getSession().setAttribute("pageBean", ctg.makingTotals(5, 8));
 		return "Final_Pro/HotspotMain";
 	}
 	
@@ -71,6 +74,15 @@ public class Ctgcontroller {
 	public String gotoAdminPage(String ID, int pw) {
 		
 		return "Final_Pro/AdminPage";
+	}
+	
+	@GetMapping(value="pgAction")
+	public String pgActing(int Page,int Block, HttpServletRequest resq) {
+		MultiPageBean bean =  (MultiPageBean)resq.getSession().getAttribute("pageBean");
+		resq.getSession().setAttribute("pageBean", ctg.changePage(Page, Block, bean));
+		System.out.println(ctg.changePage(Page, Block, bean));
+		return "Final_Pro/HotspotMain";
+						
 	}
 	
 

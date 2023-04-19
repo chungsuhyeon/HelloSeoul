@@ -5,7 +5,12 @@ import lombok.Data;
 @Data
 public class MultiPageBean {
 	private int pageScale;
-	private int blockStartNum;
-	private int blockEndNum;
-	private int lastPageNum;
+	private int blockScale;
+	private int currentPage;
+	private int currentBlock;
+	private int totalPage;
+	private int totalBlock;
+	private int pageStart;
+	private int pageEnd;
+	
 }

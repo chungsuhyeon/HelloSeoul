@@ -100,32 +100,83 @@
 			</div>
 			<hr class='hr'>
 			<!-- Paging Button -->
-			<div class='pagingbox d-flex justify-content-center my-4'>
-				<div>
-  					<ul class="pagination pagination-lg">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-   						<li class="page-item active">
-      						<a class="page-link" href="#">1</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">2</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">3</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">4</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">5</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">&raquo;</a>
-    					</li>
-  					</ul>
-  				</div>
+			<div class='pagingbar d-flex justify-content-center mt-4'>
+				<ul class='pagination'>
+					<c:choose>
+						<c:when test="${pageBean.currentPage eq 1}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=1&Block=1">&laquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${pageBean.currentPage eq 1}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&laquo;</a>
+							</li>
+						</c:when>
+						<c:when test="${pageBean.currentPage eq ((pageBean.currentBlock-1)*pageBean.blockScale)+1}">
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=${pageBean.currentPage-1}&Block=${pageBean.currentBlock-1}">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=${pageBean.currentPage-1}&Block=${pageBean.currentBlock}">&laquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="pg" begin="${(pageBean.currentBlock-1)*pageBean.blockScale+1}" end="${pageBean.currentBlock*pageBean.blockScale}">
+						<c:choose>
+							<c:when test="${pg eq pageBean.currentPage}">
+								<li class="page-item active">
+									<a class="page-link" href="/web/pgAction?Page=${pg}&Block=${pageBean.currentBlock}">${pg}</a>
+									<input type="hidden" id="conStart" value="${pageBean.pageStart}">
+									<input type="hidden" id="conEnd" value="${pageBean.pageEnd}">
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link" href="/web/pgAction?Page=${pg}&Block=${pageBean.currentBlock}">${pg}</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pageBean.currentPage eq pageBean.totalPage}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&raquo;</a>
+							</li>
+						</c:when>
+						<c:when test="${pageBean.currentPage eq (pageBean.currentBlock*pageBean.blockScale)}">
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=${pageBean.currentPage+1}&Block=${pageBean.currentBlock+1}">&raquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=${pageBean.currentPage+1}&Block=${pageBean.currentBlock}">&raquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${pageBean.currentBlock eq pageBean.totalBlock}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&raquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/pgAction?Page=${pageBean.totalPage}&Block=${pageBean.totalBlock}">&raquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
 		</div>
 	</section>

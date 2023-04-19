@@ -17,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit.web.alpha.PagingAlgo;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MultiPageBean;
 import com.bit.web.vo.MypageJjimBean;
 import com.bit.web.vo.PageBean;
 
@@ -28,8 +30,11 @@ import com.bit.web.vo.PageBean;
 @Service
 public class CtgServiceImpl implements CtgService{
 	
-	@Autowired
+	@Resource
 	private CtgDao dao;
+	
+	@Resource
+	private PagingAlgo pgt;
 	
 	
 	//controller service begin
@@ -154,10 +159,10 @@ public class CtgServiceImpl implements CtgService{
 	}
 
 	@Override
-	public String jsonParsingCoin() throws IOException{
+	public String jsonParsingCoin(String day) throws IOException{
 		// TODO Auto-generated method stub		
 		//pthon connect
-		URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate=20230410&data=AP01");
+		URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate="+day+"&data=AP01");
 		String line;
 		StringBuilder sb = new StringBuilder();
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -178,6 +183,39 @@ public class CtgServiceImpl implements CtgService{
 		String text = sb.toString();
 		return text;
 	}
+
+	@Override
+	public List<HashMap<String, Object>> reportComm() {
+		List<HashMap<String, Object>> map = dao.reportBoard();
+		return map;
+	}
+
+	@Override
+	public MultiPageBean makingTotals(int blockScale, int pageScale) {
+		// TODO Auto-generated method stub
+		MultiPageBean bean = new MultiPageBean();
+		int total = dao.countDB();
+		pgt.settingAll(blockScale, pageScale, total, bean);
+		pgt.settingStartEnd(1, 1, bean);
+		return bean;
+	}
+
+	@Override
+	public MultiPageBean changePage(int page, int block, MultiPageBean bean) {
+		// TODO Auto-generated method stub
+		return pgt.settingStartEnd(page, block, bean);
+	}
+
+	@Override
+	public List<MainDbBean> showDBs(int start, int end) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.pagingDB(map);
+	}
+	
+	
 	
 	
 	

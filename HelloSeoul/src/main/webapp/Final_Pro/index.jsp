@@ -18,15 +18,33 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1;
+	var yyyy = today.getFullYear();
+	if(dd<10){
+		dd='0'+dd;
+	}
+	if(mm<10){
+		mm='0'+mm;
+	}
+	today=yyyy+mm+dd;
+	
+	
 		$.ajax({
 			type:"POST",
 			url:'/web/coin',
+			data : {'day':today},
 			dataType:'json',
 			success: function(r){
+				var ptoday = yyyy+'-'+mm+'-'+dd;
 				console.log(r);
 				$('.coin').append(`
 						<table class='table text-center'>
 						<thead>
+							<tr class='table-primary'>
+								<th colspan='2'>\${ptoday}</th>
+							</tr>
 							<tr class='table-primary'>
 								<th>Nation</th>
 								<th>Exchange Rate</th>

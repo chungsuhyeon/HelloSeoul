@@ -31,6 +31,57 @@ $(function(){
 		var no=$(this).text();
 		document.location.href="/web/infoSelect?no="+no;
 	});
+	
+	$('#admin').click(function(){
+		$.ajax({
+			type:'POST',
+			url:'/web/report',
+			dataType:'json',
+			success: function(r){
+				$('.table').remove();
+				$('.paging').remove();
+				$('.tbb').append(`
+						<table class='table text-center'>
+							<theaed>
+								<tr>
+									<th>No</th>
+									<th>Rport Reason</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						`);
+				
+				for(var i=0; i<r.length;i++){
+					console.log(r[i]);
+					if(r[i].REPORT_REASON == 1){
+						$('tbody').append(`
+								<tr>
+									<td><a href="/web/infoSelect?no=\${r[i].COM_NO}">\${r[i].COM_NO}</a></td>
+									<td>욕설</td>
+									<td>
+								</tr>
+								`);		
+					}
+					if(r[i].REPORT_REASON == 2){
+						$('tbody').append(`
+								<tr>
+									<td><a href="/web/infoSelect?no=\${r[i].COM_NO}">\${r[i].COM_NO}</a></td>
+									<td>광고</td>
+								</tr>
+								`);		
+					}
+								
+				}
+			},
+			error: function(x){
+				alert("Error!");
+			}
+			
+		});
+	});
 });
 </script>
 <!--JS Section End -->
@@ -86,11 +137,14 @@ $(function(){
 				Board List
 				</div>
 				<div class='col-6 text-end mb-1'>
+					<c:if test="${user_id eq 'Admin'}">
+						<button class='write btn btn-light' id="admin">Admin</button>
+					</c:if>
 					<button class='write btn btn-primary' id="write">Write</button>
 				</div>
 			</div>
 			<div class='row'>
-				<div class='col-12'>
+				<div class='tbb col-12'>
 					<table class='table'>
 						<thead>
 							<tr class='table-primary text-center'>

@@ -85,4 +85,16 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public void upOneJjim(HashMap<String, Object> map) {
 		this.getSqlSession().insert("upOneJjim",map);
 	}
+	
+	public List<HashMap<String, Object>> reportBoard(){
+		return this.getSqlSession().selectList("reportBoard");
+	}
+	
+	public int countDB() {
+		return this.getSqlSession().selectOne("countDB");
+	}
+	
+	public List<MainDbBean> pagingDB(HashMap< String, Object> map) {
+		return this.getSqlSession().selectList("pagingDB", map);
+	}
 }

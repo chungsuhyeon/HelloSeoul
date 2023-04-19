@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MultiPageBean;
 import com.bit.web.vo.PageBean;
 
 public interface CtgService {
@@ -29,5 +30,9 @@ public interface CtgService {
 	List<JoinSeoulBean> collectUsers();
 	List<HashMap<String, Object>> recommandFood(String foodname);
 	void insertOneJjim(int pc, String id);
-	String jsonParsingCoin()throws IOException;
+	String jsonParsingCoin(String day)throws IOException;
+	List<HashMap<String, Object>> reportComm();
+	MultiPageBean makingTotals(int blockScale, int pageScale);
+	MultiPageBean changePage(int page, int block, MultiPageBean bean);
+	List<MainDbBean> showDBs(int start, int end);
 }

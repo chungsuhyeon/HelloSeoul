@@ -27,11 +27,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.alpha.AlphaService;
+import com.bit.web.alpha.PagingAlgo;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
+import com.bit.web.vo.CurPageBlockBean;
 import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.LocGunGuBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MultiPageBean;
 import com.bit.web.vo.MypageJjimBean;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -44,6 +47,9 @@ public class sunrestcontroller {
 	
 	@Resource
 	private CtgService ctg;
+	
+	@Resource
+	private PagingAlgo pg;
 	
 	@PostMapping(value = "showLocInfo")	
 	public List<MainDbBean> showDb() {
@@ -110,17 +116,6 @@ public class sunrestcontroller {
 		
 		return null;
 	}
-	
-	@PostMapping(value = "pagingtest")
-	public String testPaging() {
-		AlphaService as = new AlphaService();
-		
-		as.makePageBean(4, 100);
-		System.out.println(as.callBean());
-		
-		return "?";
-	}
-	
 	@PostMapping(value="jsonParsing")
 	public Object testingJson(@RequestParam(value = "file") MultipartFile formData) throws IOException{
 		String fileRealName = formData.getOriginalFilename();
@@ -178,10 +173,20 @@ public class sunrestcontroller {
 	}
 	
 	@PostMapping(value="coin")
-	public String todayCoin() throws IOException{
-		return ctg.jsonParsingCoin();
+	public String todayCoin(String day) throws IOException{
+		return ctg.jsonParsingCoin(day);
+	}
+	
+	@PostMapping(value="report")
+	public List<HashMap<String, Object>> reporting(){
+		return ctg.reportComm();
+	}
+	
+	@PostMapping(value="showPage")
+	public List<MainDbBean> showPaging(int start, int end) {
+		return ctg.showDBs(start, end); 
 	}
 
-	
+
 
 }
