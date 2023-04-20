@@ -123,7 +123,7 @@ where rw between #{start} and #{end} ]]>
 	</select>
 	
 	<select id="selecttop3" resultType="com.bit.web.vo.ComBoard">
-		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3]]>
+		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3 and report<=4]]>
 	</select>
 	
 	<select id="getTotalRow" resultType="java.lang.Integer">
