@@ -254,6 +254,7 @@ function pageShow(){
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="pg" begin="${(pageBean.currentBlock-1)*pageBean.blockScale+1}" end="${pageBean.currentBlock*pageBean.blockScale}">
+						<c:if test="${pg <= pageBean.totalPage}">
 						<c:choose>
 							<c:when test="${pg eq pageBean.currentPage}">
 								<li class="page-item active">
@@ -268,6 +269,7 @@ function pageShow(){
 								</li>
 							</c:otherwise>
 						</c:choose>
+						</c:if>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pageBean.currentPage eq pageBean.totalPage}">

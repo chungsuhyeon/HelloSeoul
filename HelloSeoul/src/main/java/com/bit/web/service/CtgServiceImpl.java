@@ -214,7 +214,27 @@ public class CtgServiceImpl implements CtgService{
 		map.put("end", end);
 		return dao.pagingDB(map);
 	}
+
+	@Override
+	public MultiPageBean makingTotals2(int blockScale, int pageScale, String user_id) {
+		// TODO Auto-generated method stub
+		MultiPageBean bean = new MultiPageBean();
+		int total = dao.countPlanner(user_id);
+		pgt.settingAll(blockScale, pageScale, total, bean);
+		pgt.settingStartEnd(1, 1, bean);
+		return bean;
+	}
 	
+	
+	@Override
+	public List<Object> userPlanner(String id, String user_nick, int start, int end) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("nick", user_nick);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.getUserPlanner1(map);
+	}
 	
 	
 	

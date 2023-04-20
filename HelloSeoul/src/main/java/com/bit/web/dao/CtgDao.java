@@ -97,4 +97,12 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<MainDbBean> pagingDB(HashMap< String, Object> map) {
 		return this.getSqlSession().selectList("pagingDB", map);
 	}
+	
+	public int countPlanner(String user_id) {
+		return this.getSqlSession().selectOne("countPlanner", user_id);
+	}
+	
+	public List<Object> getUserPlanner1(HashMap<String, Object> map){
+		return this.getSqlSession().selectList("getUserPlanner1", map);
+	}
 }

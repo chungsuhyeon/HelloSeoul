@@ -18,11 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.web.alpha.PagingAlgo;
 import com.bit.web.dao.CtgDao;
 import com.bit.web.service.CtgService;
 import com.bit.web.service.CtgServiceImpl;
+import com.bit.web.service.MypageService;
 import com.bit.web.vo.MultiPageBean;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,9 @@ public class Ctgcontroller {
 	
 	@Resource
 	private final CtgService ctg;
+	
+	@Resource
+	private MypageService contactService;
 	
 	
 	@GetMapping(value = "gotoctg")
@@ -82,6 +87,21 @@ public class Ctgcontroller {
 		resq.getSession().setAttribute("pageBean", ctg.changePage(Page, Block, bean));
 		System.out.println(ctg.changePage(Page, Block, bean));
 		return "Final_Pro/HotspotMain";
+						
+	}
+	
+	@GetMapping(value="myAction")
+	public ModelAndView pgActing2(int Page,int Block, HttpServletRequest resq, ModelAndView mav) {
+		MultiPageBean bean =  (MultiPageBean)resq.getSession().getAttribute("myPaging");
+		resq.getSession().setAttribute("myPaging", ctg.changePage(Page, Block, bean));
+		String user_id = (String)resq.getSession().getAttribute("user_id");
+		String user_nick = (String)resq.getSession().getAttribute("user_nickName");
+		System.out.println(ctg.changePage(Page, Block, bean));
+		System.out.println(ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+		mav.addObject("userInfo", contactService.userInfo(user_id));
+		mav.addObject("userCreatedPlanner", ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+		mav.setViewName("Final_Pro/myPageMain");
+		return mav;
 						
 	}
 	
