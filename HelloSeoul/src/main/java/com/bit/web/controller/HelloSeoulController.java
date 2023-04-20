@@ -44,7 +44,7 @@ public class HelloSeoulController {
 			return "Final_Pro/index";
 		}
 		else if(user_id.equals("Admin")) {
-			return "Final_Pro/Adminpage";
+			return "Final_Pro/AdminPage";
 		}
 		
 		else {
