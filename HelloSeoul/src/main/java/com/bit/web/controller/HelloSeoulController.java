@@ -42,7 +42,12 @@ public class HelloSeoulController {
 			request.getSession().setAttribute("user_first", userInfo.getUser_first());
 			request.getSession().setMaxInactiveInterval(60*60);
 			return "Final_Pro/index";
-		} else {
+		}
+		else if(user_id.equals("Admin")) {
+			return "Final_Pro/Adminpage";
+		}
+		
+		else {
 			return "Final_Pro/login";
 		}
 	}
