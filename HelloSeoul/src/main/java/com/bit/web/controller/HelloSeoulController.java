@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bit.web.service.CtgService;
 import com.bit.web.service.MypageService;
 import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
+import com.bit.web.vo.MultiPageBean;
 import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
 
@@ -24,6 +26,9 @@ import com.bit.web.vo.MypagePlannerBean;
 public class HelloSeoulController {
 	@Resource
 	private MypageService contactService;
+	
+	@Resource
+	private CtgService ctg;
 
 	// login & session store
 	@RequestMapping("siteCheck")
@@ -56,9 +61,12 @@ public class HelloSeoulController {
 		String user_id = (String)request.getSession().getAttribute("user_id");
 		String user_nick = (String)request.getSession().getAttribute("user_nickName");
 		ModelAndView mav = new ModelAndView();
-		
+		//add
+		MultiPageBean bean = ctg.makingTotals2(5, 3, user_id);
+		request.getSession().setAttribute("myPaging", bean);
+		//add
 		mav.addObject("userInfo", contactService.userInfo(user_id));
-		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick));
+		mav.addObject("userCreatedPlanner", ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
 		mav.setViewName("Final_Pro/myPageMain");
 		
 		return mav;

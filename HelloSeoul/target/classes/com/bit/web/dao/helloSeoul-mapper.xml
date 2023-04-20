@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUserPlanner" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+		select rownum, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
 		from planner
 		where user_id = #{id} or planner_no in (select planner_no 
 												from plannershare 

@@ -119,6 +119,25 @@ FROM MAINDB
 WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
 </select>
 
+<select id="countPlanner" parameterType="String" resultType="int">
+SELECT COUNT(*)
+FROM PLANNER
+WHERE USER_ID = #{user_id}
+</select>
+
+
+<select id="getUserPlanner1" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+from
+(select rownum rm, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+from planner
+where user_id = #{id} or planner_no in (select planner_no 
+										from plannershare 
+										where share_user_nick=#{nick})
+order by planner_no desc)
+WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
+</select>
+
 </mapper>
 
 
