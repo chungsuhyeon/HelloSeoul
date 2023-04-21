@@ -147,7 +147,7 @@ $(function(){
 	  			</button>
 			</div>
 			<div class='col-12'>
-				<div>Planner Share</div>
+				
 				<div class='sharebox d-inline-flex'>
 				
 				</div>
