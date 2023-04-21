@@ -372,7 +372,7 @@ function ReportOn(){
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td class='text-center'>
+								<td class='text-center' style="border-bottom-width: 0px">
 									<c:choose>
 									<c:when test="${i.com_filename!='noimg.jpg' }">
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
@@ -387,10 +387,10 @@ function ReportOn(){
 					<tr>
 						<c:choose>
 									<c:when test="${i.com_filename=='noimg.jpg' }">
-									<td style="width:500px;height: 500px;">${i.com_cont}</td>
+									<td style="width:500px;height: 500px;border-bottom-width:0px;">${i.com_cont}</td>
 									</c:when>
 									<c:otherwise>
-									<td>${i.com_cont }</td>
+									<td style="border-bottom-width: 0px">${i.com_cont }</td>
 									</c:otherwise>
 									</c:choose>
 						
@@ -409,6 +409,7 @@ function ReportOn(){
 					</tr>
 					<tr>
 						<td class='text-end' colspan="2">
+						<button type="button" class="btn btn-primary" style="float:left" id="listbt">List</button>
 							<c:if test="${user_id ne i.user_id && user_id ne null}">
 								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
