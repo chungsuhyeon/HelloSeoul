@@ -346,7 +346,13 @@ function ReportOn(){
 						<c:choose>
 							<c:when test="${i.com_ctg==1 }">
 								<td>
+									<c:choose>
+									<c:when test="${i.com_filename!='noimg.jpg' }">
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+									</c:choose>
 								</td>
 								<td style="border-left-width : 1px;">
 									<input type="hidden" id="planner_no" value="${i.planner_no }">
@@ -367,13 +373,27 @@ function ReportOn(){
 							</c:when>
 							<c:otherwise>
 								<td class='text-center'>
+									<c:choose>
+									<c:when test="${i.com_filename!='noimg.jpg' }">
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+									</c:choose>
 								</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
 					<tr>
-						<td>${i.com_cont}</td>
+						<c:choose>
+									<c:when test="${i.com_filename=='noimg.jpg' }">
+									<td style="width:500px;height: 500px;">${i.com_cont}</td>
+									</c:when>
+									<c:otherwise>
+									<td>${i.com_cont }</td>
+									</c:otherwise>
+									</c:choose>
+						
 					</tr>
 					<tr>
 						<td class='text-center' colspan="2">

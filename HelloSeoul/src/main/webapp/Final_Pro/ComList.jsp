@@ -97,14 +97,23 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 	<input type="hidden" id="user_id" value=${user_id }>
-		<div>Hot Reviews</div>
+		<div>New Write</div>
 		<div class='hotboard col-6'>
-			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
+			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel"  >
   				<div class="carousel-inner">
   					<c:forEach var='i' items="${top3}" varStatus="status">
   					<c:if test="${status.index==0 }">
   					    				<div class="carousel-item active" data-bs-interval="5000">
-      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+      					<a href="/web/infoSelect?no=${i.com_no}">
+      					<c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+      					<img src="/web/resources/test/noimg.png" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:when>
+      					<c:otherwise>
+      					<img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:otherwise>
+      					</c:choose>
+      					</a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
 					        <p>${i.com_cont }</p>
@@ -113,7 +122,14 @@ $(function(){
     			</c:if>
     				
     				<div class="carousel-item" data-bs-interval="5000">
-      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+      					<a href="/web/infoSelect?no=${i.com_no}"><c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+      					<img src="/web/resources/test/noimg.png" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:when>
+      					<c:otherwise>
+      					<img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:otherwise>
+      					</c:choose></a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
 					        <p>${i.com_cont }</p>
@@ -122,7 +138,7 @@ $(function(){
     				</c:forEach>
   				</div>
   				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    				<span class="carousel-control-prev-icon" aria-hidden="true" ></span>
     				<span class="visually-hidden">Previous</span>
   				</button>
 	  			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
