@@ -64,7 +64,7 @@ public class HelloSeoulController {
 		return mav;
 	}
 	
-	// 찜 보기 화면
+	// 찜보기 화면
 	@RequestMapping(value = "ajaxMypageJjim", method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mypageJjimListLoad(HttpServletRequest request){

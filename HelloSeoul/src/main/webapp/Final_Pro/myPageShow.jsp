@@ -90,14 +90,14 @@
 									<a class='nav-link' data-bs-toggle='tab' href='#Day\${i}' aria-selected='false' role='tab'>\${show_date}</a>
 								</li>`
 						);
-					}
 					$("div.tab-content").append(
 							`<div class="tab-pane fade" id="Day\${i}" role="tabpanel">
 								<table class='table table-hover'>
 									<tbody></tbody>
 								</table>
 							</div>`						
-					);
+						);
+					}
 					start.setDate(start.getDate() + 1);
 				} // 날짜 tab for문 끝
 				
@@ -111,11 +111,13 @@
 						$(re).each(function(idx, list){
 							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
 							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
-							
+
 							$("div#" + list['planner_date'] + " table tbody").append(
 									`<tr class='table-light'>
 										<td>
 											<span> \${list["planner_shour"]} : \${list["planner_smin"]} </span>
+											<input type="hidden" name="loc_x" value="\${list["loc_x"]}"></input>
+											<input type="hidden" name="loc_y" value="\${list["loc_y"]}"></input>
 										</td>
 										<td>
 											<span>\${list["loc_name"]}</span>
@@ -123,8 +125,9 @@
 											<span style="font-size: 12px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
 										</td>
 									</tr>`
-							);							
+							);
 						}); // $(result).each
+						
 					},
 					error: function(){
 						alert("error : " + error);
@@ -137,7 +140,16 @@
 						<li class='breadcrumb-item'><a href='/web/PlannerShare?planner_no=${param.no}&type=Planner'>Planner Share</a></li>
 						<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>`		
 					);
-				}
+				}				
+				
+				find_location_plan();
+				
+// 				console.log(document.getElementById("Day0"));
+				console.log($("div#Day0 > table > tbody > tr").length);
+				
+				$("li.nav-item").click(function(){
+					find_location_plan();
+				});
 			},
 			error: function(){
 				alert("error : " + error);
@@ -338,13 +350,28 @@
 				<!-- map -->
 				<div id="map" style="width: 100%; height: 100%; float: right;"></div>
 					<script>
-						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    		mapOption = { 
-			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-			        	level: 3 // 지도의 확대 레벨
-			    		};
-			
+				    		mapOption = { 
+				        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
+				        	level: 3 // 지도의 확대 레벨
+				    		};
+					
+// 						find_location_plan();
+					
+						function find_location_plan(){
+							const locArr = [];
+							// 배열에 추가 arr.push('d');
+// 							let showDiv = document.querySelector('div.active');
+							let showDiv = document.querySelector('ul.nav li a.active'); // 현재 클릭되어있는 날짜 tab
+							let showID = $(showDiv).attr("href").replace("#", ""); // 날짜 tab의 href 가져옴 = tabcontent의 id
+// 							let divHtml = document.querySelector("div" + showID); // div의 id가 href인 html을 찾음
+							
+							console.log($("div#" + showID + " > table > tbody > tr").length);
+							console.log($("div#" + showID + " > table > tbody > tr"));
+							
+							var markers = [];	
+						}
+						
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
 					</script>	
