@@ -301,6 +301,7 @@ public class CommServiceImpl implements CommService{
 		bean.setPlanner_no(HSdao.getPlannerNo());
 		bean.setUser_id(user_id);
 		bean.setUpdate_user(user_nick);
+		bean.setUse_yn("y");
 		String start=bean.getPlanner_start().split(" ")[0];
 		String end=bean.getPlanner_end().split(" ")[0];
 		bean.setPlanner_start(start);
@@ -311,6 +312,7 @@ public class CommServiceImpl implements CommService{
 		for(MypageMainPlannerBean seat:commdao.selectSharePlanner(planner_no)) {
 			seat.setUser_id(user_id);
 			seat.setPlanner_no(bean.getPlanner_no());
+			seat.setUse_yn("y");
 			HSdao.plannerScheduleInsert(seat);
 			System.out.println(seat);
 		}
