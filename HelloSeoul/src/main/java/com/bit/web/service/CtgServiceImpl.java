@@ -149,10 +149,6 @@ public class CtgServiceImpl implements CtgService{
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", id);
 		map.put("loc_pc", bean.getLoc_pc());
-		map.put("loc_name", bean.getLoc_name());
-		map.put("loc_ctg1", bean.getLoc_ctg1());
-		map.put("loc_ctg2", bean.getLoc_ctg2());
-		map.put("loc_sg", bean.getLoc_sg());
 		dao.upOneJjim(map);
 		
 		

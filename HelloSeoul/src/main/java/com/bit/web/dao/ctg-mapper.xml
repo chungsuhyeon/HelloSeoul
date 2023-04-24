@@ -38,8 +38,8 @@ WHERE USER_ID = #{user_id}
 </select>
 
 <insert id="insertjjim" parameterType="mypageJjim">
-INSERT INTO JJIM(USER_ID,LOC_PC,LOC_NAME,LOC_CTG1,LOC_CTG2,LOC_SG)
-VALUES(#{user_id},#{loc_pc},#{loc_name},#{loc_ctg1},#{loc_ctg2},#{loc_sg})
+INSERT INTO JJIM(USER_ID,LOC_PC)
+VALUES(#{user_id},#{loc_pc})
 </insert>
 
 <select id="searchHot" parameterType="String" resultType="mainDB">
