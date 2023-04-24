@@ -31,6 +31,57 @@ $(function(){
 		var no=$(this).text();
 		document.location.href="/web/infoSelect?no="+no;
 	});
+	
+	$('#admin').click(function(){
+		$.ajax({
+			type:'POST',
+			url:'/web/report',
+			dataType:'json',
+			success: function(r){
+				$('.table').remove();
+				$('.paging').remove();
+				$('.tbb').append(`
+						<table class='table text-center'>
+							<theaed>
+								<tr>
+									<th>No</th>
+									<th>Rport Reason</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						`);
+				
+				for(var i=0; i<r.length;i++){
+					console.log(r[i]);
+					if(r[i].REPORT_REASON == 1){
+						$('tbody').append(`
+								<tr>
+									<td><a href="/web/infoSelect?no=\${r[i].COM_NO}">\${r[i].COM_NO}</a></td>
+									<td>욕설</td>
+									<td>
+								</tr>
+								`);		
+					}
+					if(r[i].REPORT_REASON == 2){
+						$('tbody').append(`
+								<tr>
+									<td><a href="/web/infoSelect?no=\${r[i].COM_NO}">\${r[i].COM_NO}</a></td>
+									<td>광고</td>
+								</tr>
+								`);		
+					}
+								
+				}
+			},
+			error: function(x){
+				alert("Error!");
+			}
+			
+		});
+	});
 });
 </script>
 <!--JS Section End -->
@@ -46,14 +97,23 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 	<input type="hidden" id="user_id" value=${user_id }>
-		<div>Hot Reviews</div>
+		<div>New Write</div>
 		<div class='hotboard col-6'>
-			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel">
+			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel"  >
   				<div class="carousel-inner">
   					<c:forEach var='i' items="${top3}" varStatus="status">
   					<c:if test="${status.index==0 }">
-  					    				<div class="carousel-item active" data-bs-interval="2000">
-      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+  					    				<div class="carousel-item active" data-bs-interval="5000">
+      					<a href="/web/infoSelect?no=${i.com_no}">
+      					<c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+      					<img src="/web/resources/test/noimg.png" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:when>
+      					<c:otherwise>
+      					<img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:otherwise>
+      					</c:choose>
+      					</a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
 					        <p>${i.com_cont }</p>
@@ -61,8 +121,15 @@ $(function(){
     				</div>
     			</c:if>
     				
-    				<div class="carousel-item" data-bs-interval="2000">
-      					<a href="/web/infoSelect?no=${i.com_no}"><img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px "class="d-block w-100" alt="..."></a>
+    				<div class="carousel-item" data-bs-interval="5000">
+      					<a href="/web/infoSelect?no=${i.com_no}"><c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+      					<img src="/web/resources/test/noimg.png" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:when>
+      					<c:otherwise>
+      					<img src="/web/resources/test/${i.com_filename}" style="height:500px;height: 500px;"class="d-block w-100" alt="...">
+      					</c:otherwise>
+      					</c:choose></a>
       					<div class="carousel-caption d-none d-md-block">
 					        <h5>${i.com_title }</h5>
 					        <p>${i.com_cont }</p>
@@ -71,7 +138,7 @@ $(function(){
     				</c:forEach>
   				</div>
   				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    				<span class="carousel-control-prev-icon" aria-hidden="true" ></span>
     				<span class="visually-hidden">Previous</span>
   				</button>
 	  			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
@@ -80,7 +147,7 @@ $(function(){
 	  			</button>
 			</div>
 			<div class='col-12'>
-				<div>Planner Share</div>
+				
 				<div class='sharebox d-inline-flex'>
 				
 				</div>
@@ -91,20 +158,22 @@ $(function(){
 				<div class='col-6'>
 				Board List
 				</div>
-				<div class='col-6 text-end'>
-					<button class='write btn btn-primary' id="write">Write</button>
-				</div>
+				<div class='col-6 text-end mb-1'>
+					<c:if test="${user_id eq 'Admin'}">
+						<button class='write btn btn-light' id="admin">Admin</button>
+					</c:if>
+			
 			</div>
 			<div class='row'>
-				<div class='col-12'>
+				<div class='tbb col-12'>
 					<table class='table'>
 						<thead>
 							<tr class='table-primary'>
 								<th>No</th>
-								<th>Category</th>
-								<th class='w-25'>Title</th>
-								<th class='w-25'>Nick Name</th>
-								<th>RegDate</th>
+								<th style="width: 22%">Category</th>
+								<th style="width: 35%">Title</th>
+								<th style="width: 18%">Nick Name</th>
+								<th class="w-20">RegDate</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -116,15 +185,22 @@ $(function(){
 								<c:when test="${i.COM_CTG eq 2}">[Review]</c:when>
 								<c:otherwise>[together travel]</c:otherwise>
 							</c:choose></td>
-      							<td><a href="/web/infoSelect?no=${i.COM_NO}">${i.COM_TITLE}</a></td>
-      							<td>${i.USER_NICK}</td>
+
+      							<td><a href="/web/infoSelect?no=${i.COM_NO}" style="text-decoration: none;color:black;">${i.COM_TITLE}
+      							<c:if test="${i.REPLY>0 }"> <span style="color: red;">&nbsp;[${i.REPLY }]</span></c:if>
+      							</a></td>
+      							<td class='text-left'>${i.USER_NICK}</td>
+
       							<td>${fn:substringBefore(i.COM_REGDATE, ' ')}</td>
     						</tr>
   							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div><div class='col-6'></div>
+				<div class='col-6 text-end'>
+					<button class='write btn btn-primary' id="write" style="margin-right: 30px;margin-bottom: 10px;">Write</button>
+				</div>
 			<div class='row'>
 				<div class='paging col-12 d-flex justify-content-center'>
 					<ul class="pagination pagination-sm">

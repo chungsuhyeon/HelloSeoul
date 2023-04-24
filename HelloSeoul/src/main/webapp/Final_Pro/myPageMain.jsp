@@ -22,6 +22,10 @@
 			var no = $(this).parent().attr('name');
 			location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		}); // $(".loadMyPlanner").click
+		
+		$.ajax({
+			
+		});
 				
 	}); // function
 </script>
@@ -68,8 +72,8 @@
 			</ol>
 		</div>
 			<!-- Contents Box -->
-			<div class='contentsbox d-inline-flex'>
-				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="2">
+			<div class='contentsbox d-flex justify-content-center'>
+				<c:forEach var="i" items="${userCreatedPlanner}">
 					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
 	  						<tbody class='table-light text-center'>
@@ -100,32 +104,85 @@
 			</div>
 			<hr class='hr'>
 			<!-- Paging Button -->
-			<div class='pagingbox d-flex justify-content-center my-4'>
-				<div>
-  					<ul class="pagination pagination-lg">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-   						<li class="page-item active">
-      						<a class="page-link" href="#">1</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">2</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">3</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">4</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">5</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">&raquo;</a>
-    					</li>
-  					</ul>
-  				</div>
+			<div class='pagingbar d-flex justify-content-center mt-4'>
+				<ul class='pagination'>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq 1}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=1&Block=1">&laquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq 1}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&laquo;</a>
+							</li>
+						</c:when>
+						<c:when test="${myPaging.currentPage eq ((myPaging.currentBlock-1)*myPaging.blockScale)+1}">
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock-1}">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock}">&laquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="pg" begin="${(myPaging.currentBlock-1)*myPaging.blockScale+1}" end="${myPaging.currentBlock*myPaging.blockScale}">
+						<c:if test="${pg <= myPaging.totalPage}">
+						<c:choose>
+							<c:when test="${pg eq myPaging.currentPage}">
+								<li class="page-item active">
+									<a class="page-link" href="/web/myAction?Page=${pg}&Block=${myPaging.currentBlock}">${pg}</a>
+									<input type="hidden" id="conStart" value="${myPaging.pageStart}">
+									<input type="hidden" id="conEnd" value="${myPaging.pageEnd}">
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link" href="/web/myAction?Page=${pg}&Block=${myPaging.currentBlock}">${pg}</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+						</c:if>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq myPaging.totalPage}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&raquo;</a>
+							</li>
+						</c:when>
+						<c:when test="${myPaging.currentPage eq (myPaging.currentBlock*myPaging.blockScale)}">
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&raquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock}">&raquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${myPaging.currentBlock eq myPaging.totalBlock}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&raquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.totalPage}&Block=${myPaging.totalBlock}">&raquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
 		</div>
 	</section>
