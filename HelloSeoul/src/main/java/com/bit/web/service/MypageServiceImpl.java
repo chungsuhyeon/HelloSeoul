@@ -173,7 +173,7 @@ public class MypageServiceImpl implements MypageService {
 		String str = "(";
 		for(int i=0; i<list.length; i++) {
 			str += list[i] + ",";
-			System.out.println(list[i]);
+//			System.out.println(list[i]);
 		}
 		str = str.replaceAll(",$", ""); // 마지막 문자열의 , 제거
 		str += ")";		
