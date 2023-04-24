@@ -29,12 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUserPlanner" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select rownum, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
-		from planner
-		where user_id = #{id} or planner_no in (select planner_no 
-												from plannershare 
-												where share_user_nick=#{nick})
-		order by planner_no desc
+		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+		from (select rownum rm, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user, use_yn
+				from planner
+				where user_id = #{id} or planner_no in (select planner_no 
+														from plannershare 
+														where share_user_nick=#{nick})
+				order by planner_no desc)
+		where use_yn = 'y' and <![CDATA[RM>#{start}]]> and <![CDATA[RM<=#{end}]]>
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
@@ -89,25 +91,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="plannerScheduleInsert" parameterType="mypageMainPlanner">
-		insert into mainplanner(planner_no, loc_pc, planner_date, planner_shour, planner_smin)
-		values(#{planner_no}, #{loc_pc}, #{planner_date}, #{planner_shour}, #{planner_smin})
+		insert into mainplanner(planner_no, loc_pc, planner_date, planner_shour, planner_smin, use_yn)
+		values(#{planner_no}, #{loc_pc}, #{planner_date}, #{planner_shour}, #{planner_smin}, #{use_yn})
 	</insert>
 	
-	<delete id="plannerScheduleDelete" parameterType="Integer">
-		delete from mainplanner
+	<update id="plannerScheduleDelete" parameterType="java.util.HashMap">
+		update mainplanner
+		set use_yn = #{use_yn}
 		where planner_no = #{no}
-	</delete>
+	</update>
 	
-	<delete id="plannerAllDelete" parameterType="Integer">
-		delete from planner
+	<update id="plannerAllDelete" parameterType="java.util.HashMap">
+		update planner
+		set use_yn = #{use_yn}
 		where planner_no = #{no}
-	</delete>
+	</update>
 	
-	<select id="plannerShareCommunity" parameterType="Integer" resultType="Integer">
-		select com_no
-		from communityboard
-		where planner_no = #{no}
-	</select>
+<!-- 	<select id="plannerShareCommunity" parameterType="Integer" resultType="Integer"> -->
+<!-- 		select com_no -->
+<!-- 		from communityboard -->
+<!-- 		where planner_no = #{no} -->
+<!-- 	</select> -->
 	
 	<select id="mypageplannerInfo" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
 		select planner_start, planner_end, planner_title, planner_info

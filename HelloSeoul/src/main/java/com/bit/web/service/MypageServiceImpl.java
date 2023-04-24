@@ -108,10 +108,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Object> userPlanner(String id, String user_nick) {
-		HashMap<String, String> map = new HashMap<String, String>();
+	public List<Object> userPlanner(String id, String user_nick, int start, int end) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("nick", user_nick);
+		map.put("start", start);
+		map.put("end", end);
 		return helloDao.getUserPlanner(map);
 	}
 
@@ -213,6 +215,7 @@ public class MypageServiceImpl implements MypageService {
 			bean.setPlanner_no(no);
 			bean.setUser_id(id);
 			bean.setUpdate_user(nick);
+			bean.setUse_yn("y");
 			helloDao.plannerDataInsert(bean);
 			return no;
 		} else { // update
@@ -235,18 +238,25 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public void mypageScheduleDelete(int no) {
-		helloDao.plannerScheduleDelete(no);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("use_yn", "n");
+		// mainplanner use_yn = 'n'으로 변경
+		helloDao.plannerScheduleDelete(map);
 	}
 	
 	@Override
 	public void mypagePlannerDelete(int no) {
-		helloDao.plannerAllDelete(no);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("use_yn", "n");
+		helloDao.plannerAllDelete(map);
 		// 커뮤니티 공유한 플래너 삭제
-		if(helloDao.plannerShareCommunity(no).size() != 0) {
-			for(int num : helloDao.plannerShareCommunity(no)) {
-				commService.deleteBoard(num);
-			}
-		} 
+//		if(helloDao.plannerShareCommunity(no).size() != 0) {
+//			for(int num : helloDao.plannerShareCommunity(no)) {
+//				commService.deleteBoard(num);
+//			}
+//		} 
 	}
 	
 	@Override
@@ -259,6 +269,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Override
 	public void mypageScheduleInsert(MypageMainPlannerBean bean) {
+		bean.setUse_yn("y");
 		helloDao.plannerScheduleInsert(bean);
 	}
 

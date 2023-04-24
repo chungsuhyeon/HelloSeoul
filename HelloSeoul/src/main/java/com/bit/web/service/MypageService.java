@@ -13,7 +13,7 @@ public interface MypageService {
 	
 	HashMap<String, Object> userInfo(String id);
 	
-	List<Object> userPlanner(String id, String user_nick);
+	List<Object> userPlanner(String id, String user_nick, int start, int end);
 	
 	String userJjimList(String id);
 	

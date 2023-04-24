@@ -420,9 +420,8 @@
 						</button>
 					</div>
 					<div class="modal-body" style="padding: 10px; width: 100%; height:50%;">
-						<p>If you delete the planner, users who shared it will not be able to see the planner.
-							<br>Planners shared with the community will also be deleted.</p>
-						<p>Are you sure you want to delete the planner anyway?</p>
+						<p>Are you sure you want to delete the planner?</p>
+						<p>Planners shared to the community will not be deleted</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="deletePlannerYes">Delete</button>
