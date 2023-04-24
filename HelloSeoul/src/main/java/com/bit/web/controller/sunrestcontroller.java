@@ -186,6 +186,11 @@ public class sunrestcontroller {
 	public List<MainDbBean> showPaging(int start, int end) {
 		return ctg.showDBs(start, end); 
 	}
+	
+	@PostMapping(value = "commg")
+	public void adminCommunity() {
+		
+	}
 
 
 

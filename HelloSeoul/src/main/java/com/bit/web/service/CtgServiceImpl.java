@@ -235,6 +235,23 @@ public class CtgServiceImpl implements CtgService{
 		map.put("end", end);
 		return dao.getUserPlanner1(map);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getUsers() {
+		// TODO Auto-generated method stub
+		
+		return dao.getuser();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getffCount() {
+		// TODO Auto-generated method stub
+		return dao.getffCount();
+	}
+	
+	
+	
+	
 	
 	
 	
