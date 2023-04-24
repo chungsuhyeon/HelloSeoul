@@ -96,15 +96,23 @@ public class Ctgcontroller {
 		resq.getSession().setAttribute("myPaging", ctg.changePage(Page, Block, bean));
 		String user_id = (String)resq.getSession().getAttribute("user_id");
 		String user_nick = (String)resq.getSession().getAttribute("user_nickName");
-		System.out.println(ctg.changePage(Page, Block, bean));
-		System.out.println(ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+//		System.out.println(ctg.changePage(Page, Block, bean));
+//		System.out.println(ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
 		mav.addObject("userInfo", contactService.userInfo(user_id));
-		mav.addObject("userCreatedPlanner", ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
 		mav.setViewName("Final_Pro/myPageMain");
 		return mav;
 						
 	}
 	
+	@GetMapping(value = "gotoUserMg")
+	public ModelAndView gotoUserManage() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("users",ctg.getUsers());
+		mav.addObject("userFirstCount", ctg.getffCount());
+		mav.setViewName("Final_Pro/Admin/UserMg");
+		return mav;
+	}
 
 	
 
