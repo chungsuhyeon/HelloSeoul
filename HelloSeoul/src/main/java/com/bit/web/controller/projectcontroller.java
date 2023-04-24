@@ -143,9 +143,11 @@ public class projectcontroller {
 		return "Final_Pro/ComWrite";
 	}
 	@RequestMapping(value="SharePlanner")
-	public void SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
+	@ResponseBody
+	public String SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
 		String user_nick = (String)request.getSession().getAttribute("user_nickName");
 		commService.jjimPlanner(bean, planner_no, user_id, user_nick);	
+		return "저장되었습니다";
 	}
 
 	@RequestMapping(value="reportAction")
