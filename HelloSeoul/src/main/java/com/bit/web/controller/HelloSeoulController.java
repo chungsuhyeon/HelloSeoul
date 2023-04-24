@@ -71,7 +71,7 @@ public class HelloSeoulController {
 		request.getSession().setAttribute("myPaging", bean);
 		//add
 		mav.addObject("userInfo", contactService.userInfo(user_id));
-		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick, bean.getPageStart(), bean.getPageEnd()));
 		mav.setViewName("Final_Pro/myPageMain");
 		
 		return mav;
