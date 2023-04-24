@@ -40,9 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
-		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg
-		from jjim 
-		where user_id = #{value}
+		select j.loc_pc, m.loc_name, m.loc_ctg1, m.loc_ctg2, m.loc_sg 
+		from jjim j, maindb m
+		where j.loc_pc = m.loc_pc and user_id = #{value}
 	</select>
 	
 	<delete id="userJjimListDelete" parameterType="java.util.HashMap">
