@@ -206,12 +206,11 @@ function ReportOn(){
 																<span>\${x['rep_cont']}</span>
 																</div>
 																<div class='repleabar'>
-																	<a href='#'>reple</a>|
-																	<a href='/web/replyMo'>modi</a>|
+																	
 																	<a href='/web/deleteReplyMain?no=\${x["rep_no"]}&boardno=\${x["com_no"]}&user_id=\${user_id}' onclick="confirm('정말로 삭제하겠습니까?')">
 																	delete
-																	</a>|
-																	<a href='#'>report</a>
+																	</a>
+																	
 																</div>
 						 									</div>`);
 									$(Object.keys(x)).each(function(j,key){
@@ -225,6 +224,7 @@ function ReportOn(){
 
 							});
 					}
+				$("#reply_contents").val("");
 		});
 		//-----------------------------------------------------------------ajax--------------------------------------------------------------------------------------------------
 
@@ -346,7 +346,13 @@ function ReportOn(){
 						<c:choose>
 							<c:when test="${i.com_ctg==1 }">
 								<td>
+									<c:choose>
+									<c:when test="${i.com_filename!='noimg.jpg' }">
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+									</c:choose>
 								</td>
 								<td style="border-left-width : 1px;">
 									<input type="hidden" id="planner_no" value="${i.planner_no }">
@@ -366,14 +372,28 @@ function ReportOn(){
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td class='text-center'>
+								<td class='text-center' style="border-bottom-width: 0px">
+									<c:choose>
+									<c:when test="${i.com_filename!='noimg.jpg' }">
 									<img style="width: 500px; height: 500px;" src="/web/resources/test/${i.com_filename }">
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+									</c:choose>
 								</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
 					<tr>
-						<td>${i.com_cont}</td>
+						<c:choose>
+									<c:when test="${i.com_filename=='noimg.jpg' }">
+									<td style="width:500px;height: 500px;border-bottom-width:0px;">${i.com_cont}</td>
+									</c:when>
+									<c:otherwise>
+									<td style="border-bottom-width: 0px">${i.com_cont }</td>
+									</c:otherwise>
+									</c:choose>
+						
 					</tr>
 					<tr>
 						<td class='text-center' colspan="2">
@@ -389,6 +409,7 @@ function ReportOn(){
 					</tr>
 					<tr>
 						<td class='text-end' colspan="2">
+						<button type="button" class="btn btn-primary" style="float:left" id="listbt">List</button>
 							<c:if test="${user_id ne i.user_id && user_id ne null}">
 								<button type="button" class="btn btn-danger" onclick="openPop()">Report</button>
 							</c:if>
