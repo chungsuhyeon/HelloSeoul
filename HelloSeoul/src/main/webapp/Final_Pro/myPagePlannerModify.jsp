@@ -92,7 +92,7 @@
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function(result){
-						console.log(result);
+// 						console.log(result);
 						$(result).each(function(idx, list){
 							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
 							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
@@ -112,15 +112,9 @@
 												<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 													<span>\${list["loc_name"]}</span>
 													<input type="hidden" name='planner_no' value="\${no}">
-													<input type="hidden" name='loc_name' value="\${list["loc_name"]}">
 													<br>
 													<span style="font-size: 5px">\${list["loc_sg"]} > \${list["loc_ctg1"]} > \${list["loc_ctg2"]} </span>
 													<input type="hidden" name="loc_pc" value="\${list["loc_pc"]}">
-													<input type="hidden" name='loc_sg' value="\${list["loc_sg"]}">
-													<input type="hidden" name='loc_ctg1' value="\${list["loc_ctg1"]}">
-													<input type="hidden" name='loc_ctg2' value="\${list["loc_ctg2"]}">
-													<input type="hidden" name="loc_x" value="\${list["loc_x"]}">
-													<input type="hidden" name="loc_y" value="\${list["loc_y"]}">
 													<input type="hidden" name="planner_date" value="\${list["planner_date"]}">
 												</div>
 											</form>
@@ -175,7 +169,6 @@
 	 		var tr = $(this).parent().parent();
 	 		var td = tr.children();			 		
 	 		var code = td.eq(0).children().val();
-	 		
 	 		$.ajax({
 				url: '/web/ajaxMypageJjimInfo',
 				type: 'post',
@@ -183,6 +176,7 @@
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				success: function(result){
+					console.log(result);
 					var mapContainer = document.getElementById('map'),
 						mapOption = {
 							center: new kakao.maps.LatLng(result.loc_x, result.loc_y),
@@ -357,26 +351,26 @@
 		
 	} // storePlanner()
 	
-	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-	function addMarker(position, idx, title) {
-		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-        imgOptions =  {
-            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset : new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-        marker = new kakao.maps.Marker({
-            position: position, // 마커의 위치
-            image: markerImage,
-        });
+// 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+// 	function addMarker(position, idx, title) {
+// 		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+//         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+//         imgOptions =  {
+//             spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+//             spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+//             offset : new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+//         },
+//         markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+//         marker = new kakao.maps.Marker({
+//             position: position, // 마커의 위치
+//             image: markerImage,
+//         });
 
-	    marker.setMap(map); // 지도 위에 마커를 표출합니다
-	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+// 	    marker.setMap(map); // 지도 위에 마커를 표출합니다
+// 	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 	    
-	    return marker;
-	}
+// 	    return marker;
+// 	}
 	
 </script>
 <!--JS Section End -->
@@ -468,10 +462,9 @@
 						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    		mapOption = { 
-			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-			        	level: 3 // 지도의 확대 레벨
+				        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
+				        	level: 3 // 지도의 확대 레벨
 			    		};
-			
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
 					</script>				
