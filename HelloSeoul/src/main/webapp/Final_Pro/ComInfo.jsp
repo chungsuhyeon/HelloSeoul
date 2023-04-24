@@ -135,8 +135,20 @@ function sharePlannerAction(){
 	if(user_id==""){
 		alert("로그인해주시길 바랍니다.")
 	}else{
-		location.replace("/web/SharePlanner?planner_no="+planner_no+"&user_id="+user_id);
-	}
+		$.ajax({
+			url: '/web/SharePlanner',
+			type: 'post',
+			data: {planner_no:planner_no,user_id:user_id},
+			dataType: 'text',
+			success: function(result){	
+				alert("저장되었습니다");
+			},
+			error:function(){
+				console.log("error");
+			}
+		});
+// 		location.replace("/web/SharePlanner?planner_no="+planner_no+"&user_id="+user_id);
+		}
 }
 //팝업 띄우기
 function openPop() {

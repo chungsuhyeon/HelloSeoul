@@ -32,11 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
 		from (select rownum rm, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user, use_yn
 				from planner
-				where user_id = #{id} or planner_no in (select planner_no 
+				where use_yn = 'y' and  user_id = #{id} or planner_no in (select planner_no 
 														from plannershare 
 														where share_user_nick=#{nick})
 				order by planner_no desc)
-		where use_yn = 'y' and <![CDATA[RM>#{start}]]> and <![CDATA[RM<=#{end}]]>
+		where <![CDATA[RM>#{start}]]> and <![CDATA[RM<=#{end}]]>
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
@@ -61,8 +61,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="plannerDataInsert" parameterType="com.bit.web.vo.MypagePlannerBean">
-		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO, PLANNER_REGDATE, UPDATE_USER)
-		values(#{planner_no}, #{user_id}, #{planner_title}, #{planner_start}, #{planner_end}, #{planner_info}, sysdate, #{update_user})
+		insert into planner(planner_no, user_id, planner_title, planner_start, planner_end, planner_info, planner_regdate, update_user, use_yn)
+		values(#{planner_no}, #{user_id}, #{planner_title}, #{planner_start}, #{planner_end}, #{planner_info}, sysdate, #{update_user}, #{use_yn})
 	</insert>
 	
 	<select id="firstMainPlannerCreate" parameterType="Integer" resultType="java.util.HashMap">
