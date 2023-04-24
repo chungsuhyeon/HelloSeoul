@@ -2,11 +2,13 @@ package com.bit.web.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +28,7 @@ import com.bit.web.controller.PaginAction;
 import com.bit.web.dao.HelloSeoulDao;
 import com.bit.web.dao.ProjectDao;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;
 import com.bit.web.vo.ReplyBoard;
@@ -276,29 +279,8 @@ public class CommServiceImpl implements CommService{
 		return commdao.SelectPlannerTitle(planner_no);
 	}
 	
-	@Override
-	public void createSharePlanner(MypagePlannerBean bean, int planner_no, String user_id,String user_nick) {
-		// TODO Auto-generated method stub
-		HashMap<String, Object>map=commdao.SharePlanner(planner_no);
-		Object startTime=map.get("PLANNER_START");
-		String start=new SimpleDateFormat("yyyy/MM/dd").format(startTime);
-		Object endTime=map.get("PLANNER_END");
-		String end=new SimpleDateFormat("yyyy/MM/dd").format(endTime);
-		bean.setPlanner_start(start);
-		bean.setPlanner_end(end);
-		bean.setUser_id(user_id);
-		bean.setPlanner_title((String)(map.get("PLANNER_TITLE")));
-		bean.setPlanner_info((String)(map.get("PLANNER_INFO")));
-		bean.setPlanner_no(HSdao.getPlannerNo());
-//		System.out.println(bean);
-		bean.setUpdate_user(user_nick);
-		HSdao.plannerDataInsert(bean);
-	}
-	@Override
-	public List<Object> selectSharePlanner(int no) {
-		// TODO Auto-generated method stub
-		return commdao.selectSharePlanner(no);
-	}
+
+
 	@Override
 	public void insertReport(List<Integer> rr, int com_no, String user_id,ReportBoard bean) {
 	
@@ -311,8 +293,31 @@ public class CommServiceImpl implements CommService{
 		}		
 		commdao.reportUpdate(com_no);
 	}
+	@Override
+	public void jjimPlanner(MypagePlannerBean bean, int planner_no, String user_id, String user_nick) {
+		// TODO Auto-generated method stub
+		
+		bean=commdao.SharePlanner(planner_no);
+		bean.setPlanner_no(HSdao.getPlannerNo());
+		bean.setUser_id(user_id);
+		bean.setUpdate_user(user_nick);
+		String start=bean.getPlanner_start().split(" ")[0];
+		String end=bean.getPlanner_end().split(" ")[0];
+		bean.setPlanner_start(start);
+		bean.setPlanner_end(end);
+		System.out.println(bean);
+		HSdao.plannerDataInsert(bean);
+		System.out.println(commdao.selectSharePlanner(planner_no));
+		for(MypageMainPlannerBean seat:commdao.selectSharePlanner(planner_no)) {
+			seat.setUser_id(user_id);
+			seat.setPlanner_no(bean.getPlanner_no());
+			HSdao.plannerScheduleInsert(seat);
+			System.out.println(seat);
+		}
+		
+	}
 	
-
+	
 	
 	
 	

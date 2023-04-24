@@ -132,11 +132,11 @@ where rw between #{start} and #{end} ]]>
 	<select id="SelectPlannerTitle" parameterType="Integer" resultType="String">
 	select planner_title from planner where planner_no=#{planner_no}
 	</select>
-	<select id="SharePlanner" parameterType="Integer" resultType="HashMap">
+	<select id="SharePlanner" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
 	select planner_start,planner_end,planner_title,planner_info from planner where planner_no=#{planner_no}
 	</select>
-	<select id="selectSharePlanner" resultType="HashMap" parameterType="Integer">
-	select loc_pc,loc_name,loc_ctg1,loc_ctg2,loc_sg,loc_X,loc_y,planner_date,planner_shour,planner_smin from mainplanner where planner_no=#{no}
+	<select id="selectSharePlanner" resultType="com.bit.web.vo.MypageMainPlannerBean" parameterType="Integer">
+	select loc_pc,planner_date,planner_shour,planner_smin from mainplanner where planner_no=#{planner_no}
 	
 	</select>
 	<insert id="insertReport" parameterType="com.bit.web.vo.ReportBoard">
