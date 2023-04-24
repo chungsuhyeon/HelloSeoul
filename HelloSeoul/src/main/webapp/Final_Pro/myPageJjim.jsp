@@ -22,15 +22,8 @@
 			if($("table input[type='checkbox']").is(":checked")){
 				$("table input[type='checkbox']").prop('checked',false);
 			}
-		}); // $(".nav >li").click
-				
-// 		.show.bs.tab : 클릭한 탭이 보이기 전에 실행합니다.
-// 		.shown.bs.tab : 클릭한 탭이 보인 후에 실행됩니다. 위와 시간적으로 거의 차이가 없습니다.
-// 		.hide.bs.tab : 이전의 탭이 감춰지기 전에 실행됩니다.
-// 		.hidden.bs.tab : 이전의 탭이 감춰진 후에 실행됩니다.
-		
+		}); // $(".nav >li").click		
 	}); // function
-	
 	
 	$('document').ready(function(){
 		$.ajax({
