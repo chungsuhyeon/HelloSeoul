@@ -133,7 +133,10 @@ where rw between #{start} and #{end} ]]>
 	select planner_title from planner where planner_no=#{planner_no}
 	</select>
 	<select id="SharePlanner" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
-	select planner_start,planner_end,planner_title,planner_info from planner where planner_no=#{planner_no}
+<!-- 	select planner_start,planner_end,planner_title,planner_info from planner where planner_no=#{planner_no} -->
+	select p.planner_start, p.planner_end, p.planner_title, p.planner_info, u.user_nick as update_user	
+	from planner p, userboard u
+	where p.user_id = u.user_id and planner_no = #{planner_no}
 	</select>
 	<select id="selectSharePlanner" resultType="com.bit.web.vo.MypageMainPlannerBean" parameterType="Integer">
 	select loc_pc,planner_date,planner_shour,planner_smin from mainplanner where planner_no=#{planner_no}
