@@ -122,7 +122,7 @@ WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
 <select id="countPlanner" parameterType="String" resultType="int">
 SELECT COUNT(*)
 FROM PLANNER
-WHERE USER_ID = #{user_id}
+WHERE USER_ID = #{user_id} AND USE_YN = 'y'
 </select>
 
 
