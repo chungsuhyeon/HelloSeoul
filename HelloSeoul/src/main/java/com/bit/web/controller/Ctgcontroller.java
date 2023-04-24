@@ -105,6 +105,14 @@ public class Ctgcontroller {
 						
 	}
 	
+	@GetMapping(value = "gotoUserMg")
+	public ModelAndView gotoUserManage() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("users",ctg.getUsers());
+		mav.addObject("userFirstCount", ctg.getffCount());
+		mav.setViewName("Final_Pro/Admin/UserMg");
+		return mav;
+	}
 
 	
 

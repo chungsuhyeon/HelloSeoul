@@ -37,4 +37,6 @@ public interface CtgService {
 	List<MainDbBean> showDBs(int start, int end);
 	MultiPageBean makingTotals2(int blockScale, int pageScale, String user_id);
 	List<Object> userPlanner(String id, String user_nick, int start, int end);
+	List<HashMap<String, Object>> getUsers();
+	List<HashMap<String, Object>> getffCount();
 }

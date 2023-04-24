@@ -105,4 +105,13 @@ public class CtgDao extends SqlSessionDaoSupport{
 	public List<Object> getUserPlanner1(HashMap<String, Object> map){
 		return this.getSqlSession().selectList("getUserPlanner1", map);
 	}
+	
+	public List<HashMap<String, Object>> getuser(){
+		return this.getSqlSession().selectList("getuser");
+	}
+	
+	public List<HashMap<String, Object>> getffCount(){
+		return this.getSqlSession().selectList("getffCount");		
+	}
+	
 }
