@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.ReplyBoard;
 import com.bit.web.vo.ReportBoard;
@@ -50,8 +51,6 @@ public interface CommService {
 	String SelectPlannerTitle(int planner_no);
 	
 	
-	void createSharePlanner(MypagePlannerBean bean,int planner_no,String user_id,String user_nick);
-	
-	List<Object> selectSharePlanner(int no);
 	void insertReport(List<Integer>rr,int com_no,String user_id,ReportBoard bean);
+	void jjimPlanner(MypagePlannerBean bean,int planner_no,String user_id,String user_nick);
 }

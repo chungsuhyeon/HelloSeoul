@@ -443,15 +443,15 @@
 													<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 														<span>\${list.LOC_NAME}</span>
 														<input type="hidden" name='planner_no' value="\${planner_no}">
-														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
+// 														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
 														<br>
-														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
+// 														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
 														<input type="hidden" name="loc_pc" value="\${list.LOC_PC}">
-														<input type="hidden" name='loc_sg' value="\${list.LOC_SG}">
-														<input type="hidden" name='loc_ctg1' value="\${list.LOC_CTG1}">
-														<input type="hidden" name='loc_ctg2' value="\${list.LOC_CTG2}">
-														<input type="hidden" name="loc_x" value="\${list.LOC_X}">
-														<input type="hidden" name="loc_y" value="\${list.LOC_Y}">
+// 														<input type="hidden" name='loc_sg' value="\${list.LOC_SG}">
+// 														<input type="hidden" name='loc_ctg1' value="\${list.LOC_CTG1}">
+// 														<input type="hidden" name='loc_ctg2' value="\${list.LOC_CTG2}">
+// 														<input type="hidden" name="loc_x" value="\${list.LOC_X}">
+// 														<input type="hidden" name="loc_y" value="\${list.LOC_Y}">
 
 													</div>
 												</form>

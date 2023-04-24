@@ -40,7 +40,7 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원이 생성했던 플래너 load
-	public List<Object> getUserPlanner(HashMap<String, String> map){
+	public List<Object> getUserPlanner(HashMap<String, Object> map){
 		return this.getSqlSession().selectList("getUserPlanner", map);
 	}
 	
@@ -92,18 +92,18 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().insert("plannerScheduleInsert", bean);
 	}
 	
-	public void plannerScheduleDelete(int no) {
-		this.getSqlSession().delete("plannerScheduleDelete", no);
+	public void plannerScheduleDelete(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerScheduleDelete", map);
 	}
 	
 	
-	public void plannerAllDelete(int no) {
-		this.getSqlSession().delete("plannerAllDelete", no);
+	public void plannerAllDelete(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerAllDelete", map);
 	}
 	
-	public List<Integer> plannerShareCommunity(int no) {
-		return this.getSqlSession().selectList("plannerShareCommunity", no);
-	}
+//	public List<Integer> plannerShareCommunity(int no) {
+//		return this.getSqlSession().selectList("plannerShareCommunity", no);
+//	}
 	
 	public MypagePlannerBean mypageplannerInfo(int no) {
 		return this.getSqlSession().selectOne("mypageplannerInfo", no);

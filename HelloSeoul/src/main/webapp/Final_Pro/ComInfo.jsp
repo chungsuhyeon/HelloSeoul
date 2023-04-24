@@ -387,10 +387,10 @@ function ReportOn(){
 					<tr>
 						<c:choose>
 									<c:when test="${i.com_filename=='noimg.jpg' }">
-									<td style="width:500px;height: 500px;border-bottom-width:0px;">${i.com_cont}</td>
+									<td style="border-bottom-width:0px;">${i.com_cont}</td>
 									</c:when>
 									<c:otherwise>
-									<td style="border-bottom-width: 0px">${i.com_cont }</td>
+									<td style="width:500px;height: 500px;border-bottom-width: 0px">${i.com_cont }</td>
 									</c:otherwise>
 									</c:choose>
 						
@@ -418,7 +418,7 @@ function ReportOn(){
 								<button type="button" class="btn btn-primary" onclick="deleteAction()">Delete</button>
 							</c:if>
 							<c:if test="${user_id != i.user_id && i.com_ctg == 1}">
-								<button type="button" class="btn btn-primary" onclick="sharePlannerAction()">Share</button>
+								<button type="button" class="btn btn-primary" onclick="sharePlannerAction()">Planner Copy</button>
 							</c:if>
 						</td>
 					</tr>

@@ -71,13 +71,13 @@ public class HelloSeoulController {
 		request.getSession().setAttribute("myPaging", bean);
 		//add
 		mav.addObject("userInfo", contactService.userInfo(user_id));
-		mav.addObject("userCreatedPlanner", ctg.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
+		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick,bean.getPageStart(), bean.getPageEnd()));
 		mav.setViewName("Final_Pro/myPageMain");
 		
 		return mav;
 	}
 	
-	// 찜 보기 화면
+	// 찜보기 화면
 	@RequestMapping(value = "ajaxMypageJjim", method = {RequestMethod.GET, RequestMethod.POST} , produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mypageJjimListLoad(HttpServletRequest request){
@@ -111,7 +111,7 @@ public class HelloSeoulController {
 			return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no=" + contactService.mypagePlannerNext(id, nick, modi, bean);
 		} else { // modi = updatePlanner(플래너 일정 수정)
 			contactService.mypagePlannerNext(id, nick, modi, bean);			
-			return "redirect:/Final_Pro/myPagePlannerModify.jsp?planner_no="+bean.getPlanner_no();
+			return "redirect:/Final_Pro/myPagePlannerModify.jsp?planner_no=" + bean.getPlanner_no();
 		}
 	}
 		

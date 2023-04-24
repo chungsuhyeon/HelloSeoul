@@ -33,6 +33,7 @@ import com.bit.web.dao.ProjectDao;
 import com.bit.web.dao.TicketDao;
 import com.bit.web.service.CommService;
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypageMainPlannerBean;
 import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.PageBean;	
 import com.bit.web.vo.ReplyBoard;
@@ -142,22 +143,11 @@ public class projectcontroller {
 		return "Final_Pro/ComWrite";
 	}
 	@RequestMapping(value="SharePlanner")
-	public String SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
+	public void SharePlanner(HttpServletRequest request,int planner_no,Model model,MypagePlannerBean bean,String user_id) {
 		String user_nick = (String)request.getSession().getAttribute("user_nickName");
-		commService.createSharePlanner(bean, planner_no, user_id,user_nick);
-		
-		return "redirect:/Final_Pro/myPagePlannerCreate.jsp?planner_no="+bean.getPlanner_no()+"&plno="+planner_no;
-		
-		
+		commService.jjimPlanner(bean, planner_no, user_id, user_nick);	
 	}
-	@RequestMapping(value="ajaxSharePlanner")
-	@ResponseBody
-	public List<Object> ajaxSharePlanner(int no) {
-		System.out.println(no);
-		commService.selectSharePlanner(no);
-		return commService.selectSharePlanner(no);
-		
-	}
+
 	@RequestMapping(value="reportAction")
 	public String reportAction(@RequestParam(value="rr")List<Integer>rr,int com_no,String user_id,ReportBoard bean) {
 		commService.insertReport(rr, com_no, user_id, bean);
