@@ -97,7 +97,7 @@ WHERE LOC_TAG = #{foodname} AND <![CDATA[ROWNUM<20]]>
 </select>
 
 <insert id="upOneJjim" parameterType="java.util.HashMap">
-INSERT INTO JJIM VALUES(#{user_id},#{loc_pc},#{loc_name},#{loc_ctg1},#{loc_ctg2},#{loc_sg})
+INSERT INTO JJIM VALUES(#{user_id},#{loc_pc})
 </insert>
 
 <select id="reportBoard" resultType="java.util.HashMap">
@@ -115,6 +115,7 @@ SELECT LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
 FROM (
 SELECT ROWNUM RM,LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
 FROM MAINDB
+WHERE LOC_IMG IS NOT NULL
 )
 WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
 </select>

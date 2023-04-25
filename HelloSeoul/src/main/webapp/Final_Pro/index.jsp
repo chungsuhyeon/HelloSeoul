@@ -58,7 +58,7 @@ $(function(){
 					if(r[x].cur_unit != 'KRW'){
 						$('.table tbody').append(`
 								<tr>
-									<td>\${r[x].cur_unit}(\${r[x].cur_nm})</td>
+									<td>\${r[x].cur_unit}</td>
 									<td>\${r[x].ttb}</td>
 								</tr>
 								`);						

@@ -115,8 +115,8 @@ $(function(){
       					</c:choose>
       					</a>
       					<div class="carousel-caption d-none d-md-block">
-					        <h5>${i.com_title }</h5>
-					        <p>${i.com_cont }</p>
+					        <h5 style="color: black; ">${i.com_title }</h5>
+					        <p style="color: black; ">${i.com_cont }</p>
       					</div>
     				</div>
     			</c:if>
@@ -131,8 +131,8 @@ $(function(){
       					</c:otherwise>
       					</c:choose></a>
       					<div class="carousel-caption d-none d-md-block">
-					        <h5>${i.com_title }</h5>
-					        <p>${i.com_cont }</p>
+					        <h5 style="color: black; ">${i.com_title }</h5>
+					        <p style="color: black; ">${i.com_cont }</p>
       					</div>
     				</div>
     				</c:forEach>

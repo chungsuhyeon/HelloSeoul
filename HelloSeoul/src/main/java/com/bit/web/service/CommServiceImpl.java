@@ -298,6 +298,8 @@ public class CommServiceImpl implements CommService{
 		// TODO Auto-generated method stub
 		
 		bean=commdao.SharePlanner(planner_no);
+		String nick=bean.getUpdate_user();
+		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"¥‘¿« «√∑°≥ )");
 		bean.setPlanner_no(HSdao.getPlannerNo());
 		bean.setUser_id(user_id);
 		bean.setUpdate_user(user_nick);
