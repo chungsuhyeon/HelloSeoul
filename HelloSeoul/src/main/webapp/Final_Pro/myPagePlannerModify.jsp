@@ -397,16 +397,15 @@
 			<div class="main col-12" style="display: inline-flex;">
 			
 				<!--tab-->
-				<div class='tabbar col-5 bg-light'>
+				<div class='tabbar col-5'>
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
 						<!-- tab contents -->
-						
-						<div id='myTabContent border border-info-1' class='tab-content'>
+						<div id='myTabContent border border-info-1' class='tab-content'  style=' height:47%; overflow:auto;'>
 						</div>	
 						
-						<div class='settingbt'>
+						<div class='settingbt' style="margin-top: 15px;">
 							<button class='btn btn-primary' onclick="deletePlan()">일정 제거</button>
 							<button class='btn btn-primary' onclick="storePlanner()">플래너 저장</button>
 						</div>			
@@ -415,7 +414,7 @@
 				
 				<!-- jjim bar -->
 				<div class='jjimbar col-3'>
-					<div class='jjimtb'>
+					<div class='jjimtb' style=' height:52%; overflow:auto;'>
 						<table class="table table-hover">
 							<thead>
 	   							<tr>
@@ -427,7 +426,7 @@
 	    					</tbody>
 						</table>
 					</div>
-					<div class='jjimbt'>
+					<div class='jjimbt' style="margin-top: 15px;">
 						<button class='btn btn-primary' onclick="updatePlan()">일정에 추가</button>
 					</div>
 				</div>

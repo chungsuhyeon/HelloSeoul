@@ -342,7 +342,7 @@
 					</ul>
 					
 					<!-- tab contents -->
-					<div id='myTabContent border border-info-1' class='tab-content'>
+					<div id='myTabContent border border-info-1' class='tab-content' style=' height:86%; overflow:auto;'>
 					</div>
 				</div>
 				
