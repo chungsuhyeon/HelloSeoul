@@ -82,7 +82,7 @@ public class CommServiceImpl implements CommService{
 				if(fileRealName!="") {
 					System.out.println("파일있음");
 					String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-					String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+					String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 			
 					
 					/*
@@ -222,7 +222,7 @@ public class CommServiceImpl implements CommService{
 		if(fileRealName!="") {
 			System.out.println("파일있음");
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-			String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+			String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 	
 			
 			/*
