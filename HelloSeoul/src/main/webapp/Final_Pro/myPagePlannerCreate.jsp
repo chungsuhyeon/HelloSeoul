@@ -375,7 +375,7 @@
 					
 						<!-- tab contents -->
 						
-						<div id='myTabContent border border-info-1' class='tab-content' style=' height:52%; overflow:auto;'>
+						<div id='myTabContent border border-info-1' class='tab-content' style=' height:57%; overflow:auto;'>
 						</div>	
 						
 						<div class='settingbt' style="margin-top: 15px;">
@@ -387,7 +387,7 @@
 				
 				<!-- jjim bar -->
 				<div class='jjimbar col-3'>
-					<div class='jjimtb' style=' height:57%; overflow:auto;'>
+					<div class='jjimtb' style=' height:60%; overflow:auto;'>
 						<table class="table table-hover">
 							<thead>
 	   							<tr>
