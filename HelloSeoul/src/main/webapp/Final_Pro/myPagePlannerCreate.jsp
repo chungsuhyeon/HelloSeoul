@@ -131,18 +131,22 @@
 				data: {loc_code:code},
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function(result){
-					var mapContainer = document.getElementById('map'),
+				success: function(result){					
+					// 지도 마커 스크립트
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						mapOption = {
-							center: new kakao.maps.LatLng(result.loc_x, result.loc_y),
-					        level: 3
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
 					    };
-					var map = new kakao.maps.Map(mapContainer, mapOption);
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					// 마커가 표시될 위치입니다
 					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					// 마커를 생성합니다
 					var marker = new kakao.maps.Marker({
 					    position: markerPosition
 					});
-					marker.setMap(map);					
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);
 				},
 				error: function(){
 					alert("error : " + error);
@@ -403,74 +407,17 @@
 					</div>
 				</div>
 				<div class='mapbar col-4'>
-					<div class='div_map' id="map" style="width: 700px; height: 700px;"></div>				
+					<div class='div_map' id="map" style="width: 100%; height: 900px;"></div>				
 					<script>
-						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    		mapOption = { 
-			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-			        	level: 3 // 지도의 확대 레벨
-			    		};
-			
+				    		mapOption = { 
+					        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
+					        	level: 3 // 지도의 확대 레벨
+				    		};
+	
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
-						
-					</script>	
-					<script type="text/javascript">
-					var planner_no=$("input#plno").val();
-					$('document').ready(function(){
-					//공유된 플래너 표시
-					$.ajax({
-						url: '/web/ajaxSharePlanner',
-						type: 'post',
-						data: {no:planner_no},
-						dataType: 'json',
-						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-						success: function(result){						
-							$(result).each(function(index, list){
-								$("#"+list.PLANNER_DATE + " table tbody").append(
-										`<tr>
-											<td style="width: 5%;">
-												<input type="checkbox" name="planner_select_location" value="\${list.LOC_PC}">
-											</td>
-											<td>
-												<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
-													<div class='timeseting' style="display: inline-flex; width: 40%">
-														<input type="number" class="form-control" placeholder="HH" name="planner_shour" id="planner_shour" min='0' max='23' value="\${list.PLANNER_SHOUR}"required>
-														<span>&nbsp; : &nbsp;</span>
-														<input type="number" class="form-control" placeholder="mm" name="planner_smin" id="planner_smin" min='0' max='59' value="\${list.PLANNER_SMIN}" required>
-													</div>
-													<div class='loctextline' style='width: 100%; margin-left: 20px;'>
-														<span>\${list.LOC_NAME}</span>
-														<input type="hidden" name='planner_no' value="\${planner_no}">
-// 														<input type="hidden" name='loc_name' value="\${list.LOC_NAME}">
-														<br>
-// 														<span style="font-size: 5px">\${list.LOC_SG} > \${list.LOC_CTG1} > \${list.LOC_CTG2} </span>
-														<input type="hidden" name="loc_pc" value="\${list.LOC_PC}">
-// 														<input type="hidden" name='loc_sg' value="\${list.LOC_SG}">
-// 														<input type="hidden" name='loc_ctg1' value="\${list.LOC_CTG1}">
-// 														<input type="hidden" name='loc_ctg2' value="\${list.LOC_CTG2}">
-// 														<input type="hidden" name="loc_x" value="\${list.LOC_X}">
-// 														<input type="hidden" name="loc_y" value="\${list.LOC_Y}">
-
-													</div>
-												</form>
-											</td>
-										</tr>`
-								);
-							}); // for문	
-							
-							time_constraints();
-							
-							// 지도에 순서대로 마커 뿌리기 (보류)
-							
-						},
-						error:function(){
-							console.log("error");
-						}
-					});
-					});
-					</script>			
+					</script>		
 				</div>
 			</div>
 	</section>

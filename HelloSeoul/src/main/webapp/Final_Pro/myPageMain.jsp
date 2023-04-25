@@ -121,7 +121,7 @@
 					<c:choose>
 						<c:when test="${myPaging.currentPage eq 1}">
 							<li class="page-item disabled">
-							  <a class="page-link" href="#">&laquo;</a>
+							  <a class="page-link" href="#">&lt;</a>
 							</li>
 						</c:when>
 						<c:when test="${myPaging.currentPage eq ((myPaging.currentBlock-1)*myPaging.blockScale)+1}">
@@ -131,7 +131,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
-								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock}">&laquo;</a>
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock}">&lt;</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -156,7 +156,7 @@
 					<c:choose>
 						<c:when test="${myPaging.currentPage eq myPaging.totalPage}">
 							<li class="page-item disabled">
-								<a class="page-link" href="#">&raquo;</a>
+								<a class="page-link" href="#">&gt;</a>
 							</li>
 						</c:when>
 						<c:when test="${myPaging.currentPage eq (myPaging.currentBlock*myPaging.blockScale)}">
@@ -166,7 +166,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
-								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock}">&raquo;</a>
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock}">&gt;</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
