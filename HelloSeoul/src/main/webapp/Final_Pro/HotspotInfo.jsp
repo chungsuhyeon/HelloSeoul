@@ -157,10 +157,7 @@ $(function(){
 			<hr class='hr hr-blurry'/>
 			<div class='tagbar px-1 d-flex'>
 				<button class='btn btn-outline-primary'>#${info.loc_tag}</button>
-				<button class='btn btn-outline-primary'>#Tag</button>
-				<button class='btn btn-outline-primary'>#Tag</button>
-				<button class='btn btn-outline-primary'>#Tag</button>
-				<button class='btn btn-outline-primary'>#Tag</button>
+				
 			</div>
 			<hr class='hr'/>
 			<div class='jjimbar d-flex text-end'>
