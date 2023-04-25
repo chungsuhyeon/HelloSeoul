@@ -69,7 +69,6 @@ public class HelloSeoulController {
 		//add
 		MultiPageBean bean = ctg.makingTotals2(5, 3, user_id);
 		request.getSession().setAttribute("myPaging", bean);
-		System.out.println(bean+"?");
 		//add
 		mav.addObject("userInfo", contactService.userInfo(user_id));
 		mav.addObject("userCreatedPlanner", contactService.userPlanner(user_id, user_nick, bean.getPageStart(), bean.getPageEnd()));

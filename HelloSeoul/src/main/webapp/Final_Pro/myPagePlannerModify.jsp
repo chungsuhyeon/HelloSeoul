@@ -92,7 +92,6 @@
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function(result){
-// 						console.log(result);
 						$(result).each(function(idx, list){
 							list['planner_shour'] = list['planner_shour'].length == 1 ? "0" + list['planner_shour'] : list['planner_shour']
 							list['planner_smin'] = list['planner_smin'].length == 1 ? "0" + list['planner_smin'] : list['planner_smin']
@@ -175,19 +174,22 @@
 				data: {loc_code:code},
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function(result){
-					console.log(result);
-					var mapContainer = document.getElementById('map'),
+				success: function(result){		
+					// 지도 마커 스크립트
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						mapOption = {
-							center: new kakao.maps.LatLng(result.loc_x, result.loc_y),
-					        level: 3
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
 					    };
-					var map = new kakao.maps.Map(mapContainer, mapOption);
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					// 마커가 표시될 위치입니다
 					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					// 마커를 생성합니다
 					var marker = new kakao.maps.Marker({
 					    position: markerPosition
 					});
-					marker.setMap(map);					
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);
 				},
 				error: function(){
 					alert("error : " + error);
@@ -238,15 +240,9 @@
 										<div class='loctextline' style='width: 100%; margin-left: 20px;'>
 											<span>\${list.loc_name}</span>
 											<input type="hidden" name='planner_no' value="\${no}">
-											<input type="hidden" name='loc_name' value="\${list.loc_name}">
 											<br>
 											<span style="font-size: 5px">\${list.loc_sg} > \${list.loc_ctg1} > \${list.loc_ctg2} </span>
 											<input type="hidden" name="loc_pc" value="\${list.loc_pc}">
-											<input type="hidden" name='loc_sg' value="\${list.loc_sg}">
-											<input type="hidden" name='loc_ctg1' value="\${list.loc_ctg1}">
-											<input type="hidden" name='loc_ctg2' value="\${list.loc_ctg2}">
-											<input type="hidden" name="loc_x" value="\${list.loc_x}">
-											<input type="hidden" name="loc_y" value="\${list.loc_y}">
 											<input type="hidden" name="planner_date" value="\${day_info.substring(1)}">
 										</div>
 									</form>
@@ -351,32 +347,11 @@
 		
 	} // storePlanner()
 	
-// 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-// 	function addMarker(position, idx, title) {
-// 		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-//         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-//         imgOptions =  {
-//             spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-//             spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-//             offset : new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-//         },
-//         markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-//         marker = new kakao.maps.Marker({
-//             position: position, // 마커의 위치
-//             image: markerImage,
-//         });
-
-// 	    marker.setMap(map); // 지도 위에 마커를 표출합니다
-// 	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-	    
-// 	    return marker;
-// 	}
-	
 </script>
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
-<link rel="stylesheet" type="text/css" href="/web/resources/hellomypage/css/mypageCreate.css">
+<!-- <link rel="stylesheet" type="text/css" href="/web/resources/hellomypage/css/mypageCreate.css"> -->
 <link type="text/css" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
@@ -457,14 +432,14 @@
 					</div>
 				</div>
 				<div class='mapbar col-4'>
-					<div class='div_map' id="map"></div>				
+					<div class='div_map' id="map" style="width: 100%; height: 900px;"></div>				
 					<script>
-						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    		mapOption = { 
-				        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-				        	level: 3 // 지도의 확대 레벨
-			    		};
+				    		mapOption = { 
+					        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
+					        	level: 3 // 지도의 확대 레벨
+				    		};
+	
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
 					</script>				

@@ -131,18 +131,22 @@
 				data: {loc_code:code},
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function(result){
-					var mapContainer = document.getElementById('map'),
+				success: function(result){					
+					// 지도 마커 스크립트
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						mapOption = {
-							center: new kakao.maps.LatLng(result.loc_x, result.loc_y),
-					        level: 3
+							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
 					    };
-					var map = new kakao.maps.Map(mapContainer, mapOption);
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					// 마커가 표시될 위치입니다
 					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
+					// 마커를 생성합니다
 					var marker = new kakao.maps.Marker({
 					    position: markerPosition
 					});
-					marker.setMap(map);					
+					// 마커가 지도 위에 표시되도록 설정합니다
+					marker.setMap(map);
 				},
 				error: function(){
 					alert("error : " + error);
@@ -403,18 +407,16 @@
 					</div>
 				</div>
 				<div class='mapbar col-4'>
-					<div class='div_map' id="map"></div>				
+					<div class='div_map' id="map" style="width: 100%; height: 900px;"></div>				
 					<script>
-						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    		mapOption = { 
-			        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
-			        	level: 3 // 지도의 확대 레벨
-			    		};
-			
+				    		mapOption = { 
+					        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
+					        	level: 3 // 지도의 확대 레벨
+				    		};
+	
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
-						
 					</script>		
 				</div>
 			</div>
