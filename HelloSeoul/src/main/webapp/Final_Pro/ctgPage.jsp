@@ -71,7 +71,9 @@ $(function(){
 	
 	//search
 	$('.searchbt').click(function(){
-		if($('#locsg').val()=='choose'||$('#detailctg').val()==null||$('#query').val().length==0){
+		if($('#locsg').val()=='choose'||$('#detailctg').val()==null
+				//||$('#query').val().length==0
+				){
 	 		alert('Select Please');
 	 		return false;
 	 		}
