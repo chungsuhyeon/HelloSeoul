@@ -22,9 +22,13 @@ $(function(){
 	
 	//list info + map ajax
 	$('td#locname').click(function(){
+		var tr =$(this).parent();
+		var td = tr.children();
+		var pcs = td.eq(0).children().val();
+		console.log(pcs);
 		var sel = $(this).text();
 		console.log(sel);
-		ajaxpro(sel);
+		ajaxpro(pcs);
  		
 	});
 	
@@ -144,7 +148,7 @@ function ajaxpro(sel){
 	$.ajax({
 		type:'post',
 		url:'/web/showLocInfo',
-		data : {'name':sel},
+		data : {'pcs':sel},
 		dataType:'json',
 		success : function(loc){
  				//마커가 표시될 위치입니다

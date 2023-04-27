@@ -52,8 +52,8 @@ public class sunrestcontroller {
 	private PagingAlgo pg;
 	
 	@PostMapping(value = "showLocInfo")	
-	public MainDbBean showDb(String name) {
-		return ctg.showLocinfo(name);
+	public MainDbBean showDb(int pcs) {
+		return ctg.showLocinfo(pcs);
 	}
 	
 	@PostMapping(value = "searchList")
