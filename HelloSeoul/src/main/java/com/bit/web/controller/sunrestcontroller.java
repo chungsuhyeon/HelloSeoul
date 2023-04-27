@@ -57,8 +57,8 @@ public class sunrestcontroller {
 	}
 	
 	@PostMapping(value = "searchList")
-	public List<MainDbBean> searchList(String loc_sg, String detailctg, String query) {
-		return ctg.searchLoc(loc_sg, detailctg, query);
+	public List<MainDbBean> searchList(String loc_sg, String loc_ctg1, String detailctg, String query) {
+		return ctg.searchLoc(loc_sg, loc_ctg1,detailctg, query);
 	}
 	
 	@PostMapping(value="insertJjim")

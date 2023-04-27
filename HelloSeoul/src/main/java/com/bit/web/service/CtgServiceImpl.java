@@ -74,10 +74,11 @@ public class CtgServiceImpl implements CtgService{
 	}
 
 	@Override
-	public List<MainDbBean> searchLoc(String loc_sg, String detailctg, String query) {
+	public List<MainDbBean> searchLoc(String loc_sg, String loc_ctg1, String detailctg, String query) {
 		// TODO Auto-generated method stub
 		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		map.put("loc_sg", loc_sg);
+		map.put("loc_ctg1", loc_ctg1);
 		map.put("loc_ctg2", detailctg);
 		map.put("query", query);		
 		return dao.searchLoc(map);

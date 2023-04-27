@@ -82,6 +82,7 @@ $(function(){
 	 				type:'post',
 	 				url:'/web/searchList',
 	 				data : {'loc_sg':$('#locsg').val(),
+	 						'loc_ctg1':$('#foodctg').val(),
 	 						'detailctg':$('#detailctg').val(),
 	 						'query':$('#query').val()},
 	 				dataType:'json',

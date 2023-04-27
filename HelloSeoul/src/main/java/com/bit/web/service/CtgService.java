@@ -22,7 +22,7 @@ public interface CtgService {
 	
 	//restcontroller
 	MainDbBean showLocinfo(String name);
-	List<MainDbBean> searchLoc(String loc_sg, String detailctg, String query);
+	List<MainDbBean> searchLoc(String loc_sg, String loc_ctg1, String detailctg, String query);
 	void insertJjim(List<Integer> jjimpoint, String user_id);
 	List<MainDbBean> searchHot(String query);
 	List<MainDbBean> hotspotrecom(String sg);
