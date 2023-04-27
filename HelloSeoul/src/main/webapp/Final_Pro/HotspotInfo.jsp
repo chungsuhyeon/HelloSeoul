@@ -68,7 +68,7 @@ $(function(){
 						<div class="card-body">
 							<hr class='hr'>
 							<input type="hidden" id="pcs" value="\${r[i].loc_pc}">
-					  		<a onclick="insertJ()" class="card-link">Jjim</a>
+					  		<a onclick="insertJ()" class="card-link">Wish</a>
 					  		<a href="/web/gotoHotspotinfo?pc=\${r[i].loc_pc}" class="card-link">More</a>
 						</div>
 					</div>
@@ -161,7 +161,7 @@ $(function(){
 			</div>
 			<hr class='hr'/>
 			<div class='jjimbar d-flex text-end'>
-				<button class="jjim btn btn-danger">JJim</button>
+				<button class="jjim btn btn-danger">Wish</button>
 			</div>
 			<hr class='hr hr-blurry'/>
 			<div class='text-center'>
