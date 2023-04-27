@@ -170,6 +170,12 @@ GROUP BY USER_FIRST
 ON A.USER_FIRST = B.USER_FIRST
 </select>
 
+<select id="locinfos" parameterType="String" resultType="mainDB">
+SELECT  LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_NAME = #{name}
+</select>
+
 </mapper>
 
 

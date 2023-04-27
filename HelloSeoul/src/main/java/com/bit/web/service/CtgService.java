@@ -21,7 +21,7 @@ public interface CtgService {
 	MainDbBean hotspotinfo(int loc_pc);
 	
 	//restcontroller
-	List<MainDbBean> showLocinfo();
+	MainDbBean showLocinfo(String name);
 	List<MainDbBean> searchLoc(String loc_sg, String detailctg, String query);
 	void insertJjim(List<Integer> jjimpoint, String user_id);
 	List<MainDbBean> searchHot(String query);

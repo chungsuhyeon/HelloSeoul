@@ -114,4 +114,7 @@ public class CtgDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("getffCount");		
 	}
 	
+	public MainDbBean locinfos(String name) {
+		return this.getSqlSession().selectOne("locinfos", name);
+	}
 }

@@ -67,10 +67,10 @@ public class CtgServiceImpl implements CtgService{
 	
 	//rest controller service begin
 	@Override
-	public List<MainDbBean> showLocinfo() {
+	public MainDbBean showLocinfo(String name) {
 		// TODO Auto-generated method stub
 		//System.out.println(dao.showDb());
-		return dao.showDb();
+		return dao.locinfos(name);
 	}
 
 	@Override
