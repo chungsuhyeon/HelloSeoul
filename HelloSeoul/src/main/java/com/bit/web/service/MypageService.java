@@ -39,6 +39,8 @@ public interface MypageService {
 	
 	void mypageScheduleInsert(MypageMainPlannerBean bean);
 	
+	void mainplannercontentDelete(int no);
+	
 	MypagePlannerBean mypageDateInfo(int no);
 	
 	List<String> shareNickCheck(String user_nick, String nick, int no); // 공유할 닉네임 리스트 받아오기

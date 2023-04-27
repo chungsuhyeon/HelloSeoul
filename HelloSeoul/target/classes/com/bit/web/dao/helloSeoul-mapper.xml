@@ -156,6 +156,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from plannershare
 		where planner_no = #{no} and share_user_nick = #{nick}
 	</delete>
+	
+	<delete id="mainplannercontentDelete" parameterType="Integer">
+		delete from mainplanner
+		where planner_no = #{no}
+	</delete>
 
 </mapper>
 

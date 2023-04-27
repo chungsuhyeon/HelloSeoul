@@ -226,7 +226,7 @@
 				
 				$(result).each(function(index, list){
 					$(day_info + " table tbody").append(
-							`<tr>
+							`<tr class='table-light'>
 								<td style="width: 5%;">
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
 								</td>
@@ -402,7 +402,7 @@
 					</ul>
 					
 						<!-- tab contents -->
-						<div id='myTabContent border border-info-1' class='tab-content'  style=' height:57%; overflow:auto;'>
+						<div id='myTabContent border border-info-1' class='tab-content'  style=' height:55%; overflow:auto;'>
 						</div>	
 						
 						<div class='settingbt' style="margin-top: 15px;">

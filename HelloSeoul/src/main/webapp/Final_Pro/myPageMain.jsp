@@ -168,7 +168,7 @@
 						</c:when>
 						<c:when test="${myPaging.currentPage eq (myPaging.currentBlock*myPaging.blockScale)}">
 							<li class="page-item">
-								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&raquo;</a>
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&gt;</a>
 							</li>
 						</c:when>
 						<c:otherwise>
