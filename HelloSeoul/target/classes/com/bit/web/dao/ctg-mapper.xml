@@ -8,7 +8,15 @@ FROM MAINDB
 <select id="searchLoc" parameterType="java.util.HashMap" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
-WHERE LOC_SG = #{loc_sg} AND LOC_CTG1 = #{loc_ctg1} AND LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
+WHERE LOC_SG = #{loc_sg} AND LOC_CTG1 = #{loc_ctg1} AND
+<choose>
+<when test='loc_ctg2.equals("all")'>
+LOC_NAME LIKE '%'||#{query}||'%'
+</when>
+<otherwise>
+LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
+</otherwise>
+</choose>
 </select>
 
 
