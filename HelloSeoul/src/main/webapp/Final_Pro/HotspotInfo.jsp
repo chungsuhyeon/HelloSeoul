@@ -161,7 +161,7 @@ $(function(){
 			</div>
 			<hr class='hr'/>
 			<div class='jjimbar d-flex text-end'>
-				<button class="jjim btn btn-danger">JJim</button>
+				<button class="jjim btn btn-primary">Wish</button>
 			</div>
 			<hr class='hr hr-blurry'/>
 			<div class='text-center'>
