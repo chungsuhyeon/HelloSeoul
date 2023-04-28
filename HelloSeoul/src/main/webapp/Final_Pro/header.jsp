@@ -34,7 +34,7 @@ $(function(){
 	margin-left: 4px;
 	margin-right: 4px;
 	font-size: 20px;
-	color : black;
+	color : #2c3e50;
 	text-decoration: underline;
 	font-weight: bold;
 }
