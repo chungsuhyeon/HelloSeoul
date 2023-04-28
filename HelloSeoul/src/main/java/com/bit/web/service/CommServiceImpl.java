@@ -73,40 +73,40 @@ public class CommServiceImpl implements CommService{
 	@Override
 	public List<Object> updateBoard(ComBoard board,@RequestParam(value="file",required = false) MultipartFile file) {
 		// TODO Auto-generated method stub
-				String fileRealName = file.getOriginalFilename(); //���ϸ��� �� �� �ִ� �޼���!
-				long size = file.getSize(); //���� ������
+				String fileRealName = file.getOriginalFilename(); //占쏙옙占싹몌옙占쏙옙 占쏙옙爭� 占쏙옙 占쌍댐옙 占쌨쇽옙占쏙옙!
+				long size = file.getSize(); //占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 //				System.out.println(file);
-//				System.out.println("���ϸ� : "  + fileRealName);
-//				System.out.println("�뷮ũ��(byte) : " + size);
-				//������ ������ �����̸� fileextension���� .jsp�̷�����  Ȯ���� ���� ����
+//				System.out.println("占쏙옙占싹몌옙 : "  + fileRealName);
+//				System.out.println("占쎈량크占쏙옙(byte) : " + size);
+				//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싱몌옙 fileextension占쏙옙占쏙옙 .jsp占싱뤄옙占쏙옙占쏙옙  확占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
 				if(fileRealName!="") {
-					System.out.println("��������");
+					System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙");
 					String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 					String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 			
 					
 					/*
-					  ���� ���ε�� ���ϸ��� ������ ������ �̹� ������ ���� �ְ� ����ڰ� 
-					  ���ε� �ϴ� ���ϸ��� ��� �̿��� ���� �Ǿ����� �� �ֽ��ϴ�. 
-					  Ÿ�ξ �������� �ʴ� ȯ�濡���� ���� ������ ���� �ʽ��ϴ�.(�������� ��ǥ���� ����)
-					  ������ ���� ���ڸ� ���� db�� ������ ������ ���ϸ��� ���Ӱ� ����� �ش�.
+					  占쏙옙占쏙옙 占쏙옙占싸듸옙占� 占쏙옙占싹몌옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占싱뱄옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌍곤옙 占쏙옙占쏙옙微占� 
+					  占쏙옙占싸듸옙 占싹댐옙 占쏙옙占싹몌옙占쏙옙 占쏙옙占� 占싱울옙占쏙옙 占쏙옙占쏙옙 占실억옙占쏙옙占쏙옙 占쏙옙 占쌍쏙옙占싹댐옙. 
+					  타占싸어를 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 환占썸에占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占십쏙옙占싹댐옙.(占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙표占쏙옙占쏙옙 占쏙옙占쏙옙)
+					  占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쌘몌옙 占쏙옙占쏙옙 db占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싹몌옙占쏙옙 占쏙옙占쌈곤옙 占쏙옙占쏙옙占� 占쌔댐옙.
 					 */
 					
 					UUID uuid = UUID.randomUUID();
 					System.out.println(uuid.toString());
 					String[] uuids = uuid.toString().split("-");
 					String uniqueName = uuids[0];
-//					System.out.println("������ �������ڿ�" + uniqueName);
-//					System.out.println("Ȯ���ڸ�" + fileExtension);
+//					System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌘울옙" + uniqueName);
+//					System.out.println("확占쏙옙占쌘몌옙" + fileExtension);
 //				
 					String filename=uniqueName+fileExtension;
 					board.setCom_filename(filename);
 					
-//					File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ���� ��
+//					File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 占쏙옙占쏙옙 占쏙옙
 					
-					File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ���� ��
+					File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // 占쏙옙占쏙옙 占쏙옙
 					try {
-						file.transferTo(saveFile); // ���� ���� ����޼���(filewriter �۾��� �ս��� �ѹ濡 ó�����ش�.)
+						file.transferTo(saveFile); // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙氷占쏙옙占�(filewriter 占쌜억옙占쏙옙 占쌌쏙옙占쏙옙 占싼방에 처占쏙옙占쏙옙占쌔댐옙.)
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
@@ -114,7 +114,7 @@ public class CommServiceImpl implements CommService{
 					}
 				}else {
 					board.setCom_filename("noimg.jpg");
-					System.out.println("���Ͼ���");
+					System.out.println("占쏙옙占싹억옙占쏙옙");
 				}
 		// TODO Auto-generated method stub
 		return commdao.updateBoard(board);
@@ -213,40 +213,40 @@ public class CommServiceImpl implements CommService{
 	public void boardInsert(ComBoard board, @RequestParam(value="file",required = false) MultipartFile file) {
 		// TODO Auto-generated method stub
 		
-     	String fileRealName = file.getOriginalFilename(); //���ϸ��� �� �� �ִ� �޼���!
-		long size = file.getSize(); //���� ������
+     	String fileRealName = file.getOriginalFilename(); //占쏙옙占싹몌옙占쏙옙 占쏙옙爭� 占쏙옙 占쌍댐옙 占쌨쇽옙占쏙옙!
+		long size = file.getSize(); //占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 //		System.out.println(file);
-//		System.out.println("���ϸ� : "  + fileRealName);
-//		System.out.println("�뷮ũ��(byte) : " + size);
-		//������ ������ �����̸� fileextension���� .jsp�̷�����  Ȯ���� ���� ����
+//		System.out.println("占쏙옙占싹몌옙 : "  + fileRealName);
+//		System.out.println("占쎈량크占쏙옙(byte) : " + size);
+		//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싱몌옙 fileextension占쏙옙占쏙옙 .jsp占싱뤄옙占쏙옙占쏙옙  확占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
 		if(fileRealName!="") {
-			System.out.println("��������");
+			System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙");
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
 			String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 	
 			
 			/*
-			  ���� ���ε�� ���ϸ��� ������ ������ �̹� ������ ���� �ְ� ����ڰ� 
-			  ���ε� �ϴ� ���ϸ��� ��� �̿��� ���� �Ǿ����� �� �ֽ��ϴ�. 
-			  Ÿ�ξ �������� �ʴ� ȯ�濡���� ���� ������ ���� �ʽ��ϴ�.(�������� ��ǥ���� ����)
-			  ������ ���� ���ڸ� ���� db�� ������ ������ ���ϸ��� ���Ӱ� ����� �ش�.
+			  占쏙옙占쏙옙 占쏙옙占싸듸옙占� 占쏙옙占싹몌옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占싱뱄옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌍곤옙 占쏙옙占쏙옙微占� 
+			  占쏙옙占싸듸옙 占싹댐옙 占쏙옙占싹몌옙占쏙옙 占쏙옙占� 占싱울옙占쏙옙 占쏙옙占쏙옙 占실억옙占쏙옙占쏙옙 占쏙옙 占쌍쏙옙占싹댐옙. 
+			  타占싸어를 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 환占썸에占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占십쏙옙占싹댐옙.(占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙표占쏙옙占쏙옙 占쏙옙占쏙옙)
+			  占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쌘몌옙 占쏙옙占쏙옙 db占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싹몌옙占쏙옙 占쏙옙占쌈곤옙 占쏙옙占쏙옙占� 占쌔댐옙.
 			 */
 			
 			UUID uuid = UUID.randomUUID();
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
 			String uniqueName = uuids[0];
-			System.out.println("������ �������ڿ�" + uniqueName);
-			System.out.println("Ȯ���ڸ�" + fileExtension);
+			System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌘울옙" + uniqueName);
+			System.out.println("확占쏙옙占쌘몌옙" + fileExtension);
 		
 			String filename=uniqueName+fileExtension;
 			board.setCom_filename(filename);
 			
-//			File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ���� ��
+//			File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 占쏙옙占쏙옙 占쏙옙
 			
-			File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ���� ��
+			File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // 占쏙옙占쏙옙 占쏙옙
 			try {
-				file.transferTo(saveFile); // ���� ���� ����޼���(filewriter �۾��� �ս��� �ѹ濡 ó�����ش�.)
+				file.transferTo(saveFile); // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙氷占쏙옙占�(filewriter 占쌜억옙占쏙옙 占쌌쏙옙占쏙옙 占싼방에 처占쏙옙占쏙옙占쌔댐옙.)
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -254,7 +254,7 @@ public class CommServiceImpl implements CommService{
 			}
 		}else {
 			board.setCom_filename("noimg.jpg");
-			System.out.println("���Ͼ���");
+			System.out.println("占쏙옙占싹억옙占쏙옙");
 		}
 		board.setCom_no(commdao.selectBoradNo());	
 		System.out.println(board);
@@ -299,7 +299,7 @@ public class CommServiceImpl implements CommService{
 		
 		bean=commdao.SharePlanner(planner_no);
 		String nick=bean.getUpdate_user();
-		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"님의 플래너)");
+		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"님의 플래너");
 		bean.setPlanner_no(HSdao.getPlannerNo());
 		bean.setUser_id(user_id);
 		bean.setUpdate_user(user_nick);
@@ -308,15 +308,12 @@ public class CommServiceImpl implements CommService{
 		String end=bean.getPlanner_end().split(" ")[0];
 		bean.setPlanner_start(start);
 		bean.setPlanner_end(end);
-		System.out.println(bean);
 		HSdao.plannerDataInsert(bean);
-		System.out.println(commdao.selectSharePlanner(planner_no));
 		for(MypageMainPlannerBean seat:commdao.selectSharePlanner(planner_no)) {
 			seat.setUser_id(user_id);
 			seat.setPlanner_no(bean.getPlanner_no());
 			seat.setUse_yn("y");
 			HSdao.plannerScheduleInsert(seat);
-			System.out.println(seat);
 		}
 		
 	}

@@ -34,6 +34,7 @@ $(function(){
 	margin-left: 4px;
 	margin-right: 4px;
 	font-size: 20px;
+	color : black;
 	text-decoration: underline;
 	font-weight: bold;
 }
@@ -70,7 +71,7 @@ $(function(){
 			<script>
 				function googleTranslateElementInit() {
 					new google.translate.TranslateElement({
-						pageLanguage: 'ko',
+						pageLanguage: 'ko,zh-CN,zh-TW,ja,vi,th,tl,km,my,mn,ru,en,fr,ar',
 						includedLanguages: 'ko,zh-CN,zh-TW,ja,vi,th,tl,km,my,mn,ru,en,fr,ar',
 						layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
 						autoDisplay: false

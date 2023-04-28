@@ -106,9 +106,13 @@ $(function(){
 										`);
 		 					}
 		 					$('td#locname').click(function(){
+		 						var tr =$(this).parent();
+		 						var td = tr.children();
+		 						var pcs = td.eq(0).children().val();
+		 						console.log(pcs);
 		 						var sel = $(this).text();
 		 						console.log(sel);
-		 						ajaxpro(sel);
+		 						ajaxpro(pcs);
 		 				 		
 		 					});
 	 					}

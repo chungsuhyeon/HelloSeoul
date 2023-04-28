@@ -354,7 +354,7 @@ function ReportOn(){
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr style="border-bottom-width: 0px">
 						<c:choose>
 							<c:when test="${i.com_ctg==1 }">
 								<td>
@@ -402,7 +402,7 @@ function ReportOn(){
 									<td style="border-bottom-width:0px;">${i.com_cont}</td>
 									</c:when>
 									<c:otherwise>
-									<td style="width:500px;height: 500px;border-bottom-width: 0px">${i.com_cont }</td>
+									<td >${i.com_cont }</td>
 									</c:otherwise>
 									</c:choose>
 						
