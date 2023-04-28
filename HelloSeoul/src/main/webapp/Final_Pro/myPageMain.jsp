@@ -72,7 +72,7 @@
 			</ol>
 		</div>
 			<!-- Contents Box -->
-			<div class='contentsbox d-flex justify-content-center'>
+			<div class='contentsbox d-flex justify-content-center' style="height:300px;">
 				<c:forEach var="i" items="${userCreatedPlanner}">
 					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
