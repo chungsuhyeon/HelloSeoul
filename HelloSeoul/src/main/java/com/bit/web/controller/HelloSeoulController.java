@@ -146,7 +146,8 @@ public class HelloSeoulController {
 	@PostMapping(value = "deletePlannerSchedule")
 	@ResponseBody
 	public String deletePlannerSchedule(@RequestParam(value = "no") int no) {
-		contactService.mypageScheduleDelete(no);
+//		contactService.mypageScheduleDelete(no);
+		contactService.mainplannercontentDelete(no);
 		return "success";
 	}
 	

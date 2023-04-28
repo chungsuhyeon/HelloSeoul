@@ -73,40 +73,40 @@ public class CommServiceImpl implements CommService{
 	@Override
 	public List<Object> updateBoard(ComBoard board,@RequestParam(value="file",required = false) MultipartFile file) {
 		// TODO Auto-generated method stub
-				String fileRealName = file.getOriginalFilename(); //ÆÄÀÏ¸íÀ» ¾ò¾î³¾ ¼ö ÀÖ´Â ¸Ş¼­µå!
-				long size = file.getSize(); //ÆÄÀÏ »çÀÌÁî
-				System.out.println(file);
-				System.out.println("ÆÄÀÏ¸í : "  + fileRealName);
-				System.out.println("¿ë·®Å©±â(byte) : " + size);
-				//¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏÀÌ¸§ fileextensionÀ¸·Î .jspÀÌ·±½ÄÀÇ  È®ÀåÀÚ ¸íÀ» ±¸ÇÔ
+				String fileRealName = file.getOriginalFilename(); //ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½î³¾ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½!
+				long size = file.getSize(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				System.out.println(file);
+//				System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ : "  + fileRealName);
+//				System.out.println("ï¿½ë·®Å©ï¿½ï¿½(byte) : " + size);
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ fileextensionï¿½ï¿½ï¿½ï¿½ .jspï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½  È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				if(fileRealName!="") {
-					System.out.println("ÆÄÀÏÀÖÀ½");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-					String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+					String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 			
 					
 					/*
-					  ÆÄÀÏ ¾÷·Îµå½Ã ÆÄÀÏ¸íÀÌ µ¿ÀÏÇÑ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÒ ¼öµµ ÀÖ°í »ç¿ëÀÚ°¡ 
-					  ¾÷·Îµå ÇÏ´Â ÆÄÀÏ¸íÀÌ ¾ğ¾î ÀÌ¿ÜÀÇ ¾ğ¾î·Î µÇ¾îÀÖÀ» ¼ö ÀÖ½À´Ï´Ù. 
-					  Å¸ÀÎ¾î¸¦ Áö¿øÇÏÁö ¾Ê´Â È¯°æ¿¡¼­´Â Á¤»ê µ¿ÀÛÀÌ µÇÁö ¾Ê½À´Ï´Ù.(¸®´ª½º°¡ ´ëÇ¥ÀûÀÎ ¿¹½Ã)
-					  °íÀ¯ÇÑ ·£´ø ¹®ÀÚ¸¦ ÅëÇØ db¿Í ¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏ¸íÀ» »õ·Ó°Ô ¸¸µé¾î ÁØ´Ù.
+					  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ 
+					  ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. 
+					  Å¸ï¿½Î¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ È¯ï¿½æ¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+					  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
 					 */
 					
 					UUID uuid = UUID.randomUUID();
 					System.out.println(uuid.toString());
 					String[] uuids = uuid.toString().split("-");
 					String uniqueName = uuids[0];
-					System.out.println("»ı¼ºµÈ °íÀ¯¹®ÀÚ¿­" + uniqueName);
-					System.out.println("È®ÀåÀÚ¸í" + fileExtension);
-				
+//					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½" + uniqueName);
+//					System.out.println("È®ï¿½ï¿½ï¿½Ú¸ï¿½" + fileExtension);
+//				
 					String filename=uniqueName+fileExtension;
 					board.setCom_filename(filename);
 					
-//					File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid Àû¿ë Àü
+//					File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					
-					File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // Àû¿ë ÈÄ
+					File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					try {
-						file.transferTo(saveFile); // ½ÇÁ¦ ÆÄÀÏ ÀúÀå¸Ş¼­µå(filewriter ÀÛ¾÷À» ¼Õ½±°Ô ÇÑ¹æ¿¡ Ã³¸®ÇØÁØ´Ù.)
+						file.transferTo(saveFile); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ş¼ï¿½ï¿½ï¿½(filewriter ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Õ½ï¿½ï¿½ï¿½ ï¿½Ñ¹æ¿¡ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.)
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
@@ -114,7 +114,7 @@ public class CommServiceImpl implements CommService{
 					}
 				}else {
 					board.setCom_filename("noimg.jpg");
-					System.out.println("ÆÄÀÏ¾øÀ½");
+					System.out.println("ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½");
 				}
 		// TODO Auto-generated method stub
 		return commdao.updateBoard(board);
@@ -213,40 +213,40 @@ public class CommServiceImpl implements CommService{
 	public void boardInsert(ComBoard board, @RequestParam(value="file",required = false) MultipartFile file) {
 		// TODO Auto-generated method stub
 		
-     	String fileRealName = file.getOriginalFilename(); //ÆÄÀÏ¸íÀ» ¾ò¾î³¾ ¼ö ÀÖ´Â ¸Ş¼­µå!
-		long size = file.getSize(); //ÆÄÀÏ »çÀÌÁî
-		System.out.println(file);
-		System.out.println("ÆÄÀÏ¸í : "  + fileRealName);
-		System.out.println("¿ë·®Å©±â(byte) : " + size);
-		//¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏÀÌ¸§ fileextensionÀ¸·Î .jspÀÌ·±½ÄÀÇ  È®ÀåÀÚ ¸íÀ» ±¸ÇÔ
+     	String fileRealName = file.getOriginalFilename(); //ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½î³¾ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½!
+		long size = file.getSize(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		System.out.println(file);
+//		System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ : "  + fileRealName);
+//		System.out.println("ï¿½ë·®Å©ï¿½ï¿½(byte) : " + size);
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ fileextensionï¿½ï¿½ï¿½ï¿½ .jspï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½  È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if(fileRealName!="") {
-			System.out.println("ÆÄÀÏÀÖÀ½");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-			String uploadFolder = "E:\\workspring\\helloseoulproject\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
+			String uploadFolder = "D:\\Final\\HelloSeoul\\HelloSeoul\\src\\main\\webapp\\resources\\test";
 	
 			
 			/*
-			  ÆÄÀÏ ¾÷·Îµå½Ã ÆÄÀÏ¸íÀÌ µ¿ÀÏÇÑ ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÒ ¼öµµ ÀÖ°í »ç¿ëÀÚ°¡ 
-			  ¾÷·Îµå ÇÏ´Â ÆÄÀÏ¸íÀÌ ¾ğ¾î ÀÌ¿ÜÀÇ ¾ğ¾î·Î µÇ¾îÀÖÀ» ¼ö ÀÖ½À´Ï´Ù. 
-			  Å¸ÀÎ¾î¸¦ Áö¿øÇÏÁö ¾Ê´Â È¯°æ¿¡¼­´Â Á¤»ê µ¿ÀÛÀÌ µÇÁö ¾Ê½À´Ï´Ù.(¸®´ª½º°¡ ´ëÇ¥ÀûÀÎ ¿¹½Ã)
-			  °íÀ¯ÇÑ ·£´ø ¹®ÀÚ¸¦ ÅëÇØ db¿Í ¼­¹ö¿¡ ÀúÀåÇÒ ÆÄÀÏ¸íÀ» »õ·Ó°Ô ¸¸µé¾î ÁØ´Ù.
+			  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ 
+			  ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. 
+			  Å¸ï¿½Î¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ È¯ï¿½æ¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+			  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
 			 */
 			
 			UUID uuid = UUID.randomUUID();
 			System.out.println(uuid.toString());
 			String[] uuids = uuid.toString().split("-");
 			String uniqueName = uuids[0];
-			System.out.println("»ı¼ºµÈ °íÀ¯¹®ÀÚ¿­" + uniqueName);
-			System.out.println("È®ÀåÀÚ¸í" + fileExtension);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½" + uniqueName);
+			System.out.println("È®ï¿½ï¿½ï¿½Ú¸ï¿½" + fileExtension);
 		
 			String filename=uniqueName+fileExtension;
 			board.setCom_filename(filename);
 			
-//			File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid Àû¿ë Àü
+//			File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			
-			File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // Àû¿ë ÈÄ
+			File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			try {
-				file.transferTo(saveFile); // ½ÇÁ¦ ÆÄÀÏ ÀúÀå¸Ş¼­µå(filewriter ÀÛ¾÷À» ¼Õ½±°Ô ÇÑ¹æ¿¡ Ã³¸®ÇØÁØ´Ù.)
+				file.transferTo(saveFile); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ş¼ï¿½ï¿½ï¿½(filewriter ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Õ½ï¿½ï¿½ï¿½ ï¿½Ñ¹æ¿¡ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.)
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -254,7 +254,7 @@ public class CommServiceImpl implements CommService{
 			}
 		}else {
 			board.setCom_filename("noimg.jpg");
-			System.out.println("ÆÄÀÏ¾øÀ½");
+			System.out.println("ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½");
 		}
 		board.setCom_no(commdao.selectBoradNo());	
 		System.out.println(board);
@@ -299,7 +299,7 @@ public class CommServiceImpl implements CommService{
 		
 		bean=commdao.SharePlanner(planner_no);
 		String nick=bean.getUpdate_user();
-		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"´ÔÀÇ ÇÃ·¡³Ê)");
+		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"ë‹˜ì˜ í”Œë˜ë„ˆ)");
 		bean.setPlanner_no(HSdao.getPlannerNo());
 		bean.setUser_id(user_id);
 		bean.setUpdate_user(user_nick);

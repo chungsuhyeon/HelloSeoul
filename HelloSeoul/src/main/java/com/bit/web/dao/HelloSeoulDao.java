@@ -138,4 +138,9 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		this.getSqlSession().delete("shareNickDelete", map);
 	}
 	
+	// 플래너 수정때 저장버튼 누르면 데이터 삭제 후 재삽입
+	public void mainplannercontentDelete(int no) {
+		this.getSqlSession().delete("mainplannercontentDelete", no);
+	}
+	
 }

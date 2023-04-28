@@ -22,9 +22,13 @@ $(function(){
 	
 	//list info + map ajax
 	$('td#locname').click(function(){
+		var tr =$(this).parent();
+		var td = tr.children();
+		var pcs = td.eq(0).children().val();
+		console.log(pcs);
 		var sel = $(this).text();
 		console.log(sel);
-		ajaxpro(sel);
+		ajaxpro(pcs);
  		
 	});
 	
@@ -32,31 +36,31 @@ $(function(){
 		if($('#foodctg').val()=='food'){
 			$('#detailctg option').remove();
 			$('#detailctg').append(`
-					<option value="all">전체</option>
-					<option value="korean">한식</option>
-					<option value="chinese">중식</option>
-					<option value="weston">양식</option>
-					<option value="japanese">일식</option>									
-					<option value="etc">기타</option>					
+					<option value="all">all</option>
+					<option value="korean">korean</option>
+					<option value="chinese">chinese</option>
+					<option value="weston">weston</option>
+					<option value="japanese">japanese</option>									
+					<option value="etc">etc</option>					
 					`);
 		}
 		else if($('#foodctg').val()=='tour'){
 			$('#detailctg option').remove();
 			$('#detailctg').append(`
-					<option value="all">전체</option>
-					<option value="landmark">랜드마크</option>
-					<option value="nature">자연</option>
-					<option value="history">역사</option>
-					<option value="etc">기타</option>					
+					<option value="all">all</option>
+					<option value="landmark">landmark</option>
+					<option value="nature">nature</option>
+					<option value="history">history</option>
+					<option value="etc">etc</option>					
 					`);
 		}
 		else if($('#foodctg').val()=='shopping'){
 			$('#detailctg option').remove();
 			$('#detailctg').append(`
-					<option value="traditionalMarket">전통시장</option>
-					<option value="departmentstore">백화점</option>
-					<option value="goodsstore">기념품</option>
-					<option value="etc">기타</option>					
+					<option value="traditionalMarket">traditionalMarket</option>
+					<option value="departmentstore">departmentstore</option>
+					<option value="goodsstore">goodsstore</option>
+					<option value="etc">etc</option>					
 					`);
 		}
 		else{
@@ -71,7 +75,9 @@ $(function(){
 	
 	//search
 	$('.searchbt').click(function(){
-		if($('#locsg').val()=='choose'||$('#detailctg').val()==null||$('#query').val().length==0){
+		if($('#locsg').val()=='choose'||$('#detailctg').val()==null
+				//||$('#query').val().length==0
+				){
 	 		alert('Select Please');
 	 		return false;
 	 		}
@@ -80,6 +86,7 @@ $(function(){
 	 				type:'post',
 	 				url:'/web/searchList',
 	 				data : {'loc_sg':$('#locsg').val(),
+	 						'loc_ctg1':$('#foodctg').val(),
 	 						'detailctg':$('#detailctg').val(),
 	 						'query':$('#query').val()},
 	 				dataType:'json',
@@ -141,14 +148,9 @@ function ajaxpro(sel){
 	$.ajax({
 		type:'post',
 		url:'/web/showLocInfo',
+		data : {'pcs':sel},
 		dataType:'json',
-		success : function(r){
- 				for(var x=0; x<r.length;x++){
- 					if(r[x].loc_name==sel){
- 						var loc = r[x];
- 						console.log(loc);
- 						}
- 					}
+		success : function(loc){
  				//마커가 표시될 위치입니다
  				var markerPosition  = new kakao.maps.LatLng(loc.loc_x,loc.loc_y); 
 				//마커를 생성합니다
@@ -166,31 +168,31 @@ function ajaxpro(sel){
 											<td rowspan="6" style="width: 200px;">
 											<img src='\${loc.loc_img}'style='width: 100%; height: 100%;'>
 											</td>
-											<td class='table-light' style="width: 20%;">장소 이름</td>
+											<td class='table-light' style="width: 20%;">Name</td>
 											<td>\${loc.loc_name}</td>
 										</tr>
 										<tr>
-											<td class='table-light'>카테고리</td>
+											<td class='table-light'>Category</td>
 											<td>\${loc.loc_ctg2}</td>
 										</tr>
 										<tr>
-											<td class='table-light'>주소</td>
+											<td class='table-light'>Address</td>
 											<td>\${loc.loc_addr}</td>
 										</tr>
 										<tr>
-											<td class='table-light'>영업시간</td>
+											<td class='table-light'>Time</td>
 											<td>\${loc.loc_time}</td>
 										</tr>
 										<tr>
-											<td class='table-light'>전화번호</td>
+											<td class='table-light'>TEL</td>
 											<td>\${loc.loc_tel}</td>
 										</tr>
 										<tr>
-											<td class='table-light'>기타</td>
+											<td class='table-light'>Etc</td>
 											<td>\${loc.loc_name}</td>
 										</tr>
 										<tr class='table-primary'>
-											<td colspan="3" style="text-align: center;">장소정보</td>
+											<td colspan="3" style="text-align: center;">Info</td>
 										</tr>
 										<tr>
 											<td colspan="3" style="height: 350px">\${loc.loc_info}</td>
@@ -257,16 +259,16 @@ function ajaxpro2(jjimpoint){
 		<div class='col-3'>
 			<div class='searchbar1 col-12 d-inline-flex'>
 				<select class='form-select' id='locsg'>
-					<option value="choose">지역</option>
+					<option value="choose">Gungu</option>
 					<c:forEach var='sg' items="${locsg}" varStatus="cnt">
-					<option value="${sg.kr_gu}">${sg.kr_gu}</option>
+					<option value="${sg.kr_gu}">${sg.en_gu}</option>
 					</c:forEach>
 				</select>
 				<select class='form-select' id='foodctg'>
 					<option value="nodata">-----</option>
-					<option value="food">음식</option>
-					<option value="tour">명소</option>
-					<option value="shopping">쇼핑</option>
+					<option value="food">food</option>
+					<option value="tour">tour</option>
+					<option value="shopping">shopping</option>
 				</select>
 				<select class='form-select' id='detailctg'>
 					<!-- Ajax Line -->
@@ -274,14 +276,14 @@ function ajaxpro2(jjimpoint){
 			</div>
 			<div class='searchbar2 col-12 d-inline-flex'>
 				<input type="text" class="form-control w-75" placeholder="장소 이름" id="query">
-				<button type="button" class="searchbt btn btn-primary w-25">검색</button>			
+				<button type="button" class="searchbt btn btn-primary w-25">Search</button>			
 			</div>
 			<div class='ctglist overflow-scroll' style="height: 600px;">
 				<table class='table table-hover'>
 					<thead>
 						<tr class='table-primary'>
-							<th class='text-center'>찜</th>
-							<th class='text-center'>장소 이름</th>
+							<th class='text-center'>Jjim</th>
+							<th class='text-center'>Name</th>
 						</tr>
 					</thead>
 					<tbody id="tablebd">
@@ -296,39 +298,39 @@ function ajaxpro2(jjimpoint){
 				</table>
 			</div>
 			<div class='jjimsubmit'>
-			<button class="btn btn-lg btn-primary" type="button" style="width: 100%" id="jjimsubmit">찜 하기</button>
+			<button class="btn btn-lg btn-primary" type="button" style="width: 100%" id="jjimsubmit">Jjim</button>
 			</div>
 		</div>
 		<div class="infobar col-5" >
 			<table class='table' style="height: 100%;">
 				<tbody>
 					<tr>
-						<td rowspan="6" style="width: 200px;">장소사진</td>
-						<td class='table-light' style="width: 20%;">장소명</td>
+						<td rowspan="6" style="width: 200px;">Image</td>
+						<td class='table-light' style="width: 20%;">Name</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>카테고리</td>
+						<td class='info table-light'>Category</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>장소주소</td>
+						<td class='info table-light'>Address</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>영업시간</td>
+						<td class='info table-light'>Time</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>전화번호</td>
+						<td class='info table-light'>Tel</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class='info table-light'>기타</td>
+						<td class='info table-light'>Etc</td>
 						<td></td>
 					</tr>
 					<tr class='table-primary'>
-						<td colspan="3" style="text-align: center;">장소정보</td>
+						<td colspan="3" style="text-align: center;">Info</td>
 					</tr>
 					<tr>
 						<td colspan="3" style="height: 400px;"></td>

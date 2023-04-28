@@ -52,13 +52,13 @@ public class sunrestcontroller {
 	private PagingAlgo pg;
 	
 	@PostMapping(value = "showLocInfo")	
-	public List<MainDbBean> showDb() {
-		return ctg.showLocinfo();
+	public MainDbBean showDb(int pcs) {
+		return ctg.showLocinfo(pcs);
 	}
 	
 	@PostMapping(value = "searchList")
-	public List<MainDbBean> searchList(String loc_sg, String detailctg, String query) {
-		return ctg.searchLoc(loc_sg, detailctg, query);
+	public List<MainDbBean> searchList(String loc_sg, String loc_ctg1, String detailctg, String query) {
+		return ctg.searchLoc(loc_sg, loc_ctg1,detailctg, query);
 	}
 	
 	@PostMapping(value="insertJjim")

@@ -76,9 +76,16 @@
 				<c:forEach var="i" items="${userCreatedPlanner}">
 					<div name="${i.PLANNER_NO}" class='mx-2'>
 						<table class="loadMyPlanner table table-hover">
-	  						<tbody class='table-light text-center'>
+							<tbody class='table-light text-center'>
 	  							<tr>
-	      							<th>Planner Title</th>
+	  							<c:choose>
+								<c:when test="${i.USER_ID eq user_id}">
+	      							<th>Planner Title</th>   							
+								</c:when>
+								<c:otherwise>
+	      							<th>Planner Title (Shared)</th>   							
+								</c:otherwise>
+								</c:choose>	   
 	      							<td>${i.PLANNER_TITLE}</td>
 	    						</tr>
 	    						<tr>
@@ -161,7 +168,7 @@
 						</c:when>
 						<c:when test="${myPaging.currentPage eq (myPaging.currentBlock*myPaging.blockScale)}">
 							<li class="page-item">
-								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&raquo;</a>
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&gt;</a>
 							</li>
 						</c:when>
 						<c:otherwise>

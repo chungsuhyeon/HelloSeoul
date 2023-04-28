@@ -314,6 +314,11 @@ public class MypageServiceImpl implements MypageService {
 		helloDao.shareNickDelete(map);
 	}
 
+	@Override
+	public void mainplannercontentDelete(int no) {
+		helloDao.mainplannercontentDelete(no);
+	}
+
 
 
 
