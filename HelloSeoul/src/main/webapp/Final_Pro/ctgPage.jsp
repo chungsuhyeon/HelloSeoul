@@ -286,7 +286,7 @@ function ajaxpro2(jjimpoint){
 				<table class='table table-hover'>
 					<thead>
 						<tr class='table-primary'>
-							<th class='text-center'>Jjim</th>
+							<th class='text-center'>Wish</th>
 							<th class='text-center'>Name</th>
 						</tr>
 					</thead>
@@ -302,7 +302,7 @@ function ajaxpro2(jjimpoint){
 				</table>
 			</div>
 			<div class='jjimsubmit'>
-			<button class="btn btn-lg btn-primary" type="button" style="width: 100%" id="jjimsubmit">Jjim</button>
+			<button class="btn btn-lg btn-primary" type="button" style="width: 100%" id="jjimsubmit">Wish</button>
 			</div>
 		</div>
 		<div class="infobar col-5" >
