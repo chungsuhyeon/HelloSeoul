@@ -139,7 +139,7 @@
 				if('${user_id}' == result.USER_ID){
 					$("ol.breadcrumb").append(
 						`<li class='breadcrumb-item'><a href='javascript:openDeletePlannerPopup()'>Planner Delete</a></li>
-						<li class='breadcrumb-item'><a href='/web/PlannerShare?planner_no=${param.no}&type=Planner'>Planner Share</a></li>
+						<li class='breadcrumb-item'><a href='/web/PlannerShare?planner_no=${param.no}&type=Planner'>Community Share</a></li>
 						<li class='breadcrumb-item'><a href='javascript:openPop()'>Team Share</a></li>`		
 					);
 				}
