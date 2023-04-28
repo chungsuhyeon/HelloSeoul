@@ -326,7 +326,7 @@
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
-<link rel="stylesheet" type="text/css" href="/web/resources/hellomypage/css/mypageCreate.css">
+<!-- <link rel="stylesheet" type="text/css" href="/web/resources/hellomypage/css/mypageCreate.css"> -->
 <link type="text/css" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
@@ -366,17 +366,17 @@
 			</div>
 			
 			<!-- 메인 플래너 내용 -->	
-			<div class="main col-12" style="display: inline-flex;">
+			<div class="main col-12" style="display: inline-flex; height:800px;">
 			
 				<!--tab-->
-				<div class='tabbar col-5'>
+				<div class='tabbar col-5' >
 					<ul class='nav nav-tabs bg-primary' role='tablist' name="dayTabbar">
 					</ul>
 					
 						<!-- tab contents -->
 						
-						<div id='myTabContent border border-info-1' class='tab-content' style=' height:57%; overflow:auto;'>
-						</div>	
+						<div id='myTabContent border border-info-1' class='tab-content' style=' height:80%; overflow:auto;'>
+						</div>
 						
 						<div class='settingbt' style="margin-top: 15px;">
 							<button class='btn btn-primary' onclick="deletePlan()">일정 제거</button>
@@ -387,7 +387,7 @@
 				
 				<!-- jjim bar -->
 				<div class='jjimbar col-3'>
-					<div class='jjimtb' style=' height:60%; overflow:auto;'>
+					<div class='jjimtb' style=' height:90%; overflow:auto;'>
 						<table class="table table-hover">
 							<thead>
 	   							<tr>
@@ -404,7 +404,7 @@
 					</div>
 				</div>
 				<div class='mapbar col-4'>
-					<div class='div_map' id="map" style="width: 100%; height: 900px;"></div>				
+					<div class='div_map' id="map" style="width: 100%; height: 100%;"></div>				
 					<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    		mapOption = { 
