@@ -308,15 +308,12 @@ public class CommServiceImpl implements CommService{
 		String end=bean.getPlanner_end().split(" ")[0];
 		bean.setPlanner_start(start);
 		bean.setPlanner_end(end);
-		System.out.println(bean);
 		HSdao.plannerDataInsert(bean);
-		System.out.println(commdao.selectSharePlanner(planner_no));
 		for(MypageMainPlannerBean seat:commdao.selectSharePlanner(planner_no)) {
 			seat.setUser_id(user_id);
 			seat.setPlanner_no(bean.getPlanner_no());
 			seat.setUse_yn("y");
 			HSdao.plannerScheduleInsert(seat);
-			System.out.println(seat);
 		}
 		
 	}
