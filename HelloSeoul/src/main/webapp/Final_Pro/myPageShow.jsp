@@ -402,7 +402,7 @@
 							        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
 						            marker = new kakao.maps.Marker({
 							            position: locArr[i].latlng, // 마커의 위치
-							            image: markerImage 
+							            image: markerImage
 							        });
 							    markers.push(marker);
 // 							    marker.setMap(map);
