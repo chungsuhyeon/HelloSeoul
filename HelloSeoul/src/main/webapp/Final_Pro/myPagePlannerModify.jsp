@@ -33,6 +33,7 @@
 			type: 'post',
 			data: {no:no},
 			dataType: 'json',
+			async: false,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			success: function(result){
 				// 타이틀 input
@@ -90,6 +91,7 @@
 					type: 'post',
 					data: {no:no},
 					dataType: 'json',
+					async: false,
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function(result){
 						$(result).each(function(idx, list){
@@ -100,6 +102,8 @@
 									`<tr class='table-light' name="old">
 										<td style="width: 5%;">
 											<input type="checkbox" name="planner_select_location" value="\${list["loc_pc"]}">
+											<input type="hidden" name="loc_x" value="\${list["loc_x"]}"></input>
+											<input type="hidden" name="loc_y" value="\${list["loc_y"]}"></input>
 										</td>
 										<td>
 											<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
@@ -125,7 +129,13 @@
 					error: function(){
 						alert("error : " + error);
 					}
-				}); // ajax taa-content
+				}); // ajax tab-content
+				
+				find_location_plan();
+				
+				$("li.nav-item").click(function(){
+					find_location_plan();
+				});
 					
 			},
 			error: function(){
@@ -174,22 +184,8 @@
 				data: {loc_code:code},
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function(result){		
-					// 지도 마커 스크립트
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						mapOption = {
-							center: new kakao.maps.LatLng(result.loc_x, result.loc_y), // 지도의 중심좌표
-					        level: 3 // 지도의 확대 레벨
-					    };
-					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-					// 마커가 표시될 위치입니다
-					var markerPosition  = new kakao.maps.LatLng(result.loc_x, result.loc_y); 
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker({
-					    position: markerPosition
-					});
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map);
+				success: function(result){
+					oneMarker(result.loc_x, result.loc_y);
 				},
 				error: function(){
 					alert("error : " + error);
@@ -229,6 +225,8 @@
 							`<tr class='table-light'>
 								<td style="width: 5%;">
 									<input type="checkbox" name="planner_select_location" value="\${list.loc_pc}">
+									<input type="hidden" name="loc_x" value="\${list.loc_x}"></input>
+									<input type="hidden" name="loc_y" value="\${list.loc_y}"></input>
 								</td>
 								<td>
 									<form method="POST" action="/web/mainPlannerData" name="mypageMainPlannerFrm" style="width:100%; display: inline-flex;">
@@ -270,6 +268,7 @@
 				});
 				
 				// 지도에 순서대로 마커 뿌리기 (보류)
+				find_location_plan();
 				
 			},
 			error: function(){
@@ -293,6 +292,8 @@
 		if($("table input[name='planner_select_location']").is(":checked")){
 			$("table input[name='planner_select_location']").prop('checked',false);
 		}
+		
+		find_location_plan();
 	} // deletePlan()
 	
 	// 생성한 플래너 저장
@@ -402,7 +403,7 @@
 					</ul>
 					
 						<!-- tab contents -->
-						<div id='myTabContent border border-info-1' class='tab-content'  style=' height:80%; overflow:auto;'>
+						<div id='myTabContent border border-info-1' class='tab-content'  style=' height:83%; overflow:auto;'>
 						</div>	
 						
 						<div class='settingbt' style="margin-top: 15px;">
@@ -414,7 +415,7 @@
 				
 				<!-- jjim bar -->
 				<div class='jjimbar col-3'>
-					<div class='jjimtb' style=' height:90%; overflow:auto;'>
+					<div class='jjimtb' style=' height:93%; overflow:auto;'>
 						<table class="table table-hover">
 							<thead>
 	   							<tr>
@@ -433,6 +434,7 @@
 				<div class='mapbar col-4'>
 					<div class='div_map' id="map" style="width: 100%; height: 100%;"></div>				
 					<script>
+						var markers = [];
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    		mapOption = { 
 					        	center: new kakao.maps.LatLng(37.4946287, 127.0276197), // 지도의 중심좌표
@@ -440,7 +442,75 @@
 				    		};
 	
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-						var map = new kakao.maps.Map(mapContainer, mapOption); 
+						var map = new kakao.maps.Map(mapContainer, mapOption);
+						
+						function find_location_plan(){
+							setMarkers(null);		
+							markers = [];
+						
+							var locArr = [];
+							const showDiv = document.querySelector('ul.nav li a.active'); // 현재 클릭되어있는 날짜 tab
+							let showID = $(showDiv).attr("href") //.replace("#", ""); // 날짜 tab의 href 가져옴 = tabcontent의 id
+
+							const allTr = $("div" + showID + " > table > tbody > tr");
+							
+							var num = 0;
+							$(allTr).each(function(){
+								num += 1;
+								const tdInput = $(this).find('input');
+								const locX = tdInput.eq(1).val();
+								const locY = tdInput.eq(2).val();
+								locArr.push({title:num, latlng: new kakao.maps.LatLng(locX, locY)});
+							});
+														
+							// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+							var bounds = new kakao.maps.LatLngBounds();
+							bounds.extend(locArr[0].latlng);
+							map.setBounds(bounds);
+														
+							for(var i=0; i<locArr.length; i++){
+								var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+							        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+							        imgOptions =  {
+							            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+							            spriteOrigin : new kakao.maps.Point(0, (i*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+							            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+							        },
+							        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+						            marker = new kakao.maps.Marker({
+							            position: locArr[i].latlng, // 마커의 위치
+							            image: markerImage 
+							        });
+							    markers.push(marker);
+							}
+							setMarkers(map);
+						}
+						
+						function setMarkers(map){
+							for(var j=0; j<markers.length; j++){
+								markers[j].setMap(map);
+							}
+						}
+						
+						function oneMarker(locX, locY){
+							setMarkers(null);		
+							markers = [];
+							
+							var markerPosition  = new kakao.maps.LatLng(locX, locY); 
+							// 마커를 생성합니다
+							var marker = new kakao.maps.Marker({
+							    position: markerPosition
+							});
+							
+							var bounds = new kakao.maps.LatLngBounds();
+							bounds.extend(markerPosition);
+							map.setBounds(bounds);
+							
+							markers.push(marker);
+							
+							// 마커가 지도 위에 표시되도록 설정합니다
+							setMarkers(map);
+						}
 					</script>				
 				</div>
 			</div>
