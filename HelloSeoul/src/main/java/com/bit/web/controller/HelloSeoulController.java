@@ -56,6 +56,7 @@ public class HelloSeoulController {
 	@RequestMapping("HelloSeoulLogout")
 	public String BoardLogout(HttpServletRequest request) {
 		request.getSession().setAttribute("user_id", null);
+		request.getSession().setAttribute("user_first", null);
 		request.getSession().setMaxInactiveInterval(0);	
 		return "Final_Pro/index";
 	}

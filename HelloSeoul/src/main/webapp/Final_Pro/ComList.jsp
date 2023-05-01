@@ -97,8 +97,8 @@ $(function(){
 <section class='container'>
 	<div class='row'>
 	<input type="hidden" id="user_id" value=${user_id }>
-		<div>New Write</div>
 		<div class='hotboard col-6'>
+			<div class='text-center'>New Write</div>
 			<div id="carouselExampleFade" class="carousel slide carousel-fade col-12" data-bs-ride="carousel"  >
   				<div class="carousel-inner">
   					<c:forEach var='i' items="${top3}" varStatus="status">
@@ -115,8 +115,16 @@ $(function(){
       					</c:choose>
       					</a>
       					<div class="carousel-caption d-none d-md-block">
-					        <h5 style="color: black; ">${i.com_title }</h5>
-					        <p style="color: black; ">${i.com_cont }</p>
+      					<c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+					        <h5 style="color: black;">${i.com_title }</h5>
+					        <p style="color: black;">${i.com_cont }</p>
+      					</c:when>
+      					<c:otherwise>
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
+      					</c:otherwise>
+      					</c:choose>
       					</div>
     				</div>
     			</c:if>
@@ -131,8 +139,16 @@ $(function(){
       					</c:otherwise>
       					</c:choose></a>
       					<div class="carousel-caption d-none d-md-block">
-					        <h5 style="color: black; ">${i.com_title }</h5>
-					        <p style="color: black; ">${i.com_cont }</p>
+      					<c:choose>
+      					<c:when test="${i.com_filename == 'noimg.jpg' }">
+					        <h5 style="color: black;">${i.com_title }</h5>
+					        <p style="color: black;">${i.com_cont }</p>
+      					</c:when>
+      					<c:otherwise>
+					        <h5>${i.com_title }</h5>
+					        <p>${i.com_cont }</p>
+      					</c:otherwise>
+      					</c:choose>
       					</div>
     				</div>
     				</c:forEach>
@@ -155,15 +171,7 @@ $(function(){
 		</div>
 		<div class='boardlist col-6'>
 			<div class='row'>
-				<div class='col-6'>
-				Board List
-				</div>
-				<div class='col-6 text-end mb-1'>
-					<c:if test="${user_id eq 'Admin'}">
-						<button class='write btn btn-light' id="admin">Admin</button>
-					</c:if>
-			
-			</div>
+				<div class='text-center'>Board List</div>
 			<div class='row'>
 				<div class='tbb col-12'>
 					<table class='table'>

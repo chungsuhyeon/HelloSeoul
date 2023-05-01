@@ -299,7 +299,7 @@ public class CommServiceImpl implements CommService{
 		
 		bean=commdao.SharePlanner(planner_no);
 		String nick=bean.getUpdate_user();
-		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"님의 플래너");
+		bean.setPlanner_title(bean.getPlanner_title()+"("+nick+"님의 플래너)");
 		bean.setPlanner_no(HSdao.getPlannerNo());
 		bean.setUser_id(user_id);
 		bean.setUpdate_user(user_nick);

@@ -159,7 +159,8 @@ public class CtgServiceImpl implements CtgService{
 	public String jsonParsingCoin(String day) throws IOException{
 		// TODO Auto-generated method stub		
 		//pthon connect
-		URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate="+day+"&data=AP01");
+		//URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate="+day+"&data=AP01");
+		URL url = new URL("https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=2ac7TGIMKndIFA9424lQVDkcFAZVXAO7&searchdate=20230428&data=AP01");
 		String line;
 		StringBuilder sb = new StringBuilder();
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
