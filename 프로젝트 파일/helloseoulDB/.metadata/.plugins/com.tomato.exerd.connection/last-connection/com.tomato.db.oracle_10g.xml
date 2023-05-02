@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+  <connection>
+    <productId>com.tomato.db.oracle_10g</productId>
+    <productName>Oracle 9i ~ 21c</productName>
+    <name>마지막으로 구성한 연결</name>
+    <driverJars>
+      <driverJar>C:\DB\WINDOWS.X64_193000_db_home\jdbc\lib\ojdbc8.jar</driverJar>
+    </driverJars>
+    <driverClass>oracle.jdbc.OracleDriver</driverClass>
+    <url>jdbc:oracle:thin:@localhost:1521:orcl</url>
+    <properties>
+      <port>1521</port>
+      <user>seoul</user>
+      <sId>orcl</sId>
+      <password>123</password>
+      <host>localhost</host>
+      <internal_logon>normal</internal_logon>
+    </properties>
+    <extendedProperties>
+      <connectionString />
+    </extendedProperties>
+  </connection>
+</database>
+

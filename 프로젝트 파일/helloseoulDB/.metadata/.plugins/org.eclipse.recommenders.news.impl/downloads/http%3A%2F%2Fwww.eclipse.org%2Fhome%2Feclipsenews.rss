@@ -6,6 +6,14 @@
     <language>en</language>
      <atom:link href="https://newsroom.eclipse.org/rss/news/eclipse_org/announcements.xml" rel="self" type="application/rss+xml" />
       <item>
+    <title>Help Identify IoT and Edge Computing Trends By Participating in Our Annual Survey</title>
+    <link>https://newsroom.eclipse.org/news/announcements/help-identify-iot-and-edge-computing-trends-participating-our-annual-survey</link>
+    <description>Eclipse Foundation head of marketing Karla Ferrer discusses what&#039;s new in the 2023 IoT &amp; Edge Developer and Adoption Survey, and what trends we expect to gain insight on. </description>
+     <pubDate>Wed, 12 Apr 2023 14:46:45 -0400</pubDate>
+ <dc:creator>Jacob Harris</dc:creator>
+ <guid isPermaLink="true">https://newsroom.eclipse.org/news/announcements/help-identify-iot-and-edge-computing-trends-participating-our-annual-survey</guid>
+  </item>
+  <item>
     <title>La Fondation Eclipse rejoint la Société informatique de France</title>
     <link>https://newsroom.eclipse.org/news/announcements/la-fondation-eclipse-rejoint-la-soci%C3%A9t%C3%A9-informatique-de-france</link>
     <description>&lt;p&gt;&lt;strong&gt;Paris, France, le 09 mars 2023 – &lt;/strong&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;La Fondation Eclipse annonce aujourd’hui avoir rejoint la Société Informatique de France afin de collaborer à une démarche commune qui vise à rassembler toutes celles et ceux pour qui faire progresser l’informatique est un métier ou une passion : enseignants, chercheurs, ingénieurs, industriels, et consultants. La Fondation Eclipse est convaincue que cette démarche doit passer par une bonne compréhension de l’open source et de ses pratiques.&lt;/span&gt;&lt;/p&gt;
@@ -536,14 +544,6 @@
      <pubDate>Fri, 20 Jan 2023 10:42:31 -0500</pubDate>
  <dc:creator>Jacob Harris</dc:creator>
  <guid isPermaLink="true">https://newsroom.eclipse.org/news/announcements/eclipse-foundation-teams-software-engineering-academy-42-wolfsburgberlin-behalf</guid>
-  </item>
-  <item>
-    <title>European Cyber Resiliency Act: Potential Impact on the Eclipse Foundation</title>
-    <link>https://newsroom.eclipse.org/news/announcements/european-cyber-resiliency-act-potential-impact-eclipse-foundation</link>
-    <description>This document discusses Europe&#039;s proposed new legislation and the potential impact it may have on the Eclipse Foundation and its 400+ projects and community.</description>
-     <pubDate>Mon, 16 Jan 2023 11:08:50 -0500</pubDate>
- <dc:creator>Jacob Harris</dc:creator>
- <guid isPermaLink="true">https://newsroom.eclipse.org/news/announcements/european-cyber-resiliency-act-potential-impact-eclipse-foundation</guid>
   </item>
   </channel>
 </rss>

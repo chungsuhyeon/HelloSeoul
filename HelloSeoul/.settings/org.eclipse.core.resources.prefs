@@ -3,5 +3,5 @@
 >>>>>>>=branch 'subMain' of https\://github.com/chungsuhyeon/HelloSeoul.git
 eclipse.preferences.version=1
 encoding//src/main/java/com/bit/web/controller/HelloSeoulController.java=UTF-8
-encoding//src/main/webapp/Final_Pro/ctgPage.jsp=UTF-8
+encoding//src/main/java/com/bit/web/service/CommServiceImpl.java=UTF-8
 encoding//src/main/webapp/making/testmonth.jsp=UTF-8

@@ -19,7 +19,9 @@ public class joinServiceImpl implements joinService{
 	
 	//아이디(email)중복체크
 	@Override
-	public boolean ajaxGetId(String id) {				
+	public boolean ajaxGetId(String id) {
+		System.out.println(dao.ajaxGetId(id));
+		//System.out.println("boolean " + dao.ajaxGetId(id)!=null);
 		return dao.ajaxGetId(id)!=null;
 	}
 	
@@ -32,6 +34,7 @@ public class joinServiceImpl implements joinService{
 	// 대륙선택 후 해당 국가 리스트로
 	@Override
 	public List<Object> ajaxcontinent(String id) {
+		System.out.println(id);
 		return dao.selectcontinent(id);
 	}
 	

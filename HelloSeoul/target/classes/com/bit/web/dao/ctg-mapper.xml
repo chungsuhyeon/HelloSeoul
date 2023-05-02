@@ -8,7 +8,15 @@ FROM MAINDB
 <select id="searchLoc" parameterType="java.util.HashMap" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
-WHERE LOC_SG = #{loc_sg} AND LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
+WHERE LOC_SG = #{loc_sg} AND LOC_CTG1 = #{loc_ctg1} AND
+<choose>
+<when test='loc_ctg2.equals("all")'>
+LOC_NAME LIKE '%'||#{query}||'%'
+</when>
+<otherwise>
+LOC_CTG2 = #{loc_ctg2} AND LOC_NAME LIKE '%'||#{query}||'%'
+</otherwise>
+</choose>
 </select>
 
 
@@ -21,6 +29,7 @@ SELECT * FROM SIGUNGU
 <select id="readyForCategory" parameterType="String" resultType="java.util.HashMap">
 SELECT LOC_PC,LOC_NAME
 FROM MAINDB
+WHERE <![CDATA[ROWNUM<20]]>
 </select>
 
 
@@ -37,8 +46,8 @@ WHERE USER_ID = #{user_id}
 </select>
 
 <insert id="insertjjim" parameterType="mypageJjim">
-INSERT INTO JJIM(USER_ID,LOC_PC,LOC_NAME,LOC_CTG1,LOC_CTG2,LOC_SG)
-VALUES(#{user_id},#{loc_pc},#{loc_name},#{loc_ctg1},#{loc_ctg2},#{loc_sg})
+INSERT INTO JJIM(USER_ID,LOC_PC)
+VALUES(#{user_id},#{loc_pc})
 </insert>
 
 <select id="searchHot" parameterType="String" resultType="mainDB">
@@ -50,11 +59,11 @@ WHERE LOC_NAME = '%'||#{query}||'%'
 <select id="readyForHotspot" resultType="mainDB">
 SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
 FROM MAINDB
-WHERE LOC_CTG1 = 'tour'
+WHERE LOC_CTG1 = 'tour'AND <![CDATA[ROWNUM<9]]>
 </select>
 
 <select id="hotspotinfo" resultType="mainDB" parameterType="int">
-SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+SELECT LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y,LOC_TAG
 FROM MAINDB
 WHERE LOC_PC = #{loc_pc}
 </select>
@@ -67,6 +76,112 @@ FROM MAINDB
 WHERE LOC_SG = #{loc_sg}
 ORDER BY DBMS_RANDOM.VALUE)
 WHERE <![CDATA[ROWNUM<5]]> 
+</select>
+
+<select id="hotspotPage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+SELECT LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM (
+SELECT ROWNUM RM,LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM MAINDB
+WHERE LOC_CTG1 = #{ctg1}
+)
+WHERE <![CDATA[RM>=#{start}]]> AND <![CDATA[RM<#{end}]]>
+</select>
+
+
+<select id="collectUserByAdmin" resultType="com.bit.web.vo.JoinSeoulBean">
+SELECT USER_ID,USER_NICK,USER_NATION,USER_BIRTH,USER_GENDER,USER_PP,USER_FIRST
+FROM USERBOARD
+</select>
+<!-- <select id="totalpage" resultType="int"> -->
+<!-- SELECT COUNT(*) -->
+<!-- FROM MAINDB -->
+<!-- </select> -->
+
+<select id="recommanFood" resultType="java.util.HashMap" parameterType="String">
+SELECT LOC_PC, LOC_NAME, LOC_SG
+FROM MAINDB
+WHERE LOC_TAG = #{foodname} AND <![CDATA[ROWNUM<20]]>
+</select>
+
+<insert id="upOneJjim" parameterType="java.util.HashMap">
+INSERT INTO JJIM VALUES(#{user_id},#{loc_pc})
+</insert>
+
+<select id="reportBoard" resultType="java.util.HashMap">
+SELECT COM_NO, REPORT_REASON, USER_ID
+FROM REPORTBOARD
+</select>
+
+<select id="countDB" resultType="int">
+SELECT COUNT(*)
+FROM MAINDB
+</select>
+
+<select id="pagingDB" parameterType="java.util.HashMap" resultType="mainDB">
+SELECT LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM (
+SELECT ROWNUM RM,LOC_PC, LOC_NAME, LOC_IMG, LOC_INFO
+FROM MAINDB
+WHERE LOC_IMG IS NOT NULL
+)
+WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
+</select>
+
+<select id="countPlanner" parameterType="String" resultType="int">
+SELECT COUNT(*)
+FROM PLANNER
+WHERE USER_ID = #{user_id} AND USE_YN = 'y'
+</select>
+
+
+<select id="getUserPlanner1" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+from
+(select rownum rm, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+from planner
+where user_id = #{id} or planner_no in (select planner_no 
+										from plannershare 
+										where share_user_nick=#{nick})
+order by planner_no desc)
+WHERE <![CDATA[RM>#{start}]]> AND <![CDATA[RM<=#{end}]]>
+</select>
+
+<select id="getuser" resultType="java.util.HashMap">
+SELECT A.USER_ID, USER_NICK, USER_GENDER, USER_NATION, NVL(COUNTS,0) PTCOUNT
+FROM (
+SELECT USER_ID, USER_NICK, USER_GENDER, COUNTRY_NAME USER_NATION
+FROM USERBOARD
+INNER JOIN NATION
+ON USERBOARD.COUNTRY_NO = NATION.COUNTRY_NO
+) A
+LEFT OUTER JOIN
+(SELECT USER_ID, COUNT(*) COUNTS
+FROM COMMUNITYBOARD
+GROUP BY USER_ID) B
+ON A.USER_ID = B.USER_ID
+</select>
+
+<select id="getffCount" resultType="java.util.HashMap">
+SELECT A.USER_FIRST, NVL(COUNTS,0)COUNTING
+FROM(
+SELECT USER_FIRST
+FROM USERBOARD
+GROUP BY USER_FIRST
+) A
+LEFT OUTER JOIN
+(
+SELECT USER_FIRST, COUNT(*) COUNTS
+FROM USERBOARD
+GROUP BY USER_FIRST
+) B
+ON A.USER_FIRST = B.USER_FIRST
+</select>
+
+<select id="locinfos" parameterType="int" resultType="mainDB">
+SELECT  LOC_PC, LOC_NAME, LOC_CTG1, LOC_CTG2, LOC_SG, LOC_ADDR, LOC_TIME, LOC_TEL, LOC_INFO, LOC_IMG, LOC_X, LOC_Y
+FROM MAINDB
+WHERE LOC_PC = #{pcs}
 </select>
 
 </mapper>

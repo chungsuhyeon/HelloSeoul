@@ -20,4 +20,5 @@ public class MypageMainPlannerBean {
 	private String planner_date;
 	private String planner_shour;
 	private String planner_smin;
+	private String use_yn;
 }

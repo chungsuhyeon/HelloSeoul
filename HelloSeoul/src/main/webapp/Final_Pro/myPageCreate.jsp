@@ -17,13 +17,13 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript">
 	function minEndDate(){
-		let startDate = $("input[name='tripStart']").val();
-		$("input[name='tripEnd']").prop('min', startDate);
+		let startDate = $("input[name='planner_start']").val();
+		$("input[name='planner_end']").prop('min', startDate);
 	}
 	
 	function maxStartDate(){
-		let endDate = $("input[name='tripEnd']").val();
-		$("input[name='tripStart']").prop('max', endDate);
+		let endDate = $("input[name='planner_end']").val();
+		$("input[name='planner_start']").prop('max', endDate);
 	}
 	
 	$(function(){
@@ -32,21 +32,21 @@
 			if($("input#title").val().length == 0) {
 				alert("Please enter the title");
 				$("input#title").val('');
-				$("input#title").focus();			
+				$("input#title").focus();
 				return false;
 			}		
-			if($("input[name='tripStart']").val().length == 0 || $("input[name='tripEnd']").val().length == 0){
+			if($("input[name='planner_start']").val().length == 0 || $("input[name='planner_end']").val().length == 0){
 				alert("Please choose the date");
-				$("input[name='tripStart']").val('');
-				$("input[name='tripEnd']").val('');
-				$("input[name='tripStart']").focus();	
+				$("input[name='planner_start']").val('');
+				$("input[name='planner_end']").val('');
+				$("input[name='planner_start']").focus();	
 				return false;			
 			}						
 			$("form[name='mypageCreateDateFrm']").submit();
 		}); // $("button#btn_submit").click
 		
 		$("button#btn_cancle").click(function(){
-				document.location.href ="myPageMain.jsp";
+				document.location.href ="/web/myPageLoad";
 		}); // $("button#btn_cancle").click
 		
 	}); // function
@@ -55,7 +55,7 @@
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style type="text/css">
@@ -74,11 +74,11 @@
 		<jsp:include page="header.jsp"></jsp:include>
 	</header>
 	
-	<section>
-		<div class='container-fluid bg-warning' style="display: inline-flex;">
+	<section class='container'>
+		<div class='container' style="display: inline-flex;">
 			<div class='col-4'></div>
 			<div class='col-4 mt-5'>
-				<form action="/web/createPlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
+				<form action="/web/PlannerDate?modi=createPlanner" name="mypageCreateDateFrm" method="post">
 					<table class="table table-hover bg-light" style="width: 80%;">
 						<thead>
 							<tr class="table-primary">
@@ -93,7 +93,7 @@
 									<h4>Title : </h4>
 								</td>
 								<td>
-									<input type="text" class="form-control" placeholder="Input Title" id="title" name="title">
+									<input type="text" class="form-control" placeholder="Input Title" id="title" name="planner_title">
 								</td>
 							</tr>
 							<tr>
@@ -101,7 +101,7 @@
 									<h4>Start Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control" style="width: 100%;" name="tripStart" onchange="minEndDate()">
+									<input type="date" class="form-control" style="width: 100%;" name="planner_start" onchange="minEndDate()">
 								</td>
 							</tr>
 							<tr>
@@ -109,13 +109,13 @@
 									<h4>End Date : </h4>
 								</td>
 								<td>
-									<input type="date" class="form-control"  style="width: 100%;" name="tripEnd" onchange="maxStartDate()">
+									<input type="date" class="form-control"  style="width: 100%;" name="planner_end" onchange="maxStartDate()">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
 									<h4 style="text-align: center;">Planner memo</h4>
-									<textarea style="width: 100%; height: 200px; resize: none;" name="memo"></textarea>
+									<textarea style="width: 100%; height: 200px; resize: none;" name="planner_info"></textarea>
 								</td>
 							</tr>
 							<tr>

@@ -10,29 +10,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where user_id = #{value}
 	</select>
 	
-	<select id="getDbUserNick" parameterType="String" resultType="String">
-		select user_nick
+	<select id="getDbUserInfo" parameterType="String" resultType="com.bit.web.vo.JoinSeoulBean">
+		select user_nick, user_first
 		from userboard
 		where user_id = #{value}
 	</select>
 	
 	<select id="getUserInfo" parameterType="String" resultType="java.util.HashMap">
-		select user_nick, user_nation, user_birth, user_gender, user_pp, user_first
+		select user_nick, country_no, user_birth, user_gender, user_pp, user_first
 		from userboard 
 		where user_id = #{value}
 	</select>
 	
-	<select id="getUserPlanner" parameterType="String" resultType="java.util.HashMap">
-		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info
-		from planner
-		where user_id = #{value}
-		order by planner_no desc
+	<select id="getCountryName" parameterType="Integer" resultType="String">
+		select country_name
+		from nation
+		where country_no = #{contryNo}
+	</select>
+	
+	<select id="getUserPlanner" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user
+		from (select rownum rm, planner_no, user_id, planner_start, planner_end, planner_title, planner_info, planner_regdate, update_user, use_yn
+				from planner
+				where use_yn = 'y' and  user_id = #{id} or planner_no in (select planner_no 
+														from plannershare 
+														where share_user_nick=#{nick})
+				order by planner_no desc)
+		where <![CDATA[RM>#{start}]]> and <![CDATA[RM<=#{end}]]>
 	</select>
 	
 	<select id="getUserJjimList" parameterType="String" resultType="mypageJjim">
-		select * 
-		from jjim 
-		where user_id = #{value}
+		select j.loc_pc, m.loc_name, m.loc_ctg1, m.loc_ctg2, m.loc_sg 
+		from jjim j, maindb m
+		where j.loc_pc = m.loc_pc and user_id = #{value}
 	</select>
 	
 	<delete id="userJjimListDelete" parameterType="java.util.HashMap">
@@ -41,29 +51,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="getJjimInfo" parameterType="Integer" resultType="mainDb">
-		select * from maindb where loc_pc = #{value}
+		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_addr, loc_time, loc_tel, loc_info, loc_img, loc_x, loc_y, loc_tag
+		from maindb 
+		where loc_pc = #{value}
 	</select>
 	
 	<select id="getPlannerNo" resultType="Integer">
 		select planner_seq.nextval from dual
 	</select>
 	
-	<insert id="plannerDataInsert" parameterType="java.util.HashMap">
-		insert into planner(PLANNER_NO, USER_ID, PLANNER_TITLE, PLANNER_START, PLANNER_END, PLANNER_INFO)
-		values(#{no}, #{user_id}, #{title}, #{tripStart}, #{tripEnd}, #{memo})
+	<insert id="plannerDataInsert" parameterType="com.bit.web.vo.MypagePlannerBean">
+		insert into planner(planner_no, user_id, planner_title, planner_start, planner_end, planner_info, planner_regdate, update_user, use_yn)
+		values(#{planner_no}, #{user_id}, #{planner_title}, #{planner_start}, #{planner_end}, #{planner_info}, sysdate, #{update_user}, #{use_yn})
 	</insert>
 	
 	<select id="firstMainPlannerCreate" parameterType="Integer" resultType="java.util.HashMap">
-		select planner_start, planner_end, planner_title
+		select planner_start, planner_end, planner_title, user_id
 		from planner
 		where planner_no = #{no}
 	</select>
 	
 	<select id="mainPlannerDataSelect" parameterType="Integer" resultType="mypageMainPlanner">
-		select loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin
-		from mainplanner
-		where planner_no = #{no}
-		order by planner_date, planner_shour, planner_smin
+		select mp.loc_pc, db.loc_name, db.loc_ctg1, db.loc_ctg2, db.loc_sg, db.loc_x, db.loc_y, mp.planner_date, mp.planner_shour, mp.planner_smin
+		from mainplanner mp, maindb db
+		where mp.loc_pc = db.loc_pc and planner_no = #{no}
+		order by mp.planner_date, mp.planner_shour, mp.planner_smin
 	</select>
 	
 	<select id="selectMainDbData" parameterType="String" resultType="mainDb">
@@ -72,12 +84,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where loc_pc in ${value}
 	</select>
 	
+	<update id="plannerUpdateDate" parameterType="java.util.HashMap">
+		update planner
+		set planner_regdate = sysdate, update_user = #{nick}
+		where planner_no = #{no}
+	</update>
+	
 	<insert id="plannerScheduleInsert" parameterType="mypageMainPlanner">
-		insert into mainplanner(planner_no, user_id, loc_pc, loc_name, loc_ctg1, loc_ctg2, loc_sg, loc_x, loc_y, planner_date, planner_shour, planner_smin)
-		values(#{planner_no}, #{user_id}, #{loc_pc}, #{loc_name}, #{loc_ctg1}, #{loc_ctg2}, #{loc_sg}, #{loc_x}, #{loc_y}, #{planner_date}, #{planner_shour}, #{planner_smin})
+		insert into mainplanner(planner_no, loc_pc, planner_date, planner_shour, planner_smin, use_yn)
+		values(#{planner_no}, #{loc_pc}, #{planner_date}, #{planner_shour}, #{planner_smin}, #{use_yn})
 	</insert>
 	
-	<delete id="plannerScheduleDelete" parameterType="Integer">
+	<update id="plannerScheduleDelete" parameterType="java.util.HashMap">
+		update mainplanner
+		set use_yn = #{use_yn}
+		where planner_no = #{no}
+	</update>
+	
+	<update id="plannerAllDelete" parameterType="java.util.HashMap">
+		update planner
+		set use_yn = #{use_yn}
+		where planner_no = #{no}
+	</update>
+	
+<!-- 	<select id="plannerShareCommunity" parameterType="Integer" resultType="Integer"> -->
+<!-- 		select com_no -->
+<!-- 		from communityboard -->
+<!-- 		where planner_no = #{no} -->
+<!-- 	</select> -->
+	
+	<select id="mypageplannerInfo" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
+		select planner_start, planner_end, planner_title, planner_info
+		from planner
+		where planner_no = #{no}
+	</select>
+	
+	<update id="mypageDateUpdate" parameterType="com.bit.web.vo.MypagePlannerBean">
+		update planner 
+		set planner_title = #{planner_title}, planner_start = #{planner_start}, planner_end = #{planner_end}, planner_info = #{planner_info}, planner_regdate = sysdate, update_user = #{update_user}
+		where planner_no = #{planner_no}
+	</update>
+	
+	<select id="nickSearch" parameterType="java.util.HashMap" resultType="String">
+		select user_nick
+		from userboard
+		where user_nick like '%'||#{nick}||'%' 
+				and user_nick != #{user_nick}
+				and user_nick not in (select share_user_nick 
+										from plannershare 
+										where planner_no = #{no} and share_user_nick is not null)
+	</select>
+	
+	<select id="shareNickSelete" parameterType="java.util.HashMap" resultType="String">
+		select share_user_nick
+		from plannershare
+		where share_user_nick = #{nick} and planner_no = #{no}
+	</select>
+	
+	<insert id="shareNickInsert" parameterType="java.util.HashMap">
+		insert into plannershare
+		values(#{no}, #{nick})
+	</insert>
+	
+	<select id="alreadyShareUser" parameterType="Integer" resultType="String">
+		select share_user_nick
+		from plannershare
+		where planner_no = #{no}
+	</select>
+	
+	<delete id="shareNickDelete" parameterType="java.util.HashMap">
+		delete from plannershare
+		where planner_no = #{no} and share_user_nick = #{nick}
+	</delete>
+	
+	<delete id="mainplannercontentDelete" parameterType="Integer">
 		delete from mainplanner
 		where planner_no = #{no}
 	</delete>

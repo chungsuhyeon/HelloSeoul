@@ -7,15 +7,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="boardInsert" parameterType="com.bit.web.vo.ComBoard">
 	insert into communityboard values
-	(#{com_no},#{user_id},#{com_ctg},#{com_title},#{com_cont},#{com_filename},0,sysdate,#{user_nick},0,0,0)
+	(#{com_no},#{user_id},#{user_nick},#{com_ctg},#{com_title},#{com_cont},#{com_filename},0,sysdate,0,0,0,0,#{planner_no})
 	</insert>
 	<select id="selectBoradNo" resultType="Integer">
 	select communityboard_seq.nextval from dual
 	</select>
 	<select id="selectBoard" resultType="HashMap" parameterType="HashMap" >
-	<![CDATA[select rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply from
-(select rownum rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply from communityboard order by com_no desc)
-where rw between #{start} and #{end}]]>
+	<![CDATA[select rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply,report from
+(select rownum rw,com_no,user_id,com_ctg,com_title,com_cont,com_filename,com_hit,com_regdate,user_nick,good,bad,reply,report from communityboard where  report <=4 order by com_no desc)
+where rw between #{start} and #{end} ]]>
 	</select>
 <!-- 	<select id="selectBoard" resultType="com.bit.web.vo.ComBoard" > -->
 <!-- 	select * from communityboard order by com_no desc -->
@@ -37,7 +37,7 @@ where rw between #{start} and #{end}]]>
 	</delete>
 	<update id="updateBoard" parameterType="com.bit.web.vo.ComBoard" >
 	update communityboard set com_no=#{com_no},user_id=#{user_id},com_ctg=#{com_ctg},com_title=#{com_title},com_cont=#{com_cont},com_filename=#{com_filename}
-	,com_hit=#{com_hit},com_regdate=sysdate,user_nick=#{user_nick}
+	,com_hit=#{com_hit},com_regdate=sysdate,user_nick=#{user_nick},planner_no=#{planner_no}
 	 where com_no=#{com_no}
 	</update>
 	<select id="selectId" resultType="String" parameterType="String">
@@ -123,12 +123,34 @@ where rw between #{start} and #{end}]]>
 	</select>
 	
 	<select id="selecttop3" resultType="com.bit.web.vo.ComBoard">
-		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3]]>
+		<![CDATA[	select * from (select * from communityboard order by com_no desc) where rownum<=3 and report<=4]]>
 	</select>
 	
 	<select id="getTotalRow" resultType="java.lang.Integer">
-	<![CDATA[select count(*) from communityboard]]>
+	<![CDATA[select count(*) from communityboard where report<=4]]>
 	</select>
+	<select id="SelectPlannerTitle" parameterType="Integer" resultType="String">
+	select planner_title from planner where planner_no=#{planner_no}
+	</select>
+	<select id="SharePlanner" parameterType="Integer" resultType="com.bit.web.vo.MypagePlannerBean">
+<!-- 	select planner_start,planner_end,planner_title,planner_info from planner where planner_no=#{planner_no} -->
+	select p.planner_start, p.planner_end, p.planner_title, p.planner_info, u.user_nick as update_user	
+	from planner p, userboard u
+	where p.user_id = u.user_id and planner_no = #{planner_no}
+	</select>
+	<select id="selectSharePlanner" resultType="com.bit.web.vo.MypageMainPlannerBean" parameterType="Integer">
+	select loc_pc,planner_date,planner_shour,planner_smin from mainplanner where planner_no=#{planner_no}
+	
+	</select>
+	<insert id="insertReport" parameterType="com.bit.web.vo.ReportBoard">
+	insert into reportboard values(#{com_no},#{report_reason},#{user_id})
+	</insert>
+	<update id="reportUpdate" parameterType="Integer">
+	update communityboard set report=report+1 where com_no=#{com_no}
+	</update>
+	<delete id="reportDelete" parameterType="Integer">
+	delete reportboard where com_no=#{no}
+	</delete>
 </mapper>
 
 

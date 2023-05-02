@@ -9,8 +9,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.bit.web.vo.JoinSeoulBean;
 import com.bit.web.vo.MainDbBean;
 import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypagePlannerBean;
 
 @Repository(value = "helloSeoulDao")
 public class HelloSeoulDao extends SqlSessionDaoSupport{
@@ -24,8 +26,12 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectOne("getDbUserPW", id);
 	}
 	
-	public String getDbUserNick(String id) {
-		return this.getSqlSession().selectOne("getDbUserNick", id);
+	public JoinSeoulBean getDbUserInfo(String id) {
+		return this.getSqlSession().selectOne("getDbUserInfo", id);
+	}
+	
+	public String getCountryName(int no) {
+		return this.getSqlSession().selectOne("getCountryName", no);
 	}
 	
 	// 회원정보 (마이페이지 메인에 회원정보 출력하기 위함)
@@ -34,8 +40,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원이 생성했던 플래너 load
-	public List<Object> getUserPlanner(String id){
-		return this.getSqlSession().selectList("getUserPlanner", id);
+	public List<Object> getUserPlanner(HashMap<String, Object> map){
+		return this.getSqlSession().selectList("getUserPlanner", map);
 	}
 	
 	// 회원의 찜 리스트 검색
@@ -44,8 +50,8 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// 회원의 찜 리스트 삭제
-	public void userJjimListDelete(HashMap<String, String> list) {
-		this.getSqlSession().delete("userJjimListDelete", list);
+	public void userJjimListDelete(HashMap<String, Object> map) {
+		this.getSqlSession().delete("userJjimListDelete", map);
 	}
 	
 	// 찜 리스트에서 장소코드로 상세정보 조회
@@ -59,7 +65,7 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 	}
 	
 	// planner table에 데이터 insert
-	public void plannerDataInsert(HashMap<String, Object> map) {
+	public void plannerDataInsert(MypagePlannerBean map) {
 		this.getSqlSession().insert("plannerDataInsert", map);
 	}
 	
@@ -77,13 +83,64 @@ public class HelloSeoulDao extends SqlSessionDaoSupport{
 		return this.getSqlSession().selectList("selectMainDbData", codeList);
 	}
 	
+	public void plannerUpdateDate(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerUpdateDate", map);
+	}
+	
 	// 생성한 일정 insert
 	public void plannerScheduleInsert(MypageMainPlannerBean bean) {
 		this.getSqlSession().insert("plannerScheduleInsert", bean);
 	}
 	
-	public void plannerScheduleDelete(int no) {
-		this.getSqlSession().delete("plannerScheduleDelete", no);
+	public void plannerScheduleDelete(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerScheduleDelete", map);
+	}
+	
+	
+	public void plannerAllDelete(HashMap<String, Object> map) {
+		this.getSqlSession().update("plannerAllDelete", map);
+	}
+	
+//	public List<Integer> plannerShareCommunity(int no) {
+//		return this.getSqlSession().selectList("plannerShareCommunity", no);
+//	}
+	
+	public MypagePlannerBean mypageplannerInfo(int no) {
+		return this.getSqlSession().selectOne("mypageplannerInfo", no);
+	}
+	
+	public void mypageDateUpdate(MypagePlannerBean bean) {
+		this.getSqlSession().update("mypageDateUpdate", bean);
+	}
+	
+	// 전체 사용자 닉네임 검색
+	public List<String> nickSearch(HashMap<String, Object> map) {
+		return this.getSqlSession().selectList("nickSearch", map);
+	}
+	
+	// share table에 닉네임이 존재하는지 검색
+	public String shareNickSelete(HashMap<String, Object> map) {
+		return this.getSqlSession().selectOne("shareNickSelete", map);
+	}
+	
+	// share table에 닉네임 추가
+	public void shareNickInsert(HashMap<String, Object> map) {
+		this.getSqlSession().insert("shareNickInsert", map);
+	}
+	
+	// 이미 플래너 공유중인 사용자 리스트
+	public List<String> alreadyShareUser(int no){
+		return this.getSqlSession().selectList("alreadyShareUser", no);
+	}
+	
+	// 플래너 공유 취소(선택 사용자 삭제)
+	public void shareNickDelete(HashMap<String, Object> map) {
+		this.getSqlSession().delete("shareNickDelete", map);
+	}
+	
+	// 플래너 수정때 저장버튼 누르면 데이터 삭제 후 재삽입
+	public void mainplannercontentDelete(int no) {
+		this.getSqlSession().delete("mainplannercontentDelete", no);
 	}
 	
 }

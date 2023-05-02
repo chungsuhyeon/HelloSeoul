@@ -20,89 +20,72 @@
 	$(function(){
 		$(".loadMyPlanner").click(function(){
 			var no = $(this).parent().attr('name');
-			location.href = "/web/allPageLoad?no=" + no + "&modi=plannerShow";
+			location.href = "/web/Final_Pro/myPageShow.jsp?no=" + no;
 		}); // $(".loadMyPlanner").click
+		
+		$.ajax({
+			
+		});
 				
 	}); // function
 </script>
 <!--JS Section End -->
 
 <!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/bootstrap.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-	.contdivbox{
-		display: flex;
-	}
-	
-	.contdivbox>div{
-		margin : 10px;
-		border:solid;
-		float:left;
-		display:flex;
-	}
-	
-	table{
-		width: 445px !important;
-		height : 350px !important;
-	}
-	
-	th,td{
-		font-size: 20px !important;
+	.contentsbox table{
+		height: 300px;
+		width: 400px;
 	}
 </style>
 <!-- Style Section End -->
 
 </head>
 <body>
-	<header>
-		<jsp:include page="header.jsp"></jsp:include>
-	</header>
-	
-	<section>
-		<div class='container-fluid'>
-			<!-- User Info -->
-			<div>
-				<div>
-					<h2>${user_nickName}</h2>
-				</div>
-				<div>
-					<h4>
-						Nationality : ${userInfo.USER_NATION}
-						&nbsp;&nbsp;&nbsp;
-						Age : ${userInfo.USER_AGE}
-						&nbsp;&nbsp;&nbsp;
-						Tourism purpose : ${userInfo.USER_PP}
-						&nbsp;&nbsp;&nbsp;
-						1st place in tourism : ${userInfo.USER_FIRST}
-					</h4>
-				</div>
-			</div>
-			<!-- Nav Bar -->
-			<div>
-				<ol class="breadcrumb">
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageJjim.jsp">Wish</a></li>
-  					<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Planner Create</a></li>
-				</ol>
-			</div>
-			<!-- Contents Div Box -->
-			<div class='contdivbox'>
-				<c:forEach var="i" items="${userCreatedPlanner}" begin="0" end="3">
-					<div name="${i.PLANNER_NO}">
+<jsp:include page="header.jsp"></jsp:include>
+<section>
+	<div class='container'>
+		<!-- User Info -->
+		<div class='userinfobox d-flex row'>
+			<table class='table'>
+				<thead>
+					<tr class='table-primary'>
+						<th colspan="4"><h2>${user_nickName}</h2></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class='table-primary text-center'>
+						<td>Nationality : ${userInfo.USER_NATION}</td>
+						<td>Age : ${userInfo.USER_AGE}</td>
+						<td>Tourism purpose : ${userInfo.USER_PP}</td>
+						<td>1st place in tourism : ${userInfo.USER_FIRST}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Nav Bar -->
+		<div class='navbox'>
+			<ol class="breadcrumb bg-light">
+  				<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageJjim.jsp">Wish</a></li>
+  				<li class="breadcrumb-item"><a href="/web/Final_Pro/myPageCreate.jsp">Planner Create</a></li>
+			</ol>
+		</div>
+			<!-- Contents Box -->
+			<div class='contentsbox d-flex justify-content' style="height:300px;">
+				<c:forEach var="i" items="${userCreatedPlanner}">
+					<div name="${i.PLANNER_NO}" class='mx-3'>
 						<table class="loadMyPlanner table table-hover">
-	<!--   						<thead> -->
-	<!--     						<tr> -->
-	<!--       							<th>Planner Title</th> -->
-	<!--       							<td>planner_title</td> -->
-	<!--     						</tr> -->
-	<!--   						</thead> -->
-	  						<tbody>
+							<tbody class='table-light text-center'>
 	  							<tr>
-	      							<th>Planner Title</th>
+	  							<c:choose>
+								<c:when test="${i.USER_ID eq user_id}">
+	      							<th>Planner Title</th>   							
+								</c:when>
+								<c:otherwise>
+	      							<th>Planner Title (Shared)</th>   							
+								</c:otherwise>
+								</c:choose>	   
 	      							<td>${i.PLANNER_TITLE}</td>
 	    						</tr>
 	    						<tr>
@@ -117,39 +100,96 @@
 	      							<th>Planner Memo</th>
 	      							<td>${i.PLANNER_INFO}</td>
 	    						</tr>
+	    						<tr>
+	      							<th>Last Update</th>
+	      							<td>${i.UPDATE_USER} / ${fn:substring(i.PLANNER_REGDATE, 0, 16)}</td>
+	    						</tr>
 	    					</tbody>
 	    				</table>
-					</div>
+					</div>			
 				</c:forEach>			
 			</div>
-			
+			<hr class='hr'>
 			<!-- Paging Button -->
-			<div class='pagingbox'>
-				<div>
-  					<ul class="pagination pagination-lg" style="margin-left: 720px;">
-    					<li class="page-item disabled">
-      						<a class="page-link" href="#">&laquo;</a>
-    					</li>
-   						<li class="page-item active">
-      						<a class="page-link" href="#">1</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">2</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">3</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">4</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">5</a>
-    					</li>
-    					<li class="page-item">
-      						<a class="page-link" href="#">&raquo;</a>
-    					</li>
-  					</ul>
-  				</div>
+			<div class='pagingbar d-flex justify-content-center mt-4'>
+				<ul class='pagination'>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq 1}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=1&Block=1">&laquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq 1}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&lt;</a>
+							</li>
+						</c:when>
+						<c:when test="${myPaging.currentPage eq ((myPaging.currentBlock-1)*myPaging.blockScale)+1}">
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock-1}">&laquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage-1}&Block=${myPaging.currentBlock}">&lt;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="pg" begin="${(myPaging.currentBlock-1)*myPaging.blockScale+1}" end="${myPaging.currentBlock*myPaging.blockScale}">
+						<c:if test="${pg <= myPaging.totalPage}">
+						<c:choose>
+							<c:when test="${pg eq myPaging.currentPage}">
+								<li class="page-item active">
+									<a class="page-link" href="/web/myAction?Page=${pg}&Block=${myPaging.currentBlock}">${pg}</a>
+									<input type="hidden" id="conStart" value="${myPaging.pageStart}">
+									<input type="hidden" id="conEnd" value="${myPaging.pageEnd}">
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link" href="/web/myAction?Page=${pg}&Block=${myPaging.currentBlock}">${pg}</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+						</c:if>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${myPaging.currentPage eq myPaging.totalPage}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#">&gt;</a>
+							</li>
+						</c:when>
+						<c:when test="${myPaging.currentPage eq (myPaging.currentBlock*myPaging.blockScale)}">
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock+1}">&gt;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.currentPage+1}&Block=${myPaging.currentBlock}">&gt;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${myPaging.currentBlock eq myPaging.totalBlock}">
+							<li class="page-item disabled">
+							  <a class="page-link" href="#">&raquo;</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="/web/myAction?Page=${myPaging.totalPage}&Block=${myPaging.totalBlock}">&raquo;</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
 		</div>
 	</section>

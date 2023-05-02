@@ -3,12 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!-- Icon Error Begin-->
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<!-- Icon Error End-->
-<title>Hello, Seoul</title>
-<!--JS Section Begin -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -35,56 +29,59 @@ $(function(){
 </script>
 <!--JS Section End -->
 <!-- Style Section Begin -->
-<link type="text/css" rel="stylesheet" href="/web/resources/final_style/css/flatly_bootstrap.css">
 <style type="text/css">
-.logo > img{
-	width: 200px;
-	height: 80px;
-}
-.setbar > button{
-	margin-left: 10px;
-}
-li div > a{
-	font-size: 15px;
+.menuBox>a{
+	margin-left: 4px;
+	margin-right: 4px;
+	font-size: 20px;
+	color : #2c3e50;
+	text-decoration: underline;
+	font-weight: bold;
 }
 </style>
 <!-- Style Section End -->
 </head>
-<header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  		<div class='container-fluid'>
-    		<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="" src="/web/resources/final_style/img/seoul_logo.png"></a>
-    		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      			<span class="navbar-toggler-icon"></span>
-    		</button>
-    		<div class="collapse navbar-collapse" id="navbarColor01">
-      			<ul class="navbar-nav me-auto">
-			    	<li class="nav-item">
-			        	<a class="nav-link" href="/web/gotoctg">Location</a>
-			        </li>
-			    	<li class="nav-item">
-			        	<a class="nav-link" href="/web/gotohotspot">HotSpot</a>
-			        </li>
-        			<li class="nav-item">
-          				<a class="nav-link" href="/web/musicalList">TICKET</a>
-        			</li>
-      			</ul>
-      <div class="setbar d-flex">
-        	<button type="button" class="btn btn-dark" id="comm">Community</button>
-       	<c:choose>
-	       	<c:when test="${user_id eq null}">
-		       	<button type="button" class="btn btn-dark" id="login">Login</button>
- 		       	<button type="button" class="btn btn-dark" id="join">Join</button>
-	       	</c:when>
-	       	<c:otherwise>
-		       	<button type="button" class="btn btn-dark" id="logout">Logout</button>
-		       	<button type="button" class="btn btn-dark" id='mypage'>MyPage</button>
-	       	</c:otherwise>
-       	</c:choose>
-       	
-      </div>
+<header class='container'>
+	<div class='row'>
+		<div class='logoBox col-3 mt-4'>
+			<a class="logo navbar-brand" href="/web/Final_Pro/index.jsp"><img alt="logo" src="/web/resources/final_style/img/Logo.png" style="width: 100%;"></a>
+		</div>
+		<div class='menuBox col-6 text-center mt-4'>
+			<a href="/web/gotoctg">Location Search</a>
+			<a href="/web/Final_Pro/FoodSearch.jsp">K-Food Search</a>
+			<a href="/web/gotohotspot">Hotspot</a>
+			
+		</div>
+		<div class='settingBox col-3 mt-3 text-end'>
+			<div class="btn-group" role="group" aria-label="settingLabel">
+				<button type="button" class="btn btn-primary" id="comm">Community</button>
+				<c:choose>
+					<c:when test="${user_id eq null}">
+						<button type="button" class="btn btn-primary" id="login">Login</button>
+						<button type="button" class="btn btn-primary" id="join">Join</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="btn btn-primary" id="logout">Logout</button>
+						<button type="button" class="btn btn-primary" id="mypage">Mypage</button>				
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<!-- Google 번역 -->
+			<div id="google_translate_element" class="hd_lang"></div>
+			<script>
+				function googleTranslateElementInit() {
+					new google.translate.TranslateElement({
+						pageLanguage: 'ko,zh-CN,zh-TW,ja,vi,th,tl,km,my,mn,ru,en,fr,ar',
+						includedLanguages: 'ko,zh-CN,zh-TW,ja,vi,th,tl,km,my,mn,ru,en,fr,ar',
+						layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+						autoDisplay: false
+					}, 'google_translate_element');
+				}
+			</script>
+			<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+			<!-- //Google 번역 -->
+		</div>
 	</div>
-  </div>
-</nav>
-	</header>
+	<hr class='hr'/>
+</header>
 </html>

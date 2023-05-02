@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.web.vo.ComBoard;
+import com.bit.web.vo.MypageMainPlannerBean;
+import com.bit.web.vo.MypagePlannerBean;
 import com.bit.web.vo.ReplyBoard;
+import com.bit.web.vo.ReportBoard;
 import com.bit.web.vo.gbboard;
 
 public interface CommService {
@@ -20,7 +23,7 @@ public interface CommService {
 	
 	void deleteBoard(int no);
 	
-	List<Object> updateBoard(ComBoard board);
+	List<Object> updateBoard(ComBoard board,MultipartFile file);
 	
 	void replyInsert(String reply,ReplyBoard reboard,int no,String id);
 	
@@ -45,4 +48,9 @@ public interface CommService {
 //	List<Object> selectBoard(Map<String, Object>map);
 //	List<Object> selectBoardtop3();
 	void selectBoard(ComBoard board,Model model,HttpServletRequest request);
+	String SelectPlannerTitle(int planner_no);
+	
+	
+	void insertReport(List<Integer>rr,int com_no,String user_id,ReportBoard bean);
+	void jjimPlanner(MypagePlannerBean bean,int planner_no,String user_id,String user_nick);
 }
