@@ -30,7 +30,6 @@ $(function(){
 	}
 	today=yyyy+mm+dd;
 	
-	
 		$.ajax({
 			type:"POST",
 			url:'/web/coin',
